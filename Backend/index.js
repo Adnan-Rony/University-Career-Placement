@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv"
 
 const app = express();
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
@@ -17,6 +18,13 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 const PORT=3000
+
+app.get("/",(req,res)=>{
+    return res.status(200).json({
+        message:"connect the server",
+        success:true
+    })
+})
 
 app.listen(PORT,()=>{
     // connectDB();
