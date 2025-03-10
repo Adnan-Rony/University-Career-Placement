@@ -19,6 +19,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use("/api/v1/", indexRoutes); 
+app.use("/", indexRoutes); 
 
 export default app;
