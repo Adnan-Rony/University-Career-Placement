@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { User } from "../models/user.model";
+
+import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
 
@@ -18,9 +18,9 @@ export const register = async (req, res) => {
                 success: false
             });
         };
-        const file = req.file;
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        // const file = req.file;
+        // const fileUri = getDataUri(file);
+        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
         const user = await User.findOne({ email });
         if (user) {
@@ -37,9 +37,9 @@ export const register = async (req, res) => {
            
             password: hashedPassword,
             role,
-            profile:{
-                profilePhoto:cloudResponse.secure_url,
-            }
+            // profile:{
+            //     profilePhoto:cloudResponse.secure_url,
+            // }
         });
 
         return res.status(201).json({
@@ -119,60 +119,60 @@ export const logout = async (req, res) => {
     }
 }
 export const updateProfile = async (req, res) => {
-    try {
-        const { fullname, email,  bio, skills } = req.body;
+    // try {
+    //     const { fullname, email,  bio, skills } = req.body;
         
-        const file = req.file;
-        // cloudinary upload
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+    //     const file = req.file;
+    //     // cloudinary upload
+    //     const fileUri = getDataUri(file);
+    //     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
 
 
-        let skillsArray;
-        if(skills){
-            skillsArray = skills.split(",");
-        }
-        const userId = req.id; // middleware authentication
-        let user = await User.findById(userId);
+    //     let skillsArray;
+    //     if(skills){
+    //         skillsArray = skills.split(",");
+    //     }
+    //     const userId = req.id; // middleware authentication
+    //     let user = await User.findById(userId);
 
-        if (!user) {
-            return res.status(400).json({
-                message: "User not found.",
-                success: false
-            })
-        }
-        // updating data
-        if(fullname) user.fullname = fullname
-        if(email) user.email = email
+    //     if (!user) {
+    //         return res.status(400).json({
+    //             message: "User not found.",
+    //             success: false
+    //         })
+    //     }
+    //     // updating data
+    //     if(fullname) user.fullname = fullname
+    //     if(email) user.email = email
     
-        if(bio) user.profile.bio = bio
-        if(skills) user.profile.skills = skillsArray
+    //     if(bio) user.profile.bio = bio
+    //     if(skills) user.profile.skills = skillsArray
       
-        // resume comes later here...
-        if(cloudResponse){
-            user.profile.resume = cloudResponse.secure_url // save the cloudinary url
-            user.profile.resumeOriginalName = file.originalname // Save the original file name
-        }
+    //     // resume comes later here...
+    //     if(cloudResponse){
+    //         user.profile.resume = cloudResponse.secure_url // save the cloudinary url
+    //         user.profile.resumeOriginalName = file.originalname // Save the original file name
+    //     }
 
 
-        await user.save();
+    //     await user.save();
 
-        user = {
-            _id: user._id,
-            fullname: user.fullname,
-            email: user.email,
+    //     user = {
+    //         _id: user._id,
+    //         fullname: user.fullname,
+    //         email: user.email,
           
-            role: user.role,
-            profile: user.profile
-        }
+    //         role: user.role,
+    //         profile: user.profile
+    //     }
 
-        return res.status(200).json({
-            message:"Profile updated successfully.",
-            user,
-            success:true
-        })
-    } catch (error) {
-        console.log(error);
-    }
+    //     return res.status(200).json({
+    //         message:"Profile updated successfully.",
+    //         user,
+    //         success:true
+    //     })
+    // } catch (error) {
+    //     console.log(error);
+    // }
 }
