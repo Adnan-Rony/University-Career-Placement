@@ -2,7 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-
+import indexRoutes from "./routers/index.routes.js";
 dotenv.config();
 
 const app = express();
@@ -19,5 +19,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.use("/api/v1/", indexRoutes); 
 
 export default app;
