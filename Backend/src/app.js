@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import indexRoutes from "./routers/index.routes.js";
 import userRoutes from "./routers/user.route.js";  
 import companyRoute from "./routers/company.route.js";
+import jobRoute from "./routers/job.route.js";
 
 
 dotenv.config();
@@ -24,7 +25,9 @@ app.use(cors(corsOptions));
 
 // Routes
 app.use("/api/v1", indexRoutes);  // Base route
+
 app.use("/api/v1/user", userRoutes); // User-related routes
 app.use("/api/v1/company", companyRoute); // User-related routes
+app.use("/api/v1/job",jobRoute ); // User-related routes
 
 export default app;
