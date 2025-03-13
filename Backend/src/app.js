@@ -8,7 +8,6 @@ import companyRoute from "./routers/company.route.js";
 import jobRoute from "./routers/job.route.js";
 import applicationRoute from "./routers/application.route.js";
 
-
 dotenv.config();
 
 const app = express();
@@ -31,5 +30,8 @@ app.use("/api/v1/user", userRoutes); // User-related routes
 app.use("/api/v1/company", companyRoute); // User-related routes
 app.use("/api/v1/job",jobRoute ); // User-related routes
 app.use("/api/v1/application",applicationRoute ); // User-related routes
+
+
+//meet
 
 export default app;

@@ -51,6 +51,28 @@ export const register = async (req, res) => {
     }
 }
 
+//get logged user deatils
+export const getuserData = async (req, res) => {
+    try {
+        // Fetch all users from the database
+        const users = await User.find().select("-password"); // Exclude passwords for security
+
+        return res.status(200).json({
+            message: "Users data fetched successfully.",
+            loggedInUser: req.user,  // Logged-in user details
+            users,  // All users
+            success: true
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
+    }
+};
+
+
 
 export const login = async (req, res) => {
     try {
