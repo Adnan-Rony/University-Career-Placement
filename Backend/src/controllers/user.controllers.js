@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { User } from "../models/user.model";
+
+import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
 
@@ -18,9 +18,9 @@ export const register = async (req, res) => {
                 success: false
             });
         };
-        const file = req.file;
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        // const file = req.file;
+        // const fileUri = getDataUri(file);
+        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
         const user = await User.findOne({ email });
         if (user) {
@@ -37,9 +37,9 @@ export const register = async (req, res) => {
            
             password: hashedPassword,
             role,
-            profile:{
-                profilePhoto:cloudResponse.secure_url,
-            }
+            // profile:{
+            //     profilePhoto:cloudResponse.secure_url,
+            // }
         });
 
         return res.status(201).json({
@@ -50,6 +50,28 @@ export const register = async (req, res) => {
         console.log(error);
     }
 }
+
+//get logged user deatils
+export const getuserData = async (req, res) => {
+    try {
+        // Fetch all users from the database
+        const users = await User.find().select("-password"); // Exclude passwords for security
+
+        return res.status(200).json({
+            message: "Users data fetched successfully.",
+            loggedInUser: req.user,  // Logged-in user details
+            users,  // All users
+            success: true
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
+    }
+};
+
 
 
 export const login = async (req, res) => {
@@ -124,8 +146,8 @@ export const updateProfile = async (req, res) => {
         
         const file = req.file;
         // cloudinary upload
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        // const fileUri = getDataUri(file);
+        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
 
 
@@ -150,10 +172,10 @@ export const updateProfile = async (req, res) => {
         if(skills) user.profile.skills = skillsArray
       
         // resume comes later here...
-        if(cloudResponse){
-            user.profile.resume = cloudResponse.secure_url // save the cloudinary url
-            user.profile.resumeOriginalName = file.originalname // Save the original file name
-        }
+        // if(cloudResponse){
+        //     user.profile.resume = cloudResponse.secure_url // save the cloudinary url
+        //     user.profile.resumeOriginalName = file.originalname // Save the original file name
+        // }
 
 
         await user.save();
