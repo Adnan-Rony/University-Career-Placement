@@ -26,7 +26,7 @@ export const SignIn = () => {
      
     
       try{
-          const res=await axios.get(`${USER_API_END_POINT}/login`,input,{
+          const res=await axios.post(`${USER_API_END_POINT}/login`,input,{
             headers:{
               "Content-Type":"application/json",
             },
@@ -34,7 +34,7 @@ export const SignIn = () => {
           });
           if(res.data.success){
             navigate("/");
-            toast.success(res.data.message);
+            alert(res.data.message);
           }
       }
       catch(err){
