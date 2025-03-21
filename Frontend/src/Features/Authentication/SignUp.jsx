@@ -8,6 +8,7 @@ export const SignUp = () => {
   const [input, setInput] = useState({
     fullname: "",
     email: "",
+    phone: "",
     password: "",
     role: "",
     file: "",
@@ -28,6 +29,7 @@ export const SignUp = () => {
     const formData=new FormData();
     formData.append("fullname",input.fullname);
     formData.append("email",input.email);
+    formData.append("phone",input.phone);
     formData.append("password",input.password);
     formData.append("role",input.role);
    if(input.file){
@@ -39,14 +41,14 @@ export const SignUp = () => {
           },
           withCredentials:true,
         });
-        if(res.data.sucess){
+        if(res.data.success){
           navigate("/SignIn");
           toast.success(res.data.message);
         }
     }
     catch(err){
       console.log(err);
-      toast.error("Something went wrong");
+      toast.error(err.response.data.message);
     }
 
   };
@@ -72,6 +74,16 @@ export const SignUp = () => {
             value={input.fullname}
             onChange={changeEventHandler}
             placeholder="Enter your name"
+          />
+        </div>
+        <div className="my-2">
+          <input
+            className="input w-full border p-2 rounded"
+            type="text"
+            name="phone"
+            value={input.phone}
+            onChange={changeEventHandler}
+            placeholder="Enter your phone number"
           />
         </div>
 

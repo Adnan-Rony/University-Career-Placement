@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from '../../utils/Constant';
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 export const SignIn = () => {
 
    const [input, setInput] = useState({
@@ -25,13 +25,13 @@ export const SignIn = () => {
      
     
       try{
-          const res=await axios.post(`${USER_API_END_POINT}/login`,{
+          const res=await axios.get(`${USER_API_END_POINT}/login`,input,{
             headers:{
               "Content-Type":"application/json",
             },
             withCredentials:true,
           });
-          if(res.data.sucess){
+          if(res.data.success){
             navigate("/");
             toast.success(res.data.message);
           }
@@ -52,16 +52,7 @@ export const SignIn = () => {
         onSubmit={submitHandler}
         className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
       >
-        <div className="my-2">
-          <input
-            className="input w-full border p-2 rounded"
-            type="text"
-            name="fullname"
-            value={input.fullname}
-            onChange={changeEventHandler}
-            placeholder="Enter your name"
-          />
-        </div>
+       
 
         <div className="my-2">
           <input

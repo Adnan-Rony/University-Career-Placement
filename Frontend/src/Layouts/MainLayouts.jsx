@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router'
 import { Navbar } from '../Components/Navbar'
 
+
 export const MainLayouts = () => {
   return (
     <div>
@@ -10,7 +11,10 @@ export const MainLayouts = () => {
         </header>
 
       <main className='w-11/12 mx-auto'>
-      <Outlet></Outlet>
+      <Outlet>
+
+       
+      </Outlet>
       </main>
     </div>
   )
