@@ -4,13 +4,13 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-purple-100 to-purple-50 text-purple-700 py-10">
+    <footer className="bg-gradient-to-r from-purple-100 to-purple-50  py-10 fixed bottom-0 w-full">
       <div className="max-w-screen-xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* AlwaysApply Brand Section */}
           <div>
-            <h2 className="text-xl font-semibold flex items-center gap-2">
-              <span className="text-purple-600">🔍</span> AlwaysApply
+            <h2 className="text-xl font-semibold flex items-center gap-2 text-purple-700">
+              <span className="text-purple-600 ">🔍</span> AlwaysApply
             </h2>
             <p className="mt-2">
               Call now: <a href="tel:+919591776078" className="text-purple-600 font-semibold">+91 9591776078</a>
@@ -22,7 +22,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Quick Link</h3>
+            <h3 className="text-lg font-semibold mb-3 text-purple-700">Quick Link</h3>
             <ul className="space-y-2">
               <li><Link to="/about" className="hover:text-purple-600">About</Link></li>
               <li><Link to="/contact" className="hover:text-purple-600">Contact</Link></li>
@@ -32,7 +32,7 @@ const Footer = () => {
 
           {/* Candidate Section */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Candidate</h3>
+            <h3 className="text-lg font-semibold mb-3 text-purple-700">Candidate</h3>
             <ul className="space-y-2">
               <li><Link to="/jobs" className="hover:text-purple-600">Browse Jobs</Link></li>
               <li><Link to="/employers" className="hover:text-purple-600">Browse Employers</Link></li>
@@ -43,7 +43,7 @@ const Footer = () => {
 
           {/* Employers Section */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Employers</h3>
+            <h3 className="text-lg font-semibold mb-3 text-purple-700">Employers</h3>
             <ul className="space-y-2">
               <li><Link to="/post-job" className="hover:text-purple-600">Post a Job</Link></li>
               <li><Link to="/candidates" className="hover:text-purple-600">Browse Candidates</Link></li>

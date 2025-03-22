@@ -17,8 +17,10 @@ export const MainLayouts = () => {
       <main className={isHomePage ? "w-full" : "max-w-screen-xl mx-auto"}>
         <Outlet />
 
-        <Footer></Footer>
+        
       </main>
+
+      <Footer></Footer>
     </div>
   );
 };
