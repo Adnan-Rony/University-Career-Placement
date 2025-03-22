@@ -24,7 +24,7 @@ export const Home = () => {
               placeholder="Location"
               className="w-full lg:w-1/4 p-3 border rounded-lg outline-none border-none"
             />
-            <button className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700">
+            <button className="bg-actionColor text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700">
               Find Job
             </button>
           </div>

@@ -5,7 +5,7 @@ import { Navbar } from "../Components/Navbar";
 export const MainLayouts = () => {
   return (
     <div>
-      <header>
+      <header className="w-11/12 mx-auto">
         <Navbar></Navbar>
       </header>
 {/* max-w-screen-xl  mx-auto */} 
