@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from '../../utils/Constant';
 import axios from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
+
 import img from '../../assets/fb748fb1d5f7e2ac1eefdb618a0df004.png';
 export const SignIn = () => {
 

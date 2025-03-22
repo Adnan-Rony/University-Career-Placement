@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
     try {
-        const { fullname, email, password, role } = req.body;
+        const { fullname, email, password, role,phone } = req.body;
          
         if (!fullname || !email || !password || !role) {
             return res.status(400).json({
@@ -37,6 +37,7 @@ export const register = async (req, res) => {
            
             password: hashedPassword,
             role,
+            phone
             // profile:{
             //     profilePhoto:cloudResponse.secure_url,
             // }
@@ -115,6 +116,7 @@ export const login = async (req, res) => {
             _id: user._id,
             fullname: user.fullname,
             email: user.email,
+            phone:user.phone,
            
             role: user.role,
             profile: user.profile
