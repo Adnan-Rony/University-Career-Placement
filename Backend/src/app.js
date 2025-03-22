@@ -8,6 +8,7 @@ import companyRoute from "./routers/company.route.js";
 import jobRoute from "./routers/job.route.js";
 import applicationRoute from "./routers/application.route.js";
 
+
 dotenv.config();
 
 const app = express();

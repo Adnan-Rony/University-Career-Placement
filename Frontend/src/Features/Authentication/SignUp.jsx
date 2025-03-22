@@ -44,7 +44,7 @@ export const SignUp = () => {
         });
         if(res.data.success){
           navigate("/SignIn");
-          toast.success(res.data.message);
+          alert(res.data.message);
         }
     }
     catch(err){

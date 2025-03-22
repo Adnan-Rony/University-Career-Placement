@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from '../../utils/Constant';
 import axios from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
+
+import img from '../../assets/fb748fb1d5f7e2ac1eefdb618a0df004.png';
 export const SignIn = () => {
 
    const [input, setInput] = useState({
@@ -25,7 +26,7 @@ export const SignIn = () => {
      
     
       try{
-          const res=await axios.get(`${USER_API_END_POINT}/login`,input,{
+          const res=await axios.post(`${USER_API_END_POINT}/login`,input,{
             headers:{
               "Content-Type":"application/json",
             },
@@ -33,7 +34,7 @@ export const SignIn = () => {
           });
           if(res.data.success){
             navigate("/");
-            toast.success(res.data.message);
+            alert(res.data.message);
           }
       }
       catch(err){
@@ -47,10 +48,13 @@ export const SignIn = () => {
 
 
   return (
-    <div className="flex items-center justify-center max-w-7xl mx-auto">
+  <div>
+ 
+      <div className="grid lg:grid-cols-2 gap-4 items-center justify-center lg:max-w-7xl mx-auto lg:w-1/2 border border-gray-100 shadow-2xl rounded-3xl p-4 my-10">
+      
       <form
         onSubmit={submitHandler}
-        className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
+        className=""
       >
        
 
@@ -100,22 +104,15 @@ export const SignIn = () => {
             <label>Recruiter</label>
           </div>
         </div>
-        {/* <div className="flex items-center gap-2">
-  <label className="label" htmlFor="profile">Profile</label>
-  <input
-    id="profile"
-    type="file"
-    accept="image/*"
-    onChange={changeFileHandler}
-    className=" file-input-primary w-full max-w-xs"
-  />
-</div> */}
+   
 
         
 
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">
-          Sign Up
+        <button className="bg-[#6300b3] text-white px-4 py-2 rounded hover:bg-blue-600 w-full">
+        Login
         </button>
+
+        
 
         <span className="text-sm">
           Already have an account?{" "}
@@ -124,6 +121,15 @@ export const SignIn = () => {
           </Link>
         </span>
       </form>
+
+        <div>
+          <img src={img} alt="" />
+        </div>
+      
+    
+
+
     </div>
+  </div>
   )
 }
