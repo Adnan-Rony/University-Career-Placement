@@ -4,7 +4,7 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-purple-100 to-purple-50  py-10 fixed bottom-0 w-full">
+    <footer className="bg-gradient-to-r from-purple-100 to-purple-50  py-10 ">
       <div className="max-w-screen-xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* AlwaysApply Brand Section */}
