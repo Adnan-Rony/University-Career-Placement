@@ -5,9 +5,7 @@ export const Home = () => {
     <div>Home
 
 
-      <div className='bg-accent'>
-        bkasb
-      </div>
+   
     </div>
   )
 }
