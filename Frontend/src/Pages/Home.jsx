@@ -2,7 +2,6 @@ import img from "../assets/7d1edb20fcd9e15fc71a8e6cc80ede1f.png";
 
 export const Home = () => {
   return (
-<<<<<<< HEAD
     
   <div className="bg-gradient-to-r from-[#f7f1fb] to-[#f6effb]">
       <div className="max-w-screen-xl  mx-auto flex items-center justify-center p-10">
@@ -43,14 +42,3 @@ export const Home = () => {
   </div>
   );
 };
-=======
-    <div>Home
-
-
-      <div className='bg-accent'>
-        bkasb
-      </div>
-    </div>
-  )
-}
->>>>>>> 86d2f30b5dcb1739d3abbf5f70fc68a5b2dfc6d1
