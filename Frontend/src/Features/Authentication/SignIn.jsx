@@ -4,6 +4,7 @@ import { USER_API_END_POINT } from '../../utils/Constant';
 import axios from 'axios';
 
 import img from '../../assets/fb748fb1d5f7e2ac1eefdb618a0df004.png';
+import toast from 'react-hot-toast';
 export const SignIn = () => {
 
    const [input, setInput] = useState({
@@ -34,7 +35,8 @@ export const SignIn = () => {
           });
           if(res.data.success){
             navigate("/");
-            alert(res.data.message);
+            toast.success(res.data.message);
+            
           }
       }
       catch(err){
