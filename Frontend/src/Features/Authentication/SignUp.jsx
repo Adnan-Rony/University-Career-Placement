@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
 import axios from 'axios'
 import { USER_API_END_POINT } from "../../utils/Constant";
 import toast, { Toaster } from 'react-hot-toast';
+import { Link, useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
   const [input, setInput] = useState({
@@ -59,9 +60,10 @@ export const SignUp = () => {
 
 
 
-
   return (
     <div className="flex items-center justify-center max-w-7xl mx-auto">
+
+       
       <form
         onSubmit={submitHandler}
         className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
