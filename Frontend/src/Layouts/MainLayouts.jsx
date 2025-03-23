@@ -1,17 +1,26 @@
 import React from "react";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router-dom";
 import { Navbar } from "../Components/Navbar";
+import Footer from "../Components/Footer";
 
 export const MainLayouts = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/"; // Check if it's the home page
+
   return (
     <div>
-      <header className="w-11/12 mx-auto">
-        <Navbar></Navbar>
+      <header>
+        <Navbar />
       </header>
-{/* max-w-screen-xl  mx-auto */} 
-      <main className="">
-        <Outlet></Outlet>
+
+      {/* Apply max-w-screen-xl mx-auto only if NOT on the home page */}
+      <main className={isHomePage ? "w-full" : "max-w-screen-xl mx-auto"}>
+        <Outlet />
+
+        
       </main>
+
+      <Footer></Footer>
     </div>
   );
 };
