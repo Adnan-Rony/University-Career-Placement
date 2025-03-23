@@ -65,7 +65,7 @@ export const SignIn = () => {
             name="email"
             value={input.email}
             onChange={changeEventHandler}
-            placeholder="Enter your email"
+            placeholder="Enter your email email"
           />
         </div>
 
