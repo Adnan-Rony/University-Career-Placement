@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from "../../utils/Constant";
@@ -40,64 +41,8 @@ export const SignIn = () => {
   };
 
   return (
-  <div>
- 
-      <div className="grid lg:grid-cols-2 gap-4 items-center justify-center lg:max-w-7xl mx-auto lg:w-1/2 border border-gray-100 shadow-2xl rounded-3xl p-4 my-10">
-      
-      <form
-        onSubmit={submitHandler}
-        className=""
-      >
-       
-
-        <div className="my-2">
-          <input
-            className="input w-full border p-2 rounded"
-            type="email"
-            name="email"
-            value={input.email}
-            onChange={changeEventHandler}
-            placeholder="Enter your email email"
-          />
-        </div>
-
-        <div className="my-2">
-          <input
-            className="input w-full border p-2 rounded"
-            type="password"
-            name="password"
-            value={input.password}
-            onChange={changeEventHandler}
-            placeholder="Enter your password"
-          />
-        </div>
-
-        <div className="flex items-center gap-4 my-5">
-          <div className="flex items-center space-x-2">
-            <input
-              type="radio"
-              name="role"
-              value="student"
-              checked={input.role === "student"}
-              onChange={changeEventHandler}
-              className="cursor-pointer"
-            />
-            <label>Student</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <input
-              type="radio"
-              name="role"
-              value="recruiter"
-              checked={input.role === "recruiter"}
-              onChange={changeEventHandler}
-              className="cursor-pointer"
-            />
-            <label>Recruiter</label>
-          </div>
-        </div>
-   
-
+    <div className="flex items-center justify-center min-h-screen  p-4">
+      <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-3xl flex flex-col md:flex-row items-center">
         
         {/* Left Side: Form */}
         <div className="w-full md:w-1/2 px-6 ">
@@ -154,7 +99,8 @@ export const SignIn = () => {
               <hr className="w-full border-gray-300" />
             </div>
 
-            {/* Social Login Buttons */}
+
+{/* Social Login Buttons */}
             <div className="flex justify-center space-x-4">
               <button className="p-3 shadow-2xl rounded-lg hover:bg-gray-100 transition-all">
                 <FaGoogle className="text-red-500" size={20} />
