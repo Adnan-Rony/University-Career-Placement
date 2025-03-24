@@ -4,6 +4,8 @@ import { MainLayouts } from "../Layouts/MainLayouts";
 import { Home } from "../Pages/Home";
 import { SignIn } from "../Features/Authentication/SignIn";
 import { SignUp } from "../Features/Authentication/SignUp";
+import { DashBoardLayout } from "../Layouts/DashBoardLayout";
+import { PostJob } from "../Pages/Empoloyer/PostJob";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -27,6 +29,16 @@ export const AppRouter = createBrowserRouter([
       }
     ]
       
-  }
+  },
+  {
+    path: "dashboard",
+    element: <DashBoardLayout></DashBoardLayout>,
+    children: [
+      // { path: "/employer/dashboard", element: <EmployerDashboard /> },
+      // { path: "/employer/jobs", element: <EmployerJobList /> },
+      { path: "employer/post-job", 
+        element: <PostJob /> },
+    ],
+  },
 
 ])
