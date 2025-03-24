@@ -1,0 +1,95 @@
+{
+    "jobs": [
+        {
+            "_id": "58d09157fe53f7359b98af12",
+            "title": "Frontend Developer",
+            "description": "Responsible for building and maintaining the user interface of web applications.",
+            "requirements": [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "React"
+            ],
+            "salary": {
+                "min": 70000,
+                "max": 80000
+            },
+            "experienceLevel": 2,
+            "location": "Dhaka, Bangladesh",
+            "jobType": "Full-time",
+            "position": 5,
+            "company": {
+                "name": "Tech Solutions BD",
+                "image": "https://i.ibb.co.com/WvnPVtCQ/icons8-redragon-96.png"
+            },
+            "created_by": "54cf689106158b33acbb91bc",
+            "applications": [
+                "67d080c93af677df336b7234"
+            ],
+            "createdAt": "2025-03-22T09:30:12.372Z",
+            "updatedAt": "2025-03-22T11:40:25.364Z",
+            "__v": 1
+        },
+        {
+            "_id": "68d07157fe53f7359b98af32",
+            "title": "Backend Developer",
+            "description": "Responsible for building and maintaining the server-side of web applications.",
+            "requirements": [
+                "Node.js",
+                "Express",
+                "MongoDB"
+            ],
+            "salary": {
+                "min": 85000,
+                "max": 95000
+            },
+            "experienceLevel": 4,
+            "location": "Chittagong, Bangladesh",
+            "jobType": "Full-time",
+            "position": 10,
+            "company": {
+                "name": "CloudTech BD",
+                "image": "https://res.cloudinary.com/dto6ulc5n/image/upload/v1742757754/ayo-ogunseinde-6W4F62sN_yI-unsplash_z8moxp.jpg"
+            },
+            "created_by": "67cf689106158b33acbb91ba",
+            "applications": [
+                "68d091c93af677df336b7235"
+            ],
+            "createdAt": "2025-03-21T16:48:23.372Z",
+            "updatedAt": "2025-03-21T18:28:25.364Z",
+            "__v": 1
+        },
+        {
+            "_id": "69d07257fe53f7359b98af53",
+            "title": "Full Stack Developer",
+            "description": "Responsible for both the front-end and back-end of web applications.",
+            "requirements": [
+                "JavaScript",
+                "React",
+                "Node.js",
+                "Express",
+                "MongoDB"
+            ],
+            "salary": {
+                "min": 90000,
+                "max": 100000
+            },
+            "experienceLevel": 3,
+            "location": "Sylhet, Bangladesh",
+            "jobType": "Full-time",
+            "position": 8,
+            "company": {
+                "name": "Innovatech Bangladesh",
+                "image": "https://res.cloudinary.com/dto6ulc5n/image/upload/v1742756922/samples/shoe.jpg"
+            },
+            "created_by": "67cf689106158b33acbb91cc",
+            "applications": [
+                "69d092c93af677df336b7236"
+            ],
+            "createdAt": "2025-03-23T10:00:00.372Z",
+            "updatedAt": "2025-03-23T12:15:25.364Z",
+            "__v": 1
+        }
+    ],
+    "success": true
+}
