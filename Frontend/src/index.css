@@ -3,9 +3,9 @@
 
 
 @theme {
-    --color-primary: #6300B3;
-    --color-secondary: #EFE2F8;
-    --color-actionColor: #9B00FF;
+    --color-r-primary: #6300B3;
+    --color-r-secondary: #EFE2F8;
+    --color-r-accent: #9B00FF;
     --color-background: #F1E7FB;
     --color-text: #333333;
 }
