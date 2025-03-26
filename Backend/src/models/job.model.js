@@ -32,6 +32,10 @@ const jobSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    companyImage:{
+        type: String,
+        required: true
+    },
     company: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CompanyCollection', //update

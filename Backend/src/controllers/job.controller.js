@@ -3,7 +3,7 @@ import { Job } from "../models/job.model.js";
 // admin post a job
 export const postJob = async (req, res) => {
     try {
-        const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
+        const { title, description, requirements, salary, location, jobType, experience, position, companyId,companyImage } = req.body;
         const userId = req.id;
 
         if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
@@ -19,6 +19,7 @@ export const postJob = async (req, res) => {
             salary: Number(salary),
             location,
             jobType,
+            companyImage,
             experienceLevel: experience,
             position,
             company: companyId,
