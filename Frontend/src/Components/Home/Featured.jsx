@@ -16,11 +16,19 @@ export const Featured = () => {
       const res = await axios.get("http://localhost:3002/api/v1/job/get", {
         withCredentials: true, // If authentication is required
       });
-      return res.data.jobs;
+      return res.data.jobs.slice(0, 6); // Only take the first 6 jobs
     },
   });
 
-  if (isPending) return <h2>Loading...</h2>;
+  if (isPending) 
+    return (
+      <div className="flex justify-center items-center h-96 ">
+ 
+
+<span className="loading loading-dots loading-xl"></span>
+      </div>
+    );
+  
   if (error) return <h2>Error: {error.message}</h2>;
 
   return (
@@ -90,6 +98,7 @@ export const Featured = () => {
           </div>
         ))}
       </div>
+      
     </div>
   );
 };
