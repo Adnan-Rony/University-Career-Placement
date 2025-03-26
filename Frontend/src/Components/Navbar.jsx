@@ -34,6 +34,16 @@ export const Navbar = () => {
           Register
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/dashboard/employer/post-job"
+          className={({ isActive }) =>
+            isActive ? 'text-primary' : 'text-gray-500'
+          }
+        >
+          PostJob
+        </NavLink>
+      </li>
     </>
   );
   

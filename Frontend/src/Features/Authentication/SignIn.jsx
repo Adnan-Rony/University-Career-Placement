@@ -58,7 +58,7 @@ export const SignIn = () => {
                 name="email"
                 value={input.email}
                 onChange={changeEventHandler}
-                placeholder="Enter email id / username"
+                placeholder="Enter email id / username username"
              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
               />
             </div>
