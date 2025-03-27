@@ -65,7 +65,7 @@ export const Featured = () => {
                 </h3>
                 <h5 className="font-medium text-gray-600">
                   Salary:
-                  <span>{jobs?.salary}</span>
+                  {/* <span>{jobs?.salary}</span> */}
                 </h5>
               </div>
               {/* Company details */}

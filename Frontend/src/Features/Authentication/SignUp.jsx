@@ -4,6 +4,7 @@ import { USER_API_END_POINT } from "../../utils/Constant";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { GoogleSignIN } from "./GoogleSignIN";
 
 export const SignUp = () => {
   const [input, setInput] = useState({
@@ -175,9 +176,7 @@ export const SignUp = () => {
 
           {/* Social Signup Buttons */}
            <div className="flex justify-center space-x-4">
-                        <button className="p-3 shadow-2xl rounded-lg hover:bg-gray-100 transition-all">
-                          <FaGoogle className="text-red-500" size={20} />
-                        </button>
+                       <GoogleSignIN></GoogleSignIN>
                         <button className="p-3 shadow-2xl rounded-lg hover:bg-gray-100 transition-all">
                           <FaFacebook className="text-blue-600" size={20} />
                         </button>
