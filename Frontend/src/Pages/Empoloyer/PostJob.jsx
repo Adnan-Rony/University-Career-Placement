@@ -52,7 +52,7 @@ export const PostJob = () => {
               {...register("companyName", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.companyName && <span>This field is required</span>}
+            {errors.companyName && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Job Position */}
@@ -64,7 +64,7 @@ export const PostJob = () => {
               {...register("position", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.position && <span>This field is required</span>}
+            {errors.position && <span className='text-red-500'>This field is required</span>}
           </div>
             
           {/* Job Category */}
@@ -76,7 +76,7 @@ export const PostJob = () => {
               {...register("category", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.category && <span>This field is required</span>}
+            {errors.category && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Job Type */}
@@ -88,7 +88,7 @@ export const PostJob = () => {
               {...register("jobType", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.jobType && <span>This field is required</span>}
+            {errors.jobType && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Select Experience */}
@@ -100,7 +100,7 @@ export const PostJob = () => {
               <option value="Mid Level">Mid Level</option>
               <option value="Senior Level">Senior Level</option>
             </select>
-            {errors.experience && <span>This field is required</span>}
+            {errors.experience && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Posted Date */}
@@ -111,7 +111,7 @@ export const PostJob = () => {
               {...register("postedDate", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.postedDate && <span>This field is required</span>}
+            {errors.postedDate && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Last Date To Apply */}
@@ -122,7 +122,7 @@ export const PostJob = () => {
               {...register("lastDateToApply", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.lastDateToApply && <span>This field is required</span>}
+            {errors.lastDateToApply && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Close Date */}
@@ -133,7 +133,7 @@ export const PostJob = () => {
               {...register("closeDate", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.closeDate && <span>This field is required</span>}
+            {errors.closeDate && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Salary From */}
@@ -145,7 +145,7 @@ export const PostJob = () => {
               {...register("salaryFrom", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.salaryFrom && <span>This field is required</span>}
+            {errors.salaryFrom && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Salary To */}
@@ -157,7 +157,7 @@ export const PostJob = () => {
               {...register("salaryTo", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.salaryTo && <span>This field is required</span>}
+            {errors.salaryTo && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Enter City */}
@@ -169,7 +169,7 @@ export const PostJob = () => {
               {...register("city", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.city && <span>This field is required</span>}
+            {errors.city && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Enter State */}
@@ -181,7 +181,7 @@ export const PostJob = () => {
               {...register("state", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.state && <span>This field is required</span>}
+            {errors.state && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Enter Country */}
@@ -193,7 +193,7 @@ export const PostJob = () => {
               {...register("country", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.country && <span>This field is required</span>}
+            {errors.country && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Enter Education Level */}
@@ -205,22 +205,22 @@ export const PostJob = () => {
               {...register("educationLevel", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.educationLevel && <span>This field is required</span>}
+            {errors.educationLevel && <span className='text-red-500'>This field is required</span>}
           </div>
 
           {/* Job Description */}
-          <div>
+          <div className='col-span-2'>
             <label className="block text-sm font-medium mb-1">Description</label>
             <textarea rows="5"
               placeholder="Enter Job Description"
               {...register("description", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.description && <span>This field is required</span>}
+            {errors.description && <span className='text-red-500'>This field is required</span>}
           </div>
 
 {/* Status */}
-<div className="mb-4">
+<div className="mb-4 col-span-2">
   <label className="block text-sm font-medium mb-2">Status:</label>
   <div className="flex gap-6">
     <div className="flex items-center gap-2">

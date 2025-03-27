@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { FaGoogle, FaFacebook, FaLinkedin } from "react-icons/fa";
 import img from "../../assets/fb748fb1d5f7e2ac1eefdb618a0df004.png";
 import { USER_API_END_POINT } from "../../utils/Constant";
+import { GoogleSignIN } from "./GoogleSignIN";
 
 export const SignIn = () => {
   const [input, setInput] = useState({
@@ -136,9 +137,10 @@ export const SignIn = () => {
 
             {/* Social Login Buttons */}
             <div className="flex justify-center space-x-4">
-              <button className="p-3 shadow-2xl rounded-lg hover:bg-gray-100 transition-all">
+              {/* <button className="p-3 shadow-2xl rounded-lg hover:bg-gray-100 transition-all">
                 <FaGoogle className="text-red-500" size={20} />
-              </button>
+              </button> */}
+              <GoogleSignIN></GoogleSignIN>
               <button className="p-3 shadow-2xl rounded-lg hover:bg-gray-100 transition-all">
                 <FaFacebook className="text-blue-600" size={20} />
               </button>
