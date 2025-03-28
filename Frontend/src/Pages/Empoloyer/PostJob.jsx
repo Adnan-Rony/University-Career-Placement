@@ -33,7 +33,7 @@ export const PostJob = () => {
         console.log('Job Details:', jobDetails);
       }
   return (
-    <div className='bg-background container mx-auto'>
+    <div className='bg-background container mx-auto my-10 p-4 rounded-lg shadow-lg'>
         <SectionTitle title={'Post Job'}></SectionTitle>
         <div>
         <form onSubmit={handleSubmit(onSubmit)} className='p-4'>
@@ -41,7 +41,7 @@ export const PostJob = () => {
 
 
 
-          <div className='grid grid-cols-2 gap-4 '>
+          <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 '>
 
                {/* Company Name */}
           <div>
@@ -50,7 +50,7 @@ export const PostJob = () => {
               type="text"
               placeholder="Company Name"
               {...register("companyName", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.companyName && <span>This field is required</span>}
           </div>
@@ -62,7 +62,7 @@ export const PostJob = () => {
               type="text"
               placeholder="Position"
               {...register("position", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.position && <span>This field is required</span>}
           </div>
@@ -74,7 +74,7 @@ export const PostJob = () => {
               type="text"
               placeholder="Job Category"
               {...register("category", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.category && <span>This field is required</span>}
           </div>
@@ -86,7 +86,7 @@ export const PostJob = () => {
               type="text"
               placeholder="Job Type"
               {...register("jobType", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.jobType && <span>This field is required</span>}
           </div>
@@ -94,7 +94,7 @@ export const PostJob = () => {
           {/* Select Experience */}
           <div>
             <label className="block text-sm font-medium mb-1">Select Experience</label>
-            <select {...register("experience", { required: true })} className="input input-bordered w-full">
+            <select {...register("experience", { required: true })} className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none">
               <option value="">Select Experience</option>
               <option value="Entry Level">Entry Level</option>
               <option value="Mid Level">Mid Level</option>
@@ -109,7 +109,7 @@ export const PostJob = () => {
             <input
               type="date"
               {...register("postedDate", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.postedDate && <span>This field is required</span>}
           </div>
@@ -120,7 +120,7 @@ export const PostJob = () => {
             <input
               type="date"
               {...register("lastDateToApply", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.lastDateToApply && <span>This field is required</span>}
           </div>
@@ -131,7 +131,7 @@ export const PostJob = () => {
             <input
               type="date"
               {...register("closeDate", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.closeDate && <span>This field is required</span>}
           </div>
@@ -143,7 +143,7 @@ export const PostJob = () => {
               type="number"
               placeholder="Salary From"
               {...register("salaryFrom", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.salaryFrom && <span>This field is required</span>}
           </div>
@@ -155,7 +155,7 @@ export const PostJob = () => {
               type="number"
               placeholder="Salary To"
               {...register("salaryTo", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.salaryTo && <span>This field is required</span>}
           </div>
@@ -167,7 +167,7 @@ export const PostJob = () => {
               type="text"
               placeholder="Enter City"
               {...register("city", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.city && <span>This field is required</span>}
           </div>
@@ -179,7 +179,7 @@ export const PostJob = () => {
               type="text"
               placeholder="Enter State"
               {...register("state", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.state && <span>This field is required</span>}
           </div>
@@ -191,7 +191,7 @@ export const PostJob = () => {
               type="text"
               placeholder="Enter Country"
               {...register("country", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.country && <span>This field is required</span>}
           </div>
@@ -203,7 +203,7 @@ export const PostJob = () => {
               type="text"
               placeholder="Enter Education Level"
               {...register("educationLevel", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.educationLevel && <span>This field is required</span>}
           </div>
@@ -214,7 +214,7 @@ export const PostJob = () => {
             <textarea rows="5"
               placeholder="Enter Job Description"
               {...register("description", { required: true })}
-              className="input input-bordered w-full"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.description && <span>This field is required</span>}
           </div>
