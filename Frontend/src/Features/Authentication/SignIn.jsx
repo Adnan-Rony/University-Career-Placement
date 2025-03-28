@@ -55,6 +55,8 @@ export const SignIn = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4">
+      {/* Site title */}
+         <title>Job Portal | SignIn</title>
       <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-3xl flex flex-col md:flex-row items-center">
         
         {/* Left Side: Form */}
