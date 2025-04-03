@@ -14,24 +14,30 @@ export const PostJob = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
-
-
-  const onSubmit =async (data) => {
+  const onSubmit = async (data) => {
+    
     const jobDetails = {
       ...data,
-      description,
-    };
+      description:data.description
+    }
     console.log("Job Details:", jobDetails);
+    
     try {
-      const res = await axios.post(`${JOBPOST_API_END_POINT}/post`, jobDetails, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${JOBPOST_API_END_POINT}/post`,
+        jobDetails,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
       if (res.data.success) {
         navigate("/SignIn");
         toast.success(res.data.message);
@@ -41,8 +47,6 @@ export const PostJob = () => {
       toast.error(err.response?.data?.message || "Registration failed");
     }
   };
-    
-  
 
   return (
     <div className="bg-background container mx-auto my-10 p-4 rounded-lg shadow-lg">
@@ -56,20 +60,36 @@ export const PostJob = () => {
             </label>
             <input
               type="text"
-              placeholder="Company Name"
-              {...register("companyName", { required: true })}
+              placeholder="company name"
+              {...register("company", { required: true })}
               className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
-            {errors.companyName && (
+            {errors.company && (
               <span className="text-red-500">This field is required</span>
             )}
           </div>
+
+          {/* File Upload */}
+          {/* <div>
+            <label className="block text-sm font-medium mb-1">
+              Company Logo
+            </label>
+            <input
+              type="file"
+              {...register("companyImage", { required: true })}
+              accept="image/*"
+              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
+            />
+            {errors.companyImage && (
+              <span className="text-red-500">This field is required</span>
+            )}
+          </div> */}
 
           {/* Job Position */}
           <div>
             <label className="block text-sm font-medium mb-1">Position</label>
             <input
-              type="number"
+              type="text"
               placeholder="Position"
               {...register("position", { required: true })}
               className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
@@ -87,7 +107,7 @@ export const PostJob = () => {
             <input
               type="text"
               placeholder="Job Category"
-              {...register("jobType", { required: true })}
+              {...register("category", { required: true })}
               className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.category && (
@@ -98,12 +118,17 @@ export const PostJob = () => {
           {/* Job Type */}
           <div>
             <label className="block text-sm font-medium mb-1">Job Type</label>
-            <input
-              type="text"
-              placeholder="Job Type"
+            <select
               {...register("jobType", { required: true })}
               className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-            />
+            >
+              <option value="Full-Time">Select Job-Type</option>
+              <option value="Full-Time">Full-Time</option>
+              <option value="Part-Time">Part-Time</option>
+              <option value="Contract">Contract</option>
+              <option value="Internship">Internship</option>
+              <option value="Remote">Remote</option>
+            </select>
             {errors.jobType && (
               <span className="text-red-500">This field is required</span>
             )}
@@ -202,12 +227,13 @@ export const PostJob = () => {
             <label className="block text-lg font-semibold my-4">
               Job Description
             </label>
-           
-            <ReactQuill 
+
+            <ReactQuill
               theme="snow"
               value={description}
               onChange={setDescription}
               placeholder="Write job details here..."
+              {...register("description", { required: true })}
               modules={{
                 toolbar: [
                   [{ header: [1, 2, 3, false] }], // Headings
