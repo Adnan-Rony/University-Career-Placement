@@ -3,6 +3,10 @@ import { useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { SectionTitle } from "../../Components/Shared/SectionTitle";
+import axios from "axios";
+import { JOBPOST_API_END_POINT } from "../../utils/Constant";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 export const PostJob = () => {
   const {
@@ -11,14 +15,34 @@ export const PostJob = () => {
     formState: { errors },
   } = useForm();
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+
+
+  const onSubmit =async (data) => {
     const jobDetails = {
       ...data,
       description,
     };
     console.log("Job Details:", jobDetails);
+    try {
+      const res = await axios.post(`${JOBPOST_API_END_POINT}/post`, jobDetails, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
+      if (res.data.success) {
+        navigate("/SignIn");
+        toast.success(res.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response?.data?.message || "Registration failed");
+    }
   };
+    
+  
 
   return (
     <div className="bg-background container mx-auto my-10 p-4 rounded-lg shadow-lg">
@@ -45,7 +69,7 @@ export const PostJob = () => {
           <div>
             <label className="block text-sm font-medium mb-1">Position</label>
             <input
-              type="text"
+              type="number"
               placeholder="Position"
               {...register("position", { required: true })}
               className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
@@ -63,7 +87,7 @@ export const PostJob = () => {
             <input
               type="text"
               placeholder="Job Category"
-              {...register("category", { required: true })}
+              {...register("jobType", { required: true })}
               className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
             />
             {errors.category && (
