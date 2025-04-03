@@ -5,20 +5,21 @@ import { Company } from "../models/company.model.js";
 // Register a Company
 export const registerCompany = async (req, res) => {
     try {
-        const { companyName, description, website, location, logo } = req.body;
+        const { name, website, industry, location  } = req.body;
 
-        if (!companyName) {
+        if (!name) {
             return res.status(400).json({
                 message: "Company name is required.",
                 success: false
             });
         }
         let company = await Company.findOne({ 
-            name: companyName,
-            description,
+            name,
+          
             website,
             location,
-            logo,
+            industry,
+            
             userId: req.id
         });
         if (company) {
@@ -28,11 +29,11 @@ export const registerCompany = async (req, res) => {
             })
         };
         company = await Company.create({
-            name: companyName,
-            description:description,
-            website:website,
-            location:location,
-            logo:logo,
+            name,
+          
+            website,
+            location,
+            industry,
             
             userId: req.id
         });

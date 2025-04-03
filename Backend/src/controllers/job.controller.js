@@ -3,17 +3,18 @@ import { Job } from "../models/job.model.js";
 // admin post a job
 export const postJob = async (req, res) => {
     try {
-        const { title, description, requirements, salary, location, jobType, experience, position, companyId,companyImage } = req.body;
+        const {  company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description,} = req.body;
         const userId = req.id;
 
-        if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
+        if (!company || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
             return res.status(400).json({
                 message: "Somethin is missing.",
                 success: false
             })
         };
         const job = await Job.create({
-            title,
+            company,
+            companyImage,
             description,
             requirements: requirements.split(","),
             salary: Number(salary),
