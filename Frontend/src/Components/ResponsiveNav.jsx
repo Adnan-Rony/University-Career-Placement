@@ -3,7 +3,7 @@ import { Authcontext } from '../Context/Authprovider';
 
 export const ResponsiveNav = () => {
   const {user,logout}=useContext(Authcontext)
-  console.log(user);
+  // console.log(user);
     const routes = [
         { id: 1, route: "Home", path: "/" },
         { id: 2, route: "About", path: "/about" },

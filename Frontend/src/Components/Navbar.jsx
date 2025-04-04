@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router'
+import { Authcontext } from '../Context/Authprovider';
 
 export const Navbar = () => {
+  const {user,logout}=useContext(Authcontext)
   const navElements = (
     <>
       <li>
@@ -58,18 +60,13 @@ export const Navbar = () => {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><a>Item 1</a></li>
-        <li>
-          <a>Parent</a>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li>
-        <li><a>Item 3</a></li>
+      {
+      navElements
+     }
+     
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <a className="  text-xl font-extrabold">Job <span className='text-r-primary'>Portal</span></a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 text-lg font-medium text-black">
@@ -80,7 +77,16 @@ export const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+  <div >
+    {
+      user ? 
+      <Link    onClick={logout}
+       className='btn btn-primary'>Logout</Link>
+      :
+      <Link to="/SignIn"
+      className='btn btn-primary'>Login</Link>
+    }
+  </div>
   </div>
 </div>
     </div>

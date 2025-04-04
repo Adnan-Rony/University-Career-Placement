@@ -3,17 +3,28 @@ import { Company } from "../models/company.model.js";
 // admin post a job
 // export const postJob = async (req, res) => {
 //     try {
-//         const {  company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description} = req.body;
+//         const {  company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description,} = req.body;
 //         const userId = req.id;
 
-//         if (!company || !position || !description || !category || !jobType || !experience || !postedDate || !lastDateToApply || !closeDate || !salaryFrom || !salaryTo || !city || !state || !country ) {
+//         if (!company || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
 //             return res.status(400).json({
 //                 message: "Somethin is missing.",
 //                 success: false
 //             })
 //         };
 //         const job = await Job.create({
-//             company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description
+//             company,
+//             companyImage,
+//             description,
+//             requirements: requirements.split(","),
+//             salary: Number(salary),
+//             location,
+//             jobType,
+//             companyImage,
+//             experienceLevel: experience,
+//             position,
+//             company: companyId,
+//             created_by: userId
 //         });
 //         return res.status(201).json({
 //             message: "New job created successfully.",
@@ -82,6 +93,9 @@ export const postJob = async (req, res) => {
             success: false
         });
     }}
+
+
+
 
 
 
