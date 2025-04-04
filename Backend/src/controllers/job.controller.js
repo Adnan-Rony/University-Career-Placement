@@ -1,30 +1,54 @@
 import { Job } from "../models/job.model.js";
 
 // admin post a job
+// export const postJob = async (req, res) => {
+//     try {
+//         const {  company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description,} = req.body;
+//         const userId = req.id;
+
+//         if (!company || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
+//             return res.status(400).json({
+//                 message: "Somethin is missing.",
+//                 success: false
+//             })
+//         };
+//         const job = await Job.create({
+//             company,
+//             companyImage,
+//             description,
+//             requirements: requirements.split(","),
+//             salary: Number(salary),
+//             location,
+//             jobType,
+//             companyImage,
+//             experienceLevel: experience,
+//             position,
+//             company: companyId,
+//             created_by: userId
+//         });
+//         return res.status(201).json({
+//             message: "New job created successfully.",
+//             job,
+//             success: true
+//         });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
 export const postJob = async (req, res) => {
     try {
-        const {  company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description,} = req.body;
+        const {  company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description} = req.body;
         const userId = req.id;
 
-        if (!company || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
+        if (!company || !companyImage || !position || !description) {
             return res.status(400).json({
                 message: "Somethin is missing.",
                 success: false
             })
         };
         const job = await Job.create({
-            company,
-            companyImage,
-            description,
-            requirements: requirements.split(","),
-            salary: Number(salary),
-            location,
-            jobType,
-            companyImage,
-            experienceLevel: experience,
-            position,
-            company: companyId,
-            created_by: userId
+            company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description
         });
         return res.status(201).json({
             message: "New job created successfully.",
@@ -35,6 +59,9 @@ export const postJob = async (req, res) => {
         console.log(error);
     }
 }
+
+
+
 
 //student apply for all jobs
 export const getAllJobs = async (req, res) => {

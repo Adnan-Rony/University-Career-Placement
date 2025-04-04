@@ -7,15 +7,17 @@ import { useNavigate } from 'react-router'
 export const GoogleSignIN = () => {
     const navigate = useNavigate();
       const {user,logout,googleSignIn}=useContext(Authcontext)
-      console.log(user);
+      // console.log(user);
       const handleGoogleSignin=()=>{
         googleSignIn()
         .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
             toast.success("Sign In With Google Successful");
+
             navigate("/");
             const user = result.user;
+            console.log("UserInfos:",user);
            
           }).catch((error) => {
             // Handle Errors here.
