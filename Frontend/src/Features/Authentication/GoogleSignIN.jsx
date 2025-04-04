@@ -3,6 +3,7 @@ import { Authcontext } from '../../Context/Authprovider'
 import { FaGoogle } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router'
+import { GoogleAuthProvider } from 'firebase/auth'
 
 export const GoogleSignIN = () => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ export const GoogleSignIN = () => {
             toast.success("Sign In With Google Successful");
             navigate("/");
             const user = result.user;
+            console.log(user)
            
           }).catch((error) => {
             // Handle Errors here.

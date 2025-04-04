@@ -12,7 +12,7 @@ export const ResponsiveNav = () => {
         { id: 5, route: "Profile", path: "/profile/:id" }
       ];
       
-      console.log(routes);
+      // console.log(routes);
       
   return (
     <nav className='text-black md:flex mr'>
