@@ -3,6 +3,7 @@ import { Authcontext } from '../../Context/Authprovider'
 import { FaGoogle } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router'
+import axios from 'axios'
 
 export const GoogleSignIN = () => {
     const navigate = useNavigate();
@@ -11,14 +12,31 @@ export const GoogleSignIN = () => {
       const handleGoogleSignin=()=>{
         googleSignIn()
         .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            toast.success("Sign In With Google Successful");
+          
+          console.log(result.user);
+          const userInfo = {
+            fullname: result.user?.displayName,
+            email: result.user?.email,
+            profilePhoto: result.user?.photoURL,
 
-            navigate("/");
-            const user = result.user;
-            console.log("UserInfos:",user);
+            
+          };
+          
+            // Send user data to backend for registration or login
+            axios.post(`${USER_API_END_POINT}/register`,userInfo)
+            .then(response=>{
+              console.log(response.data); 
+              console.log("UserInfo Sent",userInfo);
+              navigate("/"); 
+            })
+            .catch(error=>{
+              console.error("Error while storing user info:", error.response || error);
+            })
+
            
+
+          
+            
           }).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;

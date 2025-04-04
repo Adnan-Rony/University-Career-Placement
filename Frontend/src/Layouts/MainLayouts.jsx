@@ -12,7 +12,7 @@ export const MainLayouts = () => {
     <div>
       <header>
         <Navbar />
-        <ResponsiveNav></ResponsiveNav>
+        {/* <ResponsiveNav></ResponsiveNav> */}
       </header>
 
       {/* Apply max-w-screen-xl mx-auto only if NOT on the home page */}
