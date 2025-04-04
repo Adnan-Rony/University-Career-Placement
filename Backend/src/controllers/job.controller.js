@@ -3,22 +3,24 @@ import { Job } from "../models/job.model.js";
 // admin post a job
 export const postJob = async (req, res) => {
     try {
-        const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
+        const {  company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description,} = req.body;
         const userId = req.id;
 
-        if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
+        if (!company || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
             return res.status(400).json({
                 message: "Somethin is missing.",
                 success: false
             })
         };
         const job = await Job.create({
-            title,
+            company,
+            companyImage,
             description,
             requirements: requirements.split(","),
             salary: Number(salary),
             location,
             jobType,
+            companyImage,
             experienceLevel: experience,
             position,
             company: companyId,
@@ -38,29 +40,36 @@ export const postJob = async (req, res) => {
 export const getAllJobs = async (req, res) => {
     try {
         const keyword = req.query.keyword || "";
+        const page = parseInt(req.query.page) || 1;  // Default page = 1
+        const limit = parseInt(req.query.limit) || 6; // Default limit = 6
+
         const query = {
             $or: [
                 { title: { $regex: keyword, $options: "i" } },
                 { description: { $regex: keyword, $options: "i" } },
-            ]
+            ],
         };
-        const jobs = await Job.find(query).populate({
-            path: "company"
-        }).sort({ createdAt: -1 });
-        if (!jobs) {
-            return res.status(404).json({
-                message: "Jobs not found.",
-                success: false
-            })
-        };
+
+        const jobs = await Job.find(query)
+            .populate({ path: "company" })
+            .sort({ createdAt: -1 })
+            .skip((page - 1) * limit) // Pagination logic
+            .limit(limit); // Limit results
+
+        const totalJobs = await Job.countDocuments(query); // Total jobs count
+
         return res.status(200).json({
             jobs,
-            success: true
-        })
+            totalPages: Math.ceil(totalJobs / limit),
+            currentPage: page,
+            success: true,
+        });
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        res.status(500).json({ message: "Server Error", success: false });
     }
-}
+};
+
 
 //student get  jobs which student are application
 export const getJobById = async (req, res) => {
