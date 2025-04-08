@@ -1,5 +1,5 @@
 import { Job } from "../models/job.model.js";
-
+import { Company } from "../models/company.model.js";
 // admin post a job
 // export const postJob = async (req, res) => {
 //     try {
@@ -36,29 +36,76 @@ import { Job } from "../models/job.model.js";
 //     }
 // }
 
+
+
 export const postJob = async (req, res) => {
     try {
-        const {  company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description} = req.body;
+        const { company, companyImage, position, category, jobType, experience, postedDate, lastDateToApply, closeDate, salaryFrom, salaryTo, city, state, country, educationLevel, description } = req.body;
         const userId = req.id;
 
-        if (!company || !companyImage || !position || !description) {
+        if (!company || !position || !description || !category || !jobType || !experience || !postedDate || !lastDateToApply || !closeDate || !salaryFrom || !salaryTo || !city || !state || !country) {
             return res.status(400).json({
-                message: "Somethin is missing.",
+                message: "Something is missing.",
                 success: false
-            })
-        };
+            });
+        }
+
+        // Check if the company exists and belongs to the user
+        const existingCompany = await Company.findOne({ _id: company, userId });
+        if (!existingCompany) {
+            return res.status(400).json({
+                message: "Invalid company or you do not have permission to post a job for this company.",
+                success: false
+            });
+        }
+
+        // Create the job
         const job = await Job.create({
-            company,companyImage, position,category,jobType,experience,postedDate,lastDateToApply,closeDate, salaryFrom,salaryTo,city,state,country,educationLevel,description
+            company, // Must be an ObjectId
+            companyImage,
+            position,
+            category,
+            jobType,
+            experience,
+            postedDate,
+            lastDateToApply,
+            closeDate,
+            salaryFrom,
+            salaryTo,
+            city,
+            state,
+            country,
+            educationLevel,
+            description,
+            userId, // Save the user who posted the job
         });
+
         return res.status(201).json({
             message: "New job created successfully.",
             job,
             success: true
         });
+
     } catch (error) {
-        console.log(error);
-    }
-}
+        console.error(error);
+        return res.status(500).json({
+            message: "Internal server error.",
+            success: false
+        });
+    }}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
