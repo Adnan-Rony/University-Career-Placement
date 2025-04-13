@@ -36,4 +36,12 @@ app.use("/api/v1/application",applicationRoute ); // User-related routes
 //firebase auth route
 app.use("/api/v1/userNew", UserNewroute); // User-related routes
 
+
+
+
+
+
+
+
+
 export default app;
