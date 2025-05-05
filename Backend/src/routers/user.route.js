@@ -9,7 +9,10 @@ const router = express.Router();
 router.post("/register",singleUpload, register);
 router.get("/allUsers", getuserData);//new2
 router.post("/login", login);
-router.get("/logout", logout);
+router.get("/logout",isAuthenticated, logout);
 router.post("/profile/update", isAuthenticated, updateProfile);
+
+
+
 
 export default router;

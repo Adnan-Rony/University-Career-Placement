@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Authcontext } from "../../Context/Authprovider";
 import { FaGoogle } from "react-icons/fa";
-import { USER_API_END_POINT } from "../../utils/Constant";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { USER_API_END_POINT } from "../../utils/Constant";
 
 export const GoogleSignIN = () => {
   const navigate = useNavigate();
@@ -13,18 +14,22 @@ export const GoogleSignIN = () => {
     googleSignIn()
       .then((result) => {
         console.log(result.user);
+  
+        // You can set the role here manually or let the user choose it from a form
         const userInfo = {
           fullname: result.user?.displayName,
           email: result.user?.email,
           profilePhoto: result.user?.photoURL,
+          firebaseUID: result.user.uid, // ✅ Send UID to the backend
+          role: "student", //  Manually set or fetch from a role selector
         };
-
-        // Send user data to backend for registration or login
+  
+        console.log("Sending to backend:", `${USER_API_END_POINT}/register`);
+  
         axios
           .post(`${USER_API_END_POINT}/register`, userInfo)
           .then((response) => {
             console.log(response.data);
-            console.log("UserInfo Sent", userInfo);
             navigate("/");
           })
           .catch((error) => {
@@ -35,11 +40,10 @@ export const GoogleSignIN = () => {
           });
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log("Google Sign-In Error", error.message);
       });
   };
+  
   return (
     <div>
       <button
@@ -50,4 +54,4 @@ export const GoogleSignIN = () => {
       </button>
     </div>
   );
-};
+}

@@ -4,9 +4,9 @@ import isAuthenticated from "../middlewares/authenticate.js";
 
 const router = express.Router();
 
-router.post("/registerCompany", registerCompany);
-router.get("/get", getCompany);
-router.get("/get/:id",getCompanyById );
+router.post("/registerCompany",isAuthenticated, registerCompany);
+router.get("/get",isAuthenticated, getCompany);
+router.get("/get/:id",isAuthenticated,getCompanyById );
 router.put("/update/:id", isAuthenticated, updateCompany);
 
 export default router;

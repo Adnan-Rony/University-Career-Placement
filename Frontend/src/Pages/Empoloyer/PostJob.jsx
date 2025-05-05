@@ -9,6 +9,8 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 export const PostJob = () => {
+  const [description, setDescription] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,8 +18,7 @@ export const PostJob = () => {
   } = useForm();
 
 
-  const [description, setDescription] = useState("");
-  const navigate = useNavigate();
+ 
 
   const onSubmit = async (data) => {
     
