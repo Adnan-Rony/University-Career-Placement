@@ -18,6 +18,7 @@ export const register = async (req, res) => {
                 success: false
             });
         };
+        console.log(req.body);
         // const file = req.file;
         // const fileUri = getDataUri(file);
         // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
@@ -51,6 +52,48 @@ export const register = async (req, res) => {
         console.log(error);
     }
 }
+
+// export const register = async (req, res) => {
+//     try {
+//         console.log(req.body);
+//         const { fullname, email, password, role,phone } = req.body;
+     
+//         const user = await User.findOne({ email });
+//         if (user) {
+//             return res.status(400).json({
+//                 message: 'User already exist with this email.',
+//                 success: false,
+//             })
+//         }
+       
+//         return res.status(201).json({
+//             message: "Account created successfully.",
+//             success: true
+//         });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //get logged user deatils
 export const getuserData = async (req, res) => {
