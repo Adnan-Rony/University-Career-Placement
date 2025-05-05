@@ -8,51 +8,96 @@ import jwt from "jsonwebtoken";
 
 
 
-export const register = async (req, res) => {
-    try {
-        const { fullname, email, password, role,phone } = req.body;
+// export const register = async (req, res) => {
+//     try {
+//         console.log(req.body);
+//         const { fullname, email, password, role,phone,profilePhoto  } = req.body;
          
-        if (!fullname || !email || !password || !role) {
-            return res.status(400).json({
-                message: "Something is missing",
-                success: false
-            });
-        };
-        // const file = req.file;
-        // const fileUri = getDataUri(file);
-        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+//         if (!fullname || !email  || !role) {
+//             return res.status(400).json({
+//                 message: "Something is missing",
+//                 success: false
+//             });
+//         };
+//         // const file = req.file;
+//         // const fileUri = getDataUri(file);
+//         // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
-        const user = await User.findOne({ email });
-        if (user) {
-            return res.status(400).json({
-                message: 'User already exist with this email.',
-                success: false,
-            })
-        }
-        const hashedPassword = await bcrypt.hash(password, 10);
+//         const user = await User.findOne({ email });
+//         if (user) {
+//             return res.status(400).json({
+//                 message: 'User already exist with this email.',
+//                 success: false,
+//             })
+//         }
+//         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await User.create({
-            fullname,
-            email,
+//         await User.create({
+//             fullname,
+//             email,
            
-            password: hashedPassword,
-            role,
-            phone
-            // profile:{
-            //     profilePhoto:cloudResponse.secure_url,
-            // }
-        });
+//             password: hashedPassword,
+//             role,
+//             phone,
+//             profilePhoto 
+//             // profile:{
+//             //     profilePhoto:cloudResponse.secure_url,
+//             // }
+//         });
 
-        return res.status(201).json({
-            message: "Account created successfully.",
-            success: true
-        });
-    } catch (error) {
-        console.log(error);
-    }
-}
+//         return res.status(201).json({
+//             message: "Account created successfully.",
+//             success: true
+//         });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 //get logged user deatils
+
+export const register = async (req, res) => {
+    try {
+      const { fullname, email, profilePhoto, firebaseUID, role } = req.body;
+  
+      if (!fullname || !email || !firebaseUID || !role) {
+        return res.status(400).json({
+          message: "Missing required fields",
+          success: false,
+        });
+      }
+  
+      const existingUser = await User.findOne({ firebaseUID });
+  
+      if (existingUser) {
+        return res.status(200).json({
+          message: "User already exists",
+          success: true,
+        });
+      }
+  
+      await User.create({
+        fullname,
+        email,
+        profilePhoto,
+        firebaseUID,
+        role,
+      });
+  
+      return res.status(201).json({
+        message: "User registered successfully",
+        success: true,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Server Error", success: false });
+    }
+  };
+  
+  
+
+
+
 export const getuserData = async (req, res) => {
     try {
         // Fetch all users from the database
