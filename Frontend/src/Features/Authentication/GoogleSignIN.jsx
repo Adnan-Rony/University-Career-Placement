@@ -11,37 +11,38 @@ export const GoogleSignIN = () => {
   const { user, logout, googleSignIn } = useContext(Authcontext);
   // console.log(user);
   const handleGoogleSignin = () => {
-    googleSignIn()
-      .then((result) => {
-        console.log(result.user);
+    // googleSignIn()
+    //   .then((result) => {
+    //     console.log(result.user);
   
-        // You can set the role here manually or let the user choose it from a form
-        const userInfo = {
-          fullname: result.user?.displayName,
-          email: result.user?.email,
-          profilePhoto: result.user?.photoURL,
-          firebaseUID: result.user.uid, // ✅ Send UID to the backend
-          role: "student", //  Manually set or fetch from a role selector
-        };
+    //     // You can set the role here manually or let the user choose it from a form
+    //     const userInfo = {
+    //       fullname: result.user?.displayName,
+    //       email: result.user?.email,
+    //       profilePhoto: result.user?.photoURL,
+    //       firebaseUID: result.user.uid, // ✅ Send UID to the backend
+    //       role: "student", //  Manually set or fetch from a role selector
+    //     };
   
-        console.log("Sending to backend:", `${USER_API_END_POINT}/register`);
+    //     console.log("Sending to backend:", `${USER_API_END_POINT}/register`);
   
-        axios
-          .post(`${USER_API_END_POINT}/register`, userInfo)
-          .then((response) => {
-            console.log(response.data);
-            navigate("/");
-          })
-          .catch((error) => {
-            console.error(
-              "Error while storing user info:",
-              error.response || error
-            );
-          });
-      })
-      .catch((error) => {
-        console.log("Google Sign-In Error", error.message);
-      });
+    //     axios
+    //       .post(`${USER_API_END_POINT}/register`, userInfo)
+    //       .then((response) => {
+    //         console.log(response.data);
+    //         navigate("/");
+    //       })
+    //       .catch((error) => {
+    //         console.error(
+    //           "Error while storing user info:",
+    //           error.response || error
+    //         );
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     console.log("Google Sign-In Error", error.message);
+    //   });
+    console.log("Clicked ");
   };
   
   return (
