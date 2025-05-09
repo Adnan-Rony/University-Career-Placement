@@ -44,7 +44,7 @@ excerpt,id,date
     <p className='line-clamp-2'>{blog.excerpt}</p>
     <div className="card-actions">
     
-      <Link>
+      <Link to={`/blog/blogdetails/${blog.id}`}>
       <button className="btn btn-ghost btn-outline text-r-accent">Read More</button>
       </Link>
 
