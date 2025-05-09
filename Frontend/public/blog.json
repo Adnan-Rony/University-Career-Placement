@@ -1,5 +1,5 @@
 {
-  "blogs": [
+  "data": [
     {
       "id": 1,
       "date": "August 31, 2021",
@@ -20,7 +20,9 @@
       ],
       "title": "5 Tips For Your Job Interviews",
       "excerpt": "A job ravenously while Far much that one rank beheld after outside....",
-      "details": "Job interviews can be intimidating, especially when you’re aiming for your dream role. To increase your chances of success, you must come prepared. In this article, we provide 5 actionable tips: Research the company thoroughly, practice common interview questions, dress appropriately, arrive on time, and follow up after the interview. Each of these steps plays a vital role in showing employers that you are a serious and well-prepared candidate. Confidence, combined with preparation, can go a long way in helping you secure the job you want."
+      "details": "Job interviews can be intimidating, especially when you’re aiming for your dream role. To increase your chances of success, you must come prepared. In this article, we provide 5 actionable tips: Research the company thoroughly, practice common interview questions, dress appropriately, arrive on time, and follow up after the interview. Each of these steps plays a vital role in showing employers that you are a serious and well-prepared candidate. Confidence, combined with preparation, can go a long way in helping you secure the job you want.",
+      "thumbnail": "https://res.cloudinary.com/dto6ulc5n/image/upload/v1746727398/jobportal_mftoao.webp",
+      "banner": "https://example.com/banner1.jpg"
     },
     {
       "id": 2,
@@ -42,7 +44,9 @@
       ],
       "title": "How to Build a Standout Resume",
       "excerpt": "Crafting a resume that stands out can make all the difference in your job search journey....",
-      "details": "Your resume is often the first impression employers have of you, so it needs to be strong and strategic. A standout resume starts with a clear structure, relevant keywords tailored to the job posting, and quantifiable achievements. Focus on showcasing what you’ve done rather than listing responsibilities. Use a clean, professional layout, and avoid clichés. If you’re new to the workforce, highlight education, internships, or volunteer experience. Always keep your resume updated and ensure it’s customized for every role you apply for. The little details matter."
+      "details": "Your resume is often the first impression employers have of you, so it needs to be strong and strategic. A standout resume starts with a clear structure, relevant keywords tailored to the job posting, and quantifiable achievements. Focus on showcasing what you’ve done rather than listing responsibilities. Use a clean, professional layout, and avoid clichés. If you’re new to the workforce, highlight education, internships, or volunteer experience. Always keep your resume updated and ensure it’s customized for every role you apply for. The little details matter.",
+      "thumbnail": "https://res.cloudinary.com/dto6ulc5n/image/upload/v1746688269/microsoft-edge-6CNB3iD8M4E-unsplash_1_600x400_s8czld.jpg",
+      "banner": "https://example.com/banner2.jpg"
     },
     {
       "id": 3,
@@ -64,7 +68,9 @@
       ],
       "title": "Top Remote Jobs in 2021",
       "excerpt": "Looking to work from home? Explore the most in-demand remote jobs hiring this year....",
-      "details": "With the world shifting towards flexible work environments, remote jobs are booming. From software engineering and digital marketing to virtual assistance and online teaching, there’s a growing list of remote-friendly roles. This article explores the top 10 remote job categories in 2021, outlining the skills needed and the platforms to find them. We also cover the pros and cons of remote work and how to remain productive while working from home. If you’re aiming for better work-life balance, remote work could be your ideal path."
+      "details": "With the world shifting towards flexible work environments, remote jobs are booming. From software engineering and digital marketing to virtual assistance and online teaching, there’s a growing list of remote-friendly roles. This article explores the top 10 remote job categories in 2021, outlining the skills needed and the platforms to find them. We also cover the pros and cons of remote work and how to remain productive while working from home. If you’re aiming for better work-life balance, remote work could be your ideal path.",
+      "thumbnail": "https://res.cloudinary.com/dto6ulc5n/image/upload/v1746780002/blog1_drqykp.webp",
+      "banner": "https://example.com/banner3.jpg"
     },
     {
       "id": 4,
@@ -90,7 +96,9 @@
       ],
       "title": "Why Soft Skills Matter More Than Ever",
       "excerpt": "In today’s workplace, soft skills are just as important as technical know-how....",
-      "details": "While technical skills get you noticed, soft skills help you thrive in your career. In today’s collaborative work culture, qualities like communication, empathy, adaptability, and teamwork are invaluable. This article explains why companies are prioritizing soft skills during hiring and how you can improve yours. Whether it’s handling feedback, working under pressure, or building relationships, soft skills are the glue that holds teams together. Employers are looking for well-rounded candidates who bring value beyond their resumes—and soft skills are often the deciding factor."
+      "details": "While technical skills get you noticed, soft skills help you thrive in your career. In today’s collaborative work culture, qualities like communication, empathy, adaptability, and teamwork are invaluable. This article explains why companies are prioritizing soft skills during hiring and how you can improve yours. Whether it’s handling feedback, working under pressure, or building relationships, soft skills are the glue that holds teams together. Employers are looking for well-rounded candidates who bring value beyond their resumes—and soft skills are often the deciding factor.",
+      "thumbnail": "https://example.com/thumbnail4.jpg",
+      "banner": "https://example.com/banner4.jpg"
     },
     {
       "id": 5,
@@ -112,7 +120,9 @@
       ],
       "title": "How to Prepare for a Technical Interview",
       "excerpt": "Technical interviews are tough—but with the right strategy, you can shine....",
-      "details": "Technical interviews can be daunting, especially if you're not sure what to expect. This article walks you through the preparation process—from mastering data structures and algorithms to practicing whiteboard problems. We cover how to break down problems, explain your thought process clearly, and prepare for behavioral rounds too. It also includes a list of recommended online platforms for mock interviews and coding challenges. With consistent practice and the right mindset, you can go into any technical interview with confidence and clarity."
+      "details": "Technical interviews can be daunting, especially if you're not sure what to expect. This article walks you through the preparation process—from mastering data structures and algorithms to practicing whiteboard problems. We cover how to break down problems, explain your thought process clearly, and prepare for behavioral rounds too. It also includes a list of recommended online platforms for mock interviews and coding challenges. With consistent practice and the right mindset, you can go into any technical interview with confidence and clarity.",
+      "thumbnail": "https://example.com/thumbnail5.jpg",
+      "banner": "https://example.com/banner5.jpg"
     }
   ]
 }
