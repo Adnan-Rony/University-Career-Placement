@@ -10,6 +10,8 @@ import {
 
 export const Authcontext = createContext();
 const auth = getAuth(app);
+
+
 export const Authprovider = ({ children }) => {
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
