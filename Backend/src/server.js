@@ -11,13 +11,13 @@ async function main() {
         await mongoose.connect(process.env.MONGODB_URL, {
            
         });
-        console.log("✅ Connected to database");
+        console.log(" Connected to database");
 
         app.listen(PORT, () => {
-            console.log(`🚀 App listening on port ${PORT}`);
+            console.log(` App listening on port ${PORT}`);
         });
     } catch (err) {
-        console.error("❌ Failed to connect to the database", err);
+        console.error(" Failed to connect to the database", err);
         process.exit(1); // Exit process on failure
     }
 }

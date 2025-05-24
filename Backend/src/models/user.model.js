@@ -1,56 +1,30 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
-  {
-    
-    fullname: {
-      type: String,
-      required: true,
-    },
+{
+  name: { type: String, required: true, trim: true },
 
-    firebaseUID: {
-      type: String,
-      required: true,
-      unique: true,
-    }, //update
+   email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+   phone:{type:String},
 
+ password: { type: String, required: true, minlength: 6 },
 
-
-
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    phone: {
-      type: String,
-      required: false, //update
-      
-    },
-    password: {
-      type: String,
-      required: false, //update
-    },
-    role: {
-      type: String,
-      enum: ["student", "recruiter", "admin"],
-      required: true,
-    },
-    profilePhoto: {
-      type: String,
-      default: "",
-    },
-    studentProfile: {
-      bio: { type: String },
-      skills: [{ type: String }],
-      resume: { type: String }, // URL to resume file
-      resumeOriginalName: { type: String },
-    },
-    recruiterProfile: {
-      company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" }, // Only for recruiters
-    },
+  role: {
+    type: String,
+    enum: ['job-seeker', 'employer', 'admin'],
+    default: 'job-seeker',
   },
-  { timestamps: true }
-);
+
+ bio: { type: String },
+
+  skills: [{ type: String }],
+
+  experience: { type: String },
+
+  resume: { type: String },
+
+}, { timestamps: true });
+
+userSchema.index({ role: 1 });
 
 export const User = mongoose.model("User", userSchema);

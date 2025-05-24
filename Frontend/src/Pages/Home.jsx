@@ -19,7 +19,7 @@ export const Home = () => {
 
 
     <HeroSection/>
-    {/* <Featured></Featured> */}
+    <Featured></Featured>
     <Blog/>
 
    
