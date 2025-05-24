@@ -6,6 +6,7 @@ import { SignIn } from "../Features/Authentication/SignIn";
 import { SignUp } from "../Features/Authentication/SignUp";
 import { DashBoardLayout } from "../Layouts/DashBoardLayout";
 import { PostJob } from "../Pages/Empoloyer/PostJob";
+import { BlogDetails } from "../Pages/BlogDetails";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/SignIn",
         element: <SignIn />,
+
+      },
+      {
+        path: "/blog/blogdetails/:id",
+        element: <BlogDetails/>,
 
       }
     ]

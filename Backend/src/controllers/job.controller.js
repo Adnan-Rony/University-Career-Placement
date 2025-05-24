@@ -1,6 +1,7 @@
 import { Job } from "../models/job.model.js";
 import { Company } from "../models/company.model.js";
 
+
 export const createJob = async (req, res) => {
   try {
     const {
