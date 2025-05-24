@@ -10,7 +10,7 @@ export const GoogleSignIN = () => {
   const navigate = useNavigate();
   const { user, logout, googleSignIn } = useContext(Authcontext);
   // console.log(user);
-  const handleGoogleSignin = () => {
+  const handleGoogleSignin = () => {n
     googleSignIn()
       .then((result) => {
         console.log(result.user);

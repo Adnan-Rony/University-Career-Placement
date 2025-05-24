@@ -7,7 +7,7 @@ import userRoutes from "./routers/user.route.js";
 import companyRoute from "./routers/company.route.js";
 import jobRoute from "./routers/job.route.js";
 import applicationRoute from "./routers/application.route.js";
-import UserNewroute from "./routers/UserNew.route.js"; //firebase auth route
+import adminRoute from "./routers/admin.route.js";
 
 dotenv.config();
 
@@ -31,10 +31,11 @@ app.use("/api/v1/user", userRoutes); // User-related routes
 app.use("/api/v1/company", companyRoute); // User-related routes
 app.use("/api/v1/job",jobRoute ); // User-related routes
 app.use("/api/v1/application",applicationRoute ); // User-related routes
+app.use("/api/v1/admin",adminRoute ); // User-related routes
 
 
-//firebase auth route
-app.use("/api/v1/userNew", UserNewroute); // User-related routes
+// //firebase auth route
+// app.use("/api/v1/userNew", UserNewroute); // User-related routes
 
 
 

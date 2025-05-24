@@ -1,12 +1,18 @@
 import express from "express";
-import { getCompanyById, getCompany, registerCompany, updateCompany } from "../controllers/company.controller.js";
-import isAuthenticated from "../middlewares/authenticate.js";
+import { createCompany, deleteCompany, getAllCompanies, getCompanyById, updateCompany } from "../controllers/company.controller.js";
+import { verifyToken } from "../middlewares/VerifyToken.js";
+import { requireEmployer } from "../middlewares/requireEmployer.js";
+
+
 
 const router = express.Router();
 
-router.post("/registerCompany",isAuthenticated, registerCompany);
-router.get("/get",isAuthenticated, getCompany);
-router.get("/get/:id",isAuthenticated,getCompanyById );
-router.put("/update/:id", isAuthenticated, updateCompany);
+router.post("/createcompany",verifyToken,requireEmployer, createCompany);
+router.get("/", getAllCompanies);
+router.get("/:id", getCompanyById);
+router.put("/:id",verifyToken, updateCompany);
+router.delete("/:id",verifyToken,requireEmployer, deleteCompany);
+
+
 
 export default router;
