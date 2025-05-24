@@ -3,7 +3,7 @@ import { Authcontext } from '../Context/Authprovider';
 
 export const ResponsiveNav = () => {
   const {user,logout}=useContext(Authcontext)
-  console.log(user);
+  // console.log(user);
     const routes = [
         { id: 1, route: "Home", path: "/" },
         { id: 2, route: "About", path: "/about" },
@@ -12,7 +12,7 @@ export const ResponsiveNav = () => {
         { id: 5, route: "Profile", path: "/profile/:id" }
       ];
       
-      console.log(routes);
+      // console.log(routes);
       
   return (
     <nav className='text-black md:flex mr'>

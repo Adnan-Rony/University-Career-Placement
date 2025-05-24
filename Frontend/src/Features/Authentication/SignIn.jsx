@@ -85,6 +85,7 @@ export const SignIn = () => {
               <input
                 type="password"
                 name="password"
+                
                 value={input.password}
                 onChange={changeEventHandler}
                 placeholder="Enter password"

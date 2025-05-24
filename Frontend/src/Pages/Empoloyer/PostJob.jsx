@@ -9,6 +9,8 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 export const PostJob = () => {
+  const [description, setDescription] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,8 +18,7 @@ export const PostJob = () => {
   } = useForm();
 
 
-  const [description, setDescription] = useState("");
-  const navigate = useNavigate();
+ 
 
   const onSubmit = async (data) => {
     
@@ -27,25 +28,25 @@ export const PostJob = () => {
     }
     console.log("Job Details:", jobDetails);
     
-    try {
-      const res = await axios.post(
-        `${JOBPOST_API_END_POINT}/post`,
-        jobDetails,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
-      if (res.data.success) {
-        navigate("/SignIn");
-        toast.success(res.data.message);
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error(err.response?.data?.message || "Registration failed");
-    }
+    // try {
+    //   const res = await axios.post(
+    //     `${JOBPOST_API_END_POINT}/post`,
+    //     jobDetails,
+    //     {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   if (res.data.success) {
+    //     navigate("/SignIn");
+    //     toast.success(res.data.message);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   toast.error(err.response?.data?.message || "Registration failed");
+    // }
   };
 
   return (
