@@ -14,4 +14,4 @@ name:     { type: String, required: true, trim: true },
       { timestamps: true }
     )
     companySchema.index({ industry: 1 });
-export const Company = mongoose.model("CompanyCollection", companySchema);
+export const Company = mongoose.model("Company", companySchema);
