@@ -36,6 +36,9 @@ export const BlogDetails = () => {
       
       </div>
 </div>
+<div>
+    <img src={BlogDetails.thumbnail} alt="" />
+</div>
     </div>
   )
 }
