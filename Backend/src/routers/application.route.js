@@ -1,10 +1,11 @@
 import express from "express";
+import { verifyToken } from './../middlewares/VerifyToken.js';
+import { applyToJob } from "../controllers/application.controller.js";
+import { requireJobSeeker } from "../middlewares/requirejobseeker.js";
 
 const router = express.Router();
 
-// router.get("/apply/:id", isAuthenticated,applyJob);
-// router.get("/get", isAuthenticated,getAppliedJobs);
-// router.get("/:id/applicants", isAuthenticated,getApplicants);
-// router.post("/status/:id/update", isAuthenticated,updateStatus);
+router.post("/apply", verifyToken,requireJobSeeker ,applyToJob);
+
 
 export default router;
