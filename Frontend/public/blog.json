@@ -1,0 +1,210 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "date": "August 31, 2021",
+      "author": "Sadia Rahman",
+      "authorImg":"https://res.cloudinary.com/dto6ulc5n/image/upload/v1746785735/person5_kthyhw.webp",
+      "comments": [
+        {
+          "author": "Oscar Cafeo",
+          "text": "Beautiful courses. Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement tantaneously eel valiantly petted this along across highhandedly much."
+        },
+        {
+          "author": "Tanvir Alam",
+          "text": "Really helpful tips, especially the part about researching the company beforehand."
+        },
+        {
+          "author": "Mitu Akter",
+          "text": "Loved the clarity in point number 4. That mindset shift is important!"
+        }
+      ],
+      "title": "5 Tips For Your Job Interviews",
+      "excerpt": "Job interviews can be intimidating, but with the right preparation, you can significantly increase your chances of success. Here are 5 actionable tips...",
+      "details": {
+        "intro": "Job interviews can be intimidating, especially when you’re aiming for your dream role. To increase your chances of success, you must come prepared. In this article, we provide 5 actionable tips to help you excel in any interview.",
+        "tips": [
+          {
+            "tip": "Research the Company",
+            "details": "Understanding the company’s values, products, and culture will help you tailor your responses to align with their goals."
+          },
+          {
+            "tip": "Practice Common Interview Questions",
+            "details": "Prepare answers for frequently asked questions like 'Tell me about yourself' and 'Why do you want to work here?'"
+          },
+          {
+            "tip": "Dress Appropriately",
+            "details": "Your appearance should reflect the company’s dress code—whether it's business formal or business casual."
+          },
+          {
+            "tip": "Arrive on Time",
+            "details": "Arriving late can leave a bad impression. Aim to arrive 10-15 minutes early to show your punctuality."
+          },
+          {
+            "tip": "Follow Up After the Interview",
+            "details": "Send a thank-you email expressing gratitude for the opportunity and reaffirming your interest in the role."
+          }
+        ],
+        "conclusion": "By following these tips, you’ll approach your job interview with confidence and a solid strategy to stand out among other candidates."
+      },
+      "thumbnail": "https://res.cloudinary.com/dto6ulc5n/image/upload/v1746727398/jobportal_mftoao.webp",
+      "banner": "https://example.com/banner1.jpg"
+    },
+    {
+      "id": 2,
+      "date": "September 15, 2021",
+      "author": "Rakib Hasan",
+       "authorImg":"https://res.cloudinary.com/dto6ulc5n/image/upload/v1746785736/person6_kvuepl.webp",
+      "comments": [
+        {
+          "author": "Mira Hossain",
+          "text": "Insightful advice. The resume structure tips really helped me land an interview!"
+        },
+        {
+          "author": "Shanto Majumder",
+          "text": "I’ve been applying for months, and these points gave me a new perspective."
+        },
+        {
+          "author": "Sadia Jahan",
+          "text": "Short and effective. This should be a must-read for new grads."
+        }
+      ],
+      "title": "How to Build a Standout Resume",
+      "excerpt": "Crafting a resume that stands out can make all the difference in your job search journey. Here are essential tips on making your resume shine...",
+      "details": {
+        "intro": "Your resume is often the first impression employers have of you, so it needs to be strong and strategic. In this article, we explain how to build a standout resume that catches the attention of recruiters.",
+        "steps": [
+          {
+            "step": "Start with a Strong Structure",
+            "details": "Use a clean, organized format with clear sections like Contact Info, Professional Summary, Experience, and Education."
+          },
+          {
+            "step": "Tailor Your Resume for Each Job",
+            "details": "Customize your resume for each position by using keywords from the job description and highlighting relevant skills."
+          },
+          {
+            "step": "Quantify Achievements",
+            "details": "Employers want to see measurable impact—use numbers and percentages to showcase your successes."
+          },
+          {
+            "step": "Showcase Relevant Skills",
+            "details": "List key technical skills, certifications, and soft skills that match the role you’re applying for."
+          },
+          {
+            "step": "Proofread and Edit",
+            "details": "A single typo can be a dealbreaker. Always proofread your resume and have someone else review it."
+          }
+        ],
+        "conclusion": "By following these steps, your resume will be more likely to make it to the top of the pile. Remember, your resume is your first opportunity to make a strong impression."
+      },
+      "thumbnail": "https://res.cloudinary.com/dto6ulc5n/image/upload/v1746688269/microsoft-edge-6CNB3iD8M4E-unsplash_1_600x400_s8czld.jpg",
+      "banner": "https://example.com/banner2.jpg"
+    },
+    {
+      "id": 3,
+      "date": "October 3, 2021",
+      "author": "Nusrat Jahan",
+       "authorImg":"https://res.cloudinary.com/dto6ulc5n/image/upload/v1746785745/person3_txgiys.webp",
+      "comments": [
+        {
+          "author": "Rafiul Islam",
+          "text": "Remote work is the future. Loved reading about the options available!"
+        },
+        {
+          "author": "Rumana Akhter",
+          "text": "I didn’t know content writing was in such high demand for remote roles."
+        },
+        {
+          "author": "Mahin Reza",
+          "text": "I’ve been freelancing for years. This list is solid and up-to-date."
+        }
+      ],
+      "title": "Top Remote Jobs in 2021",
+      "excerpt": "Looking to work from home? Explore the most in-demand remote jobs hiring this year, along with skills needed and platforms to find them...",
+      "details": {
+        "intro": "With the world shifting towards flexible work environments, remote jobs are booming. In this article, we explore the top remote jobs of 2021 and what it takes to succeed in them.",
+        "jobs": [
+          {
+            "job": "Software Engineering",
+            "skills": "Proficiency in coding languages like JavaScript, Python, or Java.",
+            "platforms": "GitHub, LinkedIn"
+          },
+          {
+            "job": "Digital Marketing",
+            "skills": "Expertise in SEO, SEM, content marketing, and social media strategy.",
+            "platforms": "Upwork, Fiverr, Remote OK"
+          },
+          {
+            "job": "Virtual Assistant",
+            "skills": "Strong organizational and communication skills.",
+            "platforms": "Belay, Time Etc."
+          },
+          {
+            "job": "Content Writing",
+            "skills": "Strong writing, research, and SEO knowledge.",
+            "platforms": "ProBlogger, Freelancer"
+          },
+          {
+            "job": "Online Teaching",
+            "skills": "Teaching certifications, subject expertise.",
+            "platforms": "VIPKid, TeachAway"
+          }
+        ],
+        "conclusion": "If you want to embrace remote work, these top jobs offer excellent flexibility and opportunities for growth. Make sure to upskill and find the right platform to land your next job."
+      },
+      "thumbnail": "https://res.cloudinary.com/dto6ulc5n/image/upload/v1746780002/blog1_drqykp.webp",
+      "banner": "https://example.com/banner3.jpg"
+    },
+    {
+      "id": 4,
+      "date": "November 10, 2021",
+      "author": "Tariqul Islam",
+       "authorImg":"https://res.cloudinary.com/dto6ulc5n/image/upload/v1746785736/person6_kvuepl.webp",
+      "comments": [
+        {
+          "author": "Anika Tabassum",
+          "text": "Soft skills truly make a difference. Thanks for emphasizing this!"
+        },
+        {
+          "author": "Shahriar Kabir",
+          "text": "It’s great that emotional intelligence is finally getting the spotlight."
+        },
+        {
+          "author": "Afsana Mimi",
+          "text": "Every manager should read this. Skills like communication are underrated."
+        },
+        {
+          "author": "Shuvo Talukder",
+          "text": "Refreshing to see an article that talks beyond just technical knowledge."
+        }
+      ],
+      "title": "Why Soft Skills Matter More Than Ever",
+      "excerpt": "In today’s workplace, soft skills are just as important as technical know-how. Here’s why emotional intelligence, communication, and adaptability are key to career success...",
+      "details": {
+        "intro": "While technical skills get you noticed, soft skills help you thrive in your career. This article explains why soft skills are becoming more important and how to improve them.",
+        "skills": [
+          {
+            "skill": "Emotional Intelligence",
+            "details": "Understanding and managing your emotions and the emotions of others is key to building strong relationships at work."
+          },
+          {
+            "skill": "Communication",
+            "details": "Clear and concise communication, both written and verbal, is vital for team collaboration and leadership."
+          },
+          {
+            "skill": "Adaptability",
+            "details": "Being flexible and open to change is crucial in today’s rapidly evolving work environment."
+          },
+          {
+            "skill": "Teamwork",
+            "details": "Being a team player and working effectively with others is essential for workplace success."
+          }
+        ],
+        "conclusion": "Employers are looking for well-rounded candidates who possess both technical and soft skills. Invest time in developing these skills to advance in your career."
+      },
+      "thumbnail": "https://example.com/thumbnail4.jpg",
+      "banner": "https://example.com/banner4.jpg"
+    }
+   
+  ]
+}

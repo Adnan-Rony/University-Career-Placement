@@ -1,3 +1,4 @@
+import { Blog } from "../Components/Home/Blog";
 import { Featured } from "../Components/Home/Featured";
 import HeroSection from "../Components/Home/HeroSection";
 
@@ -17,8 +18,9 @@ export const Home = () => {
          employment, hiring, job listings, apply online, career growth"/>
 
 
-    <HeroSection></HeroSection>
+    <HeroSection/>
     <Featured></Featured>
+    <Blog/>
 
    
 
