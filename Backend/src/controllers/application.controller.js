@@ -39,3 +39,73 @@ export const applyToJob = async (req, res) => {
     });
   }
 };
+
+//For Employer
+export const getApplicationsForJob = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+
+    const applications = await Application.find({ job: jobId })
+      .populate("applicant", "name email")
+      .populate("job" );
+
+    res.status(200).json({ success: true, applications });
+    
+  } catch (err) {
+    console.error("Error fetching applications:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+//job seeker
+export const getMyApplications = async (req, res) => {
+  
+  try {
+    const applications = await Application.find({ applicant: req.user.id })
+      .populate("job",).populate("applicant", "name email")
+      
+    
+
+    res.status(200).json({ success: true, applications });
+  } catch (err) {
+    console.error("Error fetching user applications:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+
+export const updateApplicationStatus = async (req, res) => {
+  try {
+    const { applicationId } = req.params;
+    const { status } = req.body;
+
+    const validStatuses = ["Pending", "Accepted", "Rejected"];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status value' });
+    }
+
+    const application = await Application.findById(applicationId);
+    if (!application) {
+      return res.status(404).json({ success: false, message: 'Application not found' });
+    }
+
+    application.status = status;
+    await application.save();
+
+    // Optionally return updated application with populated fields:
+    const updatedApplication = await Application.findById(applicationId)
+      .populate('applicant', 'name email')
+      .populate('job',);
+
+    res.status(200).json({ success: true, application: updatedApplication });
+  } catch (err) {
+    console.error('Error updating application status:', err);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+};
+
+
+
+
