@@ -43,7 +43,7 @@ export const getAllJobs = async (req, res) => {
     const { companyName, jobTitle } = req.query;
 
     let jobs = await Job.find()
-      .populate('company', 'name logo')
+      .populate('company', )
       .populate('postedBy', 'email');
 
     if (companyName) {
@@ -83,6 +83,7 @@ export const getJobById = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to get job" });
   }
 };
+
 
 
 export const updateJob = async (req, res) => {
@@ -127,8 +128,11 @@ export const deleteJob = async (req, res) => {
     if (job.postedBy.toString() !== req.user.id) {
       return res.status(403).json({ success: false, message: "Not authorized to delete this job" });
     }
+ 
 
-    await job.remove();
+
+  await job.deleteOne();
+
 
     res.status(200).json({ success: true, message: "Job deleted successfully" });
   } catch (error) {
