@@ -29,7 +29,6 @@ export const Authprovider = ({ children }) => {
   }
 
 
-
   const Authinfo = {
     user,
     logout,googleSignIn

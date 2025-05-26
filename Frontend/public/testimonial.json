@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Fatima Rahman",
+      "title": "Software Engineer at BRAC IT",
+      "image": "https://example.com/images/fatima.jpg",
+      "testimonial": "Thanks to this job portal, I got my dream job in just two weeks! The website is very easy to use.",
+      "rating": 5,
+      "date": "2025-04-10"
+    },
+    {
+      "id": 2,
+      "name": "Arif Hossain",
+      "title": "Digital Marketing Specialist at Pathao",
+      "image": "https://example.com/images/arif.jpg",
+      "testimonial": "It was easy to connect with top companies. Very helpful for job seekers.",
+      "rating": 4,
+      "date": "2025-03-22"
+    },
+    {
+      "id": 3,
+      "name": "Nasrin Akter",
+      "title": "HR Manager at Grameenphone",
+      "image": "https://example.com/images/nasrin.jpg",
+      "testimonial": "The recruitment process became much easier and faster with this platform.",
+      "rating": 5,
+      "date": "2025-02-15"
+    }
+ 
+  ]
+}
