@@ -1,0 +1,13 @@
+.swiper-button-prev,
+.swiper-button-next {
+
+  padding: 10px;
+  /* background-color: #EFE2F8; */
+ 
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  /* font-size: 20px; */
+  color: blueviolet;
+}
