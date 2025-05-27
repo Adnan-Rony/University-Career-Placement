@@ -1,6 +1,6 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { LoginUser, LogoutUser, RegisterUser } from "../api/auth.js";
-import { useMutation } from './../../node_modules/@tanstack/react-query/src/useMutation';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import { CurrentUser, LoginUser, LogoutUser, RegisterUser } from "../api/auth.js";
 
 
 
@@ -10,22 +10,42 @@ export const UseLoginUser = () => {
   return useMutation({
     mutationFn: LoginUser, 
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']); // Triggers refetch
+      queryClient.invalidateQueries(['user']); 
     },
   });
 };
 
 //registation
 export const UseRegister=()=>{
-        const QueryClient=useQueryClient();
+        const queryClient=useQueryClient();
 
-        return useMutation
+        return useMutation({
+             mutationFn: RegisterUser, 
+    onSuccess: () => {
+      queryClient.invalidateQueries(['user']); 
+    },
+        })
 }
 
 
 //Logout
-export const Uselogout = () => {
-  return useMutation({
-    mutationFn: LogoutUser,
+
+export const UseLogout=()=>{
+        const queryClient=useQueryClient();
+
+        return useMutation({
+             mutationFn: LogoutUser, 
+    onSuccess: () => {
+      queryClient.invalidateQueries(['user']); 
+    },
+        })
+}
+
+
+export const UseCurrentUser = () => {
+  return useQuery({
+    queryKey: ['user'],
+    queryFn: CurrentUser,
   });
 };
+
