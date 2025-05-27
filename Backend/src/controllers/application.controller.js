@@ -1,4 +1,5 @@
 import { Application } from "../models/application.model.js";
+import { sendEmail } from "../utils/mailer.js";
 
 
 
@@ -86,7 +87,8 @@ export const updateApplicationStatus = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid status value' });
     }
 
-    const application = await Application.findById(applicationId);
+ 
+    const application = await Application.findById(applicationId).populate('applicant', 'name email');
     if (!application) {
       return res.status(404).json({ success: false, message: 'Application not found' });
     }
@@ -94,10 +96,20 @@ export const updateApplicationStatus = async (req, res) => {
     application.status = status;
     await application.save();
 
-    // Optionally return updated application with populated fields:
+  
+    await sendEmail(
+      application.applicant.email,
+      "Your Application Status Has Been Updated",
+      `Hi ${application.applicant.name},\n\nYour application status has been updated to: ${status}.\n\nBest of luck!\nUniversity Job Hub`
+    );
+
+    console.log("Email user:", process.env.EMAIL_USER);
+    console.log("Email pass exists:", !!process.env.EMAIL_PASS);
+
+    // Optionally return updated application
     const updatedApplication = await Application.findById(applicationId)
       .populate('applicant', 'name email')
-      .populate('job',);
+      .populate('job');
 
     res.status(200).json({ success: true, application: updatedApplication });
   } catch (err) {
@@ -105,6 +117,7 @@ export const updateApplicationStatus = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+
 
 
 
