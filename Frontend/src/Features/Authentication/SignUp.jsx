@@ -94,7 +94,7 @@ export const SignUp = () => {
             </span>
           </div>
 
-       <div className="flex items-center gap-4">
+       {/* <div className="flex items-center gap-4">
   <label className="text-gray-700 font-medium">Role:</label>
 
   <div className="flex items-center space-x-2">
@@ -116,7 +116,7 @@ export const SignUp = () => {
     />
     <label>employer</label>
   </div>
-</div>
+</div> */}
 
 
           {/* Submit Button */}
