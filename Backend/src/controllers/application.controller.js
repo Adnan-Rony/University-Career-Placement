@@ -1,132 +1,124 @@
 import { Application } from "../models/application.model.js";
-import { Job } from "../models/job.model.js";
+import { sendEmail } from "../utils/mailer.js";
 
 
-export const applyJob = async (req, res) => {
-    try {
-        const userId = req.id;
-        const jobId = req.params.id;
-        if (!jobId) {
-            return res.status(400).json({
-                message: "Job id is required.",
-                success: false
-            })
-        };
-        // check if the user has already applied for the job
-        const existingApplication = await Application.findOne({ job: jobId, applicant: userId });
 
-        if (existingApplication) {
-            return res.status(400).json({
-                message: "You have already applied for this jobs",
-                success: false
-            });
-        }
+export const applyToJob = async (req, res) => {
+  try {
+    const { jobId, resume, coverLetter } = req.body;
 
-        // check if the jobs exists
-        const job = await Job.findById(jobId);
-        if (!job) {
-            return res.status(404).json({
-                message: "Job not found",
-                success: false
-            })
-        }
-        // create a new application
-        const newApplication = await Application.create({
-            job:jobId,
-            applicant:userId,
-        });
+    const existingApplication = await Application.findOne({
+      job: jobId,
+      applicant: req.user.id,
+    });
 
-        job.applications.push(newApplication._id);
-        await job.save();
-        return res.status(201).json({
-            message:"Job applied successfully.",
-            success:true
-        })
-    } catch (error) {
-        console.log(error);
+    if (existingApplication) {
+      return res.status(400).json({
+        success: false,
+        message: "You have already applied to this job",
+      });
     }
+
+    const application = new Application({
+      job: jobId,
+      applicant: req.user.id,   // corrected from student to applicant
+      resume,
+      coverLetter,
+    });
+
+    await application.save();
+
+    res.status(201).json({
+      success: true,            // fixed typo
+      message: "Application submitted successfully.",
+    });
+  } catch (err) {
+    console.error("Apply error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
 };
 
-export const getAppliedJobs = async (req,res) => {
-    try {
-        const userId = req.id;
-        const application = await Application.find({applicant:userId}).sort({createdAt:-1}).populate({
-            path:'job',
-            options:{sort:{createdAt:-1}},
-            populate:{
-                path:'company',
-                options:{sort:{createdAt:-1}},
-            }
-        });
-        if(!application){
-            return res.status(404).json({
-                message:"No Applications",
-                success:false
-            })
-        };
-        return res.status(200).json({
-            application,
-            success:true
-        })
-    } catch (error) {
-        console.log(error);
+//For Employer
+export const getApplicationsForJob = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+
+    const applications = await Application.find({ job: jobId })
+      .populate("applicant", "name email")
+      .populate("job" );
+
+    res.status(200).json({ success: true, applications });
+    
+  } catch (err) {
+    console.error("Error fetching applications:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+//job seeker
+export const getMyApplications = async (req, res) => {
+  
+  try {
+    const applications = await Application.find({ applicant: req.user.id })
+      .populate("job",).populate("applicant", "name email")
+      
+    
+
+    res.status(200).json({ success: true, applications });
+  } catch (err) {
+    console.error("Error fetching user applications:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+
+export const updateApplicationStatus = async (req, res) => {
+  try {
+    const { applicationId } = req.params;
+    const { status } = req.body;
+
+    const validStatuses = ["Pending", "Accepted", "Rejected"];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status value' });
     }
-}
-// admin show all applicants are apply the jobs
-export const getApplicants = async (req,res) => {
-    try {
-        const jobId = req.params.id;
-        const job = await Job.findById(jobId).populate({
-            path:'applications',
-            options:{sort:{createdAt:-1}},
-            populate:{
-                path:'applicant'
-            }
-        });
-        if(!job){
-            return res.status(404).json({
-                message:'Job not found.',
-                success:false
-            })
-        };
-        return res.status(200).json({
-            job, 
-            succees:true
-        });
-    } catch (error) {
-        console.log(error);
+
+ 
+    const application = await Application.findById(applicationId).populate('applicant', 'name email');
+    if (!application) {
+      return res.status(404).json({ success: false, message: 'Application not found' });
     }
-}
-export const updateStatus = async (req,res) => {
-    try {
-        const {status} = req.body;
-        const applicationId = req.params.id;
-        if(!status){
-            return res.status(400).json({
-                message:'status is required',
-                success:false
-            })
-        };
 
-        // find the application by applicantion id
-        const application = await Application.findOne({_id:applicationId});
-        if(!application){
-            return res.status(404).json({
-                message:"Application not found.",
-                success:false
-            })
-        };
+    application.status = status;
+    await application.save();
 
-        // update the status
-        application.status = status.toLowerCase();
-        await application.save();
+  
+    await sendEmail(
+      application.applicant.email,
+      "Your Application Status Has Been Updated",
+      `Hi ${application.applicant.name},\n\nYour application status has been updated to: ${status}.\n\nBest of luck!\nUniversity Job Hub`
+    );
 
-        return res.status(200).json({
-            message:"Status updated successfully.",
-            success:true
-        });
+    console.log("Email user:", process.env.EMAIL_USER);
+    console.log("Email pass exists:", !!process.env.EMAIL_PASS);
 
-    } catch (error) {
-        console.log(error);
-    }
-}
+    // Optionally return updated application
+    const updatedApplication = await Application.findById(applicationId)
+      .populate('applicant', 'name email')
+      .populate('job');
+
+    res.status(200).json({ success: true, application: updatedApplication });
+  } catch (err) {
+    console.error('Error updating application status:', err);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+};
+
+
+
+
+

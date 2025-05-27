@@ -1,5 +1,7 @@
+import { Blog } from "../Components/Home/Blog";
 import { Featured } from "../Components/Home/Featured";
 import HeroSection from "../Components/Home/HeroSection";
+import { Testimonails } from "../Components/Home/Testimonails";
 
 
 
@@ -17,8 +19,10 @@ export const Home = () => {
          employment, hiring, job listings, apply online, career growth"/>
 
 
-    <HeroSection></HeroSection>
-    <Featured></Featured>
+    <HeroSection/>
+    {/* <Featured/> */}
+    <Blog/>
+    <Testimonails/>
 
    
 

@@ -1,10 +1,23 @@
 import express from "express";
+import { verifyToken } from './../middlewares/VerifyToken.js';
+import { applyToJob, getApplicationsForJob, getMyApplications, updateApplicationStatus } from "../controllers/application.controller.js";
+import { requireJobSeeker } from "../middlewares/requirejobseeker.js";
+import { requireEmployer } from './../middlewares/requireEmployer.js';
 
 const router = express.Router();
 
-// router.get("/apply/:id", isAuthenticated,applyJob);
-// router.get("/get", isAuthenticated,getAppliedJobs);
-// router.get("/:id/applicants", isAuthenticated,getApplicants);
-// router.post("/status/:id/update", isAuthenticated,updateStatus);
+router.post("/apply", verifyToken, requireJobSeeker, applyToJob);
+
+router.get("/my", verifyToken, requireJobSeeker, getMyApplications);
+
+router.get("/job/:jobId", verifyToken, requireEmployer, getApplicationsForJob);
+
+router.put("/:applicationId", verifyToken, requireEmployer, updateApplicationStatus);
+
+
+
+
+
+
 
 export default router;
