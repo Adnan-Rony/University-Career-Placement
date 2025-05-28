@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter,  } from "react-router";
+import { createBrowserRouter } from "react-router";
 import { MainLayouts } from "../Layouts/MainLayouts";
 import { Home } from "../Pages/Home";
 import { SignIn } from "../Features/Authentication/SignIn";
@@ -16,25 +16,20 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-
       },
       {
         path: "/SignUp",
         element: <SignUp />,
-
       },
       {
         path: "/SignIn",
         element: <SignIn />,
-
       },
       {
         path: "/blog/blogdetails/:id",
-        element: <BlogDetails/>,
-
-      }
-    ]
-      
+        element: <BlogDetails />,
+      },
+    ],
   },
   {
     path: "dashboard",
@@ -42,9 +37,7 @@ export const AppRouter = createBrowserRouter([
     children: [
       // { path: "/employer/dashboard", element: <EmployerDashboard /> },
       // { path: "/employer/jobs", element: <EmployerJobList /> },
-      { path: "employer/post-job", 
-        element: <PostJob /> },
+      { path: "employer/post-job", element: <PostJob /> },
     ],
   },
-
-])
+]);
