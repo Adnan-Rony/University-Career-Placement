@@ -16,7 +16,7 @@ export const MainLayouts = () => {
       </header>
 
       {/* Apply max-w-screen-xl mx-auto only if NOT on the home page */}
-      <main className={isHomePage ? "w-full" : "max-w-screen-xl mx-auto"}>
+      <main >
         <Outlet />
 
         
