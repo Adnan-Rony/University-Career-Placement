@@ -20,7 +20,7 @@ export const Home = () => {
 
 
     <HeroSection/>
-    {/* <Featured/> */}
+    <Featured/>
     <Blog/>
     <Testimonails/>
 
