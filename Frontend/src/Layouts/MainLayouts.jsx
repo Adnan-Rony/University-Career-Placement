@@ -1,12 +1,11 @@
 import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import { Navbar } from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { ResponsiveNav } from "../Components/ResponsiveNav";
 
 export const MainLayouts = () => {
   const location = useLocation();
-  const isHomePage = location.pathname === "/"; // Check if it's the home page
 
   return (
     <div>
@@ -16,10 +15,9 @@ export const MainLayouts = () => {
       </header>
 
       {/* Apply max-w-screen-xl mx-auto only if NOT on the home page */}
-      <main >
+      <main>
         <Outlet />
-
-        
+        <ScrollRestoration />
       </main>
 
       <Footer></Footer>

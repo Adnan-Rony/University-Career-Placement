@@ -141,3 +141,37 @@ export const deleteCompany = async (req, res) => {
   }
 };
 
+
+export const getMyCompany = async (req, res) => {
+  try {
+    // Ensure user is authenticated
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    // Ensure user is an employer
+    if (req.user.role !== 'employer') {
+      return res.status(403).json({ success: false, message: "Only employers can view their company profile" });
+    }
+
+    const company = await Company.findOne({ createdBy: req.user.id });
+
+    if (!company) {
+      return res.status(404).json({ success: false, message: "No company profile found for this user" });
+    }
+
+    res.status(200).json({
+      success: true,
+      company,
+    });
+
+  } catch (error) {
+    console.error("Error fetching company profile:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch company profile",
+      error: error.message,
+    });
+  }
+};
+

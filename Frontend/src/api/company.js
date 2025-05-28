@@ -5,3 +5,7 @@ export const fetchCompany = async () => {
   const res = await axiosInstance.get('/company');
   return res.data;
 };
+export const fetchMyCompany = async () => {
+  const res = await axiosInstance.get('/company/my-company');
+  return res.data;
+};
