@@ -2,6 +2,7 @@ import React from "react";
 import { CiBookmark, CiLocationOn } from "react-icons/ci";
 import { SectionTitle } from "../Shared/SectionTitle";
 import { UseJobs } from "../../hooks/useJobs.js";
+import { Link } from "react-router";
 
 export const Featured = () => {
   const { data, isPending, error } = UseJobs();
@@ -76,9 +77,11 @@ export const Featured = () => {
 
               {/* Action Buttons */}
               <div className="grid grid-cols-2 gap-3">
+                <Link to={`/job/details/${job._id}`}>
                 <button className="text-sm font-medium border border-r-primary text-r-primary py-2 px-3 rounded-lg hover:bg-r-primary hover:text-white transition">
                   Learn More
                 </button>
+                </Link>
                 <button className="text-sm font-medium bg-r-primary text-white py-2 px-3 rounded-lg hover:bg-r-accent transition">
                   Apply Now
                 </button>

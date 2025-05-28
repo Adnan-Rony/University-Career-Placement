@@ -1,287 +1,172 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { SectionTitle } from "../../Components/Shared/SectionTitle";
-import axios from "axios";
-import { JOBPOST_API_END_POINT } from "../../utils/Constant";
-import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { UseCreateJob } from './../../hooks/useJobs.js';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { UseMyCompany } from "../../hooks/useCompany.js";
 
 export const PostJob = () => {
-  const [description, setDescription] = useState("");
+  const { mutate: job, isPending } = UseCreateJob();
+  const { data, isLoading, isError } = UseMyCompany();
+
+
+  const companies = data?.company ? [data.company] : [];
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [description, setDescription] = useState("");
 
-
- 
-
-  const onSubmit = async (data) => {
-    
-    const jobDetails = {
-      ...data,
-      description:data.description
+  const onSubmit = (formData) => {
+    if (!description) {
+      toast.error("Description is required");
+      return;
     }
-    console.log("Job Details:", jobDetails);
-    
-    // try {
-    //   const res = await axios.post(
-    //     `${JOBPOST_API_END_POINT}/post`,
-    //     jobDetails,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   if (res.data.success) {
-    //     navigate("/SignIn");
-    //     toast.success(res.data.message);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   toast.error(err.response?.data?.message || "Registration failed");
-    // }
+
+    const payload = {
+      ...formData,
+      description,
+      salaryRange: {
+        min: Number(formData.min),
+        max: Number(formData.max),
+      },
+      location: {
+        city: formData.city,
+        state: formData.state,
+        country: formData.country,
+      },
+    };
+
+    job(payload, {
+      onSuccess: () => {
+        reset();
+        setDescription("");
+        toast.success("Job posted successfully!");
+        navigate("/");
+      },
+      onError: (err) => {
+        toast.error("Post failed: " + (err?.response?.data?.message || "Something went wrong"));
+      },
+    });
   };
 
+  if (isLoading) return <div>Loading companies...</div>;
+  if (isError) return <div>Error loading companies</div>;
+
   return (
-    <div className="bg-background container mx-auto my-10 p-4 rounded-lg shadow-lg">
-      <SectionTitle title={"Post Job"} />
-      <form onSubmit={handleSubmit(onSubmit)} className="p-4">
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-          {/* Company Name */}
+    <div className="mx-auto my-10 p-6 rounded-lg shadow-xl max-w-2xl">
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow space-y-6">
+
+        {/* Company Select */}
+        <div>
+          <label className="block font-medium mb-1">
+            Company <span className="text-red-500">*</span>
+          </label>
+          <select {...register("company", { required: true })} className="w-full border border-gray-300 p-2 rounded focus:ring">
+            <option value="">Select a company</option>
+            {companies.map((company) => (
+              <option key={company._id} value={company._id}>
+                {company.name}
+              </option>
+            ))}
+          </select>
+          {errors.company && <p className="text-red-500 text-sm mt-1">Company is required</p>}
+        </div>
+
+        {/* Job Title */}
+        <div>
+          <label className="block font-semibold mb-1">Job Title <span className="text-red-500">*</span></label>
+          <input
+            {...register("title", { required: true })}
+            className="w-full border border-gray-300 p-2 rounded focus:ring focus:ring-blue-200 outline-none"
+          />
+          {errors.title && <p className="text-red-500 text-sm mt-1">Title is required</p>}
+        </div>
+
+        
+
+        {/* Location Inputs */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Company Name
-            </label>
-            <input
-              type="text"
-              placeholder="company name"
-              {...register("company", { required: true })}
-              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-            />
-            {errors.company && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <label className="block font-medium">City</label>
+            <input {...register("city")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
           </div>
-
-          {/* File Upload */}
-          {/* <div>
-            <label className="block text-sm font-medium mb-1">
-              Company Logo
-            </label>
-            <input
-              type="file"
-              {...register("companyImage", { required: true })}
-              accept="image/*"
-              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-            />
-            {errors.companyImage && (
-              <span className="text-red-500">This field is required</span>
-            )}
-          </div> */}
-
-          {/* Job Position */}
           <div>
-            <label className="block text-sm font-medium mb-1">Position</label>
-            <input
-              type="text"
-              placeholder="Position"
-              {...register("position", { required: true })}
-              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-            />
-            {errors.position && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <label className="block font-medium">State</label>
+            <input {...register("state")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
           </div>
-
-          {/* Job Category */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Job Category
-            </label>
-            <input
-              type="text"
-              placeholder="Job Category"
-              {...register("category", { required: true })}
-              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-            />
-            {errors.category && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <label className="block font-medium">Country</label>
+            <input {...register("country")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
           </div>
+        </div>
 
-          {/* Job Type */}
+        {/* Salary Range */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Job Type</label>
-            <select
-              {...register("jobType", { required: true })}
-              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-            >
-              <option value="Full-Time">Select Job-Type</option>
-              <option value="Full-Time">Full-Time</option>
-              <option value="Part-Time">Part-Time</option>
-              <option value="Contract">Contract</option>
-              <option value="Internship">Internship</option>
-              <option value="Remote">Remote</option>
-            </select>
-            {errors.jobType && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <label className="block font-medium">Min Salary</label>
+            <input type="number" {...register("min")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
           </div>
-
-          {/* Experience */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Experience Level
-            </label>
-            <select
-              {...register("experience", { required: true })}
-              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-            >
-              <option value="">Select Experience</option>
-              <option value="Entry Level">Entry Level</option>
-              <option value="Mid Level">Mid Level</option>
-              <option value="Senior Level">Senior Level</option>
-            </select>
-            {errors.experience && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <label className="block font-medium">Max Salary</label>
+            <input type="number" {...register("max")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
           </div>
+        </div>
 
-          {/* Dates */}
-          {["postedDate", "lastDateToApply", "closeDate"].map((field) => (
-            <div key={field}>
-              <label className="block text-sm font-medium mb-1">
-                {field.replace(/([A-Z])/g, " $1")}
-              </label>
-              <input
-                type="date"
-                {...register(field, { required: true })}
-                className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-              />
-              {errors[field] && (
-                <span className="text-red-500">This field is required</span>
-              )}
-            </div>
-          ))}
+        {/* Job Type */}
+        <div>
+          <label className="block font-medium">Job Type</label>
+          <select {...register("jobType")} className="w-full border border-gray-300 p-2 rounded focus:ring">
+            <option value="full-time">Full-Time</option>
+            <option value="part-time">Part-Time</option>
+            <option value="internship">Internship</option>
+            <option value="contract">Contract</option>
+          </select>
+        </div>
 
-          {/* Salary */}
-          {["salaryFrom", "salaryTo"].map((field) => (
-            <div key={field}>
-              <label className="block text-sm font-medium mb-1">
-                {field.replace(/([A-Z])/g, " $1")}
-              </label>
-              <input
-                type="number"
-                placeholder={`Enter ${field.replace(/([A-Z])/g, " $1")}`}
-                {...register(field, { required: true })}
-                className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-              />
-              {errors[field] && (
-                <span className="text-red-500">This field is required</span>
-              )}
-            </div>
-          ))}
+        {/* Deadline */}
+        <div>
+          <label className="block font-medium">
+            Application Deadline <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="date"
+            {...register("deadline", { required: true })}
+            className="w-full border border-gray-300 p-2 rounded focus:ring"
+          />
+          {errors.deadline && <p className="text-red-500 text-sm mt-1">Deadline is required</p>}
+        </div>
 
-          {/* Location */}
-          {["city", "state", "country"].map((field) => (
-            <div key={field}>
-              <label className="block text-sm font-medium mb-1">
-                {field.replace(/([A-Z])/g, " $1")}
-              </label>
-              <input
-                type="text"
-                placeholder={`Enter ${field}`}
-                {...register(field, { required: true })}
-                className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-              />
-              {errors[field] && (
-                <span className="text-red-500">This field is required</span>
-              )}
-            </div>
-          ))}
-
-          {/* Education Level */}
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Education Level
-            </label>
-            <input
-              type="text"
-              placeholder="Enter Education Level"
-              {...register("educationLevel", { required: true })}
-              className="w-full shadow rounded-lg p-3 focus:ring-2 focus:ring-purple-400 outline-none"
-            />
-            {errors.educationLevel && (
-              <span className="text-red-500">This field is required</span>
-            )}
-          </div>
-
-          {/* Job Description */}
-          <div className="col-span-2 ">
-            <label className="block text-lg font-semibold my-4">
-              Job Description
-            </label>
-
-            <ReactQuill
-              theme="snow"
-              value={description}
-              onChange={setDescription}
-              placeholder="Write job details here..."
-              {...register("description", { required: true })}
-              modules={{
-                toolbar: [
-                  [{ header: [1, 2, 3, false] }], // Headings
-                  ["bold", "italic", "underline", "strike"], // Text formatting
-                  [{ list: "ordered" }, { list: "bullet" }], // Lists
-                  [{ indent: "-1" }, { indent: "+1" }], // Indentation
-                  ["blockquote", "code-block"], // Block elements
-                  [{ align: [] }], // Alignment
-                  ["clean"], // Clear formatting
-                  ["undo", "redo"], // Undo/redo
-                ],
-              }}
-              className="bg-white border-none shadow-sm rounded-lg"
-            />
-            <p className="text-gray-400 text-sm text-right mt-1">
-              {description.length}/10,000
-            </p>
-          </div>
-
-          {/* Status */}
-          <div className="col-span-2">
-            <label className="block text-sm font-medium mb-2">Status</label>
-            <div className="flex gap-6">
-              {["Active", "Inactive"].map((status) => (
-                <div key={status} className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    {...register("status", { required: true })}
-                    value={status}
-                  />
-                  <p className="text-sm">{status}</p>
-                </div>
-              ))}
-            </div>
-            {errors.status && (
-              <span className="text-red-500">This field is required</span>
-            )}
-          </div>
+        {/* Skills */}
+        <div>
+          <label className="block font-medium">Skills (comma-separated)</label>
+          <input
+            {...register("skillsRequired")}
+            className="w-full border border-gray-300 p-2 rounded focus:ring"
+            placeholder="React, JavaScript, HTML"
+          />
+        </div>
+        {/* Description */}
+        <div>
+          <label className="block font-semibold mb-1">Description <span className="text-red-500">*</span></label>
+          <ReactQuill
+            theme="snow"
+            value={description}
+            onChange={setDescription}
+            className="bg-white border border-gray-300 rounded"
+          />
+          {!description && <p className="text-red-500 text-sm mt-1">Description is required</p>}
         </div>
 
         {/* Submit Button */}
-        <div className="mt-3">
-          <input
-            className="btn bg-r-primary text-white hover:bg-r-accent"
-            type="submit"
-          />
-        </div>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white w-full p-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+          disabled={isPending || !description }
+        >
+          {isPending ? "Posting..." : "Post Job"}
+        </button>
       </form>
     </div>
   );

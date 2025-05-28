@@ -70,7 +70,7 @@ export const getAllJobs = async (req, res) => {
 export const getJobById = async (req, res) => {
   try {
     const job = await Job.findById(req.params.id)
-      .populate('company', 'name logo')
+      .populate('company')
       .populate('postedBy', 'email');
 
     if (!job) {
