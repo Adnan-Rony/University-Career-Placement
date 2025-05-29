@@ -30,7 +30,7 @@ export const UseRegister=()=>{
 
 //Logout
 
-export const UseLogout=()=>{
+export const useLogout=()=>{
         const queryClient=useQueryClient();
 
         return useMutation({

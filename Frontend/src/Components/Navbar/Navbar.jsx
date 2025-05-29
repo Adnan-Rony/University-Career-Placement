@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router'
 import { Authcontext } from '../../Context/Authprovider';
-import { useCurrentUser } from '../../hooks/useAuth';
+import { useCurrentUser, useLogout } from '../../hooks/useAuth';
 import { UserDropdown } from './UserDropdown';
 
 export const Navbar = () => {
   // const {user,logout}=useContext(Authcontext)
 
   const {data}=useCurrentUser()
+  
   const user=data?.user
   // console.log(user);
   const navElements = (

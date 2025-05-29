@@ -4,13 +4,19 @@ import { MdDashboard, MdKeyboardArrowDown } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
 import { IoMdSettings } from "react-icons/io";
 import { Link } from "react-router";
+import { useLogout } from "../../hooks/useAuth";
 
 export const UserDropdown = ({user}) => {
+    const { mutate: logout, isPending } = useLogout();
     const [isdown,setDown]=useState(false)
+
     console.log(user);
 const handleDrowpdown=()=>{
 setDown(!isdown)
 }
+const handleLogout = () => {
+  logout(); // This will call your API and invalidate the user cache
+};
 
     const avatar="https://res.cloudinary.com/dto6ulc5n/image/upload/v1742757754/ayo-ogunseinde-6W4F62sN_yI-unsplash_z8moxp.jpg"
   return (
@@ -62,12 +68,14 @@ setDown(!isdown)
       </Link>
     </li>
     <hr className="text-gray-400  my-2" />
-    <Link>
-      <button className="w-full text-left px-4 pb-2  text-red-600 flex items-center gap-1
+    
+      <button 
+      onClick={handleLogout}
+      className="w-full text-left px-4 pb-2  text-red-600 flex items-center gap-1
        hover:bg-gray-100">
        <IoLogOut /> Logout
       </button>
-    </Link>
+   
   </ul>
 </div>
 }
