@@ -1,9 +1,15 @@
 import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router'
-import { Authcontext } from '../Context/Authprovider';
+import { Authcontext } from '../../Context/Authprovider';
+import { useCurrentUser } from '../../hooks/useAuth';
+import { UserDropdown } from './UserDropdown';
 
 export const Navbar = () => {
-  const {user,logout}=useContext(Authcontext)
+  // const {user,logout}=useContext(Authcontext)
+
+  const {data}=useCurrentUser()
+  const user=data?.user
+  // console.log(user);
   const navElements = (
     <>
       <li>
@@ -91,8 +97,10 @@ export const Navbar = () => {
   <div className='text-sm font-medium'>
     {
       user ? 
-      <Link    onClick={logout}
-       className=''>Logout</Link>
+      // <Link   
+      //  className=''>Logout</Link>
+
+      <UserDropdown user={user}/>
       :
       <Link to="/SignIn"
       className=''>Login</Link>

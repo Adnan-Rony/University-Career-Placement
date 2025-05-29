@@ -44,7 +44,7 @@ export const UseLogout=()=>{
 // Fetch User Informations
 
 
-export const UseCurrentUser = () => {
+export const useCurrentUser = () => {
   return useQuery({
     queryKey: ['user'],
     queryFn: CurrentUser,
