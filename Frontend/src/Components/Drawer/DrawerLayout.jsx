@@ -1,20 +1,36 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
 import { DashboardNavbar } from "../Dashboard/DashboardNavbar";
-import { FiAlignLeft } from "react-icons/fi";
 import { FaBriefcase, FaHome } from "react-icons/fa";
-import { FaUserPen } from "react-icons/fa6";
-import { MdDashboard } from "react-icons/md";
+import { AdminSidebar } from "./Sidebars/AdminSidebar";
+import { EmployerSidebar } from "./Sidebars/EmployerSidebar";
+import { JobSeekerSidebar } from "./Sidebars/JobSeekerSidebar";
 export const DrawerLayout = () => {
+  const role = "seeker";
+
+  const RenderSidebars = () => {
+    switch (role) {
+      case "admin":
+        return <AdminSidebar />;
+      case "employer":
+        return <EmployerSidebar />;
+      case "seeker":
+      default:
+        return <JobSeekerSidebar />;
+    }
+  };
+
   return (
     <div>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col  container space-y-4
-         mx-auto ">
-        <div>
+        <div
+          className="drawer-content flex flex-col  container space-y-4
+         mx-auto "
+        >
+          <div>
             <DashboardNavbar />
-        </div>
+          </div>
           <div className="border-1 border-gray-300 rounded-2xl ">
             <Outlet />
           </div>
@@ -41,23 +57,7 @@ export const DrawerLayout = () => {
               </div>
             </li>
 
-            <li>
-              <Link>
-                <MdDashboard/> User Dashboard
-              </Link>
-            </li>
-
-            <li>
-              <Link to={"employer/post-job"}>
-                <FaBriefcase /> Post a Job
-              </Link>
-            </li>
-
-            <li>
-              <Link>
-                <FaUserPen /> Profile
-              </Link>
-            </li>
+            {RenderSidebars()}
 
             <hr />
 

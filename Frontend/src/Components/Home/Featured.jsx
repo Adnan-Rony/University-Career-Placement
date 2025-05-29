@@ -7,6 +7,7 @@ import { Link } from "react-router";
 export const Featured = () => {
   const { data, isPending, error } = UseJobs();
   const jobs = data?.jobs || [];
+const  companyLogo='https://res.cloudinary.com/dto6ulc5n/image/upload/v1742758272/icons8-redragon-96_oyy58g.png'
 
   if (isPending)
     return (
@@ -57,9 +58,9 @@ export const Featured = () => {
               {/* Company Info */}
               <div className="flex items-center gap-4 mb-5">
                 <img
-                  src={job?.company?.logo || "https://via.placeholder.com/40"}
+                  src={job?.company?.logo || companyLogo}
                   alt="Company Logo"
-                  className="w-12 h-12 object-cover rounded-xl border"
+                  className="w-12 h-12 object-cover rounded-xl "
                 />
                 <div>
                   <p className="font-semibold text-gray-800">

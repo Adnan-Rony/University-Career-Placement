@@ -23,6 +23,8 @@ export const LogoutUser = async () => {
 };
 
 
+
+// Fetch User Informations
 export const CurrentUser = async () => {
   try {
     const res = await axiosInstance.get('/user/me');
