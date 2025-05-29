@@ -40,7 +40,7 @@ export const AppRouter = createBrowserRouter([
       
   },
   {
-    path: "dashboard",
+    path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
       // { path: "/employer/dashboard", element: <EmployerDashboard /> },
