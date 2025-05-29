@@ -46,6 +46,17 @@ export const Navbar = () => {
           PostJob
         </NavLink>
       </li>
+      <li>
+        <NavLink
+        to={'/dashboard'}
+         
+          className={({ isActive }) =>
+            isActive ? 'text-primary' : 'text-gray-500'
+          }
+        >
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
   
@@ -69,7 +80,7 @@ export const Navbar = () => {
     <a className="  text-xl font-extrabold">Job <span className='text-r-primary'>Portal</span></a>
   </div>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1 text-lg font-medium text-black">
+    <ul className="menu menu-horizontal px-1 text-sm font-medium text-black">
      {
       navElements
      }
@@ -77,14 +88,14 @@ export const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-  <div >
+  <div className='text-sm font-medium'>
     {
       user ? 
       <Link    onClick={logout}
-       className='btn btn-primary'>Logout</Link>
+       className=''>Logout</Link>
       :
       <Link to="/SignIn"
-      className='btn btn-primary'>Login</Link>
+      className=''>Login</Link>
     }
   </div>
   </div>
