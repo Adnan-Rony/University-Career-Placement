@@ -9,7 +9,7 @@ export const JobSeekerSidebar = () => {
     <div className='space-y-2'>
          <li>
               <Link>
-                <MdDashboard/> User Dashboard
+                <MdDashboard/> JobSeeker Dashboard
               </Link>
             </li>
 
