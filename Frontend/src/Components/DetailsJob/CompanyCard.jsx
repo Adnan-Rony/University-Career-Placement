@@ -33,15 +33,17 @@ const CompanyCard = ({ job }) => {
           </div>
           <div className="flex justify-between items-center">
             <p>Email:</p>
-            <p>{job?.postedBy?.email}</p>
+            <p>{job?.company?.contactPersonEmail}</p>
           </div>
           <div className="flex justify-between items-center">
             <p>Location:</p>
-            <p>{job?.company?.location || "N/A"}</p>
+            <p>
+              {job?.company?.city},{job?.company?.location}{" "}
+            </p>
           </div>
           <div className="flex justify-between items-center">
             <p>Phone:</p>
-            <p>017474730447</p>
+            <p>{job?.company?.contactPersonMobile}</p>
           </div>
         </div>
 
@@ -51,7 +53,7 @@ const CompanyCard = ({ job }) => {
           rel="noopener noreferrer"
           className="btn w-full bg-blue-500 text-white text-center block px-4 py-2 rounded-md hover:bg-blue-600 transition"
         >
-          {job?.company?.website}
+          {job?.company?.websiteUrl}
         </a>
       </div>
 
@@ -66,54 +68,121 @@ const CompanyCard = ({ job }) => {
               <RxCross1 />
             </button>
 
-            {/* Company Header */}
-            <div className="flex items-center gap-4 mb-6">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
               <img
-                src="https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Fcompany-logo%2F1-5.png&w=256&q=75"
+                src={job?.company?.logo}
                 alt="Company Logo"
-                className="w-14 h-14 rounded-md object-cover border border-gray-200"
+                className="w-20 h-20 rounded-md object-cover border border-gray-200"
               />
-              <div>
-                <h2 className="text-xl font-bold text-gray-800">
-                  Company Profile
+              <div className="text-center sm:text-left">
+                <h2 className="text-2xl font-bold text-gray-800">
+                  {job?.company?.name}
                 </h2>
-                <p className="text-sm text-gray-500">{job?.company?.name}</p>
+                <p className="text-sm text-gray-500">
+                  {job?.company?.industry}
+                </p>
               </div>
             </div>
 
-            {/* Company Details */}
-            <div className="space-y-4 text-sm text-gray-700">
-              <div  className="flex gap-4 item-center">
+            {/* Details Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
+              <div>
+                <p className="font-medium">Establishment:</p>
+                <p>{job?.company?.establishment || "N/A"}</p>
+              </div>
+              <div>
                 <p className="font-medium">Industry:</p>
                 <p>{job?.company?.industry || "N/A"}</p>
               </div>
-              <div className="flex justify-normal gap-9 item-center">
-                <p className="font-medium">Email:</p>
-                <p>{job?.postedBy?.email}</p>
+              <div>
+                <p className="font-medium">Country:</p>
+                <p>{job?.company?.country || "N/A"}</p>
               </div>
-              <div className="flex gap-6">
-                <p className="font-medium">Website:</p>
-                <p>
-                  <a
-                    href={job?.company?.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 underline hover:text-blue-700"
-                  >
-                    {job?.company?.website}
-                  </a>
-                </p>
-              </div>
-              <div  className="flex gap-6 item-center">
+              {/* <div>
+                <p className="font-medium">City:</p>
+                <p>{job?.company?.city || "N/A"}</p>
+              </div> */}
+              <div>
                 <p className="font-medium">Location:</p>
-                <p>{job?.company?.location || "N/A"}</p>
-                
+                <p>{job?.company?.city || "N/A"},{job?.company?.location || "N/A"}</p>
               </div>
 
               <div>
-                <p className="font-medium">Description:</p>
-                <p className="my-2">{job?.company?.description || "N/A"}</p>
+                <p className="font-medium">Contact Person:</p>
+                <p>
+                  {job?.company?.contactPersonName || "N/A"} (
+                  {job?.company?.contactPersonDesignation})
+                </p>
               </div>
+              <div>
+                <p className="font-medium">Employees:</p>
+                <p>{job?.company?.employees || "N/A"}</p>
+              </div>
+              <div>
+                <p className="font-medium">Contact Email:</p>
+                <p>{job?.company?.contactPersonEmail || "N/A"}</p>
+              </div>
+              <div>
+                <p className="font-medium">Contact Mobile:</p>
+                <p>{job?.company?.contactPersonMobile || "N/A"}</p>
+              </div>
+
+              <div>
+                <p className="font-medium">Website:</p>
+                <a
+                  href={job?.company?.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700"
+                >
+                  {job?.company?.websiteUrl || "N/A"}
+                </a>
+              </div>
+
+              <div>
+                <p className="font-medium">Facebook:</p>
+                <a
+                  href={job?.company?.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700"
+                >
+                  {job?.company?.facebookUrl || "N/A"}
+                </a>
+              </div>
+
+              <div>
+                <p className="font-medium">Twitter:</p>
+                <a
+                  href={job?.company?.twitterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700"
+                >
+                  {job?.company?.twitterUrl || "N/A"}
+                </a>
+              </div>
+
+              <div>
+                <p className="font-medium">LinkedIn:</p>
+                <a
+                  href={job?.company?.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700"
+                >
+                  {job?.company?.linkedinUrl || "N/A"}
+                </a>
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="mt-6">
+              <p className="font-medium mb-1">Description:</p>
+              <p className="text-gray-600">
+                {job?.company?.description || "N/A"}
+              </p>
             </div>
           </div>
         </div>

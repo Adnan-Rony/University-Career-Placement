@@ -10,14 +10,15 @@ import { UseFetchSingleJobById } from "../hooks/useJobs.js";
 import HeaderJobCard from "../Components/DetailsJob/HeaderJobCard.jsx";
 import JobDescription from "../Components/DetailsJob/JobDescription.jsx";
 import JobOverView from "../Components/DetailsJob/JobOverView.jsx";
+import Loading from "../Components/Loading.jsx";
 
 const JobDetails = () => {
   const { id } = useParams();
 
   const { data: job, isLoading, isError } = UseFetchSingleJobById(id);
-
+  console.log(job);
   if (isLoading)
-    return <div className="p-10 text-center">Loading job details...</div>;
+    return <Loading></Loading>
 
   return (
     <div className=" bg-gray-50">
@@ -26,24 +27,22 @@ const JobDetails = () => {
 
       {/* Content Section */}
       <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8 ">
-        
-          {/* Job Description */}
+        {/* Job Description */}
 
-          <div className="lg:col-span-2 px-4 py-8 ">
-            <JobDescription></JobDescription>
+        <div className="lg:col-span-2 px-4 py-8 ">
+          <JobDescription></JobDescription>
+        </div>
+
+        {/* Sidebar: Overview & Company */}
+        <div className="lg:col-span-1 space-y-4">
+          {/* Job Overview */}
+          <JobOverView job={job}></JobOverView>
+
+          {/* Company Overview */}
+          <div className="">
+            <CompanyCard job={job} />
           </div>
-
-          {/* Sidebar: Overview & Company */}
-          <div className="lg:col-span-1 space-y-4">
-            {/* Job Overview */}
-            <JobOverView job={job}></JobOverView>
-
-            {/* Company Overview */}
-            <div className="">
-              <CompanyCard job={job} />
-            </div>
-          </div>
-        
+        </div>
       </div>
     </div>
   );

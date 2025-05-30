@@ -1,16 +1,17 @@
 import { CiClock1, CiSaveUp2, CiCalendar } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
+import { IoIosPeople } from 'react-icons/io';
 
 
 const HeaderJobCard = ({ job }) => {
   return (
     <div>
-      <div className="px-4 py-8 bg-gradient-to-r from-indigo-50 to-blue-50">
+      <div className="px-4 py-10 bg-gradient-to-r from-indigo-50 to-blue-50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex items-start gap-4">
             <img
-              src={job?.image}
+              src={job?.company?.logo}
               alt="Invision Logo"
               className="w-16 h-16 rounded-md object-cover flex-shrink-0"
             />
@@ -19,22 +20,23 @@ const HeaderJobCard = ({ job }) => {
                 {job.title}
               </h1>
               <div className="flex items-center gap-4 text-gray-600 text-sm mt-1 flex-wrap">
-                <span className="flex items-center gap-1">Invision</span>
+               
+               
                 <span className="flex items-center gap-1">
-                  <MdOutlineLocationOn />
-                  {job?.location?.city},{job?.location?.state},
-                  {job?.location?.country}
-                </span>
-                <span className="flex items-center gap-1">
-                  <CiClock1 />
+                  <CiClock1 className="text-xl"/>
                   {new Date(job?.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
                   })}
                 </span>
+                 <span className="flex items-center gap-1">
+                  <MdOutlineLocationOn className="text-xl" />
+                  {job?.location?.city},{job?.location?.state},
+                  {job?.location?.country}
+                </span>
                 <span className="flex items-center gap-1">
-                  <GiMoneyStack />
+                  <GiMoneyStack className="text-xl"/>
                   {job?.salaryRange?.min}-{job?.salaryRange?.max}$
                 </span>
               </div>

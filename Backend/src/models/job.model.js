@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema({
   title: { type: String, required: true },
+  vacancy: { type: String, required: true },
   description: String,
   company: { type: mongoose.Schema.Types.ObjectId, ref: "Company", required: true },
   postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
@@ -17,6 +18,7 @@ const jobSchema = new mongoose.Schema({
     min: Number,
     max: Number,
   },
+
   jobType: {
     type: String,
     enum: ["full-time", "part-time", "internship", "contract"],
