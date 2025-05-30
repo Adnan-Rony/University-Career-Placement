@@ -7,51 +7,82 @@ import { Company } from './../models/company.model.js';
 
 
 export const createCompany = async (req, res) => {
-  console.log('req.user:', req.user);
-  console.log('req.cookies:', req.cookies);
-
   try {
-    const { name, location, industry, website, logo ,description} = req.body;
-
-    // Ensure user is authenticated
+    console.log("Request Body:", req.body);
+    // Check user authentication and role
     if (!req.user || !req.user.id) {
       return res.status(401).json({ success: false, message: "Unauthorized" });
     }
-
-    // Ensure user is an employer
-    if (req.user.role !== 'employer') {
-      return res.status(403).json({ success: false, message: "Only employers can create a company profile" });
+    if (req.user.role !== "employer") {
+      return res.status(403).json({
+        success: false,
+        message: "Only employers can create a company profile",
+      });
     }
 
-    const createdBy = req.user.id;
+    // Destructure all expected fields from req.body
+    const {
+      name,
+      location,
+      industry,
+      websiteUrl,
+      logo,
+      description,
+      establishment,
+      employees,
+      country,
+      contactPersonName,
+      contactPersonDesignation,
+      contactPersonEmail,
+      contactPersonMobile,
+      facebookUrl,
+      twitterUrl,
+      city,
+      cover,
+      linkedinUrl,
+    } = req.body;
 
+    // Create new company document with all fields
     const newCompany = new Company({
       name,
       location,
       industry,
-      website,
+      websiteUrl,
       logo,
-      createdBy,
-      description
+      description,
+      establishment,
+      employees,
+      country,
+      contactPersonName,
+      contactPersonDesignation,
+      contactPersonEmail,
+      contactPersonMobile,
+      facebookUrl,
+      twitterUrl,
+      linkedinUrl,
+      city,
+      cover,
+      createdBy: req.user.id,
     });
 
     await newCompany.save();
 
-    res.status(201).json({
+
+    return res.status(201).json({
       success: true,
       message: "Company profile created successfully",
       company: newCompany,
     });
-
   } catch (error) {
     console.error("Company creation error:", error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Failed to create company",
       error: error.message,
     });
   }
 };
+
 
 // Get all companies (public)
 export const getAllCompanies = async (req, res) => {
@@ -82,8 +113,9 @@ export const getCompanyById = async (req, res) => {
 
 // Update a company (only the creator can update it)
 export const updateCompany = async (req, res) => {
-    console.log('req.user:', req.user);
+  console.log('req.user:', req.user);
   console.log('req.cookies:', req.cookies);
+
   try {
     const { id } = req.params;
 
@@ -98,7 +130,27 @@ export const updateCompany = async (req, res) => {
     }
 
     // Allowed fields to update
-    const allowedUpdates = ['name', 'location', 'industry', 'website', 'logo',"description"];
+    const allowedUpdates = [
+      'name',
+      'location',
+      'industry',
+      'websiteurl',
+      'logo',
+      'city',
+      'description',
+      'establishment',
+      'employees',
+      'country',
+      'Contact_Person_Name',
+      'Contact_Person_Designation',
+      'Contact_Person_email',
+      'Contact_Person_mobile',
+      'facebookurl',
+      'twittweurl',
+      'linkdinurl',
+      'cover'
+    ];
+
     allowedUpdates.forEach((field) => {
       if (req.body[field] !== undefined) {
         company[field] = req.body[field];
@@ -118,6 +170,7 @@ export const updateCompany = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error.' });
   }
 };
+
 
 
 // Delete a company (owner only)

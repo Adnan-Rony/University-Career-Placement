@@ -1,20 +1,27 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { UseCreateJob } from './../../hooks/useJobs.js';
+import { UseCreateJob } from "./../../hooks/useJobs.js";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { UseMyCompany } from "../../hooks/useCompany.js";
+import axios from "axios";
 
 export const PostJob = () => {
   const { mutate: job, isPending } = UseCreateJob();
   const { data, isLoading, isError } = UseMyCompany();
 
+  const [image, setImage] = useState("");
 
   const companies = data?.company ? [data.company] : [];
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
   const [description, setDescription] = useState("");
 
@@ -26,6 +33,7 @@ export const PostJob = () => {
 
     const payload = {
       ...formData,
+      image,
       description,
       salaryRange: {
         min: Number(formData.min),
@@ -46,9 +54,33 @@ export const PostJob = () => {
         navigate("/");
       },
       onError: (err) => {
-        toast.error("Post failed: " + (err?.response?.data?.message || "Something went wrong"));
+        toast.error(
+          "Post failed: " +
+            (err?.response?.data?.message || "Something went wrong")
+        );
       },
     });
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "blogging"); // Replace with your actual preset
+
+    try {
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dnpycgwch/logo/upload", // Replace with your actual cloud name
+        formData
+      );
+      setImage(res.data.secure_url); // Set uploaded image URL
+      toast.success("Image uploaded!");
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast.error("Image upload failed");
+    }
   };
 
   if (isLoading) return <div>Loading companies...</div>;
@@ -56,14 +88,19 @@ export const PostJob = () => {
 
   return (
     <div className="mx-auto my-10 p-6 rounded-lg shadow-xl max-w-2xl">
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow space-y-6">
-
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white p-8 rounded-lg shadow space-y-6"
+      >
         {/* Company Select */}
         <div>
           <label className="block font-medium mb-1">
             Company <span className="text-red-500">*</span>
           </label>
-          <select {...register("company", { required: true })} className="w-full border border-gray-300 p-2 rounded focus:ring">
+          <select
+            {...register("company", { required: true })}
+            className="w-full border border-gray-300 p-2 rounded focus:ring"
+          >
             <option value="">Select a company</option>
             {companies.map((company) => (
               <option key={company._id} value={company._id}>
@@ -71,34 +108,69 @@ export const PostJob = () => {
               </option>
             ))}
           </select>
-          {errors.company && <p className="text-red-500 text-sm mt-1">Company is required</p>}
+          {errors.company && (
+            <p className="text-red-500 text-sm mt-1">Company is required</p>
+          )}
         </div>
 
         {/* Job Title */}
         <div>
-          <label className="block font-semibold mb-1">Job Title <span className="text-red-500">*</span></label>
+          <label className="block font-semibold mb-1">
+            Job Title <span className="text-red-500">*</span>
+          </label>
           <input
             {...register("title", { required: true })}
             className="w-full border border-gray-300 p-2 rounded focus:ring focus:ring-blue-200 outline-none"
           />
-          {errors.title && <p className="text-red-500 text-sm mt-1">Title is required</p>}
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-1">Title is required</p>
+          )}
         </div>
 
+        {/* image */}
+        {/* Image Upload */}
+        <div>
+          <label className="block font-semibold mb-1">
+            Upload Image <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileUpload}
+            className="w-full border border-gray-300 p-2 rounded focus:ring focus:ring-blue-200 outline-none"
+          />
         
+          {image && (
+            <img
+              src={image}
+              alt="Preview"
+              className="mt-2 h-32 object-contain rounded"
+            />
+          )}
+        </div>
 
         {/* Location Inputs */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block font-medium">City</label>
-            <input {...register("city")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
+            <input
+              {...register("city")}
+              className="w-full border border-gray-300 p-2 rounded focus:ring"
+            />
           </div>
           <div>
             <label className="block font-medium">State</label>
-            <input {...register("state")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
+            <input
+              {...register("state")}
+              className="w-full border border-gray-300 p-2 rounded focus:ring"
+            />
           </div>
           <div>
             <label className="block font-medium">Country</label>
-            <input {...register("country")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
+            <input
+              {...register("country")}
+              className="w-full border border-gray-300 p-2 rounded focus:ring"
+            />
           </div>
         </div>
 
@@ -106,18 +178,29 @@ export const PostJob = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block font-medium">Min Salary</label>
-            <input type="number" {...register("min")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
+            <input
+              type="number"
+              {...register("min")}
+              className="w-full border border-gray-300 p-2 rounded focus:ring"
+            />
           </div>
           <div>
             <label className="block font-medium">Max Salary</label>
-            <input type="number" {...register("max")} className="w-full border border-gray-300 p-2 rounded focus:ring" />
+            <input
+              type="number"
+              {...register("max")}
+              className="w-full border border-gray-300 p-2 rounded focus:ring"
+            />
           </div>
         </div>
 
         {/* Job Type */}
         <div>
           <label className="block font-medium">Job Type</label>
-          <select {...register("jobType")} className="w-full border border-gray-300 p-2 rounded focus:ring">
+          <select
+            {...register("jobType")}
+            className="w-full border border-gray-300 p-2 rounded focus:ring"
+          >
             <option value="full-time">Full-Time</option>
             <option value="part-time">Part-Time</option>
             <option value="internship">Internship</option>
@@ -135,7 +218,9 @@ export const PostJob = () => {
             {...register("deadline", { required: true })}
             className="w-full border border-gray-300 p-2 rounded focus:ring"
           />
-          {errors.deadline && <p className="text-red-500 text-sm mt-1">Deadline is required</p>}
+          {errors.deadline && (
+            <p className="text-red-500 text-sm mt-1">Deadline is required</p>
+          )}
         </div>
 
         {/* Skills */}
@@ -149,21 +234,25 @@ export const PostJob = () => {
         </div>
         {/* Description */}
         <div>
-          <label className="block font-semibold mb-1">Description <span className="text-red-500">*</span></label>
+          <label className="block font-semibold mb-1">
+            Description <span className="text-red-500">*</span>
+          </label>
           <ReactQuill
             theme="snow"
             value={description}
             onChange={setDescription}
             className="bg-white border border-gray-300 rounded"
           />
-          {!description && <p className="text-red-500 text-sm mt-1">Description is required</p>}
+          {!description && (
+            <p className="text-red-500 text-sm mt-1">Description is required</p>
+          )}
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
           className="bg-blue-600 text-white w-full p-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-          disabled={isPending || !description }
+          disabled={isPending || !description}
         >
           {isPending ? "Posting..." : "Post Job"}
         </button>

@@ -8,7 +8,12 @@ import { DashBoardLayout } from "../Layouts/DashBoardLayout";
 import { PostJob } from "../Pages/Empoloyer/PostJob";
 import { BlogDetails } from "../Pages/BlogDetails";
 import JobDetails from "../Pages/JobDetails.jsx";
+
+import CreateCompany from "../Pages/CreateCompany.jsx";
+
+
 import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/AdminDashboard/AdminDashboardMenu.jsx";
+
 
 export const AppRouter = createBrowserRouter([
   {
@@ -36,7 +41,13 @@ export const AppRouter = createBrowserRouter([
         path: "/job/details/:id",
         element: <JobDetails/>,
 
-      }
+      },
+      {
+        path: "/company",
+        element: <CreateCompany/>,
+
+      },
+    
     ]
       
   },
