@@ -6,7 +6,7 @@ export const createJob = async (req, res) => {
   try {
     const {
       title, description, company, location, salaryRange,
-      jobType, deadline, skillsRequired,image
+      jobType, deadline, skillsRequired,image,vacancy
     } = req.body;
 
     const employerId = req.user.id; 
@@ -26,6 +26,7 @@ export const createJob = async (req, res) => {
       location,
       salaryRange,
       jobType,
+      vacancy,
       deadline,
       image,
       skillsRequired
@@ -44,7 +45,7 @@ export const getAllJobs = async (req, res) => {
     const { companyName, jobTitle } = req.query;
 
     let jobs = await Job.find()
-      .populate('company', )
+      .populate('company' )
       .populate('postedBy', 'email');
 
     if (companyName) {
@@ -69,6 +70,7 @@ export const getAllJobs = async (req, res) => {
 };
 
 export const getJobById = async (req, res) => {
+  
   try {
     const job = await Job.findById(req.params.id)
       .populate('company')
@@ -101,7 +103,7 @@ export const updateJob = async (req, res) => {
     }
 
     // Update allowed fields
-    const allowedUpdates = ['title', 'description', 'location', 'salaryRange', 'jobType', 'deadline', 'skillsRequired','image'];
+    const allowedUpdates = ['title', 'description', 'location', 'salaryRange', 'jobType', 'deadline', 'skillsRequired','image','vacancy'];
     allowedUpdates.forEach(field => {
       if (req.body[field] !== undefined) {
         job[field] = req.body[field];

@@ -14,7 +14,11 @@ export const PostJob = () => {
 
   const [image, setImage] = useState("");
 
-  const companies = data?.company ? [data.company] : [];
+  const companies = Array.isArray(data?.company)
+    ? data.company
+    : data?.company
+    ? [data.company]
+    : [];
 
   const {
     register,
@@ -72,7 +76,7 @@ export const PostJob = () => {
 
     try {
       const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dnpycgwch/logo/upload", // Replace with your actual cloud name
+        "https://api.cloudinary.com/v1_1/dnpycgwch/image/upload", // Replace with your actual cloud name
         formData
       );
       setImage(res.data.secure_url); // Set uploaded image URL
@@ -93,25 +97,27 @@ export const PostJob = () => {
         className="bg-white p-8 rounded-lg shadow space-y-6"
       >
         {/* Company Select */}
-        <div>
-          <label className="block font-medium mb-1">
-            Company <span className="text-red-500">*</span>
-          </label>
-          <select
-            {...register("company", { required: true })}
-            className="w-full border border-gray-300 p-2 rounded focus:ring"
-          >
-            <option value="">Select a company</option>
-            {companies.map((company) => (
-              <option key={company._id} value={company._id}>
-                {company.name}
-              </option>
-            ))}
-          </select>
-          {errors.company && (
-            <p className="text-red-500 text-sm mt-1">Company is required</p>
-          )}
-        </div>
+        {!isLoading && !isError && (
+          <div>
+            <label className="block font-medium mb-1">
+              Company <span className="text-red-500">*</span>
+            </label>
+            <select
+              {...register("company", { required: true })}
+              className="w-full border border-gray-300 p-2 rounded focus:ring"
+            >
+              <option value="">Select a company</option>
+              {companies.map((company) => (
+                <option key={company._id} value={company._id}>
+                  {company.name}
+                </option>
+              ))}
+            </select>
+            {errors.company && (
+              <p className="text-red-500 text-sm mt-1">Company is required</p>
+            )}
+          </div>
+        )}
 
         {/* Job Title */}
         <div>
@@ -139,7 +145,7 @@ export const PostJob = () => {
             onChange={handleFileUpload}
             className="w-full border border-gray-300 p-2 rounded focus:ring focus:ring-blue-200 outline-none"
           />
-        
+
           {image && (
             <img
               src={image}
@@ -175,7 +181,7 @@ export const PostJob = () => {
         </div>
 
         {/* Salary Range */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block font-medium">Min Salary</label>
             <input
@@ -189,6 +195,14 @@ export const PostJob = () => {
             <input
               type="number"
               {...register("max")}
+              className="w-full border border-gray-300 p-2 rounded focus:ring"
+            />
+          </div>
+          <div>
+            <label className="block font-medium">Vacancy</label>
+            <input
+              type="number"
+              {...register("vacancy")}
               className="w-full border border-gray-300 p-2 rounded focus:ring"
             />
           </div>
