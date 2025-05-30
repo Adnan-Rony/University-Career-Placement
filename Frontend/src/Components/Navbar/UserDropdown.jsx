@@ -15,6 +15,8 @@ export const UserDropdown = ({ user }) => {
   const handleDrowpdown = () => {
     setDown(!isdown);
   };
+
+  
   const handleLogout = () => {
     console.log("Logout clicked");
     logout(undefined, {

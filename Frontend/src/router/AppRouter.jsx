@@ -13,6 +13,7 @@ import CreateCompany from "../Pages/CreateCompany.jsx";
 
 
 import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/AdminDashboard/AdminDashboardMenu.jsx";
+import { ManageCompany } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageCompany/ManageCompany.jsx";
 
 
 export const AppRouter = createBrowserRouter([
@@ -60,6 +61,10 @@ export const AppRouter = createBrowserRouter([
       {
         path:"adminDashboard",
         element:<AdminDashboardMenu/>
+      },
+      {
+        path:"manageCompany",
+        element:<ManageCompany/>
       }
     ],
   },
