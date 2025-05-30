@@ -1,6 +1,8 @@
 import { CiClock1, CiSaveUp2, CiCalendar } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
+
+
 const HeaderJobCard = ({ job }) => {
   return (
     <div>
@@ -8,7 +10,7 @@ const HeaderJobCard = ({ job }) => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex items-start gap-4">
             <img
-              src="https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Fcompany-logo%2F1-5.png&w=256&q=75"
+              src={job?.image}
               alt="Invision Logo"
               className="w-16 h-16 rounded-md object-cover flex-shrink-0"
             />
