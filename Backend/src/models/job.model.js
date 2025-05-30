@@ -12,6 +12,7 @@ const jobSchema = new mongoose.Schema({
     state: String,
     country: String,
   },
+  image:{type:String},
   salaryRange: {
     min: Number,
     max: Number,

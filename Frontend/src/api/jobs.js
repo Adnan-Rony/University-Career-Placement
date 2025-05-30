@@ -6,6 +6,10 @@ export const fetchJobs = async () => {
   const res = await axiosInstance.get('/job');
   return res.data;
 };
+export const fetchSingleJobs = async (id) => {
+  const res = await axiosInstance.get(`/job/${id}`);
+  return res.data;
+};
 
 
 export const createJob = async (jobData) => {

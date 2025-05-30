@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter,  } from "react-router";
+import { createBrowserRouter } from "react-router";
 import { MainLayouts } from "../Layouts/MainLayouts";
 import { Home } from "../Pages/Home";
 import { SignIn } from "../Features/Authentication/SignIn";
@@ -7,6 +7,13 @@ import { SignUp } from "../Features/Authentication/SignUp";
 import { DashBoardLayout } from "../Layouts/DashBoardLayout";
 import { PostJob } from "../Pages/Empoloyer/PostJob";
 import { BlogDetails } from "../Pages/BlogDetails";
+import JobDetails from "../Pages/JobDetails.jsx";
+
+import CreateCompany from "../Pages/CreateCompany.jsx";
+
+
+import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/AdminDashboard/AdminDashboardMenu.jsx";
+
 
 export const AppRouter = createBrowserRouter([
   {
@@ -16,35 +23,44 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-
       },
       {
         path: "/SignUp",
         element: <SignUp />,
-
       },
       {
         path: "/SignIn",
         element: <SignIn />,
-
       },
       {
         path: "/blog/blogdetails/:id",
         element: <BlogDetails/>,
 
-      }
+      },
+      {
+        path: "/job/details/:id",
+        element: <JobDetails/>,
+
+      },
+      {
+        path: "/company",
+        element: <CreateCompany/>,
+
+      },
+    
     ]
       
   },
   {
-    path: "dashboard",
+    path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
-      // { path: "/employer/dashboard", element: <EmployerDashboard /> },
-      // { path: "/employer/jobs", element: <EmployerJobList /> },
-      { path: "employer/post-job", 
-        element: <PostJob /> },
+      
+      { path: "employer/post-job", element: <PostJob /> },
+      {
+        path:"adminDashboard",
+        element:<AdminDashboardMenu/>
+      }
     ],
   },
-
-])
+]);

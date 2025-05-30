@@ -27,7 +27,7 @@ export const Testimonails = () => {
     },
   });
 
-  console.log(testimonails);
+ 
 
   if (isPending) {
     return <h1>loading</h1>;
