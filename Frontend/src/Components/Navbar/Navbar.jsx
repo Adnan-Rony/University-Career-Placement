@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+
 import { Link, NavLink } from 'react-router'
 import { Authcontext } from '../../Context/Authprovider';
-import { useCurrentUser, useLogout } from '../../hooks/useAuth';
+import { useCurrentUser,  } from '../../hooks/useAuth';
 import { UserDropdown } from './UserDropdown';
 
 export const Navbar = () => {
