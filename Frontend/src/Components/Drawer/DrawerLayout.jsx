@@ -5,8 +5,15 @@ import { FaBriefcase, FaHome } from "react-icons/fa";
 import { AdminSidebar } from "./Sidebars/AdminSidebar";
 import { EmployerSidebar } from "./Sidebars/EmployerSidebar";
 import { JobSeekerSidebar } from "./Sidebars/JobSeekerSidebar";
+import { useCurrentUser } from "../../hooks/useAuth";
 export const DrawerLayout = () => {
-  const role = "seeker";
+ 
+
+   const {data}=useCurrentUser()
+    
+    const user=data?.user
+     const role = user?.role;
+    console.log(role);
 
   const RenderSidebars = () => {
     switch (role) {
@@ -14,7 +21,7 @@ export const DrawerLayout = () => {
         return <AdminSidebar />;
       case "employer":
         return <EmployerSidebar />;
-      case "seeker":
+      case "jobseeker":
       default:
         return <JobSeekerSidebar />;
     }
@@ -31,7 +38,7 @@ export const DrawerLayout = () => {
           <div>
             <DashboardNavbar />
           </div>
-          <div className="border-1 border-gray-300 rounded-2xl ">
+          <div className=" ">
             <Outlet />
           </div>
         </div>
@@ -44,7 +51,7 @@ export const DrawerLayout = () => {
 
           <ul
             className="menu bg-base-300 
-    text-base-content min-h-full w-60 p-4 space-y-3 text-base font-medium"
+    text-base-content min-h-full w-60 p-4 space-y-3 text-base "
           >
             {/* Sidebar content here */}
             <li>

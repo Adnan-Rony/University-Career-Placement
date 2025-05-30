@@ -7,10 +7,9 @@ import { Link } from "react-router";
 import { useLogout } from "../../hooks/useAuth";
 
 export const UserDropdown = ({user}) => {
-    const { mutate: logout, isPending } = useLogout();
+    const { mutate:logout, isPending } = useLogout();
     const [isdown,setDown]=useState(false)
 
-    console.log(user);
 const handleDrowpdown=()=>{
 setDown(!isdown)
 }

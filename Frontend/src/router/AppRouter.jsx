@@ -8,6 +8,7 @@ import { DashBoardLayout } from "../Layouts/DashBoardLayout";
 import { PostJob } from "../Pages/Empoloyer/PostJob";
 import { BlogDetails } from "../Pages/BlogDetails";
 import JobDetails from "../Pages/JobDetails.jsx";
+import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/AdminDashboard/AdminDashboardMenu.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -43,9 +44,12 @@ export const AppRouter = createBrowserRouter([
     path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
-      // { path: "/employer/dashboard", element: <EmployerDashboard /> },
-      // { path: "/employer/jobs", element: <EmployerJobList /> },
+      
       { path: "employer/post-job", element: <PostJob /> },
+      {
+        path:"adminDashboard",
+        element:<AdminDashboardMenu/>
+      }
     ],
   },
 ]);
