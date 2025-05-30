@@ -1,21 +1,44 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
 import { DashboardNavbar } from "../Dashboard/DashboardNavbar";
-import { FiAlignLeft } from "react-icons/fi";
 import { FaBriefcase, FaHome } from "react-icons/fa";
-import { FaUserPen } from "react-icons/fa6";
-import { MdDashboard } from "react-icons/md";
+import { AdminSidebar } from "./Sidebars/AdminSidebar";
+import { EmployerSidebar } from "./Sidebars/EmployerSidebar";
+import { JobSeekerSidebar } from "./Sidebars/JobSeekerSidebar";
+import { useCurrentUser } from "../../hooks/useAuth";
 export const DrawerLayout = () => {
+ 
+
+   const {data}=useCurrentUser()
+    
+    const user=data?.user
+     const role = user?.role;
+    console.log(role);
+
+  const RenderSidebars = () => {
+    switch (role) {
+      case "admin":
+        return <AdminSidebar />;
+      case "employer":
+        return <EmployerSidebar />;
+      case "jobseeker":
+      default:
+        return <JobSeekerSidebar />;
+    }
+  };
+
   return (
     <div>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col  container space-y-4
-         mx-auto ">
-        <div>
+        <div
+          className="drawer-content flex flex-col  container space-y-4
+         mx-auto "
+        >
+          <div>
             <DashboardNavbar />
-        </div>
-          <div className="border-1 border-gray-300 rounded-2xl ">
+          </div>
+          <div className=" ">
             <Outlet />
           </div>
         </div>
@@ -28,7 +51,7 @@ export const DrawerLayout = () => {
 
           <ul
             className="menu bg-base-300 
-    text-base-content min-h-full w-60 p-4 space-y-3 text-base font-medium"
+    text-base-content min-h-full w-60 p-4 space-y-3 text-base "
           >
             {/* Sidebar content here */}
             <li>
@@ -41,23 +64,7 @@ export const DrawerLayout = () => {
               </div>
             </li>
 
-            <li>
-              <Link>
-                <MdDashboard/> User Dashboard
-              </Link>
-            </li>
-
-            <li>
-              <Link to={"employer/post-job"}>
-                <FaBriefcase /> Post a Job
-              </Link>
-            </li>
-
-            <li>
-              <Link>
-                <FaUserPen /> Profile
-              </Link>
-            </li>
+            {RenderSidebars()}
 
             <hr />
 
