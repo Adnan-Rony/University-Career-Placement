@@ -149,8 +149,8 @@ export const UserDropdown = ({ user }) => {
         className="dropdown-content menu bg-white rounded-xl z-50 w-60 p-2 shadow-lg border border-gray-200 text-sm text-gray-700"
       >
         <li className="px-2 py-1">
-          <h2 className="capitalize">{user.name}</h2>
-          <h2 className="text-xs text-gray-400">{user.email}</h2>
+          <h2 className="capitalize">{user?.name} <sub className="text-r-accent">({user?.role})</sub></h2>
+          <h2 className="text-xs text-gray-400">{user?.email}</h2>
         </li>
         <hr className="my-1" />
 
