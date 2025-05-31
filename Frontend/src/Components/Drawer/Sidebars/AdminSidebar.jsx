@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaBriefcase, FaChartBar, FaCogs, FaSignOutAlt, FaUsers } from 'react-icons/fa'
+import { IoBusiness } from 'react-icons/io5'
 import { MdDashboard } from 'react-icons/md'
 import { Link } from 'react-router'
 
@@ -9,6 +10,11 @@ export const AdminSidebar = () => {
       <li>
         <Link to="adminDashboard" className="flex items-center gap-2">
           <MdDashboard />Admin Dashboard
+        </Link>
+      </li>
+      <li>
+        <Link to="manageCompany" className="flex items-center gap-2">
+        <IoBusiness /> Manage Company
         </Link>
       </li>
       <li>
