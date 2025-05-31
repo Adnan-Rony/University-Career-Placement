@@ -3,7 +3,7 @@ import React from 'react';
 const JobDescription = () => {
     return (
         <div>
-             <div className="flex-1 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition text-gray-700">
+             <div className="flex-1  p-6 rounded-lg  text-gray-700">
                         <h2 className="text-lg font-semibold mb-4">Job Description</h2>
                         <p className="mb-6 text-sm md:text-base leading-relaxed md:leading-loose">
                           As a Product Designer, you will work within a Product Delivery

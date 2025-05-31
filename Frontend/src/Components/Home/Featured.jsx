@@ -9,20 +9,7 @@ export const Featured = () => {
   const { data, isPending, error } = UseJobs();
   const jobs = data?.jobs || [];
 
-  if (isPending)
-    return (
-      <div className="container mx-auto mt-12">
-        <SectionTitle
-          title={"Featured Job"}
-          subtitle={" Choose jobs from the top employers and apply for the same"}
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 3 }).map((_, idx) => (
-            <SkeletonCard key={idx} />
-          ))}
-        </div>
-      </div>
-    );
+  if (isPending) return <SkeletonCard></SkeletonCard>;
 
   if (error) return <h2>Error: {error.message}</h2>;
 

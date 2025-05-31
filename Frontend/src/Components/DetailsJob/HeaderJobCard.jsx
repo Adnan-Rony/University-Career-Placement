@@ -27,7 +27,7 @@ const HeaderJobCard = ({ job }) => {
             />
             <div>
               <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
-                {job.title}
+                {job?.title}
               </h1>
               <div className="flex items-center gap-4 text-gray-600 text-sm mt-1 flex-wrap">
                 <span className="flex items-center gap-1">
@@ -69,7 +69,7 @@ const HeaderJobCard = ({ job }) => {
               isOpen={showModal}
               onClose={() => setShowModal(false)}
               onSubmit={handleApply} 
-              jobId={job._id}
+              jobId={job?._id}
             />
 
             <button
