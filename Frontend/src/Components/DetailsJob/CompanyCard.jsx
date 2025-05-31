@@ -7,7 +7,7 @@ const CompanyCard = ({ job }) => {
   return (
     <>
       {/* Company Info Card */}
-      <div className="p-6 rounded-lg shadow-md hover:shadow-lg text-gray-700 bg-gradient-to-r from-indigo-50 to-blue-50">
+      <div className="p-6 rounded-lg shadow-md hover:shadow-lg text-gray-700 bg-r-background">
         <div className="flex items-center justify-start gap-6">
           <img
             src={job?.company?.logo }
@@ -19,7 +19,7 @@ const CompanyCard = ({ job }) => {
             <p className="font-semibold">{job?.company?.name}</p>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="text-blue-500  "
+              className="text-r-accent "
             >
               View Company Profile
             </button>
@@ -51,7 +51,7 @@ const CompanyCard = ({ job }) => {
           href={job?.company?.website}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn w-full bg-blue-500 text-white text-center block px-4 py-2 rounded-md hover:bg-blue-600 transition"
+          className="btn w-full  text-white text-center block px-4 py-2 rounded-md  transition bg-r-primary hover:bg-r-accent"
         >
           {job?.company?.websiteUrl}
         </a>

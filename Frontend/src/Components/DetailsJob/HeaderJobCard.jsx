@@ -1,13 +1,16 @@
-import { CiClock1, CiSaveUp2, CiCalendar } from "react-icons/ci";
+import { CiClock1, CiSaveUp2, CiCalendar, CiCalendarDate, CiHeart } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
 
 import { useState } from "react";
 import ApplyJob from "./ApplyJob.jsx";
+import { IoBusiness } from "react-icons/io5";
+import { FaDollarSign, FaHeart } from "react-icons/fa6";
+import moment from "moment/moment.js";
 
 const HeaderJobCard = ({ job }) => {
   const [showModal, setShowModal] = useState(false);
-
+console.log(job);
 
   const handleApply = (applicationData) => {
     
@@ -16,51 +19,78 @@ const HeaderJobCard = ({ job }) => {
     setShowModal(false);
   };
   return (
-    <div>
-      <div className="px-4 py-10 bg-gradient-to-r from-indigo-50 to-blue-50">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div className="flex items-start gap-4">
-            <img
+    <div className="
+    ">
+      <div className="px-6 py-10  border border-gray-200
+        rounded-lg w-8/12 mx-auto mt-12 
+       bg-gradient-to-t from-purple-50 via-purple-100 to-purple-200
+        
+        ">
+        <div className=" mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="  w-full">
+            {/* <img
               src={job?.company?.logo}
               alt="Invision Logo"
               className="w-16 h-16 rounded-md object-cover flex-shrink-0"
-            />
-            <div>
-              <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
-                {job.title}
-              </h1>
-              <div className="flex items-center gap-4 text-gray-600 text-sm mt-1 flex-wrap">
-                <span className="flex items-center gap-1">
-                  <CiClock1 className="text-xl" />
+            /> */}
+            <div className="  space-y-2">
+               <div className=" flex justify-between  items-center">
+
+             <div className="flex gap-2 mt-2 flex-wrap">
+                 <span className="bg-white text-r-primary px-3 py-1 rounded-full text-xs font-semibold uppercase">
+                  {job?.jobType}
+                </span>
+                    <span className="flex items-center gap-1">
+                  <CiClock1 className="text-lg" />
+                  Posted: {""}
                   {new Date(job?.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
                   })}
                 </span>
+             </div>
+             <div className="">
+               <button className="btn btn-neutral btn-outline hover:bg-r-background hover:text-black">
+               <CiHeart className="text-2xl" />
+               </button>
+
+             </div>
+
+
+              </div>
+              <h1 className="text-xl md:text-3xl font-bold text-gray-900">
+                {job.title}
+              </h1>
+           {/* Company Name */}
+              <h1 className="flex items-center gap-1 text-lg">
+             <span><IoBusiness /></span>   
+             <span className="font-semibold opacity-80">{job?.company?.name}</span>
+              </h1>
+
+              <div className="flex items-center
+              
+              gap-14 text-gray-600 text-sm mt-3 flex-wrap">
+            
                 <span className="flex items-center gap-1">
                   <MdOutlineLocationOn className="text-xl" />
                   {job?.location?.city},{job?.location?.state},
                   {job?.location?.country}
                 </span>
                 <span className="flex items-center gap-1">
-                  <GiMoneyStack className="text-xl" />
-                  {job?.salaryRange?.min}-{job?.salaryRange?.max}$
+                  <FaDollarSign className="text-xl" />
+                  {job?.salaryRange?.min}-{job?.salaryRange?.max}
+                </span>
+                <span className="flex items-center gap-1">
+                  <CiCalendarDate className="text-xl" />
+                   {moment(job?.deadline).format("MMMM D, YYYY")}
                 </span>
               </div>
-              <div className="flex gap-2 mt-2 flex-wrap">
-                <span className="bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
-                  {job?.jobType}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3">
+              {/*Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3 w-full">
             <button
               onClick={() => setShowModal(true)}
-              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+              className=" mt-3 text-white rounded-md btn bg-r-primary border-none  hover:bg-r-accent w-full"
             >
               Apply For Job
             </button>
@@ -72,13 +102,35 @@ const HeaderJobCard = ({ job }) => {
               jobId={job._id}
             />
 
-            <button
-              aria-label="Bookmark job"
-              className="bg-blue-100 hover:bg-blue-200 transition rounded-md p-2"
+            {/* <button
+              aria-label="Bookmark job "
+              className="bg-r-accent  hover:bg-blue-200 transition rounded-md p-2"
             >
-              <CiSaveUp2 className="text-xl" />
-            </button>
+              <CiSaveUp2 className="text-xl text-white" />
+            </button> */}
           </div>
+             
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          {/* <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => setShowModal(true)}
+              className=" text-white rounded-md btn bg-r-primary"
+            >
+              Apply For Job
+            </button>
+
+            <ApplyJob
+              isOpen={showModal}
+              onClose={() => setShowModal(false)}
+              onSubmit={handleApply} 
+              jobId={job._id}
+            />
+
+        
+          </div> */}
         </div>
       </div>
     </div>
