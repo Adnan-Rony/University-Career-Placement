@@ -10,7 +10,7 @@ export const Navbar = () => {
   const {data}=useCurrentUser()
   
   const user=data?.user
-  // console.log(user);
+  console.log(user);
   const navElements = (
     <>
       <li>
@@ -53,17 +53,7 @@ export const Navbar = () => {
           PostJob
         </NavLink>
       </li>
-      <li>
-        <NavLink
-        to={'/dashboard'}
-         
-          className={({ isActive }) =>
-            isActive ? 'text-primary' : 'text-gray-500'
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
+    
     </>
   );
   

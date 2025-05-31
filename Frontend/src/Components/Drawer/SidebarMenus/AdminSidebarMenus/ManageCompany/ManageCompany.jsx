@@ -42,7 +42,7 @@ export const ManageCompany = () => {
 
   return (
     <div>
-        <h1 className='font-semibold text-r-primary'>Total Companies : {companies.length}</h1>
+        <h1 className='font-semibold text-r-primary'>Total Companies : {companies?.length}</h1>
 
         <div className="overflow-x-auto">
   <table className="table">
@@ -66,7 +66,7 @@ export const ManageCompany = () => {
       
 
       {
-       companies?.length>0 ? 
+       companies?.length >0 ? 
        <>
 {
 
