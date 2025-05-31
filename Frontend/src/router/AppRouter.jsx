@@ -14,6 +14,9 @@ import CreateCompany from "../Pages/CreateCompany.jsx";
 
 import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/AdminDashboard/AdminDashboardMenu.jsx";
 import { ManageCompany } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageCompany/ManageCompany.jsx";
+import { EmployerDashboardMenu } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerDashboard/EmployerDashboardMenu.jsx";
+import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerDashboard/JobSeekerDashboardMenu.jsx";
+import { PostedJobs } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/PostedJobs/PostedJobs.jsx";
 
 
 export const AppRouter = createBrowserRouter([
@@ -56,8 +59,24 @@ export const AppRouter = createBrowserRouter([
     path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
-      
-      { path: "employer/post-job", element: <PostJob /> },
+       { path: "jobseekerDashboard",
+         element:<JobSeekerDashboardMenu/>
+         },
+
+
+
+      // For Employer
+      { path: "employerDashboard",
+         element: <EmployerDashboardMenu/>
+         },
+      { path: "employer/post-job",
+         element: <PostJob />
+         },
+      { path: "employer/postedJobs",
+         element: <PostedJobs/>
+         },
+
+
       {
         path:"adminDashboard",
         element:<AdminDashboardMenu/>
