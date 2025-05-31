@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CreateMyCompany, fetchMyCompany } from "../api/company.js";
+import { CreateMyCompany, fetchCompany, fetchMyCompany } from "../api/company.js";
 
 export const UseMyCompany = () => {
   return useQuery({
@@ -19,3 +19,13 @@ export const UseCreateCompany = () => {
     },
   });
 };
+
+// Fetch All Companies Data
+export const useFetchCompanies=()=>{
+
+  return useQuery({
+    queryKey:['fetchcompanies'],
+    queryFn:fetchCompany
+  })
+
+}

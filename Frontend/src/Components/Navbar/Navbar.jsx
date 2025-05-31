@@ -10,39 +10,45 @@ export const Navbar = () => {
   const {data}=useCurrentUser()
   
   const user=data?.user
-  // console.log(user);
-  const navElements = (
-    <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? 'text-primary' : 'text-gray-500'
-          }
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/SignIn"
-          className={({ isActive }) =>
-            isActive ? 'text-primary' : 'text-gray-500'
-          }
-        >
-          Login
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/SignUp"
-          className={({ isActive }) =>
-            isActive ? 'text-primary' : 'text-gray-500'
-          }
-        >
-          Register
-        </NavLink>
-      </li>
+  console.log(user);
+ const navElements = (
+  <>
+    <li>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? 'text-primary' : 'text-gray-500'
+        }
+      >
+        Home
+      </NavLink>
+    </li>
+ 
+
+    {!user ? (
+      <>
+        <li>
+          <NavLink
+            to="/SignIn"
+            className={({ isActive }) =>
+              isActive ? 'text-primary' : 'text-gray-500'
+            }
+          >
+            Login
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/SignUp"
+            className={({ isActive }) =>
+              isActive ? 'text-primary' : 'text-gray-500'
+            }
+          >
+            Register
+          </NavLink>
+        </li>
+      </>
+    ) : (
       <li>
         <NavLink
           to="/dashboard/employer/post-job"
@@ -53,19 +59,23 @@ export const Navbar = () => {
           PostJob
         </NavLink>
       </li>
-      <li>
-        <NavLink
-        to={'/dashboard'}
-         
-          className={({ isActive }) =>
-            isActive ? 'text-primary' : 'text-gray-500'
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
-    </>
-  );
+    )
+    
+    }
+
+       <li>
+      <NavLink
+        to=""
+        className={({ isActive }) =>
+          isActive ? 'text-primary' : 'text-gray-500'
+        }
+      >
+       About Us
+      </NavLink>
+    </li>
+  </>
+);
+
   
   return (
     <div>

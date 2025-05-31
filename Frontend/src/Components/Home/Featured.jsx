@@ -44,7 +44,7 @@ export const Featured = () => {
                   <img
                     src={job?.company?.logo}
                     alt="Company Logo"
-                    className="w-12 h-12 object-cover rounded-xl "
+                    className="w-12 h-12 object-cover rounded-xl border border-gray-300"
                   />
                   <div>
                     <p className="font-semibold text-gray-800">

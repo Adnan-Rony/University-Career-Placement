@@ -22,15 +22,15 @@ console.log(job)
   if (isLoading) return <JobDetailsSkeleton></JobDetailsSkeleton>;
 
   return (
-    <div className=" bg-gray-50">
+    <div className="">
       {/* Header Section */}
       <HeaderJobCard job={job}></HeaderJobCard>
 
       {/* Content Section */}
-      <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8 ">
+      <div className="w-8/12  mx-auto  my-12  grid grid-cols-1 lg:grid-cols-3 gap-8 ">
         {/* Job Description */}
 
-        <div className="lg:col-span-2 px-4 py-8 ">
+        <div className="lg:col-span-2   ">
           <JobDescription></JobDescription>
             <hr className="my-10 border-gray-300" />
             {/* releted jobs card */}
