@@ -41,6 +41,7 @@ export const applyToJob = async (req, res) => {
   }
 };
 
+
 //For Employer
 export const getApplicationsForJob = async (req, res) => {
   try {
@@ -48,7 +49,8 @@ export const getApplicationsForJob = async (req, res) => {
 
     const applications = await Application.find({ job: jobId })
       .populate("applicant", "name email")
-      .populate("job" );
+      .populate("job" )
+      .populate("company" );
 
     res.status(200).json({ success: true, applications });
     
@@ -64,7 +66,8 @@ export const getMyApplications = async (req, res) => {
   
   try {
     const applications = await Application.find({ applicant: req.user.id })
-      .populate("job",).populate("applicant", "name email")
+      .populate("job",)
+      .populate("applicant", "name email")
       
     
 

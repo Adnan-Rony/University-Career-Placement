@@ -3,17 +3,24 @@ import { CiBookmark, CiLocationOn } from "react-icons/ci";
 import { SectionTitle } from "../Shared/SectionTitle";
 import { UseJobs } from "../../hooks/useJobs.js";
 import { Link } from "react-router";
-import Loading from "../Loading.jsx";
+import SkeletonCard from "../loading/SkeletonCard.jsx";
 
 export const Featured = () => {
   const { data, isPending, error } = UseJobs();
   const jobs = data?.jobs || [];
 
-
   if (isPending)
     return (
-      <div className="flex justify-center items-center h-96 ">
-        <Loading></Loading>
+      <div className="container mx-auto mt-12">
+        <SectionTitle
+          title={"Featured Job"}
+          subtitle={" Choose jobs from the top employers and apply for the same"}
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <SkeletonCard key={idx} />
+          ))}
+        </div>
       </div>
     );
 
@@ -24,7 +31,7 @@ export const Featured = () => {
       <SectionTitle
         title={"Featured Job"}
         subtitle={" Choose jobs from the top employers and apply for the same"}
-      ></SectionTitle>
+      />
 
       <div
         className="grid grid-cols-1 md:grid-cols-2 md:gap-8 lg:grid-cols-3 
@@ -44,37 +51,34 @@ export const Featured = () => {
                 <CiBookmark className="text-xl text-gray-500 cursor-pointer hover:text-gray-700" />
               </div>
 
-              {/* Job Type & Salary */}
+              {/* Company Info */}
+              <Link to={`/job/details/${job._id}`}>
+                <div className="flex items-center gap-4 mb-5">
+                  <img
+                    src={job?.company?.logo}
+                    alt="Company Logo"
+                    className="w-12 h-12 object-cover rounded-xl "
+                  />
+                  <div>
+                    <p className="font-semibold text-gray-800">
+                      {job?.company?.name || "Unknown Company"}
+                    </p>
+                    <div className="flex items-center gap-1 text-sm text-gray-600">
+                      <CiLocationOn className="text-lg" />
+                      <span>
+                        {job?.location?.city}, {job?.location?.state},{" "}
+                        {job?.location?.country}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Job Type */}
               <div className="flex items-center gap-3 mb-3">
                 <span className="bg-purple-100 text-purple-700 text-xs font-medium px-3 py-1 rounded-full">
                   {job?.jobType}
                 </span>
-                {job?.salary && (
-                  <span className="text-sm text-gray-600 font-medium">
-                    💰 Salary: {job?.salary}
-                  </span>
-                )}
-              </div>
-
-              {/* Company Info */}
-              <div className="flex items-center gap-4 mb-5">
-                <img
-                  src={job?.company?.logo}
-                  alt="Company Logo"
-                  className="w-12 h-12 object-cover rounded-xl "
-                />
-                <div>
-                  <p className="font-semibold text-gray-800">
-                    {job?.company?.name || "Unknown Company"}
-                  </p>
-                  <div className="flex items-center gap-1 text-sm text-gray-600">
-                    <CiLocationOn className="text-lg" />
-                    <span>
-                      {job?.location?.city}, {job?.location?.state},{" "}
-                      {job?.location?.country}
-                    </span>
-                  </div>
-                </div>
               </div>
 
               {/* Action Buttons */}

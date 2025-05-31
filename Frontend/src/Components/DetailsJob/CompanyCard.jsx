@@ -10,7 +10,7 @@ const CompanyCard = ({ job }) => {
       <div className="p-6 rounded-lg shadow-md hover:shadow-lg text-gray-700 bg-gradient-to-r from-indigo-50 to-blue-50">
         <div className="flex items-center justify-start gap-6">
           <img
-            src={job?.company?.logo || "https://via.placeholder.com/50"}
+            src={job?.company?.logo }
             alt="Company Logo"
             className="w-12 h-12 rounded-md object-cover"
           />

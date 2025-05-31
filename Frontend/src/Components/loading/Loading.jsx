@@ -1,10 +1,9 @@
-import React from 'react';
-import img from '../../public/sitelogo (2).png'
+import React from "react";
+import img from "../../public/sitelogo (2).png";
+
 const Loading = () => {
-    return (
-        <div>
-             <div className="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
-   
+  return (
+    <div className="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
       <img
         src={img}
         alt="Company Logo"
@@ -16,8 +15,7 @@ const Loading = () => {
 
       <p className="text-gray-600 text-sm mt-4">Loading, please wait...</p>
     </div>
-        </div>
-    );
+  );
 };
 
 export default Loading;

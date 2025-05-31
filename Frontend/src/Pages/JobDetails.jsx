@@ -10,7 +10,7 @@ import { UseFetchSingleJobById } from "../hooks/useJobs.js";
 import HeaderJobCard from "../Components/DetailsJob/HeaderJobCard.jsx";
 import JobDescription from "../Components/DetailsJob/JobDescription.jsx";
 import JobOverView from "../Components/DetailsJob/JobOverView.jsx";
-import Loading from "../Components/Loading.jsx";
+import JobDetailsSkeleton from "../Components/loading/JobDetailsSkeleton.jsx";
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -18,7 +18,7 @@ const JobDetails = () => {
   const { data: job, isLoading, isError } = UseFetchSingleJobById(id);
   console.log(job);
   if (isLoading)
-    return <Loading></Loading>
+    return <JobDetailsSkeleton></JobDetailsSkeleton>
 
   return (
     <div className=" bg-gray-50">
