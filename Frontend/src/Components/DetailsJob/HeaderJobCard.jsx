@@ -28,11 +28,7 @@ console.log(job);
         ">
         <div className=" mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="  w-full">
-            {/* <img
-              src={job?.company?.logo}
-              alt="Invision Logo"
-              className="w-16 h-16 rounded-md object-cover flex-shrink-0"
-            /> */}
+      
             <div className="  space-y-2">
                <div className=" flex justify-between  items-center">
 
@@ -43,6 +39,7 @@ console.log(job);
                     <span className="flex items-center gap-1">
                   <CiClock1 className="text-lg" />
                   Posted: {""}
+
                   {new Date(job?.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
@@ -126,7 +123,7 @@ console.log(job);
               isOpen={showModal}
               onClose={() => setShowModal(false)}
               onSubmit={handleApply} 
-              jobId={job._id}
+              jobId={job?._id}
             />
 
         

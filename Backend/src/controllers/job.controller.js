@@ -87,8 +87,6 @@ export const getJobById = async (req, res) => {
   }
 };
 
-
-
 export const updateJob = async (req, res) => {
   try {
     const job = await Job.findById(req.params.id);
@@ -190,6 +188,40 @@ export const searchJobs = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to search jobs" });
   }
 };
+
+
+export const getRecommendedJobs = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+
+    const currentJob = await Job.findById(jobId).populate('company');
+    if (!currentJob) {
+      return res.status(404).json({ success: false, message: 'Job not found' });
+    }
+
+    const titleKeywords = currentJob.title.split(' ').slice(0, 2).join(' '); // Use first two words
+
+    const recommendedJobs = await Job.find({
+      _id: { $ne: jobId },
+      $or: [
+        { company: currentJob.company._id },
+        { title: { $regex: titleKeywords, $options: 'i' } },
+        { industry: currentJob.industry || { $exists: false } }, // Fallback if industry is missing
+      ],
+    })
+      .limit(5)
+      .sort({ createdAt: -1 })
+      .populate('company')
+      .populate('postedBy', 'email');
+
+    res.status(200).json({ success: true, data: recommendedJobs });
+  } catch (error) {
+    console.error('Get Recommended Jobs Error:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch recommended jobs', error: error.message });
+  }
+};
+
+
 
 
 
