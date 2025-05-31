@@ -10,7 +10,8 @@ import { RxTimer } from 'react-icons/rx';
 const JobOverView = ({job}) => {
     return (
         <div>
-              <div className=" p-6 rounded-lg shadow-md hover:shadow-lg transition bg-r-background
+              <div className=" px-6 py-8 rounded-lg shadow-md hover:shadow-lg transition border
+               border-gray-200
            
               text-gray-700 ">
               <h3 className="font-semibold text-lg mb-4">Job Overview</h3>

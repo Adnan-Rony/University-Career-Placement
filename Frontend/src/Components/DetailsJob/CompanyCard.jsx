@@ -7,7 +7,7 @@ const CompanyCard = ({ job }) => {
   return (
     <>
       {/* Company Info Card */}
-      <div className="p-6 rounded-lg shadow-md hover:shadow-lg text-gray-700 bg-r-background">
+      <div className="p-6 rounded-lg shadow-md hover:shadow-lg text-gray-700 border border-gray-200">
         <div className="flex items-center justify-start gap-6">
           <img
             src={job?.company?.logo }
