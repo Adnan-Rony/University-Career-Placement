@@ -146,11 +146,10 @@ export const deleteJob = async (req, res) => {
 export const searchJobs = async (req, res) => {
   try {
     const { title, companyName, location, jobType, skills } = req.query;
-
     let query = {};
 
     if (title) {
-      query.title = { $regex: title, $options: "i" }; // Case-insensitive search
+      query.title = { $regex: title, $options: "i" };
     }
 
     if (jobType) {
@@ -158,26 +157,26 @@ export const searchJobs = async (req, res) => {
     }
 
     if (location) {
+      const locationRegex = { $regex: location, $options: "i" };
       query.$or = [
-        { "location.city": { $regex: location, $options: "i" } },
-        { "location.state": { $regex: location, $options: "i" } },
-        { "location.country": { $regex: location, $options: "i" } },
+        ...(query.$or || []),
+        { "location.city": locationRegex },
+        { "location.state": locationRegex },
+        { "location.country": locationRegex },
       ];
     }
 
     if (skills) {
-      const skillsArray = skills.split(",").map(skill => skill.trim());
-      query.skillsRequired = { $all: skillsArray };  // Change to $in if you want any match instead of all
+      const skillsArray = skills.split(",").map((s) => s.trim());
+      query.skillsRequired = { $all: skillsArray };
     }
 
-    // First find jobs matching filters (except companyName)
     let jobs = await Job.find(query)
-      .populate('company', 'name logo')
-      .populate('postedBy', 'email');
+      .populate("company", "name logo")
+      .populate("postedBy", "email");
 
     if (companyName) {
-      // Filter jobs by company name (case-insensitive)
-      jobs = jobs.filter(job =>
+      jobs = jobs.filter((job) =>
         job.company?.name.toLowerCase().includes(companyName.toLowerCase())
       );
     }
@@ -188,6 +187,8 @@ export const searchJobs = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to search jobs" });
   }
 };
+
+
 
 
 export const getRecommendedJobs = async (req, res) => {

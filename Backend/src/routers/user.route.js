@@ -1,9 +1,6 @@
 import  express  from 'express';
 import { getCurrentUser, login, logout, register, updateUserProfile } from "../controllers/user.controllers.js";
 import { verifyToken } from './../middlewares/VerifyToken.js';
-import { getAllUsers } from '../controllers/AdminController.js';
-import { checkAdmin } from '../middlewares/checkRole.js';
-
 
 
 

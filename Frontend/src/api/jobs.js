@@ -46,3 +46,14 @@ export const deleteJob = async (id) => {
 };
 
 
+export const fetchSearchJobs = async (title, location) => {
+  const res = await axiosInstance.get("/job/search", {
+    params: {
+      title,
+      location,
+    },
+  });
+  return res.data.jobs; 
+}
+
+
