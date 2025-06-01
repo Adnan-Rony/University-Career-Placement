@@ -1,25 +1,43 @@
-import React, { useContext } from "react";
-import { Authcontext } from "../../Context/Authprovider";
-import { FaGoogle } from "react-icons/fa";
-import toast from "react-hot-toast";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import { USER_API_END_POINT } from "../../utils/Constant";
+import { useContext } from "react";
+import { Authcontext } from "../../Context/Authprovider";
+import axiosInstance from "../../api/axiosInstance.js";
 
 export const GoogleSignIN = () => {
   const navigate = useNavigate();
-  const { user, logout, googleSignIn } = useContext(Authcontext);
- 
+  const { googleSignIn } = useContext(Authcontext);
+  const [error, setError] = useState(null);
 
-  
+const handleGoogleSignIn = async () => {
+  try {
+    const result = await googleSignIn();
+    const user = result.user;
+
+    // Make sure axiosInstance has withCredentials:true
+    await axiosInstance.post('/user/register', {
+      name: user.displayName,
+      email: user.email,
+    });
+
+    navigate('/'); // after successful register/login
+
+  } catch (error) {
+    console.error("Google sign-in failed:", error);
+  }
+};
+
+
   return (
     <div>
       <button
-      
-        className="p-3 shadow-2xl rounded-lg hover:bg-gray-100 transition-all"
+        onClick={handleGoogleSignIn}
+        className="w-full py-2 px-4 bg-orange-500 text-white font-semibold rounded-md hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50"
       >
-        <FaGoogle className="text-red-500" size={20} />
+        Continue With Google
       </button>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
-}
+};
