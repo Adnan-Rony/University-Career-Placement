@@ -1,4 +1,5 @@
 import img from "../../assets/7d1edb20fcd9e15fc71a8e6cc80ede1f.png";
+import SearchBar from "./SearchBar.jsx";
 
 const HeroSection = () => {
     return (
@@ -12,21 +13,16 @@ const HeroSection = () => {
           <p className="text-gray-600 py-2 ">
             Thousands of jobs in all the leading sectors are waiting for you.
           </p>
-          <div className="bg-white   p-2 rounded-lg shadow-md flex flex-col lg:flex-row items-center gap-3">
-            <input
-              type="text"
-              placeholder="Job title, Keyword..."
-              className="w-full lg:w-1/2 p-3 border rounded-lg outline-none border-none "
-            /> 
-            <input
-              type="text"
-              placeholder="Location"
-              className="w-full lg:w-1/4 p-3 border rounded-lg outline-none border-none"
-            />
-            <button className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700">
-              Find Job
-            </button>
-          </div>
+
+
+
+          <SearchBar></SearchBar>
+
+
+
+
+
+
           <p className="text-gray-500">
             Suggestions: <span className="text-purple-600">UI/UX Designer</span>,
             Programming, <span className="text-purple-600">Digital Marketing</span>,

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { createJob, deleteJob, fetchJobs, fetchRelatedJobs,  fetchSingleJobs, updateJob } from "../api/jobs.js";
+import { createJob, deleteJob, fetchJobs, fetchRelatedJobs,  fetchSearchJobs,  fetchSingleJobs, updateJob } from "../api/jobs.js";
 
 
 
@@ -65,4 +65,15 @@ export const UseDeleteJob = () => {
   });
 };
 
+
+
+
+
+export const UseSearchJobs = (title, location) => {
+  return useQuery({
+    queryKey: ["searchJobs", title, location],
+    queryFn: () => fetchSearchJobs(title, location),
+    enabled: !!title?.trim(),
+  });
+};
 

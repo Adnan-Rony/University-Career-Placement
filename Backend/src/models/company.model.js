@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Job } from "./job.model.js";
 
 const companySchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
@@ -45,6 +46,7 @@ employees: {
   country: { type: String, trim: true },
   location: { type: String, trim: true },
   city: { type: String, trim: true },
+  trusted:{type:String,trim:true,enum:['verified','notverified'],default:'notverified'},
 
   contactPersonName: { type: String, required: true, trim: true },
   contactPersonDesignation: { type: String, required: true, trim: true },
@@ -66,7 +68,14 @@ employees: {
 {
   timestamps: true,
 });
-
+companySchema.pre('deleteOne', { document: true, query: false }, async function (next) {
+  try {
+    await Job.deleteMany({ company: this._id });
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 companySchema.index({ industry: 1 });
 
 export const Company = mongoose.model("Company", companySchema);

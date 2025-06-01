@@ -14,10 +14,10 @@ export const Featured = () => {
   if (error) return <h2>Error: {error.message}</h2>;
 
   return (
-    <div className="container mx-auto mt-12">
+    <div className="max-w-screen-xl mx-auto mt-12 p-2">
       <SectionTitle
         title={"Featured Job"}
-        subtitle={" Choose jobs from the top employers and apply for the same"}
+        // subtitle={" Choose jobs from the top employers and apply for the same"}
       />
 
       <div
