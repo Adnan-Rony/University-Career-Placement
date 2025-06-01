@@ -1,4 +1,5 @@
 import { Blog } from "../Components/Home/Blog";
+import FeatureCompany from "../Components/Home/FeatureCompany.jsx";
 import { Featured } from "../Components/Home/Featured";
 import HeroSection from "../Components/Home/HeroSection";
 import { Testimonails } from "../Components/Home/Testimonails";
@@ -20,6 +21,7 @@ export const Home = () => {
 
 
     <HeroSection/>
+    <FeatureCompany></FeatureCompany>
     <Featured/>
     <Blog/>
     <Testimonails/>

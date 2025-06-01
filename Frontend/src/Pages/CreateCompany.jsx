@@ -14,6 +14,7 @@ const CreateCompany = () => {
     formState: { errors },
   } = useForm();
   const [image, setImage] = useState("");
+  const [cover, setCover] = useState("");
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
@@ -35,16 +36,37 @@ const CreateCompany = () => {
       toast.error("Image upload failed");
     }
   };
+  const handleCoverUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "blogging");
+
+    try {
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dnpycgwch/image/upload",
+        formData
+      );
+      setCover(res.data.secure_url);
+      toast.success("Cover Photo uploaded!");
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast.error("Cover Photo upload failed");
+    }
+  };
 
   const onSubmit = (data) => {
-    if (!image) {
-      toast.error("Please upload a company logo");
+    if (!cover) {
+      toast.error("Please upload a company cover");
       return;
     }
 
     const companyData = {
       ...data,
       logo: image,
+      cover:cover
     };
 
     console.log("Submitting company data:", companyData); // ✅ Log this
@@ -251,6 +273,24 @@ const CreateCompany = () => {
               {image && (
                 <img
                   src={image}
+                  alt="Preview"
+                  className="mt-2 h-32 object-contain rounded"
+                />
+              )}
+            </div>
+            <div className="my-2">
+              <label className="block font-semibold mb-1">
+                Upload Company Cover 
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleCoverUpload}
+                className="w-full border p-2 rounded"
+              />
+              {cover && (
+                <img
+                  src={cover}
                   alt="Preview"
                   className="mt-2 h-32 object-contain rounded"
                 />
