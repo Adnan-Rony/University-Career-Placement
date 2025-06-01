@@ -93,6 +93,10 @@ export const SignIn = () => {
             </button>
           </form>
 
+          <div className="my-3">
+           {/* <GoogleSignIN></GoogleSignIN> */}
+          </div>
+
           {/* Register Link */}
           <p className="text-sm text-center mt-4">
             Don’t have an account?{" "}
