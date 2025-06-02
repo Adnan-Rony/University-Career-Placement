@@ -55,7 +55,7 @@ const CardCompany = () => {
                   <img
                     src={company.logo || img2}
                     alt={`${company.name} Logo`}
-                    className="w-8 h-8 object-contain"
+                    className="w-8 h-8 object-cover rounded-full"
                   />
                   <h2 className="text-lg font-semibold">{company.name}</h2>
                 </div>
@@ -63,7 +63,8 @@ const CardCompany = () => {
                 <div className="flex items-center text-gray-600 text-sm gap-1">
                   <div className="flex justify-between  items-center text-gray-600 text-sm gap-2">
                     <MapPin size={16} />
-                    <span>{company.location || "Unknown"}</span>
+                    <span>{company.city},{company.location}</span>
+                    
                   </div>
                 </div>
 

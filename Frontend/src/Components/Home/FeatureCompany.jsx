@@ -9,6 +9,7 @@ const FeatureCompany = () => {
       <div className=" ">
           <SectionTitle
                 title={"Featured Companies"}
+                nextpage={"Explore More"}
                 // subtitle={" Choose jobs from the top employers and apply for the same"}
               />
         <CardCompany></CardCompany>

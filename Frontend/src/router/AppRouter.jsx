@@ -14,6 +14,7 @@ import CreateCompany from "../Pages/CreateCompany.jsx";
 
 import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/AdminDashboard/AdminDashboardMenu.jsx";
 import { ManageCompany } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageCompany/ManageCompany.jsx";
+import JobsShowAll from "../Pages/JobsShowAll.jsx";
 
 
 export const AppRouter = createBrowserRouter([
@@ -46,6 +47,11 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/company",
         element: <CreateCompany/>,
+
+      },
+      {
+        path: "/alljobs",
+        element: <JobsShowAll/>,
 
       },
     
