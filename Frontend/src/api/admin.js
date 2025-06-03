@@ -46,11 +46,20 @@ export const fetchSingleCompanyByAdmin = async (id) => {
 };
 
 
-// Delete Company
+
+
+export const UpdateSingleCompanyByAdmin = async ({ id, badge }) => {
+  const res = await axiosInstance.put(`/admin/company/${id}`, {
+    badges: badge,
+  });
+  return res.data;
+};
+
 export const deleteSingleCompanyByAdmin = async (id) => {
   const res = await axiosInstance.delete(`/admin/company/${id}`);
   return res.data;
 };
+
 
 
 //application

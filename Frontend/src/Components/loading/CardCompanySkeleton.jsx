@@ -7,31 +7,32 @@ const CardCompanySkeleton = () => {
         <div
           key={idx}
           className="rounded-xl shadow-sm overflow-hidden bg-white animate-pulse"
+          aria-label="Loading company card"
         >
           {/* Banner Skeleton */}
-          <div className="relative bg-gray-200 lg:h-[195px] h-40 w-full"></div>
+          <div className="relative skeleton bg-gray-200 lg:h-[195px] h-40 w-full" />
 
           {/* Info Skeleton */}
-          <div className="p-4 space-y-3">
+          <div className="p-4 space-y-4">
             {/* Logo & Name */}
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
-              <div className="h-4 w-3/4 bg-gray-300 rounded"></div>
+            <div className="flex items-center gap-3">
+              <div className="w-10  skeleton h-10 bg-gray-300 rounded-full" />
+              <div className="h-4 skeleton w-3/4 bg-gray-300 rounded" />
             </div>
 
             {/* Location */}
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-gray-300 rounded-full" />
-              <div className="w-1/2 h-4 bg-gray-300 rounded"></div>
+              <div className="w-4 skeleton h-4 bg-gray-300 rounded-full" />
+              <div className="w-1/2 skeleton h-4 bg-gray-300 rounded" />
             </div>
 
-            {/* Bottom Row */}
-            <div className="flex justify-between items-center mt-2">
+            {/* Bottom Row: Tags and Button */}
+            <div className="flex justify-between items-center mt-3">
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-gray-300 rounded-full" />
-                <div className="w-24 h-4 bg-gray-300 rounded"></div>
+                <div className="w-4 skeleton h-4 bg-gray-300 rounded-full" />
+                <div className="w-20 skeleton h-4 bg-gray-300 rounded" />
               </div>
-              <div className="w-24 h-8 bg-gray-300 rounded-md"></div>
+              <div className="w-24 skeleton h-8 bg-gray-300 rounded-md" />
             </div>
           </div>
         </div>
