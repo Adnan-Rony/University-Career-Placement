@@ -16,9 +16,7 @@ import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSideb
 import { ManageCompany } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageCompany/ManageCompany.jsx";
 import JobsShowAll from "../Pages/JobsShowAll.jsx";
 
-import { EmployerDashboardMenu } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerDashboard/EmployerDashboardMenu.jsx";
-import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerDashboard/JobSeekerDashboardMenu.jsx";
-import { PostedJobs } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/PostedJobs/PostedJobs.jsx";
+
 
 export const AppRouter = createBrowserRouter([
   {
