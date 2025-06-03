@@ -3,7 +3,7 @@ import { Company } from "../models/company.model.js";
 import { Job } from "../models/job.model.js";
 import { User } from "../models/user.model.js";
 
-  
+  //user
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -70,7 +70,7 @@ export const deleteJobByAdmin = async (req, res) => {
   }
 };
 
-
+//companies
 export const getAllCompanies = async (req, res) => {
   try {
     const companies = await Company.find().populate('createdBy', 'name email');
@@ -96,6 +96,69 @@ export const getCompanyById = async (req, res) => {
   }
 };
 
+export const updateCompanyByAdmin = async (req, res) => {
+  console.log('req.user:', req.user);
+  console.log('req.cookies:', req.cookies);
+
+  try {
+    const { id } = req.params;
+
+    const company = await Company.findById(id);
+    if (!company) {
+      return res.status(404).json({ success: false, message: 'Company not found.' });
+    }
+
+    // Only allow update if user is admin or the creator of the company
+    const isAdmin = req.user.role === 'admin';
+    const isCreator = company.createdBy.toString() === req.user.id;
+
+    if (!isAdmin && !isCreator) {
+      return res.status(403).json({ success: false, message: 'Not authorized to update this company.' });
+    }
+
+    // Allowed fields to update
+    const allowedUpdates = [
+      'name',
+      'location',
+      'industry',
+      'websiteurl',
+      'logo',
+      'city',
+      'description',
+      'establishment',
+      'employees',
+      'country',
+      'Contact_Person_Name',
+      'Contact_Person_Designation',
+      'Contact_Person_email',
+      'Contact_Person_mobile',
+      'facebookurl',
+      'twittweurl',
+      'linkdinurl',
+      'cover',
+      'trusted',
+      'badges',
+    ];
+
+    allowedUpdates.forEach((field) => {
+      if (req.body[field] !== undefined) {
+        company[field] = req.body[field];
+      }
+    });
+
+    await company.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Company updated successfully.',
+      company,
+    });
+
+  } catch (err) {
+    console.error('Update error:', err);
+    res.status(500).json({ success: false, message: 'Server error.' });
+  }
+};
 
 
 export const deleteCompany = async (req, res) => {
@@ -121,6 +184,8 @@ export const deleteCompany = async (req, res) => {
   }
 };
 
+
+//application
 
 export const getAllAppliedJobs = async (req, res) => {
   try {
