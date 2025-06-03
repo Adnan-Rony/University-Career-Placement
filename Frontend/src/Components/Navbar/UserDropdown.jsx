@@ -170,7 +170,7 @@ export const UserDropdown = ({ user }) => {
         )}
         {user?.role === "job-seeker" && (
           <li>
-            <Link to="dashboard" className="flex items-center gap-1">
+            <Link to="jobseekerDashboard" className="flex items-center gap-1">
               <MdDashboard /> Dashboard
             </Link>
           </li>
