@@ -1,5 +1,3 @@
-import React from "react";
-import { SectionTitle } from "../Shared/SectionTitle.jsx";
 
 const SkeletonCard = () => {
   return (
@@ -14,16 +12,16 @@ const SkeletonCard = () => {
         >
           {/* Header: Title & Bookmark */}
           <div className="flex items-center justify-between">
-            <div className="h-4 w-2/3 bg-gray-200 rounded" />
-            <div className="h-5 w-5 bg-gray-200 rounded-full" />
+            <div className="h-4 skeleton w-2/3 bg-gray-200 rounded" />
+            <div className="h-5 skeleton w-5 bg-gray-200 rounded-full" />
           </div>
 
           {/* Company Info */}
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gray-200 rounded-xl" />
+            <div className="w-12 skeleton h-12 bg-gray-200 rounded-xl" />
             <div className="flex flex-col gap-2">
-              <div className="h-3 w-32 bg-gray-200 rounded" />
-              <div className="h-3 w-24 bg-gray-100 rounded" />
+              <div className="h-3 skeleton w-32 bg-gray-200 rounded" />
+              <div className="h-3 skeleton w-24 bg-gray-100 rounded" />
             </div>
           </div>
 
@@ -32,8 +30,8 @@ const SkeletonCard = () => {
 
           {/* Buttons */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="h-10 bg-gray-200 rounded-lg" />
-            <div className="h-10 bg-gray-200 rounded-lg" />
+            <div className="h-10 skeleton bg-gray-200 rounded-lg" />
+            <div className="h-10 skeleton bg-gray-200 rounded-lg" />
           </div>
         </div>
       ))}

@@ -7,6 +7,7 @@ import img from "../../assets/company.png";
 import { Link } from "react-router";
 import AllJobsCards from "../jobs/AllJobsCards.jsx";
 import { RxTimer } from "react-icons/rx";
+import ReletedJobsSkeleton from "../loading/ReletedJobsSkeleton.jsx";
 
 export default function RelatedJobs({ jobId }) {
   const { data, isLoading, error } = UseRelatedJobs(jobId);
@@ -15,7 +16,7 @@ export default function RelatedJobs({ jobId }) {
 
   const jobs = Array.isArray(data) ? data : []; // Ensure data is an array
 
-  if (isLoading) return <p>Loading related jobs...</p>;
+  if (isLoading) return <p><ReletedJobsSkeleton></ReletedJobsSkeleton></p>;
   if (error) {
     console.error("RelatedJobs Error:", error);
     return (

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteSingleCompanyByAdmin, deletesingleJobsByAdmin, deleteUserByAdmin, fetchAdminAllApplication, fetchAdminAllCompany, fetchAdminAllJobs, fetchAdminAllUsers, fetchSingleCompanyByAdmin, fetchSingleJobsByAdmin } from "../api/admin.js";
+import { deleteSingleCompanyByAdmin, deletesingleJobsByAdmin, deleteUserByAdmin, fetchAdminAllApplication, fetchAdminAllCompany, fetchAdminAllJobs, fetchAdminAllUsers, fetchSingleCompanyByAdmin, fetchSingleJobsByAdmin, UpdateSingleCompanyByAdmin } from "../api/admin.js";
 
 
 //user
@@ -83,6 +83,16 @@ export const UseDeleteSingleCompanyByAdmin = () => {
 
   return useMutation({
     mutationFn: deleteSingleCompanyByAdmin,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['admin-company']);
+    },
+  });
+};
+export const UseUpdateSingleCompanyByAdmin = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: UpdateSingleCompanyByAdmin,
     onSuccess: () => {
       queryClient.invalidateQueries(['admin-company']);
     },
