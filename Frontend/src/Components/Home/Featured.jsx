@@ -16,15 +16,16 @@ export const Featured = () => {
   return (
     <div className="max-w-screen-xl mx-auto mt-12 p-2">
       <SectionTitle
-        title={"Featured Job"}
-        // subtitle={" Choose jobs from the top employers and apply for the same"}
+        title="Featured Job"
+        nextpage="Explore More"
+        nextpageLink="/alljobs" // <- Add the route here
       />
 
       <div
         className="grid grid-cols-1 md:grid-cols-2 md:gap-8 lg:grid-cols-3 
     lg:gap-20 mb-8 "
       >
-        {jobs.map((job) => (
+        {jobs.slice(0, 3).map((job) => (
           <div
             key={job._id}
             className="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300"
