@@ -10,6 +10,7 @@ const FeatureCompany = () => {
           <SectionTitle
                 title={"Featured Companies"}
                 nextpage={"Explore More"}
+                nextpageLink="/allcompanies" // <- Add the route here
                 // subtitle={" Choose jobs from the top employers and apply for the same"}
               />
         <CardCompany></CardCompany>

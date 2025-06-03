@@ -16,7 +16,7 @@ export const MainLayouts = () => {
       </header>
 
       {/* Apply max-w-screen-xl mx-auto only if NOT on the home page */}
-      <main>
+      <main className="bg-[#f9f9f9]">
         <Outlet />
         <ScrollRestoration />
       </main>

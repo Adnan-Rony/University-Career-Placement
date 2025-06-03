@@ -1,26 +1,20 @@
 import React from "react";
+import { UseJobs } from "../../hooks/useJobs.js";
 import { CiBookmark, CiLocationOn } from "react-icons/ci";
 import { SectionTitle } from "../Shared/SectionTitle";
-import { UseJobs } from "../../hooks/useJobs.js";
+
 import { Link } from "react-router";
 import SkeletonCard from "../loading/SkeletonCard.jsx";
-
-export const Featured = () => {
+const FeatureJobCard = () => {
   const { data, isPending, error } = UseJobs();
-  const jobs = data?.jobs || [];
 
   if (isPending) return <SkeletonCard></SkeletonCard>;
 
   if (error) return <h2>Error: {error.message}</h2>;
+  const jobs = data?.jobs || [];
 
   return (
-    <div className="max-w-screen-xl mx-auto mt-12 p-2">
-      <SectionTitle
-        title="Featured Job"
-        nextpage="Explore More"
-        nextpageLink="/alljobs" // <- Add the route here
-      />
-
+    <div>
       <div
         className="grid grid-cols-1 md:grid-cols-2 md:gap-8 lg:grid-cols-3 
     lg:gap-20 mb-8 "
@@ -87,3 +81,5 @@ export const Featured = () => {
     </div>
   );
 };
+
+export default FeatureJobCard;
