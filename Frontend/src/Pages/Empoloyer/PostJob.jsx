@@ -116,6 +116,7 @@ export const PostJob = () => {
             {errors.company && (
               <p className="text-red-500 text-sm mt-1">Company is required</p>
             )}
+            
           </div>
         )}
 

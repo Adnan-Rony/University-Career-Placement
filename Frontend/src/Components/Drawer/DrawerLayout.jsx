@@ -29,7 +29,7 @@ export const DrawerLayout = () => {
 
   return (
     <div>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open bg-linear-to-t from-purple-50 to-purple-100">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div
           className="drawer-content flex flex-col  container space-y-4
@@ -51,7 +51,7 @@ export const DrawerLayout = () => {
 
           <ul
             className="menu bg-base-300 
-    text-base-content min-h-full w-60 p-4 space-y-3 text-base "
+    text-base-content min-h-full w-60 p-4 space-y-3 text-base border-r border-gray-200 "
           >
             {/* Sidebar content here */}
             <li>

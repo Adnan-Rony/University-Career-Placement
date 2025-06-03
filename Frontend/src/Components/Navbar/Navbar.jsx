@@ -51,12 +51,12 @@ export const Navbar = () => {
     ) : (
       <li>
         <NavLink
-          to="/dashboard/employer/post-job"
+          to="/"
           className={({ isActive }) =>
             isActive ? 'text-primary' : 'text-gray-500'
           }
         >
-          PostJob
+          Jobs
         </NavLink>
       </li>
     )
