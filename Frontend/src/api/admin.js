@@ -17,17 +17,17 @@ export const deleteUserByAdmin = async (id) => {
 //jobs
 
 export const fetchAdminAllJobs = async () => {
-  const res = await axiosInstance.get('/job');
+  const res = await axiosInstance.get('/admin/job');
   return res.data;
 };
 
 export const fetchSingleJobsByAdmin = async (id) => {
-  const res = await axiosInstance.get(`/job/${id}`);
+  const res = await axiosInstance.get(`/admin/job/${id}`);
   return res.data;
 };
 
 export const deletesingleJobsByAdmin = async (id) => {
-  const res = await axiosInstance.delete(`/job/${id}`);
+  const res = await axiosInstance.delete(`/admin/job/${id}`);
   return res.data;
 };
 
@@ -36,25 +36,25 @@ export const deletesingleJobsByAdmin = async (id) => {
 //company
 
 export const fetchAdminAllCompany = async () => {
-  const res = await axiosInstance.get('/company');
+  const res = await axiosInstance.get('/admin/company');
   return res.data;
 };
 
 export const fetchSingleCompanyByAdmin = async (id) => {
-  const res = await axiosInstance.get(`/company/${id}`);
+  const res = await axiosInstance.get(`/admin/company/${id}`);
   return res.data;
 };
 
 
 // Delete Company
 export const deleteSingleCompanyByAdmin = async (id) => {
-  const res = await axiosInstance.delete(`/company/${id}`);
+  const res = await axiosInstance.delete(`/admin/company/${id}`);
   return res.data;
 };
 
 
 //application
 export const fetchAdminAllApplication = async () => {
-  const res = await axiosInstance.get('/application');
+  const res = await axiosInstance.get('/admin/application');
   return res.data;
 };
