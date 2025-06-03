@@ -30,7 +30,7 @@ const HeaderJobCard = ({ job }) => {
     >
       <div
         className="px-6 py-10  border border-gray-200
-        rounded-lg w-8/12 mx-auto mt-12 
+        rounded-lg w-8/12 mx-auto  
        bg-gradient-to-t from-purple-50 via-purple-100 to-purple-200
         
         "

@@ -22,10 +22,10 @@ const AllJobsCards = () => {
   };
 
   if (isPending) return <AllJobsSkeleton />;
-  if (error) return <h2>Error: {error.message}</h2>;
+
 
   return (
-    <div className="space-y-4">
+    <div className="">
       {jobs.map((job) => (
         <div
           key={job._id}

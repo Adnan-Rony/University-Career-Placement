@@ -14,9 +14,11 @@ import { useFetchCompanies } from "../../hooks/useCompany.js";
 import CardCompanySkeleton from "../loading/CardCompanySkeleton.jsx";
 
 const CardCompany = () => {
-  const { data, isLoading, isError } = useFetchCompanies();
+  const { data, isLoading, error } = useFetchCompanies();
 
   if (isLoading) return <CardCompanySkeleton></CardCompanySkeleton>;
+  if (error) return <p>Something went wrong: {error.message}</p>;
+  const companies = data?.companies || [];
 
   return (
     <div className="">
@@ -34,13 +36,13 @@ const CardCompany = () => {
         className="mySwiper"
         spaceBetween={20}
       >
-        {data.companies.map((company) => (
+        {companies?.map((company) => (
           <SwiperSlide key={company.id}>
             <div className="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300 my-4 lg:p-0 p-1">
               {/* Banner */}
               <div className="relative">
                 <img
-                  src={company.cover || img1}
+                  src={company?.cover || img1}
                   alt={`${company.name} Banner`}
                   className="lg:h-[195px] w-full object-cover"
                 />
@@ -53,18 +55,19 @@ const CardCompany = () => {
               <div className="p-4 space-y-3">
                 <div className="flex items-center gap-2">
                   <img
-                    src={company.logo || img2}
+                    src={company?.logo || img2}
                     alt={`${company.name} Logo`}
                     className="w-8 h-8 object-cover rounded-full"
                   />
-                  <h2 className="text-lg font-semibold">{company.name}</h2>
+                  <h2 className="text-lg font-semibold">{company?.name}</h2>
                 </div>
 
                 <div className="flex items-center text-gray-600 text-sm gap-1">
                   <div className="flex justify-between  items-center text-gray-600 text-sm gap-2">
                     <MapPin size={16} />
-                    <span>{company.city},{company.location}</span>
-                    
+                    <span>
+                      {company?.city},{company?.location}
+                    </span>
                   </div>
                 </div>
 
