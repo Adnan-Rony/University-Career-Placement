@@ -62,6 +62,12 @@ employees: {
 
   logo: { type: String },
   cover: { type: String },
+badges: {
+  type: String,
+  enum: ['trusted', 'top-recuiter', 'regular-recuiter'],
+  default: 'regular-recuiter'
+},
+
 
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 },

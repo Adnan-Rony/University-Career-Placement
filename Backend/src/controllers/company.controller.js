@@ -39,6 +39,8 @@ export const createCompany = async (req, res) => {
       twitterUrl,
       city,
       cover,
+      trusted,
+      badges,
       linkedinUrl,
     } = req.body;
 
@@ -62,6 +64,8 @@ export const createCompany = async (req, res) => {
       linkedinUrl,
       city,
       cover,
+       trusted,
+      badges,
       createdBy: req.user.id,
     });
 
@@ -148,7 +152,8 @@ export const updateCompany = async (req, res) => {
       'facebookurl',
       'twittweurl',
       'linkdinurl',
-      'cover'
+      'cover',
+
     ];
 
     allowedUpdates.forEach((field) => {
