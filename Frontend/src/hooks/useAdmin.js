@@ -75,6 +75,9 @@ export const UseFetchSingleCompanyByAdmin = (id) => {
   });
 };
 
+
+// Delete a individual company
+
 export const UseDeleteSingleCompanyByAdmin = () => {
   const queryClient = useQueryClient();
 

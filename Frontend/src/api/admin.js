@@ -45,6 +45,8 @@ export const fetchSingleCompanyByAdmin = async (id) => {
   return res.data;
 };
 
+
+// Delete Company
 export const deleteSingleCompanyByAdmin = async (id) => {
   const res = await axiosInstance.delete(`/company/${id}`);
   return res.data;
