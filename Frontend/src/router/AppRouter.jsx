@@ -22,6 +22,7 @@ import AllCompany from "../Pages/company/AllCompany.jsx";
 import { EmployerDashboardMenu } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerDashboard/EmployerDashboardMenu.jsx";
 import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerDashboard/JobSeekerDashboardMenu.jsx";
 import { PostedJobs } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/PostedJobs/PostedJobs.jsx";
+import { ManageUsers } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageUsers/ManageUsers.jsx";
 
 
 
@@ -92,7 +93,7 @@ export const AppRouter = createBrowserRouter([
          element: <PostedJobs/>
          },
 
-
+ // For Admin
       {
         path:"adminDashboard",
         element:<AdminDashboardMenu/>
@@ -100,6 +101,10 @@ export const AppRouter = createBrowserRouter([
       {
         path:"manageCompany",
         element:<ManageCompany/>
+      },
+      {
+        path:"manageUsers",
+        element:<ManageUsers/>
       }
     ],
   },
