@@ -26,6 +26,7 @@ export const Navbar = () => {
  
 
     {!user ? (
+      //  User Not Logged In
       <>
         <li>
           <NavLink
@@ -49,9 +50,10 @@ export const Navbar = () => {
         </li>
       </>
     ) : (
+   <>
       <li>
         <NavLink
-          to="/"
+          to="/alljobs"
           className={({ isActive }) =>
             isActive ? 'text-primary' : 'text-gray-500'
           }
@@ -59,6 +61,18 @@ export const Navbar = () => {
           Jobs
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/allcompanies"
+          className={({ isActive }) =>
+            isActive ? 'text-primary' : 'text-gray-500'
+          }
+        >
+          Companies
+        </NavLink>
+      </li>
+   </>
+      
     )
     
     }
