@@ -3,56 +3,90 @@ import Swal from "sweetalert2";
 import {
   UseDeleteSingleCompanyByAdmin,
   UsefetchAllCompanyByAdmin,
+  UseUpdateSingleCompanyByAdmin,
 } from "../../../../../hooks/useAdmin";
+import DashboardManageCompanySkeleton from "../../../../loading/DashboardManageCompanySkeleton.jsx";
 
 export const ManageCompany = () => {
-  const { data: Allcompanies } = UsefetchAllCompanyByAdmin();
+  const { data: Allcompanies, isLoading } = UsefetchAllCompanyByAdmin();
   const companies = Allcompanies?.companies;
 
   const { mutate: deleteCompany } = UseDeleteSingleCompanyByAdmin();
 
-const handleDelete = (id) => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "This action cannot be undone!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#6300B3",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-    color: "#333333",
-    customClass: {
-      popup: 'rounded-lg shadow-md',
-      confirmButton: 'swal2-confirm-btn',
-      cancelButton: 'swal2-cancel-btn'
-    }
-  }).then((result) => {
-    if (result.isConfirmed) {
-      deleteCompany(id, {
+  const { mutate: updateCompany } = UseUpdateSingleCompanyByAdmin();
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action cannot be undone!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#6300B3",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      color: "#333333",
+      customClass: {
+        popup: "rounded-lg shadow-md",
+        confirmButton: "swal2-confirm-btn",
+        cancelButton: "swal2-cancel-btn",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteCompany(id, {
+          onSuccess: () => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "The company has been successfully removed.",
+              icon: "success",
+              confirmButtonColor: "#6300B3",
+              color: "#333333",
+            });
+          },
+          onError: (err) => {
+            console.error(err);
+            Swal.fire({
+              title: "Error",
+              text: "Failed to delete the company.",
+              icon: "error",
+              confirmButtonColor: "#d33",
+              color: "#333333",
+            });
+          },
+        });
+      }
+    });
+  };
+
+  const handleBadgeUpdate = (companyId, badgeValue) => {
+    updateCompany(
+      { id: companyId, badges: badgeValue },
+      {
         onSuccess: () => {
           Swal.fire({
-            title: "Deleted!",
-            text: "The company has been successfully removed.",
+            title: "Success!",
+            text: `Company promoted as ${badgeValue}.`,
             icon: "success",
             confirmButtonColor: "#6300B3",
-            color: "#333333"
           });
         },
-        onError: (err) => {
-          console.error(err);
+        onError: (error) => {
           Swal.fire({
             title: "Error",
-            text: "Failed to delete the company.",
+            text: "Failed to update badge.",
             icon: "error",
-            confirmButtonColor: "#d33",
-            color: "#333333"
           });
+          console.error("Update error:", error);
         },
-      });
-    }
-  });
-};
+      }
+    );
+  };
 
+  if (isLoading)
+    return (
+      <p>
+        <DashboardManageCompanySkeleton />
+      </p>
+    );
 
   return (
     <div>
@@ -72,7 +106,7 @@ const handleDelete = (id) => {
               </th>
               <th>Name</th>
               <th>Field</th>
-              <th>Add Tags</th>
+              <th>Promotion</th>
               <th>Remove</th>
               <th></th>
             </tr>
@@ -130,25 +164,50 @@ const handleDelete = (id) => {
   </div>
 </td> */}
 
-                    <th>
-                      <div className="dropdown dropdown-center">
-                        <div tabIndex={0} role="button" className="btn m-1">
-                          Select
-                        </div>
-                        <ul
-                          tabIndex={0}
-                          className="dropdown-content menu bg-r-background w-44
-   rounded-box z-1 font-semibold p-2 shadow-sm"
-                        >
-                          <li>
-                            <a>Trusted Partner</a>
-                          </li>
-                          <li>
-                            <a>Top Recruiter</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </th>
+                  <th>
+  <div className="dropdown dropdown-center">
+    <div tabIndex={0} role="button" className="btn m-1">
+      {company.badges === "trusted"
+        ? "✅ Trusted Partner"
+        : company.badges === "top-recuiter"
+        ? "✅ Top Recruiter"
+        : "Regular Recruiter"}
+    </div>
+    <ul
+      tabIndex={0}
+      className="dropdown-content menu bg-white w-48 rounded-box z-[1] font-semibold p-2 shadow"
+    >
+      <li>
+        <button
+          onClick={() => handleBadgeUpdate(company._id, "trusted")}
+          disabled={company.badges === "trusted"}
+          className={company.badges === "trusted" ? "text-green-600 font-bold" : ""}
+        >
+          Trusted Partner
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={() => handleBadgeUpdate(company._id, "top-recuiter")}
+          disabled={company.badges === "top-recuiter"}
+          className={company.badges === "top-recuiter" ? "text-blue-600 font-bold" : ""}
+        >
+          Top Recruiter
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={() => handleBadgeUpdate(company._id, "regular-recuiter")}
+          disabled={company.badges === "regular-recuiter"}
+          className={company.badges === "regular-recuiter" ? "text-gray-500 font-bold" : ""}
+        >
+          Regular Recruiter
+        </button>
+      </li>
+    </ul>
+  </div>
+</th>
+
 
                     <th>
                       <button
