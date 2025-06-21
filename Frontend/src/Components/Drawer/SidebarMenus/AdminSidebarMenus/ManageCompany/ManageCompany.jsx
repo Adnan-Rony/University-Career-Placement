@@ -6,6 +6,7 @@ import {
   UseUpdateSingleCompanyByAdmin,
 } from "../../../../../hooks/useAdmin";
 import DashboardManageCompanySkeleton from "../../../../loading/DashboardManageCompanySkeleton.jsx";
+import { FaHandshake, FaTrophy, FaUserFriends } from "react-icons/fa";
 
 export const ManageCompany = () => {
   const { data: Allcompanies, isLoading } = UsefetchAllCompanyByAdmin();
@@ -143,70 +144,60 @@ export const ManageCompany = () => {
 
                       <span className="">Name: {company.createdBy.name}</span>
                     </td>
-                    {/* 
-      <td>
-  <div className="dropdown dropdown-end">
-    <label tabIndex={0} className="btn btn-xs btn-outline m-1">Actions</label>
-    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-      <li>
-        <button >Block/Suspend</button>
-      </li>
-      <li>
-        <button >Edit Info</button>
-      </li>
-      <li>
-        <button >Assign Tags/Status</button>
-      </li>
-      <li>
-        <button className="text-red-500">Delete</button>
-      </li>
-    </ul>
-  </div>
-</td> */}
 
-                  <th>
-  <div className="dropdown dropdown-center">
-    <div tabIndex={0} role="button" className="btn m-1">
-      {company.badges === "trusted"
-        ? "✅ Trusted Partner"
-        : company.badges === "top-recuiter"
-        ? "✅ Top Recruiter"
-        : "Regular Recruiter"}
-    </div>
-    <ul
-      tabIndex={0}
-      className="dropdown-content menu bg-white w-48 rounded-box z-[1] font-semibold p-2 shadow"
-    >
-      <li>
-        <button
-          onClick={() => handleBadgeUpdate(company._id, "trusted")}
-          disabled={company.badges === "trusted"}
-          className={company.badges === "trusted" ? "text-green-600 font-bold" : ""}
-        >
-          Trusted Partner
-        </button>
-      </li>
-      <li>
-        <button
-          onClick={() => handleBadgeUpdate(company._id, "top-recuiter")}
-          disabled={company.badges === "top-recuiter"}
-          className={company.badges === "top-recuiter" ? "text-blue-600 font-bold" : ""}
-        >
-          Top Recruiter
-        </button>
-      </li>
-      <li>
-        <button
-          onClick={() => handleBadgeUpdate(company._id, "regular-recuiter")}
-          disabled={company.badges === "regular-recuiter"}
-          className={company.badges === "regular-recuiter" ? "text-gray-500 font-bold" : ""}
-        >
-          Regular Recruiter
-        </button>
-      </li>
-    </ul>
-  </div>
-</th>
+
+                    <th>
+                      <div className="dropdown dropdown-center">
+                        <div tabIndex={0} role="button " className="btn ">
+                          {company.badges === "trusted"
+                            ? <>
+                              <FaHandshake />
+                              <p>Trusted Partner</p>
+                            </>
+                            : company.badges === "top-recuiter"
+                              ? <>
+                                <FaTrophy />
+                                <p>Top Recruiter</p>
+                              </>
+                              : <>
+                                <FaUserFriends />
+                                <p>Regular Recruiter</p>
+                              </>}
+                        </div>
+                        <ul
+                          tabIndex={0}
+                          className="dropdown-content menu bg-white w-48 rounded-box z-[1] font-semibold p-2 shadow"
+                        >
+                          <li>
+                            <button
+                              onClick={() => handleBadgeUpdate(company._id, "trusted")}
+                              disabled={company.badges === "trusted"}
+                              className={company.badges === "trusted" ? "text-green-600 font-bold" : ""}
+                            >
+                              Trusted Partner
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => handleBadgeUpdate(company._id, "top-recuiter")}
+                              disabled={company.badges === "top-recuiter"}
+                              className={company.badges === "top-recuiter" ? "text-blue-600 font-bold" : ""}
+                            >
+                              Top Recruiter
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => handleBadgeUpdate(company._id, "regular-recuiter")}
+                              disabled={company.badges === "regular-recuiter"}
+                              className={company.badges === "regular-recuiter" ? "text-gray-500 font-bold" : ""}
+                            >
+                              Regular Recruiter
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </th>
 
 
                     <th>

@@ -23,6 +23,7 @@ import { EmployerDashboardMenu } from "../Components/Drawer/SidebarMenus/Employe
 import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerDashboard/JobSeekerDashboardMenu.jsx";
 import { PostedJobs } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/PostedJobs/PostedJobs.jsx";
 import { ManageUsers } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageUsers/ManageUsers.jsx";
+import { JobseekerProfile } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/Profile/JobseekerProfile.jsx";
 
 
 
@@ -79,8 +80,12 @@ export const AppRouter = createBrowserRouter([
        { path: "jobseekerDashboard",
          element:<JobSeekerDashboardMenu/>
          },
+        {
+          path:"jobseekerProfile",
+          element:<JobseekerProfile/>
+        }
 
-
+,
 
       // For Employer
       { path: "employerDashboard",
