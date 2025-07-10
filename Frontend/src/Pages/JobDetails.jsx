@@ -16,7 +16,7 @@ import RelatedJobs from "../Components/DetailsJob/RelatedJobs.jsx";
 const JobDetails = () => {
   const { id } = useParams();
 
-  const { data: job, isLoading, isError } = UseFetchSingleJobById(id);
+  const { data: job, isLoading } = UseFetchSingleJobById(id);
    
 console.log(job)
   if (isLoading) return <JobDetailsSkeleton></JobDetailsSkeleton>;
