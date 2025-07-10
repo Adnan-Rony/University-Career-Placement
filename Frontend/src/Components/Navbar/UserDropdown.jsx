@@ -153,7 +153,7 @@ export const UserDropdown = ({ user }) => {
           <h2 className="text-xs text-gray-400">{user?.email}</h2>
         </li>
         <hr className="my-1" />
-
+          {/* User Menus */}
         {user?.role === "admin" && (
           <li>
             <Link to="dashboard/adminDashboard" className="flex items-center gap-1">
@@ -161,6 +161,8 @@ export const UserDropdown = ({ user }) => {
             </Link>
           </li>
         )}
+
+        {/* Employer Menus */}
         {user?.role === "employer" && (
           <li>
             <Link to="dashboard/employerDashboard" className="flex items-center gap-1">
@@ -169,19 +171,19 @@ export const UserDropdown = ({ user }) => {
           </li>
         )}
         {user?.role === "job-seeker" && (
+        <>
           <li>
             <Link to="dashboard/jobseekerDashboard" className="flex items-center gap-1">
               <MdDashboard /> Dashboard
             </Link>
           </li>
-        )}
 
-        <li>
-          <Link className="flex items-center gap-1">
+          <li>
+          <Link to={'dashboard/jobseekerProfile'} className="flex items-center gap-1">
             <FaUser /> Profile
           </Link>
         </li>
-        <li>
+         <li>
           <Link className="flex items-center gap-1">
             <FaHeart /> Wishlist
           </Link>
@@ -191,6 +193,12 @@ export const UserDropdown = ({ user }) => {
             <IoMdSettings /> Settings
           </Link>
         </li>
+          </>
+        )}
+
+        
+       
+        
 
         <hr className="my-1" />
 
