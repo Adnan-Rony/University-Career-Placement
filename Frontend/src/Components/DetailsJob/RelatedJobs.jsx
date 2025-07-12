@@ -16,7 +16,12 @@ export default function RelatedJobs({ jobId }) {
 
   const jobs = Array.isArray(data) ? data : []; // Ensure data is an array
 
-  if (isLoading) return <p><ReletedJobsSkeleton></ReletedJobsSkeleton></p>;
+  if (isLoading)
+    return (
+      <p>
+        <ReletedJobsSkeleton></ReletedJobsSkeleton>
+      </p>
+    );
   if (error) {
     console.error("RelatedJobs Error:", error);
     return (
@@ -28,9 +33,9 @@ export default function RelatedJobs({ jobId }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold mb-2">Related Jobs</h2>
+      <h2 className="text-2xl font-semibold mb-2">Related Jobs ( <span className="text-sm font-normal"> {jobs.length} jobs found — based on this job.</span>) </h2>
       <p className="text-sm text-gray-500 mb-6">
-        {jobs.length} jobs found — based on this job.
+       
       </p>
 
       <div className="space-y-4">

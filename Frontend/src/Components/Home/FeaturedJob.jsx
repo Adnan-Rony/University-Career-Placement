@@ -4,7 +4,7 @@ import FeatureJobCard from './FeatureJobCard.jsx';
 
 const FeaturedJob = () => {
   return (
-    <div className="max-w-screen-xl mx-auto mt-12 p-2">
+    <div className="container mx-auto mt-12 p-2">
       <SectionTitle
         title="Featured Job"
         nextpage="Explore More"

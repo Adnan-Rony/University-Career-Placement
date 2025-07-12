@@ -7,13 +7,11 @@ import { EmployerSidebar } from "./Sidebars/EmployerSidebar";
 import { JobSeekerSidebar } from "./Sidebars/JobSeekerSidebar";
 import { useCurrentUser } from "../../hooks/useAuth";
 export const DrawerLayout = () => {
- 
+  const { data } = useCurrentUser();
 
-   const {data}=useCurrentUser()
-    
-    const user=data?.user
-     const role = user?.role;
-    console.log(role);
+  const user = data?.user;
+  const role = user?.role;
+  console.log(role);
 
   const RenderSidebars = () => {
     switch (role) {

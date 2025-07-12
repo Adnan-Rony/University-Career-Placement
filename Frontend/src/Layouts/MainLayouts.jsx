@@ -1,9 +1,8 @@
-import React from "react";
+
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 
-import Footer from "../Components/Footer";
-import { ResponsiveNav } from "../Components/ResponsiveNav";
-import { Navbar } from "../Components/Navbar/Navbar";
+import { Navbar } from './../Components/Navbar/Navbar';
+import Footer from './../Components/Shared/Footer';
 
 export const MainLayouts = () => {
   const location = useLocation();

@@ -6,7 +6,7 @@ import JobDescriptionSkeleton from './JobDescriptionSkeleton';
 
 const JobDetailsSkeleton = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 container mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <HeaderSkeleton />
 
       <div className="max-w-7xl mx-auto px-4 md:px-0 grid md:grid-cols-3 gap-6 mt-6">
