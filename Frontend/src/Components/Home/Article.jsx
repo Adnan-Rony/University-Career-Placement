@@ -37,7 +37,7 @@ const Article = () => {
     },
   ];
   return (
-    <section className="bg-gray-100 py-16">
+    <section className=" py-16">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-semibold mb-2">Recent News Articles</h2>

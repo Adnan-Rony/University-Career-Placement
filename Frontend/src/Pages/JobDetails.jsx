@@ -1,51 +1,50 @@
 import React from "react";
-import { MdOutlineLocationOn } from "react-icons/md";
-import { CiClock1, CiSaveUp2, CiCalendar } from "react-icons/ci";
-import { GiMoneyStack } from "react-icons/gi";
-import { RxTimer } from "react-icons/rx";
-import { FaRegUser } from "react-icons/fa6";
-import CompanyCard from "../Components/DetailsJob/CompanyCard.jsx";
 import { useParams } from "react-router";
-import { UseFetchSingleJobById,  } from "../hooks/useJobs.js";
+import { UseFetchSingleJobById } from "../hooks/useJobs.js";
+
+// Components
 import HeaderJobCard from "../Components/DetailsJob/HeaderJobCard.jsx";
 import JobDescription from "../Components/DetailsJob/JobDescription.jsx";
 import JobOverView from "../Components/DetailsJob/JobOverView.jsx";
-import JobDetailsSkeleton from "../Components/loading/JobDetailsSkeleton.jsx";
+import CompanyCard from "../Components/DetailsJob/CompanyCard.jsx";
 import RelatedJobs from "../Components/DetailsJob/RelatedJobs.jsx";
+import JobDetailsSkeleton from "../Components/loading/JobDetailsSkeleton.jsx";
 
 const JobDetails = () => {
   const { id } = useParams();
-
   const { data: job, isLoading } = UseFetchSingleJobById(id);
-   
-console.log(job)
-  if (isLoading) return <JobDetailsSkeleton></JobDetailsSkeleton>;
+
+  if (isLoading) return <JobDetailsSkeleton />;
 
   return (
-    <div className="">
-      {/* Header Section */}
-      <HeaderJobCard job={job}></HeaderJobCard>
+    <div className="min-h-screen  pb-20">
+      {/* Job Header */}
+      <HeaderJobCard job={job} />
 
-      {/* Content Section */}
-      <div className="w-8/12  mx-auto  my-12  grid grid-cols-1 lg:grid-cols-3 gap-8 ">
-        {/* Job Description */}
+      {/* Main Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-2 grid grid-cols-1 lg:grid-cols-3 gap-2">
+        {/* Left Content (Description + Related) */}
+        <div className="lg:col-span-2 space-y-2">
+          <section className=" rounded-xl  p-2">
+            <JobDescription />
+          </section>
 
-        <div className="lg:col-span-2   ">
-          <JobDescription></JobDescription>
-            <hr className="my-10 border-gray-300" />
-            {/* releted jobs card */}
-          <RelatedJobs jobId={id} currentJob={job}></RelatedJobs>
+          <section className=" rounded-xl  p-2">
+            <RelatedJobs jobId={id} currentJob={job} />
+          </section>
         </div>
 
-        {/* Sidebar: Overview & Company */}
-        <div className="lg:col-span-1 space-y-4">
-          {/* Job Overview */}
-          <JobOverView job={job}></JobOverView>
+        {/* Right Sidebar */}
+        <div className="space-y-2">
+          <div className=" rounded-xl  p-2">
+            <JobOverView job={job} />
+          </div>
 
-          {/* Company Overview */}
-          <div className="">
+          <div className=" rounded-xl  p-2">
             <CompanyCard job={job} />
           </div>
+
+          
         </div>
       </div>
     </div>

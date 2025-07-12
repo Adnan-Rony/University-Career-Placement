@@ -1,5 +1,6 @@
 import Article from "../Components/Home/Article.jsx";
 import { Blog } from "../Components/Home/Blog";
+import FaqSection from "../Components/Home/FAQ.jsx";
 import FeatureCompany from "../Components/Home/FeatureCompany.jsx";
 import FeaturedJob from "../Components/Home/FeaturedJob.jsx";
 import HeroSection from "../Components/Home/HeroSection";
@@ -32,6 +33,7 @@ export const Home = () => {
       <SponserCompany/>
       {/* <Blog /> */}
       <Article/>
+      <FaqSection showall={false}/>
       <Newsletter></Newsletter>
       {/* <Testimonails /> */}
     </div>

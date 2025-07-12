@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import toast from "react-hot-toast";
-import { UseCreateJob } from "./../../hooks/useJobs.js";
+import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
 import { UseMyCompany } from "../../hooks/useCompany.js";
-import axios from "axios";
+import { UseCreateJob } from "./../../hooks/useJobs.js";
 
-export const PostJob = () => {
+export const CompanyCreate = () => {
   const { mutate: job, isPending } = UseCreateJob();
   const { data, isLoading, isError } = UseMyCompany();
 
@@ -116,7 +116,6 @@ export const PostJob = () => {
             {errors.company && (
               <p className="text-red-500 text-sm mt-1">Company is required</p>
             )}
-            
           </div>
         )}
 
