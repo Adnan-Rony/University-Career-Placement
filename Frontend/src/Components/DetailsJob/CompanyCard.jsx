@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-
+import img from "../../assets/company.png";
 const CompanyCard = ({ job }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
       {/* Main Card */}
-      <div className="p-6 rounded-xl shadow-sm hover:shadow-md bg-white text-gray-800 border border-gray-200">
+      <div className="p-6 rounded-xl  text-gray-800 bg-gradient-to-r from-[#f7f1fb] to-[#f6effb] ">
         <div className="flex items-center gap-4">
           <img
-            src={job?.company?.logo}
+            src={job?.company?.logo || img }
             alt="Company Logo"
-            className="w-14 h-14 rounded-lg object-cover border"
+            className="w-14 h-14 rounded-lg object-cover "
           />
           <div>
             <h2 className="font-semibold text-lg">{job?.company?.name}</h2>

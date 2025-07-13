@@ -8,7 +8,7 @@ import { RxTimer } from 'react-icons/rx';
 
 const JobOverView = ({ job }) => {
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 space-y-6">
+    <div className="bg-gradient-to-r from-[#f7f1fb] to-[#f6effb]   p-6 space-y-6">
       <h3 className="text-xl font-bold text-gray-800 border-b border-gray-300 pb-2">Job Overview</h3>
 
       <div className="space-y-5 text-sm text-gray-700">

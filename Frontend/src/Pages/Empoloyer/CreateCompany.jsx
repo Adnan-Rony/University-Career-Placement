@@ -39,7 +39,7 @@ const CreateCompany = ({ registeredUser, onCompanyCreated }) => {
   const handleCoverUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
+    
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "blogging");

@@ -23,7 +23,7 @@ export const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/faqs"
+          to="/interview-questions"
           className={({ isActive }) =>
             isActive ? "text-r-primary font-semibold" : "text-gray-600"
           }
@@ -33,12 +33,12 @@ export const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/about"
+          to="/allcompanies"
           className={({ isActive }) =>
             isActive ? "text-r-primary font-semibold" : "text-gray-600"
           }
         >
-          About Us
+          Companies
         </NavLink>
       </li>
     </>
