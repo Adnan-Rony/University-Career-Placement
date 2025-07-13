@@ -18,11 +18,11 @@ export const AdminSidebar = () => {
         </Link>
       </li>
       <li>
-        <Link to="" className="flex items-center gap-2">
+        <Link to="manageUsers" className="flex items-center gap-2">
           <FaUsers /> Manage Users
         </Link>
       </li>
-      <li>
+      {/* <li>
         <Link to="" className="flex items-center gap-2">
           <FaBriefcase /> Manage Jobs
         </Link>
@@ -36,7 +36,7 @@ export const AdminSidebar = () => {
         <Link to="" className="flex items-center gap-2">
           <FaCogs /> Settings
         </Link>
-      </li>
+      </li> */}
       <li>
         <Link to="" className="flex items-center gap-2 text-red-600">
           <FaSignOutAlt /> Logout

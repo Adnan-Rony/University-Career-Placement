@@ -11,6 +11,7 @@ export const UseAdminAllUser = () => {
   });
 };
 
+
 export const UseAdminDeleteUser = () => {
   const queryClient = useQueryClient();
 

@@ -9,40 +9,80 @@ export const Navbar = () => {
   const user = data?.user;
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const navElements = (
-    <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "text-r-primary font-semibold" : "text-gray-600"
-          }
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/interview-questions"
-          className={({ isActive }) =>
-            isActive ? "text-r-primary font-semibold" : "text-gray-600"
-          }
-        >
-          FAQs
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/allcompanies"
-          className={({ isActive }) =>
-            isActive ? "text-r-primary font-semibold" : "text-gray-600"
-          }
-        >
-          Companies
-        </NavLink>
-      </li>
-    </>
-  );
+const navElements = (
+  <>
+    {!user ? (
+      // User Not Logged In
+      <>
+        <li>
+          <NavLink
+            to="/SignIn"
+            className={({ isActive }) =>
+              isActive ? 'text-primary' : 'text-gray-500'
+            }
+          >
+            Login
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/SignUp"
+            className={({ isActive }) =>
+              isActive ? 'text-primary' : 'text-gray-500'
+            }
+          >
+            Register
+          </NavLink>
+        </li>
+      </>
+    ) : null}
+
+    <li>
+      <NavLink
+        to="/alljobs"
+        className={({ isActive }) =>
+          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
+        }
+      >
+        Home
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink
+        to="/interview-questions"
+        className={({ isActive }) =>
+          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
+        }
+      >
+        FAQs
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink
+        to="/allcompanies"
+        className={({ isActive }) =>
+          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
+        }
+      >
+        Companies
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          isActive ? 'text-primary' : 'text-gray-500'
+        }
+      >
+        About Us
+      </NavLink>
+    </li>
+  </>
+);
+
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">

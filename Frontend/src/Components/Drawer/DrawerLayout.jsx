@@ -53,13 +53,13 @@ export const DrawerLayout = () => {
           >
             {/* Sidebar content here */}
             <li>
-              <div className="">
+              <Link to={'/'} className="">
                 <h1 className="text-2xl font-extrabold text-nowrap mb-2">
                   Job
                   <span className="text-r-primary"> Portal</span>
                 </h1>
                 <sub className="text-black/50">Dashboard</sub>
-              </div>
+              </Link>
             </li>
 
             {RenderSidebars()}

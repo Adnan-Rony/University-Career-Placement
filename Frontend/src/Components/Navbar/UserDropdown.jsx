@@ -49,7 +49,9 @@ export const UserDropdown = ({ user }) => {
             <p className="text-gray-500 text-xs">{user?.email}</p>
           </div>
         </li>
+
         <hr className="text-gray-300" />
+
 
         {user?.role === "admin" && (
           <li>
@@ -61,6 +63,8 @@ export const UserDropdown = ({ user }) => {
             </Link>
           </li>
         )}
+
+        {/* Employer Menus */}
         {user?.role === "employer" && (
           <li>
             <Link
@@ -72,33 +76,36 @@ export const UserDropdown = ({ user }) => {
           </li>
         )}
         {user?.role === "job-seeker" && (
+        <>
           <li>
+
             <Link
               to="/dashboard/jobseekerDashboard"
               className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 transition gap-2"
             >
               <MdDashboard className="text-gray-600" /> Jobseeker Dashboard
+
             </Link>
           </li>
-        )}
 
-        <li>
-          <Link
-            to="/profile"
-            className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 transition gap-2"
-          >
-            <FaUser className="text-gray-600" /> Profile
-          </Link>
-        </li>
+<li>
+  <Link
+    to="/dashboard/jobseekerProfile"
+    className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 transition gap-2"
+  >
+    <FaUser className="text-gray-600" /> Profile
+  </Link>
+</li>
 
-        <li>
-          <Link
-            to="/wishlist"
-            className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 transition gap-2"
-          >
-            <FaHeart className="text-gray-600" /> Wishlist
-          </Link>
-        </li>
+<li>
+  <Link
+    to="/wishlist"
+    className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 transition gap-2"
+  >
+    <FaHeart className="text-gray-600" /> Wishlist
+  </Link>
+</li>
+
 
         <li>
           <Link
@@ -108,6 +115,12 @@ export const UserDropdown = ({ user }) => {
             <IoMdSettings className="text-gray-600" /> Settings
           </Link>
         </li>
+          </>
+        )}
+
+        
+       
+        
 
        <hr className="text-gray-300" />
 
