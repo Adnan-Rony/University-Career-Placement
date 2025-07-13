@@ -4,7 +4,9 @@ import CardCompany from "./CardCompany.jsx";
 
 const FeatureCompany = () => {
   return (
-    <div className="container  mx-auto p-2 m-12 ">
+
+    <div className="container mx-auto p-2 m-12 ">
+
       
       <div className=" ">
           <SectionTitle

@@ -151,8 +151,8 @@ const ApplyJob = ({ isOpen, onClose, jobId }) => {
               className={`w-full py-3 rounded-lg text-white font-semibold transition
           ${
             isLoading
-              ? "bg-blue-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-purple-700 cursor-not-allowed"
+              : "bg-purple-700 "
           }
         `}
             >

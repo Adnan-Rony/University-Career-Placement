@@ -4,7 +4,7 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-purple-100 to-purple-50  py-10 ">
+    <footer className="bg-gradient-to-r from-[#f7f1fb] to-[#f6effb]  py-10 ">
       <div className="max-w-screen-xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* AlwaysApply Brand Section */}
@@ -53,19 +53,9 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-purple-300 my-6"></div>
+       
 
-        {/* Footer Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-purple-600">
-          <p>© 2022 AlwaysApply - Job Portal. All Rights Reserved</p>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <a href="#" className="hover:text-purple-800"><FaFacebookF /></a>
-            <a href="#" className="hover:text-purple-800"><FaInstagram /></a>
-            <a href="#" className="hover:text-purple-800"><FaTwitter /></a>
-            <a href="#" className="hover:text-purple-800"><FaYoutube /></a>
-          </div>
-        </div>
+      
       </div>
     </footer>
   );

@@ -25,7 +25,7 @@ const AllJobsCards = () => {
 
 
   return (
-    <div className="">
+    <div className="space-y-4">
       {jobs.map((job) => (
         <div
           key={job._id}

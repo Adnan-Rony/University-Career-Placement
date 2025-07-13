@@ -5,8 +5,8 @@ import { Company } from "../models/company.model.js";
 export const createJob = async (req, res) => {
   try {
     const {
-      title, description, company, location, salaryRange,
-      jobType, deadline, skillsRequired,image,vacancy
+      title, description, company, location,country,city, salaryRange,
+      jobType, deadline, skillsRequired,image,vacancy,industry
     } = req.body;
 
     const employerId = req.user.id; 
@@ -22,6 +22,7 @@ export const createJob = async (req, res) => {
       title,
       description,
       company,
+      industry,
       postedBy: employerId,
       location,
       salaryRange,
@@ -29,7 +30,8 @@ export const createJob = async (req, res) => {
       vacancy,
       deadline,
       image,
-      skillsRequired
+      skillsRequired,
+      country,city,
     });
 
     await newJob.save();
@@ -101,7 +103,7 @@ export const updateJob = async (req, res) => {
     }
 
     // Update allowed fields
-    const allowedUpdates = ['title', 'description', 'location', 'salaryRange', 'jobType', 'deadline', 'skillsRequired','image','vacancy'];
+    const allowedUpdates = ['title', 'description','industry', 'location', 'salaryRange','location','city', 'jobType', 'deadline', 'skillsRequired','image','vacancy'];
     allowedUpdates.forEach(field => {
       if (req.body[field] !== undefined) {
         job[field] = req.body[field];
@@ -145,7 +147,7 @@ export const deleteJob = async (req, res) => {
 
 export const searchJobs = async (req, res) => {
   try {
-    const { title, companyName, location, jobType, skills } = req.query;
+    const { title, companyName,country,city,industry, location, jobType, skills } = req.query;
     let query = {};
 
     if (title) {
@@ -157,7 +159,7 @@ export const searchJobs = async (req, res) => {
     }
 
     if (location) {
-      const locationRegex = { $regex: location, $options: "i" };
+      const locationRegex = { $regex: location, $regex:city, $regex:country, $options: "i" };
       query.$or = [
         ...(query.$or || []),
         { "location.city": locationRegex },

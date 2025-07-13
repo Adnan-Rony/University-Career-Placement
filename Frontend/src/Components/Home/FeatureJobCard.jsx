@@ -5,6 +5,7 @@ import { SectionTitle } from "../Shared/SectionTitle";
 
 import { Link } from "react-router";
 import SkeletonCard from "../loading/SkeletonCard.jsx";
+
 const FeatureJobCard = () => {
   const { data, isPending, error } = UseJobs();
 
@@ -16,10 +17,10 @@ const FeatureJobCard = () => {
   return (
     <div>
       <div
-        className="grid grid-cols-1 md:grid-cols-2 md:gap-8 lg:grid-cols-3 
+        className="grid grid-cols-1 md:grid-cols-2 md:gap-8 lg:grid-cols-4 
     lg:gap-20 mb-8 "
       >
-        {jobs.slice(0, 3).map((job) => (
+        {jobs.slice(0,5).map((job) => (
           <div
             key={job._id}
             className="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300"

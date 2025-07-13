@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Authcontext } from '../Context/Authprovider';
+import { Authcontext } from '../../Context/Authprovider';
 
 export const ResponsiveNav = () => {
   const {user,logout}=useContext(Authcontext)

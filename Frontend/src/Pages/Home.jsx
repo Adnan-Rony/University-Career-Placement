@@ -1,8 +1,14 @@
+import Article from "../Components/Home/Article.jsx";
 import { Blog } from "../Components/Home/Blog";
+import FaqSection from "../Components/Home/FAQ.jsx";
 import FeatureCompany from "../Components/Home/FeatureCompany.jsx";
 import FeaturedJob from "../Components/Home/FeaturedJob.jsx";
 import HeroSection from "../Components/Home/HeroSection";
+import PopulerJob from "../Components/Home/PopulerJob.jsx";
+import SponserCompany from "../Components/Home/SponserCompany.jsx";
+import Newsletter from "../Components/Home/SubsCribeNewsLetter.jsx";
 import { Testimonails } from "../Components/Home/Testimonails";
+
 
 export const Home = () => {
   return (
@@ -21,10 +27,15 @@ export const Home = () => {
       />
 
       <HeroSection />
-      <FeatureCompany></FeatureCompany>
-      <FeaturedJob />
-      <Blog />
-      <Testimonails />
+      <PopulerJob/>
+      {/* <FeatureCompany></FeatureCompany> */}
+      {/* <FeaturedJob /> */}
+      <SponserCompany/>
+      {/* <Blog /> */}
+      <Article/>
+      <FaqSection showall={false}/>
+      <Newsletter></Newsletter>
+      {/* <Testimonails /> */}
     </div>
   );
 };
