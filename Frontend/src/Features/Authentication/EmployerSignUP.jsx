@@ -7,6 +7,9 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Stepper } from "react-form-stepper";
 import CreateCompany from "../../Pages/Empoloyer/CreateCompany";
 import Confetti from "react-confetti";
+
+
+
 const EmployerSignUP = () => {
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -36,7 +39,7 @@ const EmployerSignUP = () => {
 
   const handleDone = () => {
     toast.success("Company created successfully!");
-    navigate("dashboard/employerDashboard"); 
+    navigate("/dashboard/employerDashboard"); 
   };
 
   return (

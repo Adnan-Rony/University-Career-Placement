@@ -1,8 +1,4 @@
-import {
-  CiClock1,
-  CiCalendarDate,
-  CiHeart,
-} from "react-icons/ci";
+import { CiClock1, CiCalendarDate, CiHeart } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { IoBusiness } from "react-icons/io5";
@@ -60,11 +56,11 @@ const HeaderJobCard = ({ job }) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 mt-2">
           <div className="flex items-center gap-2">
             <MdOutlineLocationOn className="text-xl text-purple-500" />
-            {job?.location?.city}, {job?.location?.state}, {job?.location?.country}
+            {job?.location}, {job?.state}, {job?.country}
           </div>
           <div className="flex items-center gap-2">
-            <FaDollarSign className="text-lg text-green-500" />
-            ${job?.salaryRange?.min} - ${job?.salaryRange?.max}
+            <FaDollarSign className="text-lg text-green-500" />$
+            {job?.salaryRange?.min} - ${job?.salaryRange?.max}
           </div>
           <div className="flex items-center gap-2">
             <CiCalendarDate className="text-xl text-blue-500" />
