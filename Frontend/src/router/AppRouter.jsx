@@ -19,8 +19,10 @@ import { EmployerDashboardMenu } from "../Components/Drawer/SidebarMenus/Employe
 import { PostedJobs } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/PostedJobs/PostedJobs.jsx";
 import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerDashboard/JobSeekerDashboardMenu.jsx";
 
-import AllFaqs from "../Pages/AllFaqs.jsx";
 import EmployerSignUP from "../Features/Authentication/EmployerSignUP.jsx";
+import AllFaqs from "../Pages/AllFaqs.jsx";
+import { CreateJob } from "../Pages/Empoloyer/CreateJob.jsx";
+
 
 export const AppRouter = createBrowserRouter([
   {
@@ -66,6 +68,10 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/employer-create-company",
         element: <EmployerSignUP />,
+      },
+      {
+        path: "/create-job",
+        element: <CreateJob />,
       },
     ],
   },
