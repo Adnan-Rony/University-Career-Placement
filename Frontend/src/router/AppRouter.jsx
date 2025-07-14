@@ -21,7 +21,7 @@ import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSee
 
 import EmployerSignUP from "../Features/Authentication/EmployerSignUP.jsx";
 import AllFaqs from "../Pages/AllFaqs.jsx";
-import { CreateJob } from "../Pages/Empoloyer/CreateJob.jsx";
+import { CreateJob } from './../Pages/Empoloyer/CreateJob';
 
 
 export const AppRouter = createBrowserRouter([

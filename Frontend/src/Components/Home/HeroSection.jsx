@@ -18,10 +18,9 @@ const HeroSection = () => {
 
             <p className="text-gray-500">
               Suggestions:{" "}
-              <span className="text-purple-600">UI/UX Designer</span>,
+              <span className="text-purple-600">Software Developer</span>,
               Programming,{" "}
-              <span className="text-purple-600">Digital Marketing</span>, Video,
-              Animation.
+              <span className="text-purple-600">Graphic Designer</span>,Data Analyst, Marketing Specialist.
             </p>
           </div>
           <div className="flex justify-center">
