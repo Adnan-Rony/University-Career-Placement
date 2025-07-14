@@ -99,9 +99,12 @@ export const AppRouter = createBrowserRouter([
       { path: "employerDashboard",
          element: <EmployerDashboardMenu/>
          },
-      { path: "employer/post-job",
-         element: <PostJob />
-         },
+
+
+        //  { path: "employer/post-job",
+        //  element: <PostJob />
+        //  },
+
       { path: "employer/postedJobs",
          element: <PostedJobs/>
          },

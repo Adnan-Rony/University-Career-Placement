@@ -3,10 +3,9 @@ import React from 'react'
 export const OverViewTab = () => {
   return (
     <div>
-      <h1 className='text-red-600'>
-        Lorem ipsum dolor sit
-         amet consectetur adipisicing elit. Voluptate, quibusdam.
-      </h1>
+     <p className="text-gray-600 mb-6 p-2">
+        You haven't completed your profile yet. Completing your profile will help employers find you more easily.
+      </p>
     </div>
   )
 }

@@ -15,7 +15,7 @@ export const JobseekerProfile = () => {
       case "Overview":
         return <OverViewTab />
       case "Profile":
-        return <ProfileTab />
+        return <ProfileTab/>
       case "Resume / CV":
         return <ResumeCvTab />
       case "Profile":
@@ -28,7 +28,7 @@ export const JobseekerProfile = () => {
   }
   return (
     <div>
-      <h1 className='text-3xl font-bold text-r-primary mb-6'>Edit Your JobSeeker  Profile Profile</h1>
+      <h1 className='text-3xl font-bold  mb-6'>Edit Your JobSeeker  Profile Profile</h1>
 
       <div>
 
@@ -43,7 +43,7 @@ export const JobseekerProfile = () => {
             >{tab}</li>)
           }
         </ul>
-        <div className='border my-6 bg-white'>
+        <div className='border rounded-md border-gray-300 my-6 bg-white'>
           {renederTabsByClick()}
         </div>
 
