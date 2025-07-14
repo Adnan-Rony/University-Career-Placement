@@ -8,19 +8,15 @@ export const JobSeekerSidebar = () => {
   return (
     <div className='space-y-2'>
          <li>
-              <Link>
+              <Link to={'jobseekerDashboard'}>
                 <MdDashboard/> JobSeeker Dashboard
               </Link>
             </li>
 
-            <li>
-              <Link to={"employer/post-job"}>
-                <FaBriefcase /> Post a Job
-              </Link>
-            </li>
+            
 
             <li>
-              <Link>
+              <Link to={'jobseekerProfile'}>
                 <FaUserPen /> Profile
               </Link>
             </li>

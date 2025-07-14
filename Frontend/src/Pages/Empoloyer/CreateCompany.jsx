@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { UseCreateCompany } from "../hooks/useCompany.js";
 import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { UseCreateCompany } from "../../hooks/useCompany.js";
 
-const CreateCompany = () => {
+const CreateCompany = ({ registeredUser, onCompanyCreated }) => {
   const { mutate: company, isPending, isLoading, isError } = UseCreateCompany();
 
   const {
@@ -14,6 +14,7 @@ const CreateCompany = () => {
     formState: { errors },
   } = useForm();
   const [image, setImage] = useState("");
+  const [cover, setCover] = useState("");
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
@@ -35,25 +36,49 @@ const CreateCompany = () => {
       toast.error("Image upload failed");
     }
   };
+  const handleCoverUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "blogging");
+
+    try {
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dnpycgwch/image/upload",
+        formData
+      );
+      setCover(res.data.secure_url);
+      toast.success("Cover Photo uploaded!");
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast.error("Cover Photo upload failed");
+    }
+  };
 
   const onSubmit = (data) => {
-    if (!image) {
-      toast.error("Please upload a company logo");
+    if (!cover) {
+      toast.error("Please upload a company cover");
       return;
     }
 
     const companyData = {
       ...data,
       logo: image,
+      cover: cover,
     };
 
-    console.log("Submitting company data:", companyData); // ✅ Log this
+    console.log("Submitting company data:", companyData);
 
     company(companyData, {
       onSuccess: () => {
         toast.success("Company created successfully");
         reset();
         setImage("");
+         if (onCompanyCreated) {
+      onCompanyCreated();  
+    }
       },
       onError: (error) => {
         console.error(
@@ -70,9 +95,9 @@ const CreateCompany = () => {
 
   return (
     <div>
-      <div className="max-w-6xl mx-auto p-6 bg-white">
+      <div className="max-w-7xl mx-auto p-6 ">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="shadow-xl rounded-2xl p-4">
+          <div className=" rounded-2xl p-4">
             <h2 className="text-xl font-semibold mb-6">
               Tell Us About Your Company
             </h2>
@@ -86,7 +111,7 @@ const CreateCompany = () => {
                   {...register("name", { required: true })}
                   type="text"
                   placeholder="Company name"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.name && (
                   <p className="text-red-500 text-sm mt-1">
@@ -99,7 +124,7 @@ const CreateCompany = () => {
                 <label className="block font-semibold mb-1">Industry *</label>
                 <select
                   {...register("industry", { required: true })}
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -159,7 +184,7 @@ const CreateCompany = () => {
                   {...register("establishment", { required: true })}
                   type="text"
                   placeholder="YYYY"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.establishment && (
                   <p className="text-red-500 text-sm mt-1">
@@ -174,7 +199,7 @@ const CreateCompany = () => {
                 </label>
                 <select
                   {...register("employees", { required: true })}
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -200,7 +225,7 @@ const CreateCompany = () => {
                   {...register("country", { required: true })}
                   type="text"
                   placeholder="Country"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.country && (
                   <p className="text-red-500 text-sm mt-1">
@@ -215,7 +240,7 @@ const CreateCompany = () => {
                   {...register("location", { required: true })}
                   type="text"
                   placeholder="Location"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.location && (
                   <p className="text-red-500 text-sm mt-1">
@@ -230,7 +255,7 @@ const CreateCompany = () => {
                   {...register("city", { required: true })}
                   type="text"
                   placeholder="City"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.city && (
                   <p className="text-red-500 text-sm mt-1">City is required</p>
@@ -246,11 +271,29 @@ const CreateCompany = () => {
                 type="file"
                 accept="image/*"
                 onChange={handleFileUpload}
-                className="w-full border p-2 rounded"
+                className="w-full border border-purple-300 focus:outline-none focus:ring-0 p-2 rounded"
               />
               {image && (
                 <img
                   src={image}
+                  alt="Preview"
+                  className="mt-2 h-32 object-contain rounded"
+                />
+              )}
+            </div>
+            <div className="my-2">
+              <label className="block font-semibold mb-1">
+                Upload Company Cover
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleCoverUpload}
+                className="w-full border border-purple-300 focus:outline-none focus:ring-0 p-2 rounded"
+              />
+              {cover && (
+                <img
+                  src={cover}
                   alt="Preview"
                   className="mt-2 h-32 object-contain rounded"
                 />
@@ -261,7 +304,7 @@ const CreateCompany = () => {
               <label className="block font-semibold mb-1">About *</label>
               <textarea
                 {...register("description", { required: true })}
-                className="w-full p-4 border rounded-lg text-sm"
+                className="w-full p-4 border border-purple-300 focus:outline-none focus:ring-0 rounded-lg text-sm"
                 rows="5"
                 placeholder="About Company"
               />
@@ -273,7 +316,7 @@ const CreateCompany = () => {
             </div>
           </div>
 
-          <div className="p-4 my-4 shadow-xl rounded-2xl">
+          <div className="p-4 my-4  rounded-2xl">
             <p className="text-xl font-semibold mb-6">
               Provide Contact Person Information
             </p>
@@ -285,7 +328,7 @@ const CreateCompany = () => {
                 <input
                   {...register("contactPersonName", { required: true })}
                   type="text"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.contactPersonName && (
                   <p className="text-red-500 text-sm mt-1">Name is required</p>
@@ -298,7 +341,7 @@ const CreateCompany = () => {
                 <input
                   {...register("contactPersonDesignation", { required: true })}
                   type="text"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.contactPersonDesignation && (
                   <p className="text-red-500 text-sm mt-1">
@@ -311,7 +354,7 @@ const CreateCompany = () => {
                 <input
                   {...register("contactPersonEmail", { required: true })}
                   type="email"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.contactPersonEmail && (
                   <p className="text-red-500 text-sm mt-1">Email is required</p>
@@ -322,7 +365,7 @@ const CreateCompany = () => {
                 <input
                   {...register("contactPersonMobile", { required: true })}
                   type="tel"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
                 {errors.contactPersonMobile && (
                   <p className="text-red-500 text-sm mt-1">
@@ -333,7 +376,7 @@ const CreateCompany = () => {
             </div>
           </div>
 
-          <div className="p-4 my-4 shadow-2xl rounded-2xl">
+          <div className="p-4 my-4  rounded-2xl">
             <p className="text-xl font-semibold mb-6">Social Network</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
@@ -341,7 +384,7 @@ const CreateCompany = () => {
                 <input
                   {...register("facebookUrl")}
                   type="text"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
               </div>
               <div>
@@ -349,7 +392,7 @@ const CreateCompany = () => {
                 <input
                   {...register("twitterUrl")}
                   type="text"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
               </div>
               <div>
@@ -357,7 +400,7 @@ const CreateCompany = () => {
                 <input
                   {...register("linkedinUrl")}
                   type="text"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
               </div>
               <div>
@@ -365,19 +408,21 @@ const CreateCompany = () => {
                 <input
                   {...register("websiteUrl")}
                   type="text"
-                  className="mt-1 w-full px-4 py-2 border rounded-md"
+                  className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
                 />
               </div>
             </div>
           </div>
 
-          <button
+          <div className="flex justify-end mt-6">
+            <button
             type="submit"
-            className="bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+            className="bg-purple-700 text-white p-3 rounded-lg font-semibold  "
             disabled={isLoading}
           >
             {isPending ? "Creating..." : "Create Company"}
           </button>
+          </div>
         </form>
       </div>
     </div>

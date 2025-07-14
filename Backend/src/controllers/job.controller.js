@@ -5,8 +5,8 @@ import { Company } from "../models/company.model.js";
 export const createJob = async (req, res) => {
   try {
     const {
-      title, description, company, location, salaryRange,
-      jobType, deadline, skillsRequired,image,vacancy
+      title, description, company, location,country,city, salaryRange,
+      jobType, deadline, skillsRequired,image,vacancy,industry
     } = req.body;
 
     const employerId = req.user.id; 
@@ -22,6 +22,7 @@ export const createJob = async (req, res) => {
       title,
       description,
       company,
+      industry,
       postedBy: employerId,
       location,
       salaryRange,
@@ -29,7 +30,8 @@ export const createJob = async (req, res) => {
       vacancy,
       deadline,
       image,
-      skillsRequired
+      skillsRequired,
+      country,city,
     });
 
     await newJob.save();
@@ -101,7 +103,7 @@ export const updateJob = async (req, res) => {
     }
 
     // Update allowed fields
-    const allowedUpdates = ['title', 'description', 'location', 'salaryRange', 'jobType', 'deadline', 'skillsRequired','image','vacancy'];
+    const allowedUpdates = ['title', 'description','industry', 'location', 'salaryRange','location','city', 'jobType', 'deadline', 'skillsRequired','image','vacancy'];
     allowedUpdates.forEach(field => {
       if (req.body[field] !== undefined) {
         job[field] = req.body[field];
@@ -145,12 +147,11 @@ export const deleteJob = async (req, res) => {
 
 export const searchJobs = async (req, res) => {
   try {
-    const { title, companyName, location, jobType, skills } = req.query;
-
+    const { title, companyName,country,city,industry, location, jobType, skills } = req.query;
     let query = {};
 
     if (title) {
-      query.title = { $regex: title, $options: "i" }; // Case-insensitive search
+      query.title = { $regex: title, $options: "i" };
     }
 
     if (jobType) {
@@ -158,26 +159,26 @@ export const searchJobs = async (req, res) => {
     }
 
     if (location) {
+      const locationRegex = { $regex: location, $regex:city, $regex:country, $options: "i" };
       query.$or = [
-        { "location.city": { $regex: location, $options: "i" } },
-        { "location.state": { $regex: location, $options: "i" } },
-        { "location.country": { $regex: location, $options: "i" } },
+        ...(query.$or || []),
+        { "location.city": locationRegex },
+        { "location.state": locationRegex },
+        { "location.country": locationRegex },
       ];
     }
 
     if (skills) {
-      const skillsArray = skills.split(",").map(skill => skill.trim());
-      query.skillsRequired = { $all: skillsArray };  // Change to $in if you want any match instead of all
+      const skillsArray = skills.split(",").map((s) => s.trim());
+      query.skillsRequired = { $all: skillsArray };
     }
 
-    // First find jobs matching filters (except companyName)
     let jobs = await Job.find(query)
-      .populate('company', 'name logo')
-      .populate('postedBy', 'email');
+      .populate("company", "name logo")
+      .populate("postedBy", "email");
 
     if (companyName) {
-      // Filter jobs by company name (case-insensitive)
-      jobs = jobs.filter(job =>
+      jobs = jobs.filter((job) =>
         job.company?.name.toLowerCase().includes(companyName.toLowerCase())
       );
     }
@@ -188,6 +189,8 @@ export const searchJobs = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to search jobs" });
   }
 };
+
+
 
 
 export const getRecommendedJobs = async (req, res) => {

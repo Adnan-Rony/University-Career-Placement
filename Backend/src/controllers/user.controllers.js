@@ -7,57 +7,66 @@ import { generateToken } from './../utils/generateToken.js';
 
 
 export const register = async (req, res) => {
-    const { name, email, password, role } = req.body;
+  const { name, email, password, role } = req.body;
 
-    try {
-
-        let existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ success: false, message: 'User already exists' });
-        }
-
-        // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create new user
-        const newUser = new User({
-            name,
-            email,
-            password: hashedPassword,
-            role: role || 'job-seeker',
-        });
-
-        await newUser.save();
-
-        // Generate JWT
-        const token = generateToken(newUser);
-
-        // Set cookie
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-            maxAge: 5 * 24 * 60 * 60 * 1000, // 5 days
-        });
-
-        // Return response
-        res.status(201).json({
-            success: true,
-            message: 'User registered successfully',
-            user: {
-                id: newUser._id,
-                name: newUser.name,
-                email: newUser.email,
-                role: newUser.role,
-            },
-            token
-        });
-
-    } catch (error) {
-        console.error('Registration error:', error);
-        res.status(500).json({ success: false, message: 'Server error. Please try again.' });
+  try {
+    let existingUser = await User.findOne({ email });
+    if (existingUser) {
+      // ✅ If user already exists, just return success with their data
+      const token = generateToken(existingUser);
+      return res.status(200).json({
+        success: true,
+        message: 'User already exists (logged in)',
+        user: {
+          id: existingUser._id,
+          name: existingUser.name,
+          email: existingUser.email,
+          role: existingUser.role,
+        },
+        token,
+      });
     }
+
+    const hashedPassword = password
+      ? await bcrypt.hash(password, 10)
+      : undefined;
+
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword || '', // Or just skip password
+      role: role || 'job-seeker',
+    });
+
+    await newUser.save();
+
+    const token = generateToken(newUser);
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      maxAge: 5 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'User registered successfully',
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role,
+      },
+      token,
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ success: false, message: 'Server error. Please try again.' });
+  }
 };
+
+
 
 export const login = async (req, res) => {
     const { email, password } = req.body;

@@ -7,7 +7,7 @@ const Loading = () => {
       <img
         src={img}
         alt="Company Logo"
-        className="w-16 h-16 animate-pulse mb-4"
+        className="w-16 h-16 skeleton animate-pulse mb-4"
       />
 
       {/* Spinner */}

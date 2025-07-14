@@ -1,19 +1,32 @@
-import React from "react";
 import { createBrowserRouter } from "react-router";
-import { MainLayouts } from "../Layouts/MainLayouts";
-import { Home } from "../Pages/Home";
 import { SignIn } from "../Features/Authentication/SignIn";
 import { SignUp } from "../Features/Authentication/SignUp";
 import { DashBoardLayout } from "../Layouts/DashBoardLayout";
-import { PostJob } from "../Pages/Empoloyer/PostJob";
+import { MainLayouts } from "../Layouts/MainLayouts";
 import { BlogDetails } from "../Pages/BlogDetails";
+import { Home } from "../Pages/Home";
 import JobDetails from "../Pages/JobDetails.jsx";
 
-import CreateCompany from "../Pages/CreateCompany.jsx";
-
+import CreateCompany from "../Pages/Empoloyer/CreateCompany.jsx";
 
 import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/AdminDashboard/AdminDashboardMenu.jsx";
 import { ManageCompany } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageCompany/ManageCompany.jsx";
+
+import JobsShowAll from "../Pages/JobsShowAll.jsx";
+import AllCompany from "../Pages/company/AllCompany.jsx";
+
+import { EmployerDashboardMenu } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerDashboard/EmployerDashboardMenu.jsx";
+import { PostedJobs } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/PostedJobs/PostedJobs.jsx";
+
+import { ManageUsers } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageUsers/ManageUsers.jsx";
+import { JobseekerProfile } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/Profile/JobseekerProfile.jsx";
+
+import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerDashboard/JobSeekerDashboardMenu.jsx";
+
+
+import EmployerSignUP from "../Features/Authentication/EmployerSignUP.jsx";
+import AllFaqs from "../Pages/AllFaqs.jsx";
+import { CreateJob } from './../Pages/Empoloyer/CreateJob';
 
 
 export const AppRouter = createBrowserRouter([
@@ -35,37 +48,91 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: "/blog/blogdetails/:id",
-        element: <BlogDetails/>,
-
+        element: <BlogDetails />,
       },
       {
         path: "/job/details/:id",
-        element: <JobDetails/>,
-
+        element: <JobDetails />,
+      },
+      // {
+      //   path: "/company",
+      //   element: <CreateCompany />,
+      // },
+      {
+        path: "/alljobs",
+        element: <JobsShowAll />,
       },
       {
-        path: "/company",
-        element: <CreateCompany/>,
-
+        path: "/allcompanies",
+        element: <AllCompany />,
       },
-    
-    ]
-      
+      {
+        path: "/interview-questions",
+        element: <AllFaqs />,
+      },
+      {
+        path: "/employer-create-company",
+        element: <EmployerSignUP />,
+      },
+      {
+        path: "/create-job",
+        element: <CreateJob />,
+      },
+    ],
   },
   {
     path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
-      
-      { path: "employer/post-job", element: <PostJob /> },
+
+       { path: "jobseekerDashboard",
+         element:<JobSeekerDashboardMenu/>
+         },
+        {
+          path:"jobseekerProfile",
+          element:<JobseekerProfile/>
+        }
+
+,
+
+      // For Employer
+      { path: "employerDashboard",
+         element: <EmployerDashboardMenu/>
+         },
+
+
+        //  { path: "employer/post-job",
+        //  element: <PostJob />
+        //  },
+
+      { path: "employer/postedJobs",
+         element: <PostedJobs/>
+         },
+
+ // For Admin
+
+    
+
+      // For Employer
+     
+      { path: "employer/post-job", element: <CreateCompany /> },
+      { path: "employer/postedJobs", element: <PostedJobs /> },
+
+
       {
-        path:"adminDashboard",
-        element:<AdminDashboardMenu/>
+        path: "adminDashboard",
+        element: <AdminDashboardMenu />,
       },
       {
+
         path:"manageCompany",
         element:<ManageCompany/>
+      },
+      {
+        path:"manageUsers",
+        element:<ManageUsers/>
       }
+
     ],
   },
 ]);

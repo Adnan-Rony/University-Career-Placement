@@ -7,13 +7,11 @@ import { EmployerSidebar } from "./Sidebars/EmployerSidebar";
 import { JobSeekerSidebar } from "./Sidebars/JobSeekerSidebar";
 import { useCurrentUser } from "../../hooks/useAuth";
 export const DrawerLayout = () => {
- 
+  const { data } = useCurrentUser();
 
-   const {data}=useCurrentUser()
-    
-    const user=data?.user
-     const role = user?.role;
-    console.log(role);
+  const user = data?.user;
+  const role = user?.role;
+  console.log(role);
 
   const RenderSidebars = () => {
     switch (role) {
@@ -29,7 +27,7 @@ export const DrawerLayout = () => {
 
   return (
     <div>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open bg-[#f9f9f9]">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div
           className="drawer-content flex flex-col  container space-y-4
@@ -50,18 +48,18 @@ export const DrawerLayout = () => {
           ></label>
 
           <ul
-            className="menu bg-base-300 
-    text-base-content min-h-full w-60 p-4 space-y-3 text-base "
+            className="menu  bg-gradient-to-r from-[#f7f1fb] to-[#f6effb]
+    text-base-content min-h-full w-60 p-4 space-y-3 text-base border-r border-gray-200 "
           >
             {/* Sidebar content here */}
             <li>
-              <div className="">
+              <Link to={'/'} className="">
                 <h1 className="text-2xl font-extrabold text-nowrap mb-2">
                   Job
                   <span className="text-r-primary"> Portal</span>
                 </h1>
                 <sub className="text-black/50">Dashboard</sub>
-              </div>
+              </Link>
             </li>
 
             {RenderSidebars()}
