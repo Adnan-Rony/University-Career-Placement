@@ -21,6 +21,8 @@ export const CreateJob = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     // Check if company exists
     if (!myCompanyData?.company?.length) {
@@ -50,6 +52,7 @@ export const CreateJob = () => {
       onSuccess: () => {
         toast.success("Job created successfully");
         reset();
+        navigate("/")
       },
       onError: (error) => {
         toast.error(error.response?.data?.message || "Failed to create job");

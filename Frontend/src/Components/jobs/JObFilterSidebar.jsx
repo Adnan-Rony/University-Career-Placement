@@ -3,7 +3,7 @@ import React from "react";
 const JObFilterSidebar = () => {
   return (
     <div>
-      <aside className=" bg-white p-5 rounded-lg shadow-sm space-y-6">
+      <aside className=" bg-white p-5 rounded-lg shadow-sm space-y-6 h-full">
         <div>
           <label className="block text-sm font-semibold mb-1">
             Search by Keywords
