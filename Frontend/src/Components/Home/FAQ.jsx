@@ -98,7 +98,7 @@ const FaqSection = ({ showall = false }) => {
       {!showall && (
         <div className="text-center mt-10">
           <Link to="/interview-questions" className="inline-block">
-            <button className="btn bg-purple-700 text-white btn-outline">
+            <button className="btn bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white btn-outline">
               Read More
             </button>
           </Link>

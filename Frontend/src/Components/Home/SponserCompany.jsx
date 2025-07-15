@@ -91,7 +91,7 @@ const SponserCompany = () => {
             onClick={() => setActiveIndustry(industry)}
             className={`px-4 py-1 border rounded-full text-sm transition ${
               activeIndustry === industry
-                ? "bg-r-primary text-white "
+                ? "bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white "
                 : "hover:bg-blue-100"
             }`}
           >
@@ -115,7 +115,7 @@ const SponserCompany = () => {
 
       {/* View all button */}
       <div className="text-center mt-10">
-        <button className="px-6 py-2 bg-r-primary text-white rounded-full hover:bg-r-primary transition">
+        <button className="px-6 py-2 bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white rounded-full hover:bg-r-primary transition">
           View all companies
         </button>
       </div>

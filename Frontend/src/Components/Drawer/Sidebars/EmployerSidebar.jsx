@@ -17,8 +17,8 @@ export const EmployerSidebar = () => {
         </Link>
       </li>
       <li>
-        <Link to="employer/post-job" className="flex items-center gap-2">
-        <IoBusiness /> Create Company
+        <Link to="employer/create-job" className="flex items-center gap-2">
+        <IoBusiness /> Create job
         </Link>
       </li>
       <li>

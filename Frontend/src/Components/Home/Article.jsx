@@ -78,7 +78,7 @@ const Article = () => {
                 <p className="text-gray-600 text-sm mb-4">{article.excerpt}</p>
 
                 <Link>
-                  <button className="btn bg-r-primary text-white btn-outline">
+                  <button className="btn bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white btn-outline">
                     Read More
                   </button>
                 </Link>

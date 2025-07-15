@@ -1,17 +1,16 @@
-import axios from "axios";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
 import { UseMyCompany } from "../../hooks/useCompany.js";
 import { UseCreateJob } from "../../hooks/useJobs.js";
 
-
-
 export const CreateJob = () => {
-    const { data: myCompanyData, isLoading: loadingCompany, isError: companyError } = UseMyCompany();
+  const {
+    data: myCompanyData,
+    isLoading: loadingCompany,
+    isError: companyError,
+  } = UseMyCompany();
   const { mutate: createJob, isLoading } = UseCreateJob();
 
   const {
@@ -52,9 +51,10 @@ export const CreateJob = () => {
       onSuccess: () => {
         toast.success("Job created successfully");
         reset();
-        navigate("/")
+        navigate("/");
       },
       onError: (error) => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
         toast.error(error.response?.data?.message || "Failed to create job");
       },
     });
@@ -66,26 +66,24 @@ export const CreateJob = () => {
   return (
     <div className="mx-auto my-10 p-6  container ">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div>
-            <label className="block font-semibold mb-1">title *</label>
+            <label className="block font-semibold mb-1"> Job title *</label>
             <input
-            {...register("title", { required: true })}
+              {...register("title", { required: true })}
               type="text"
               placeholder="Enter a job title"
               className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
             />
-            {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job title is required
-                  </p>
-                )}
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">Job title is required</p>
+            )}
           </div>
 
           <div>
             <label className="block font-semibold mb-1">Job Type *</label>
             <select
-             {...register("jobType", { required: true })}
+              {...register("jobType", { required: true })}
               className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
               defaultValue=""
             >
@@ -98,105 +96,10 @@ export const CreateJob = () => {
               <option value="contract">contract</option>
             </select>
             {errors.jobType && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Industry is required
-                  </p>
-                )}
+              <p className="text-red-500 text-sm mt-1">Industry is required</p>
+            )}
           </div>
-        </div>
 
-        <div className="grid grid-cols-1  gap-6 mb-6">
-          <div>
-            <label className="block font-semibold mb-1">Description *</label>
-            <textarea
-              {...register("description", { required: true })}
-              placeholder="Enter job description"
-              type="text"
-              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
-            />
-            {errors.description && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job description is required
-                  </p>
-                )}
-          </div>
-        </div>
-
-        {/* VACANCY deadline */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <label className="block font-semibold mb-1">Vacancy *</label>
-            <input
-             {...register("vacancy", { required: true })}
-              type="number"
-              placeholder="Enter a number of vacancies"
-              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
-            />
-            {errors.vacancy && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job vacancy is required
-                  </p>
-                )}
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Deadline *</label>
-            <input
-               {...register("deadline", { required: true })}
-              type="date"
-              placeholder=""
-              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
-            />
-            {errors.deadline && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job deadline is required
-                  </p>
-                )}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <label className="block font-semibold mb-1">Country *</label>
-            <input
-              {...register("country", { required: true })}
-              type="country"
-              placeholder="Enter a country"
-              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
-            />
-            {errors.country && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job country is required
-                  </p>
-                )}
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">location *</label>
-            <input
-              {...register("location", { required: true })}
-              type="text"
-              placeholder="enter a location"
-              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
-            />
-               {errors.location && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job location is required
-                  </p>
-                )}
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">City *</label>
-            <input
-              {...register("city", { required: true })}
-              type="text"
-              placeholder="enter a city"
-              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
-            />
-              {errors.city && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job city is required
-                  </p>
-                )}
-          </div>
           <div>
             <label className="block font-semibold mb-1">
               Select Industry *
@@ -245,87 +148,374 @@ export const CreateJob = () => {
               <option value="others">Others</option>
             </select>
             {errors.industry && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job industry is required
-                  </p>
-                )}
+              <p className="text-red-500 text-sm mt-1">
+                Job industry is required
+              </p>
+            )}
           </div>
-
-          {/* <div>
-            <label className="block font-semibold mb-1">
-              Upload Job Image *
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              className="w-full border file-input border-purple-300 focus:outline-none focus:ring-0  rounded"
-            />
-          </div> */}
         </div>
 
-        <div className="grid grid-cols-1 gap-6 mb-6">
+        <div className="grid grid-cols-1  gap-6 mb-6">
+          <div>
+            <label className="block font-semibold mb-1">Description *</label>
+            <textarea
+              {...register("description", { required: true })}
+              placeholder="Enter job description"
+              type="text"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.description && (
+              <p className="text-red-500 text-sm mt-1">
+                Job description is required
+              </p>
+            )}
+          </div>
+
           <div>
             <label className="block font-semibold mb-1">
+              Job Requirement *
+            </label>
+            <textarea
+              {...register("jobRequirements", { required: true })}
+              placeholder="Enter job jobRequirements"
+              type="text"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.jobRequirements && (
+              <p className="text-red-500 text-sm mt-1">
+                Job jobRequirements is required
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* VACANCY deadline */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div>
+            <label className="block font-semibold mb-1">Deadline *</label>
+            <input
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+              {...register("deadline", { required: true })}
+              type="date"
+              min={new Date().toISOString().split("T")[0]}
+              max={
+                new Date(new Date().setMonth(new Date().getMonth() + 2))
+                  .toISOString()
+                  .split("T")[0]
+              }
+            />
+
+            {errors.deadline && (
+              <p className="text-red-500 text-sm mt-1">
+                Job deadline is required
+              </p>
+            )}
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Vacancy *</label>
+            <input
+              {...register("vacancy", { required: true })}
+              type="number"
+              placeholder=""
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.vacancy && (
+              <p className="text-red-500 text-sm mt-1">
+                Job vacancy is required
+              </p>
+            )}
+          </div>
+          <div className="w-full">
+            <label className="block font-medium text-gray-700 mb-1">
+              Gender
+            </label>
+            <select
+              {...register("gender", { required: false })}
+              defaultValue=""
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="" disabled>
+                Select gender
+              </option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Any">Any</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div>
+            <label className="block font-semibold mb-1">Country *</label>
+            <input
+              {...register("country", { required: true })}
+              type="country"
+              placeholder="Enter a country"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.country && (
+              <p className="text-red-500 text-sm mt-1">
+                Job country is required
+              </p>
+            )}
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">location *</label>
+            <input
+              {...register("location", { required: true })}
+              type="text"
+              placeholder="enter a location"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.location && (
+              <p className="text-red-500 text-sm mt-1">
+                Job location is required
+              </p>
+            )}
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">City *</label>
+            <input
+              {...register("city", { required: true })}
+              type="text"
+              placeholder="enter a city"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.city && (
+              <p className="text-red-500 text-sm mt-1">Job city is required</p>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {/* Salary Type */}
+          <div className="w-full">
+            <label className="block font-medium text-gray-700 mb-1">
+              Salary Type *
+            </label>
+            <select
+              {...register("salaryType", { required: true })}
+              defaultValue=""
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="" disabled>
+                Select Salary Type
+              </option>
+              <option value="Monthly">Monthly</option>
+              <option value="Yearly">Yearly</option>
+              <option value="Hourly">Hourly</option>
+              <option value="Negotiable">Negotiable</option>
+            </select>
+            {errors.salaryType && (
+              <p className="text-red-500 text-sm mt-1">
+                Salary type is required
+              </p>
+            )}
+          </div>
+
+          {/* Currency */}
+          <div className="w-full">
+            <label className="block font-medium text-gray-700 mb-1">
+              Currency *
+            </label>
+            <select
+              {...register("currency", { required: true })}
+              defaultValue=""
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="" disabled>
+                Select Currency
+              </option>
+              <option value="USD">USD</option>
+              <option value="BDT">BDT</option>
+              <option value="INR">INR</option>
+              <option value="Other">Other</option>
+            </select>
+            {errors.currency && (
+              <p className="text-red-500 text-sm mt-1">Currency is required</p>
+            )}
+          </div>
+
+          {/* Salary Range */}
+          <div className="w-full">
+            <label className="block font-medium text-gray-700 mb-1">
               Salary Range (BDT) *
             </label>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <input
                 {...register("salaryMin", { required: true })}
                 type="number"
                 name="salaryMin"
                 placeholder="Min"
-                className="w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
-               {errors.salaryMin && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job salaryMin is required
-                  </p>
-                )}
               <span className="text-gray-500">to</span>
               <input
                 {...register("salaryMax", { required: true })}
                 type="number"
                 name="salaryMax"
                 placeholder="Max"
-                className="w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
-              {errors.salaryMax && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job salaryMax is required
-                  </p>
-                )}
             </div>
+            {(errors.salaryMin || errors.salaryMax) && (
+              <p className="text-red-500 text-sm mt-1">
+                Salary range is required
+              </p>
+            )}
           </div>
         </div>
 
         {/* skill */}
-        <div className="grid grid-cols-1  gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3  gap-6 mb-6">
           <div>
             <label className="block font-semibold mb-1">
-              Skills Required *
+              Total Years of Experience *
             </label>
+            <input
+              {...register("totalExperience", { required: false })}
+              type="number"
+              placeholder="Enter a number of vacancies"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.totalExperience && (
+              <p className="text-red-500 text-sm mt-1">
+                total Experience is required
+              </p>
+            )}
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">
+              Minimum Experience{" "}
+            </label>
+            <input
+              {...register("minExperience", { required: false })}
+              type="number"
+              placeholder="Enter a number of vacancies"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.minExperience && (
+              <p className="text-red-500 text-sm mt-1">
+                total Experience is required
+              </p>
+            )}
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">
+              Miximum Experience{" "}
+            </label>
+            <input
+              {...register("maxExperience", { required: false })}
+              type="number"
+              placeholder="Enter a number of vacancies"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+            {errors.maxExperience && (
+              <p className="text-red-500 text-sm mt-1">
+                total Experience is required
+              </p>
+            )}
+          </div>
+
+          <div className="w-full">
+            <label className="block font-medium text-gray-700 mb-1">
+              job Level *
+            </label>
+            <select
+              {...register("jobLevel", { required: true })}
+              defaultValue=""
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="" disabled>
+                Select Currency
+              </option>
+              <option value="Entry">Entry</option>
+              <option value="Mid">Mid</option>
+              <option value="Senior">Senior</option>
+              <option value="Executive">Executive</option>
+              <option value="Top Level">Top Level</option>
+              <option value="Other">Other</option>
+            </select>
+            {errors.jobLevel && (
+              <p className="text-red-500 text-sm mt-1">jobLevel is required</p>
+            )}
+          </div>
+          <div className="w-full">
+            <label className="block font-medium text-gray-700 mb-1">
+              job Shift *
+            </label>
+            <select
+              {...register("jobShift", { required: true })}
+              defaultValue=""
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="" disabled>
+                Select jobShift
+              </option>
+              <option value="Day">Day</option>
+              <option value="Night">Night</option>
+              <option value="Flexible">Flexible</option>
+              <option value="Rotational">Rotational</option>
+              <option value="Remote">Remote</option>
+            </select>
+            {errors.jobShift && (
+              <p className="text-red-500 text-sm mt-1">jobShift is required</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block font-semibold mb-1">Minimum Age </label>
+            <input
+              {...register("minAge", { required: false })}
+              type="number"
+              placeholder="Enter a number of vacancies"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+          </div>
+          
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3  gap-6 mb-6">
+          <div className="md:col-span-1">
+            <label className="block font-semibold mb-1">Miximum Age </label>
+            <input
+              {...register("maxAge", { required: false })}
+              type="number"
+              placeholder="Enter a number of vacancies"
+              className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block font-semibold mb-1">
+              Skills Required (comma separated) *
+            </label>
+
             <textarea
               {...register("skillsRequired", { required: true })}
               placeholder="Enter skills requirement"
               type="text"
               className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
             />
-             {errors.skillsRequired && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Job skillsRequired is required
-                  </p>
-                )}
+            {errors.skillsRequired && (
+              <p className="text-red-500 text-sm mt-1">
+                Job skillsRequired is required
+              </p>
+            )}
           </div>
         </div>
-         <div className="flex justify-end mt-6">
-            <button
+
+        <div className="flex justify-end mt-6">
+          <button
             type="submit"
-            className="bg-purple-700 text-white p-3 rounded-lg font-semibold  "
+            className={`bg-purple-700 text-white p-3 rounded-lg font-semibold ${
+              isLoading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
             disabled={isLoading}
           >
-           {isLoading ? "Creating..." : "Create Job"}
+            {isLoading ? "Creating..." : "Create Job"}
           </button>
-          </div>
+        </div>
       </form>
     </div>
   );

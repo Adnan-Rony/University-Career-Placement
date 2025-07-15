@@ -45,7 +45,7 @@ const SearchBar = () => {
           onClick={() =>
             navigate(`/job/search-results?title=${input}&location=${location}`)
           }
-          className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700"
+          className="bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700"
         >
           Find Job
         </button>
