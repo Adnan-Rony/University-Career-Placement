@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { SocialProfiles } from '../ProfileForms/SocialProfiles';
+import { EducationForm } from '../ProfileForms/EducationForm';
 
 export const ProfileTab = () => {
   const { register, control, handleSubmit, watch, formState: { errors } } = useForm({
@@ -114,6 +115,7 @@ export const ProfileTab = () => {
 
     
     <SocialProfiles/>
+    <EducationForm/>
    </div>
   );
 };
