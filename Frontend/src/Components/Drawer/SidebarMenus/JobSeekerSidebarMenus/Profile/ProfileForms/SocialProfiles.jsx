@@ -11,12 +11,7 @@ export const SocialProfiles = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-    website: profileData.website,
-    linkedin: profileData.linkedin,
-    github: profileData.github,
-    twitter: profileData.twitter,
-    },
+    defaultValues:profileData.social
   });
 
   const onSubmit = (data) => {
@@ -52,8 +47,8 @@ export const SocialProfiles = () => {
 
         {/* LinkedIn */}
         <div className="col-span-2">
-          <label className="text-sm font-medium
-          flex items-center gap-1 text-gray-700">
+          <label className="text-sm font-medium text-gray-700
+          flex items-center gap-1 ">
           <FaLinkedin />  LinkedIn
           </label>
           <input
@@ -92,7 +87,11 @@ export const SocialProfiles = () => {
             className="mt-1 input w-full"
           />
         </div>
-
+    <div className="col-span-2 flex justify-end">
+      <button
+      type="submit"
+      className="btn btn-outline ">Submit</button>
+    </div>
       
       </form>
     </div>
