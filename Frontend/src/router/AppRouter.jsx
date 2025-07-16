@@ -24,6 +24,7 @@ import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSee
 import EmployerSignUP from "../Features/Authentication/EmployerSignUP.jsx";
 import AllFaqs from "../Pages/AllFaqs.jsx";
 import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
+import CompanyDetails from "../Pages/company/CompanyDetails.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/create-job",
         element: <CreateJob />,
+      },
+      {
+        path: "/company",
+        element: <CompanyDetails />,
       },
     ],
   },

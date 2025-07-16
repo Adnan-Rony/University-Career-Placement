@@ -59,7 +59,7 @@ export const getAllJobs = async (req, res) => {
   try {
     const { companyName, jobTitle } = req.query;
 
-    let jobs = await Job.find()
+    let jobs = await Job.find().sort({ createdAt: -1 })
       .populate('company' )
       .populate('postedBy', 'email');
 
