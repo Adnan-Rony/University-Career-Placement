@@ -64,7 +64,7 @@ export const CreateJob = () => {
   if (companyError) return <div>Error loading your company data.</div>;
 
   return (
-    <div className="mx-auto my-10 p-6  container ">
+    <div className="mx-auto  p-5   container bg-white  rounded-lg shadow-md border border-gray-200">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div>

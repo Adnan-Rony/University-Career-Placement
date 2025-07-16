@@ -7,6 +7,12 @@ export const fetchApplication = async () => {
 };
 
 
+export const fetchAllApplicationBySingleCompany = async () => {
+  const res = await axiosInstance.get('/application/all-applications');
+  return res.data;
+};
+
+
 
 export const createApply = async (data) => {
   const res = await axiosInstance.post('/application/apply',data);

@@ -1,4 +1,5 @@
 import { Application } from "../models/application.model.js";
+import { Job } from "../models/job.model.js";
 import { sendEmail } from "../utils/mailer.js";
 
 
@@ -54,6 +55,36 @@ export const getApplicationsForJob = async (req, res) => {
 
     res.status(200).json({ success: true, applications });
     
+  } catch (err) {
+    console.error("Error fetching applications:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+//upsated fetch all application
+export const getAllApplicationsForEmployer = async (req, res) => {
+  try {
+    const employerId = req.user.id; 
+
+    
+    const jobs = await Job.find({ postedBy: employerId }).select("_id");
+
+    const jobIds = jobs.map((job) => job._id);
+
+    // Step 2: Find all applications for those jobs
+    const applications = await Application.find({ job: { $in: jobIds } })
+      .populate("applicant", "name email")
+      .populate({
+        path: "job",
+        select: "title image deadline",
+        populate: {
+          path: "company",
+          select: "name logo",
+        },
+      });
+
+    res.status(200).json({ success: true, applications });
   } catch (err) {
     console.error("Error fetching applications:", err);
     res.status(500).json({ success: false, message: "Server error" });

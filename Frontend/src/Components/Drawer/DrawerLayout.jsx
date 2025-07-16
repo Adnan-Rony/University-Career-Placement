@@ -54,12 +54,12 @@ export const DrawerLayout = () => {
             {/* Sidebar content here */}
             <li>
               <Link to={"/"} className="">
-                 <div className="flex items-center gap-2 mb-4">
-                            <div className="w-8 h-8 flex items-center justify-center bg-purple-700 text-white rounded-md">
-                              <FaGraduationCap />
-                            </div>
-                            <h2 className="font-bold text-black text-lg">JobPortal</h2>
-                          </div>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 flex items-center justify-center bg-purple-700 text-white rounded-md">
+                    <FaGraduationCap />
+                  </div>
+                  <h2 className="font-bold text-black text-lg">JobPortal</h2>
+                </div>
               </Link>
             </li>
 
