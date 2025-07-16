@@ -1,40 +1,17 @@
 import React from "react";
 
-const CardCompanySkeleton = () => {
+const CardCompanySkeleton = ({ count = 6 }) => {
   return (
-    <div className="container mt-12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-      {Array.from({ length: 3 }).map((_, idx) => (
+    <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 gap-4 max-w-screen-xl mx-auto">
+      {Array.from({ length: count }).map((_, index) => (
         <div
-          key={idx}
-          className="rounded-xl shadow-sm overflow-hidden bg-white animate-pulse"
-          aria-label="Loading company card"
+          key={index}
+          className="animate-pulse border border-gray-200 p-5 rounded-md text-center shadow w-56 mx-auto"
         >
-          {/* Banner Skeleton */}
-          <div className="relative skeleton bg-gray-200 lg:h-[195px] h-40 w-full" />
-
-          {/* Info Skeleton */}
-          <div className="p-4 space-y-4">
-            {/* Logo & Name */}
-            <div className="flex items-center gap-3">
-              <div className="w-10  skeleton h-10 bg-gray-300 rounded-full" />
-              <div className="h-4 skeleton w-3/4 bg-gray-300 rounded" />
-            </div>
-
-            {/* Location */}
-            <div className="flex items-center gap-2">
-              <div className="w-4 skeleton h-4 bg-gray-300 rounded-full" />
-              <div className="w-1/2 skeleton h-4 bg-gray-300 rounded" />
-            </div>
-
-            {/* Bottom Row: Tags and Button */}
-            <div className="flex justify-between items-center mt-3">
-              <div className="flex items-center gap-2">
-                <div className="w-4 skeleton h-4 bg-gray-300 rounded-full" />
-                <div className="w-20 skeleton h-4 bg-gray-300 rounded" />
-              </div>
-              <div className="w-24 skeleton h-8 bg-gray-300 rounded-md" />
-            </div>
-          </div>
+          <div className="w-16 h-16 mx-auto mb-3 bg-gray-300 rounded-full" />
+          <div className="h-4 bg-gray-300 rounded w-3/4 mx-auto mb-2" />
+          <div className="h-3 bg-gray-200 rounded w-1/2 mx-auto mb-4" />
+          <div className="h-8 bg-gray-300 rounded w-24 mx-auto" />
         </div>
       ))}
     </div>

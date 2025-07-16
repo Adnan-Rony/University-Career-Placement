@@ -1,4 +1,4 @@
-import { CiClock1, CiCalendarDate, CiHeart } from "react-icons/ci";
+import { CiClock1, CiCalendarDate, CiHeart, CiBookmark } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { IoBusiness } from "react-icons/io5";
@@ -17,7 +17,7 @@ const HeaderJobCard = ({ job }) => {
 
   return (
     <div className="w-full bg-gradient-to-r from-[#f7f1fb] to-[#f6effb] py-10 px-4 md:px-0">
-      <div className="max-w-7xl  mx-auto bg-white border border-gray-200 rounded-2xl shadow-md p-6 md:p-10 space-y-6">
+      <div className="container  mx-auto bg-white border border-gray-200 rounded-2xl shadow-md p-4 md:p-10 space-y-6">
         {/* Header section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex flex-col gap-2 w-full">
@@ -36,8 +36,8 @@ const HeaderJobCard = ({ job }) => {
                   })}
                 </span>
               </div>
-              <button className="text-purple-600 hover:text-red-500 transition">
-                <CiHeart className="text-2xl" />
+              <button className="text-gray-400 hover:text-gray-600">
+                <CiBookmark className="text-xl" />
               </button>
             </div>
 
@@ -72,7 +72,7 @@ const HeaderJobCard = ({ job }) => {
         <div>
           <button
             onClick={() => setShowModal(true)}
-            className="w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-lg transition"
+            className="w-full md:w-auto bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white font-medium px-6 py-3 rounded-lg transition"
           >
             Apply for this Job
           </button>

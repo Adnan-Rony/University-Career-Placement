@@ -6,7 +6,7 @@ export const createJob = async (req, res) => {
   try {
     const {
       title, description, company, location,country,city, salaryRange,
-      jobType, deadline, skillsRequired,image,vacancy,industry
+      jobType, deadline, skillsRequired,image,vacancy,industry,salaryType,currency,jobLevel,jobShift,gender,minEducationLevel,preferredEducationLevel,totalExperience,minExperience,maxExperience,minAge,maxAge,jobRequirements
     } = req.body;
 
     const employerId = req.user.id; 
@@ -32,6 +32,19 @@ export const createJob = async (req, res) => {
       image,
       skillsRequired,
       country,city,
+      salaryType,
+      currency,
+      jobLevel,
+      jobShift,
+      gender,
+      minEducationLevel,
+      preferredEducationLevel,
+      totalExperience,
+      minExperience,
+      maxExperience,
+      minAge,
+      maxAge,
+      jobRequirements
     });
 
     await newJob.save();
@@ -46,7 +59,7 @@ export const getAllJobs = async (req, res) => {
   try {
     const { companyName, jobTitle } = req.query;
 
-    let jobs = await Job.find()
+    let jobs = await Job.find().sort({ createdAt: -1 })
       .populate('company' )
       .populate('postedBy', 'email');
 
@@ -103,7 +116,7 @@ export const updateJob = async (req, res) => {
     }
 
     // Update allowed fields
-    const allowedUpdates = ['title', 'description','industry', 'location', 'salaryRange','location','city', 'jobType', 'deadline', 'skillsRequired','image','vacancy'];
+    const allowedUpdates = ['title', 'description','industry', 'location', 'salaryRange','location','city', 'jobType', 'deadline', 'skillsRequired','image','vacancy',"salaryType","currency","jobLevel","jobShift","gender","minEducationLevel","preferredEducationLevel","totalExperience","minExperience","maxExperience","minAge","maxAge","jobRequirements"];
     allowedUpdates.forEach(field => {
       if (req.body[field] !== undefined) {
         job[field] = req.body[field];
