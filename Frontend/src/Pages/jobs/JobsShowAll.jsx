@@ -100,7 +100,7 @@ const JobsShowAll = () => {
                 setFilters((prev) => ({ ...prev, keyword: e.target.value }))
               }
               placeholder="Job title, keywords..."
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded input"
             />
           </div>
 
@@ -111,7 +111,7 @@ const JobsShowAll = () => {
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, jobType: e.target.value }))
               }
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded select"
             >
               <option value="">Choose a job Type</option>
               {jobTypes.map((jobtype) => (
@@ -132,7 +132,7 @@ const JobsShowAll = () => {
                 setFilters((prev) => ({ ...prev, location: e.target.value }))
               }
               placeholder="City or location"
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded input"
             />
           </div>
 
@@ -144,7 +144,7 @@ const JobsShowAll = () => {
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, category: e.target.value }))
               }
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded select"
             >
               <option value="">Choose a category</option>
               {industries.map((industry) => (

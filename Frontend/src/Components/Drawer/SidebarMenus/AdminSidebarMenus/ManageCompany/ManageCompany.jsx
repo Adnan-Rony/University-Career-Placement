@@ -8,9 +8,15 @@ import {
 import DashboardManageCompanySkeleton from "../../../../loading/DashboardManageCompanySkeleton.jsx";
 import { FaHandshake, FaTrophy, FaUserFriends } from "react-icons/fa";
 
+
 export const ManageCompany = () => {
   const { data: Allcompanies, isLoading } = UsefetchAllCompanyByAdmin();
-  const companies = Allcompanies?.companies;
+
+  console.log(Allcompanies)
+
+
+
+  const companies = Allcompanies?.companies || [];
 
   const { mutate: deleteCompany } = UseDeleteSingleCompanyByAdmin();
 
@@ -118,7 +124,7 @@ export const ManageCompany = () => {
             {companies?.length > 0 ? (
               <>
                 {companies.map((company) => (
-                  <tr key={company._id}>
+                  <tr key={company?._id}>
                     <th>
                       <label>
                         <input type="checkbox" className="checkbox" />
@@ -128,33 +134,33 @@ export const ManageCompany = () => {
                       <div className="flex items-center gap-3">
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">
-                            <img src={company.logo} alt="Company Logo" />
+                            <img src={company?.logo} alt="Company Logo" />
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{company.name}</div>
+                          <div className="font-bold">{company?.name}</div>
                           <div className="text-sm opacity-50">
-                            {company.location}
+                            {company?.location}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="flex flex-col justify-start items-start ">
-                      <span className="font-semibold">{company.industry}</span>
+                      <span className="font-semibold">{company?.industry}</span>
 
-                      <span className="">Name: {company.createdBy.name}</span>
+                      <span className="">Name: {company?.createdBy?.name}</span>
                     </td>
 
 
                     <th>
                       <div className="dropdown dropdown-center">
                         <div tabIndex={0} role="button " className="btn ">
-                          {company.badges === "trusted"
+                          {company?.badges === "trusted"
                             ? <>
                               <FaHandshake />
                               <p>Trusted Partner</p>
                             </>
-                            : company.badges === "top-recuiter"
+                            : company?.badges === "top-recuiter"
                               ? <>
                                 <FaTrophy />
                                 <p>Top Recruiter</p>
@@ -170,9 +176,9 @@ export const ManageCompany = () => {
                         >
                           <li>
                             <button
-                              onClick={() => handleBadgeUpdate(company._id, "trusted")}
-                              disabled={company.badges === "trusted"}
-                              className={company.badges === "trusted" ? "text-green-600 font-bold" : ""}
+                              onClick={() => handleBadgeUpdate(company?._id, "trusted")}
+                              disabled={company?.badges === "trusted"}
+                              className={company?.badges === "trusted" ? "text-green-600 font-bold" : ""}
                             >
                               Trusted Partner
                             </button>
@@ -180,17 +186,17 @@ export const ManageCompany = () => {
                           <li>
                             <button
                               onClick={() => handleBadgeUpdate(company._id, "top-recuiter")}
-                              disabled={company.badges === "top-recuiter"}
-                              className={company.badges === "top-recuiter" ? "text-blue-600 font-bold" : ""}
+                              disabled={company?.badges === "top-recuiter"}
+                              className={company?.badges === "top-recuiter" ? "text-blue-600 font-bold" : ""}
                             >
                               Top Recruiter
                             </button>
                           </li>
                           <li>
                             <button
-                              onClick={() => handleBadgeUpdate(company._id, "regular-recuiter")}
-                              disabled={company.badges === "regular-recuiter"}
-                              className={company.badges === "regular-recuiter" ? "text-gray-500 font-bold" : ""}
+                              onClick={() => handleBadgeUpdate(company?._id, "regular-recuiter")}
+                              disabled={company?.badges === "regular-recuiter"}
+                              className={company?.badges === "regular-recuiter" ? "text-gray-500 font-bold" : ""}
                             >
                               Regular Recruiter
                             </button>

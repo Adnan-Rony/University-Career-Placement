@@ -84,6 +84,7 @@ export const getAllJobs = async (req, res) => {
   }
 };
 
+
 export const getJobById = async (req, res) => {
   
   try {
@@ -236,6 +237,22 @@ export const getRecommendedJobs = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch recommended jobs', error: error.message });
   }
 };
+
+
+export const getMyJobs=async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const jobs = await Job.find({ postedBy: userId })
+      .populate('company', 'name logo')
+      .populate('postedBy', 'email');
+
+    res.status(200).json({ success: true, jobs });
+  } catch (error) {
+    console.error("Get My Jobs Error:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch your jobs" });
+  }
+}
 
 
 

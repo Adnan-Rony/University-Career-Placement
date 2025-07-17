@@ -4,6 +4,7 @@ import { useFetchCompanies } from "../../hooks/useCompany.js";
 import CompaniesCards from "../company/CompaniesCard.jsx";
 import { Link } from "react-router";
 import CompanyCardSkeleton from "../loading/SponserCompanyCardSkeleton.jsx";
+import CompanyDetails from "../../Pages/company/CompanyDetails.jsx";
 
 const SponserCompany = () => {
   const { data, isLoading, isError } = useFetchCompanies();
@@ -78,7 +79,7 @@ const SponserCompany = () => {
               to="/allcompanies"
               className="px-6 py-2 bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white rounded-full hover:brightness-110 transition"
             >
-              View all companies
+              View All Companies
             </Link>
           </div>
         </>

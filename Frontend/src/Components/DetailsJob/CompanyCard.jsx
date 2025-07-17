@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import img from "../../assets/company.png";
+import { Link } from "react-router";
 const CompanyCard = ({ job }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -10,7 +11,7 @@ const CompanyCard = ({ job }) => {
       <div className="p-6 rounded-xl  text-gray-800 bg-gradient-to-r from-[#f7f1fb] to-[#f6effb] ">
         <div className="flex items-center gap-4">
           <img
-            src={job?.company?.logo || img }
+            src={job?.company?.logo || img}
             alt="Company Logo"
             className="w-14 h-14 rounded-lg object-cover "
           />
@@ -46,16 +47,9 @@ const CompanyCard = ({ job }) => {
           </div>
         </div>
 
-        {job?.company?.websiteUrl && (
-          <a
-            href={job?.company?.websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 block text-center w-full bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white py-2 rounded-lg transition"
-          >
-            Visit Website
-          </a>
-        )}
+        <Link to={`/companydetails/${job.company._id}`} className="mt-4 block text-center w-full bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white py-2 rounded-lg transition">
+          Details Company
+        </Link>
       </div>
 
       {/* Modal */}
@@ -79,7 +73,9 @@ const CompanyCard = ({ job }) => {
               />
               <div className="text-center sm:text-left">
                 <h2 className="text-2xl font-bold">{job?.company?.name}</h2>
-                <p className="text-sm text-gray-500">{job?.company?.industry}</p>
+                <p className="text-sm text-gray-500">
+                  {job?.company?.industry}
+                </p>
               </div>
             </div>
 
@@ -99,7 +95,10 @@ const CompanyCard = ({ job }) => {
               </div>
               <div>
                 <p className="font-medium">Location:</p>
-                <p>{job?.company?.city || "N/A"}, {job?.company?.location || "N/A"}</p>
+                <p>
+                  {job?.company?.city || "N/A"},{" "}
+                  {job?.company?.location || "N/A"}
+                </p>
               </div>
               <div>
                 <p className="font-medium">Contact Person:</p>
