@@ -12,7 +12,7 @@ export const register = async (req, res) => {
   try {
     let existingUser = await User.findOne({ email });
     if (existingUser) {
-      // ✅ If user already exists, just return success with their data
+      // 
       const token = generateToken(existingUser);
       return res.status(200).json({
         success: true,
@@ -140,56 +140,85 @@ export const logout = async (req, res) => {
 
 
 export const updateUserProfile = async (req, res) => {
-    try {
-        const userId = req.user.id; // from protect middleware
-        const { name, phone, bio, skills, experience, resume } = req.body;
+  try {
+    const userId = req.user.id; // from protect middleware
 
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
-            {
-                name,
-                phone,
-                bio,
-                skills,
-                experience,
-                resume,
-            },
-            { new: true, runValidators: true }
-        ).select('-password');
+    const {
+      name,
+      phone,
+      bio,
+      skills,
+      experience,
+      picture,
+      resume,
+      education,
+      socialLinks,
+      certifications,
+      languages,
+      projects,
+      address,
+      dob,
+      gender
+    } = req.body;
 
-        res.status(200).json({
-            success: true,
-            message: 'Profile updated successfully',
-            user: updatedUser,
-        });
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        name,
+        phone,
+        bio,
+        skills,
+        experience,
+        picture,
+        resume,
+        education,
+        socialLinks,
+        certifications,
+        languages,
+        projects,
+        address,
+        dob,
+        gender
+      },
+      { new: true, runValidators: true }
+    ).select('-password');
 
-    } catch (error) {
-        console.error('Update profile error:', error);
-        res.status(500).json({ success: false, message: 'Server error' });
-    }
+    res.status(200).json({
+      success: true,
+      message: 'Profile updated successfully',
+      user: updatedUser
+    });
+
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
 };
+
 
 
 export const getCurrentUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password'); // Exclude password
+
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
+
     res.status(200).json({
       success: true,
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-       
-      },
+      user, // Return full user object
     });
+
   } catch (err) {
-    res.status(500).json({ success: false, message: 'Failed to fetch user', error: err.message });
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch user',
+      error: err.message,
+    });
   }
 };
+
 
 
 
