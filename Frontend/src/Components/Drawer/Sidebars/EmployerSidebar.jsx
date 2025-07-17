@@ -13,11 +13,11 @@ export const EmployerSidebar = () => {
         </Link>
       </li>
 
-      <li>
+      {/* <li>
         <Link to="employer/managecompany" className="flex items-center gap-2">
           <IoBusiness /> Manage Company
         </Link>
-      </li>
+      </li> */}
       <li>
         <Link to="employer/create-job" className="flex items-center gap-2">
           <IoBusiness /> Create job
@@ -31,6 +31,16 @@ export const EmployerSidebar = () => {
       <li>
         <Link to="employer/applications" className="flex items-center gap-2">
           <MdPlaylistAddCircle /> Applied Jobs
+        </Link>
+      </li>
+      <li>
+        <Link to="employer/alljobs" className="flex items-center gap-2">
+          <MdPlaylistAddCircle /> Finds Jobs
+        </Link>
+      </li>
+      <li>
+        <Link to="employer/interview" className="flex items-center gap-2">
+          <MdPlaylistAddCircle /> Interviews
         </Link>
       </li>
     </div>

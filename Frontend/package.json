@@ -16,6 +16,7 @@
     "axios-instances": "^1.0.3",
     "date-fns": "^4.1.0",
     "firebase": "^11.5.0",
+    "framer-motion": "^12.23.6",
     "lucide-react": "^0.511.0",
     "moment": "^2.30.1",
     "quill": "^2.0.3",

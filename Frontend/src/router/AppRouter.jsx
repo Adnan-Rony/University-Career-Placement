@@ -27,6 +27,8 @@ import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
 import CompanyDetails from "../Pages/company/CompanyDetails.jsx";
 import EmployerCompany from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerCompanys/EmployerCompany.jsx";
 import EmployerApplication from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerCompanys/EmployerApplications/EmployerApplication.jsx";
+import ScheduleInterviewForm from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerInterview/ScheduleInterviewForm.jsx";
+import EmployerShowAllApplication from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerInterview/EmployerShowAllApplication.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -104,6 +106,8 @@ export const AppRouter = createBrowserRouter([
       { path: "employer/postedJobs", element: <PostedJobs /> },
       { path: "employer/managecompany", element: <EmployerCompany /> },
       { path: "employer/applications", element: <EmployerApplication /> },
+      { path: "employer/alljobs", element: <JobsShowAll /> },
+      { path: "employer/interview", element: <EmployerShowAllApplication /> },
 
 
       //for admin
