@@ -22,7 +22,7 @@ const EmployerApplication = () => {
   }
 
   return (
-    <div className="overflow-x-auto bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+    <div className="overflow-x-auto bg-white p-6 md:px-5 rounded-xl shadow-lg border border-gray-200">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">
         All Applications
       </h2>

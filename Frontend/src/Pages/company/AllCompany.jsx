@@ -60,7 +60,7 @@ const AllCompany = () => {
     <div className="mx-auto max-w-screen-xl">
       <div className="container mx-auto px-4 py-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Filter Sidebar */}
-        <aside className="bg-white p-5 rounded-lg shadow-sm space-y-6 h-screen sticky top-4 overflow-y-auto">
+        <aside className=" p-5 rounded-lg shadow-sm space-y-6    overflow-y-auto">
           {/* Keyword Filter */}
           <div>
             <label className="block text-sm font-semibold mb-1">
@@ -69,7 +69,7 @@ const AllCompany = () => {
             <input
               type="text"
               placeholder="Company name..."
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded input "
               value={filters.keyword}
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, keyword: e.target.value }))
@@ -83,7 +83,7 @@ const AllCompany = () => {
             <input
               type="text"
               placeholder="City or location"
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded input "
               value={filters.location}
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, location: e.target.value }))
@@ -95,7 +95,7 @@ const AllCompany = () => {
           <div>
             <label className="block text-sm font-semibold mb-1">Industry</label>
             <select
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded select"
               value={filters.industry}
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, industry: e.target.value }))

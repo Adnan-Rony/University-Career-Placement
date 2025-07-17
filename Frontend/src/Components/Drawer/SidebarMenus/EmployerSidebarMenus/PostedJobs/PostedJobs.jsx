@@ -2,6 +2,7 @@ import React from "react";
 import { UseMyJobs } from "../../../../../hooks/useJobs";
 import { format } from "date-fns";
 import PostedJobsSkeleton from "../../../../loading/PostedJobsSkeleton.jsx";
+import { Link } from 'react-router';
 
 export const PostedJobs = () => {
   const { data: allJobs, isLoading } = UseMyJobs();
@@ -106,9 +107,9 @@ export const PostedJobs = () => {
 
                 {/* Actions */}
                 <td className="flex gap-2">
-                  <button className="btn btn-xs bg-r-primary text-white hover:bg-r-primary/90 border-none">
+                  <Link to={`/job/details/${job._id}`} className="btn btn-xs bg-r-primary text-white hover:bg-r-primary/90 border-none">
                     View
-                  </button>
+                  </Link>
                   <button className="btn btn-xs bg-yellow-100 text-yellow-800 hover:bg-yellow-200 border border-yellow-300">
                     Edit
                   </button>
