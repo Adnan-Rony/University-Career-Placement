@@ -14,12 +14,16 @@ export const JobseekerProfile = () => {
     switch (activeTab) {
       case "Overview":
         return <OverViewTab />
+
       case "Profile":
         return <ProfileTab/>
+
       case "Resume / CV":
         return <ResumeCvTab />
-      case "Profile":
-        return <ProfileTab />
+
+      // case "Profile":
+      //   return <ProfileTab />
+
       case "Preferences":
         return <PreferencesTab />
       default:
@@ -27,8 +31,8 @@ export const JobseekerProfile = () => {
     }
   }
   return (
-    <div>
-      <h1 className='text-3xl font-bold  mb-6'>Edit Your JobSeeker  Profile Profile</h1>
+    <div className='md:px-5 p-4'>
+      <h1 className='text-3xl font-semibold  mb-6'>Edit Your JobSeeker  Profile Profile</h1>
 
       <div>
 
