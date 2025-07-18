@@ -100,8 +100,8 @@ const EmployerApplication = () => {
               </td>
 
               <td className="px-6 py-4 text-gray-600">
-                {app.interviewDate ? (
-                  new Date(app.interviewDate).toLocaleString()
+                {app?.interview?.scheduledAt ? (
+                  new Date(app.interview?.scheduledAt).toLocaleString()
                 ) : (
                   <span className="text-sm text-gray-400 italic">
                     Not scheduled

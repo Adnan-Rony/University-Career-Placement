@@ -20,6 +20,11 @@ export const JobSeekerSidebar = () => {
                 <FaUserPen /> Profile
               </Link>
             </li>
+            <li>
+              <Link to={'jobseekerAppliedJob'}>
+                <FaUserPen /> Applied Jobs
+              </Link>
+            </li>
              
     </div>
   )

@@ -114,10 +114,25 @@ export const getMyApplications = async (req, res) => {
     const applications = await Application.find({ applicant: req.user.id })
       .populate("job",)
       .populate("applicant", "name email")
+
+       // For each application, find related interview
+    const updatedApplications = await Promise.all(
+      applications.map(async (app) => {
+        const interview = await interviewModel.findOne({
+          jobId: app.job._id,
+          candidateId: req.user.id,
+        });
+
+        return {
+          ...app.toObject(),
+          interview, // add interview details if found
+        };
+      })
+    );
       
     
 
-    res.status(200).json({ success: true, applications });
+    res.status(200).json({ success: true, applications:updatedApplications });
   } catch (err) {
     console.error("Error fetching user applications:", err);
     res.status(500).json({ success: false, message: "Server error" });

@@ -29,6 +29,9 @@ import EmployerCompany from "../Components/Drawer/SidebarMenus/EmployerSidebarMe
 import EmployerApplication from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerCompanys/EmployerApplications/EmployerApplication.jsx";
 import ScheduleInterviewForm from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerInterview/ScheduleInterviewForm.jsx";
 import EmployerShowAllApplication from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerInterview/EmployerShowAllApplication.jsx";
+import JobSeekerAppliedJobs from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerAppliedJobs/JobSeekerAppliedJobs.jsx";
+import PortfolioBuilder from "../Pages/portfolio/Portfolio.jsx";
+import { PortfolioPreview } from "../Components/portfolio/PortfolioPreview.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -87,6 +90,14 @@ export const AppRouter = createBrowserRouter([
         path: "/company",
         element: <CompanyDetails />,
       },
+      {
+        path: "/portfolio",
+        element: <PortfolioBuilder />,
+      },
+      {
+        path: "/portfolioo",
+        element: <PortfolioPreview />,
+      },
     ],
   },
   {
@@ -98,6 +109,11 @@ export const AppRouter = createBrowserRouter([
         path: "jobseekerProfile",
         element: <JobseekerProfile />,
       },
+      {
+        path: "jobseekerAppliedJob",
+        element: <JobSeekerAppliedJobs />,
+      },
+
 
       // For Employer
       { path: "employerDashboard", element: <EmployerDashboardMenu /> },
