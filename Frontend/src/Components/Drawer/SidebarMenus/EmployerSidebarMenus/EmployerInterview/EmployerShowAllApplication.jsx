@@ -31,17 +31,17 @@ const EmployerShowAllApplication = () => {
         <div className="w-full">
           <table className="min-w-full text-sm table-auto">
             <thead className="bg-gray-100 text-gray-700 sticky top-0 z-10">
-              <tr>
-                <th className="px-5 py-3 text-left">👤 Candidate</th>
-                <th className="px-5 py-3 text-left">✉️ Email</th>
-                <th className="px-5 py-3 text-left">💼 Job Title</th>
-                <th className="px-5 py-3 text-left">📅 Scheduled At</th>
-                <th className="px-5 py-3 text-left">📡 Mode</th>
-                <th className="px-5 py-3 text-left">🔗 Location / Link</th>
-                <th className="px-5 py-3 text-left">📌 Status</th>
+              <tr className="text-left text-sm font-semibold">
+                <th className="px-5 py-3">👤 Candidate</th>
+                <th className="px-5 py-3">✉️ Email</th>
+                <th className="px-5 py-3">💼 Job Title</th>
+                <th className="px-5 py-3">📅 Scheduled At</th>
+                <th className="px-5 py-3">📡 Mode</th>
+                <th className="px-5 py-3">🔗 Link / Location</th>
+                <th className="px-5 py-3">📌 Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-gray-700">
               {interviews.map((item) => (
                 <tr
                   key={item._id}
@@ -53,18 +53,32 @@ const EmployerShowAllApplication = () => {
                   <td className="px-5 py-4 text-gray-600">
                     {item.candidateId?.email}
                   </td>
-                  <td className="px-5 py-4 text-gray-700">
+                  <td className="px-5 py-4 text-gray-800 font-medium">
                     {item.jobId?.title}
                   </td>
                   <td className="px-5 py-4 text-gray-600">
                     {format(new Date(item.scheduledAt), "PPpp")}
                   </td>
-                  <td className="px-5 py-4 text-gray-700 capitalize">
-                    {item.mode}
+                  <td className="px-5 py-4 capitalize">{item.mode}</td>
+                  <td className="px-5 py-4 text-gray-700 break-words">
+                    {item?.mode === "Online" ? (
+                      <a
+                        href={item?.locationOrLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-xs bg-green-100 text-green-700 border border-green-300"
+                      >
+                        Join Meeting
+                      </a>
+                    ) : (
+                      <div className="space-y-1">
+                        {item?.locationOrLink && (
+                          <div>{item.locationOrLink}</div>
+                        )}
+                      </div>
+                    )}
                   </td>
-                  <td className="px-5 py-4 break-words text-blue-600">
-                    {item.locationOrLink || "-"}
-                  </td>
+
                   <td className="px-5 py-4">
                     <span
                       className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${

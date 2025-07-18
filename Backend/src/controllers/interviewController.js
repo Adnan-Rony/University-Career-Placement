@@ -1,3 +1,4 @@
+import { Application } from "../models/application.model.js";
 import interviewModel from "../models/interview.model.js";
 
 
@@ -15,6 +16,16 @@ export const scheduleInterview = async (req, res) => {
       locationOrLink,
       notes,
     });
+
+
+    // 2. Update the application status to "Scheduled"
+    await Application.findOneAndUpdate(
+      { job: jobId, applicant: candidateId },
+      { status: "Scheduled" }
+    );
+
+
+
 
     res.status(201).json({ success: true, interview });
   } catch (error) {
