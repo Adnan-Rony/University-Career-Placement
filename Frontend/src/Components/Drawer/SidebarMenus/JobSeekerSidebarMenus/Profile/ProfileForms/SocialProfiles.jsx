@@ -1,19 +1,17 @@
-
-import React from 'react';
+import { FaLinkedin ,FaGithub } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
-
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { HiGlobeAlt } from "react-icons/hi";
+import { useContext } from "react";
+import { ProfileContext } from "../../../../../../Context/ProfileProvider";
 export const SocialProfiles = () => {
+  const {profileData,setProfileData}=useContext(ProfileContext)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      website: 'https://tamjidahmedportfolio.netlify.app/',
-      linkedin: 'https://www.linkedin.com/in/tamjid-ahmed-profile59326b/',
-      github: 'https://github.com/Tamjid388',
-      twitter: 'https://twitter.com/username',
-    },
+    defaultValues:profileData.social
   });
 
   const onSubmit = (data) => {
@@ -34,8 +32,8 @@ export const SocialProfiles = () => {
        className="grid grid-cols-2 gap-6  w-full px-8">
         {/* Website */}
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Website*
+          <label className="flex items-center gap-1 text-sm font-medium text-gray-700">
+           <HiGlobeAlt /> Website*
           </label>
           <input
             type="url"
@@ -49,8 +47,9 @@ export const SocialProfiles = () => {
 
         {/* LinkedIn */}
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-gray-700">
-            LinkedIn*
+          <label className="text-sm font-medium text-gray-700
+          flex items-center gap-1 ">
+          <FaLinkedin />  LinkedIn
           </label>
           <input
             type="url"
@@ -64,8 +63,8 @@ export const SocialProfiles = () => {
 
         {/* GitHub */}
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-gray-700">
-            GitHub*
+          <label className="flex items-center gap-1 text-sm font-medium text-gray-700">
+            <FaGithub />GitHub
           </label>
           <input
             type="url"
@@ -79,8 +78,8 @@ export const SocialProfiles = () => {
 
         {/* Twitter */}
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Twitter
+          <label className="flex items-center gap-1 text-sm font-medium text-gray-700">
+           <FaSquareXTwitter /> X
           </label>
           <input
             type="url"
@@ -88,11 +87,12 @@ export const SocialProfiles = () => {
             className="mt-1 input w-full"
           />
         </div>
-
-        <button type="submit" 
-        className="btn bg-r-accent text-white col-span-2">
-          Save
-        </button>
+    <div className="col-span-2 flex justify-end">
+      <button
+      type="submit"
+      className="btn btn-outline ">Submit</button>
+    </div>
+      
       </form>
     </div>
   );

@@ -1,7 +1,10 @@
 import React from 'react'
+import { UploadResume } from '../ProfileForms/UploadResume'
 
 export const ResumeCvTab = () => {
   return (
-    <div>ResumeCvTab</div>
+    <div>
+      <UploadResume/>
+    </div>
   )
 }
