@@ -25,6 +25,18 @@ export const JobSeekerSidebar = () => {
                 <FaUserPen /> Applied Jobs
               </Link>
             </li>
+            <li>
+              <Link to={'jobseekercreateportfolio'}>
+                <FaUserPen /> Portfolio Builder
+              </Link>
+            </li>
+
+            {/* <li>
+              <Link to={'jobseekerMyPortfolio'}>
+                <FaUserPen /> My Portfolio
+              </Link>
+            </li> */}
+
              
     </div>
   )

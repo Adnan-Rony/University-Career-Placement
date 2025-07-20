@@ -36,7 +36,7 @@ export const UseLogout=()=>{
         return useMutation({
              mutationFn: LogoutUser, 
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']); 
+      queryClient.removeQueries(['user']); 
     },
         })
 }

@@ -1,11 +1,19 @@
-import React from "react";
-import { FaGithub, FaLinkedin, FaWhatsapp, FaLink } from "react-icons/fa";
+import React, { useState } from "react";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaWhatsapp,
+  FaLink,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 
 export const PortfolioPreview = ({ data }) => {
   const {
     fullName,
     title,
     bio,
+    about,
     profileImage,
     experience: [],
     skills = [],
@@ -14,12 +22,71 @@ export const PortfolioPreview = ({ data }) => {
     socials = {},
   } = data;
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const navItems = [
+    { id: "hero", label: "Home" },
+    { id: "skills", label: "Skills" },
+    { id: "projects", label: "Projects" },
+    { id: "education", label: "Education" },
+    { id: "experience", label: "Experience" },
+  ];
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+    setMenuOpen(false);
+  };
+
   return (
     <div className="bg-black text-white p-6 space-y-12">
+      {/* Navbar */}
+      <nav className="">
+        <div className=" mx-auto flex justify-between gap-10 items-center p-4">
+          <p className="text-purple-500">{fullName}</p>
+
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex gap-6">
+            {navItems.map((item) => (
+              <li
+                key={item.id}
+                className="cursor-pointer hover:text-purple-400 transition-colors"
+                onClick={() => scrollToSection(item.id)}
+              >
+                {item.label}
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Icon */}
+          <div className="md:hidden">
+            <button onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <ul className="md:hidden bg-black flex flex-col items-center gap-4 py-4">
+            {navItems.map((item) => (
+              <li
+                key={item.id}
+                className="cursor-pointer hover:text-purple-400"
+                onClick={() => scrollToSection(item.id)}
+              >
+                {item.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </nav>
       {/* Hero Section */}
       <section className="flex flex-col md:flex-row items-center justify-between gap-10">
         <div className="max-w-xl space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">
+          <h1 className="text-3xl md:text-5xl font-bold">
             Hello, I am <span className="text-purple-500">{fullName}</span>
           </h1>
           <p className="text-gray-300">{bio}</p>
@@ -59,6 +126,13 @@ export const PortfolioPreview = ({ data }) => {
         />
       </section>
 
+      <section id="about" className="">
+        <h2 className="text-3xl font-bold text-center  mb-8">About Me</h2>
+        <div className="max-w-4xl mx-auto text-center text-gray-300  leading-7">
+          {about ? <p>{about}</p> : <p>No about information provided yet.</p>}
+        </div>
+      </section>
+
       {/* Skills */}
       <section className="text-center">
         <h2 className="text-3xl font-bold mb-1">My Skills</h2>
@@ -71,12 +145,11 @@ export const PortfolioPreview = ({ data }) => {
               key={idx}
               className="bg-gray-800 rounded-lg p-4 flex flex-col items-center hover:scale-105 transition-transform duration-300"
             >
-              <p className="text-lg font-semibold text-white">{skill.name}</p>
-              {skill.level && (
-                <p className="text-xs text-gray-400 mt-1">
-                  Level: {skill.level}
-                </p>
-              )}
+              {/* <p className="text-lg font-semibold text-white">{skill.name}</p> */}
+              <img
+                src={skill.skillImageUrl}
+                alt="https://cdn-icons-png.flaticon.com/512/10262/10262344.png"
+              />
             </div>
           ))}
         </div>

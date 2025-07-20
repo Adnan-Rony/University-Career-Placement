@@ -1,6 +1,7 @@
-import React from "react";
-import { useForm, useFieldArray } from "react-hook-form";
-import { PortfolioPreview } from "../../Components/portfolio/PortfolioPreview.jsx";
+import { useFieldArray, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { UseCreatePortfolio } from "../../../../hooks/usePortfolio.js";
+import { PortfolioPreview } from './../../../../Components/portfolio/PortfolioPreview';
 
 const PortfolioBuilder = () => {
   const {
@@ -15,12 +16,13 @@ const PortfolioBuilder = () => {
         fullName: "",
         title: "",
         bio: "",
+        about: "",
         email: "",
         phone: "",
         location: "",
         profileImage: "",
       },
-      skills: [{ name: "", level: "Beginner" }],
+      skills: [{ name: "", level: "Beginner", skillImageUrl: "" }],
       projects: [
         {
           title: "",
@@ -48,6 +50,8 @@ const PortfolioBuilder = () => {
     },
   });
 
+  const { mutate, isLoading, isError, isSuccess } = UseCreatePortfolio();
+
   // Arrays for dynamic fields
   const skillsArray = useFieldArray({ control, name: "skills" });
   const projectsArray = useFieldArray({ control, name: "projects" });
@@ -63,9 +67,16 @@ const PortfolioBuilder = () => {
   const formData = watch();
 
   const onSubmit = (data) => {
-    console.log("Portfolio Data:", data);
-    alert("Portfolio saved! (Check console for data)");
-    // Here you can send data to backend API via axios/fetch
+    console.log("Submitting Portfolio:", data);
+    mutate(data, {
+      onSuccess: () => {
+        toast.success("Portfolio created successfully!");
+      },
+      onError: (error) => {
+        toast.error("Failed to create portfolio!");
+        console.error(error);
+      },
+    });
   };
 
   return (
@@ -93,6 +104,11 @@ const PortfolioBuilder = () => {
           <textarea
             {...register("basicInfo.bio")}
             placeholder="Short Bio"
+            className="textarea w-full mb-2"
+          />
+          <textarea
+            {...register("basicInfo.about")}
+            placeholder="full about yourself"
             className="textarea w-full mb-2"
           />
           <input
@@ -127,6 +143,11 @@ const PortfolioBuilder = () => {
                 placeholder="Skill Name"
                 className="input flex-1"
               />
+              <input
+                {...register(`skills.${idx}.skillImageUrl`)}
+                placeholder="Skill icon image URL"
+                className="input flex-1"
+              />
               <select
                 {...register(`skills.${idx}.level`)}
                 className="select w-40"
@@ -138,7 +159,7 @@ const PortfolioBuilder = () => {
               <button
                 type="button"
                 onClick={() => skillsArray.remove(idx)}
-                className="btn btn-error"
+                className="btn btn-outline bg-gray-300 border-none"
               >
                 ❌
               </button>
@@ -147,9 +168,59 @@ const PortfolioBuilder = () => {
           <button
             type="button"
             onClick={() => skillsArray.append({ name: "", level: "Beginner" })}
-            className="btn btn-primary"
+            className="btn text-white bg-gradient-to-r from-[#7405de] to-[#a626ec] border-none"
           >
             + Add Skill
+          </button>
+        </section>
+
+        {/* Education */}
+        <section>
+          <h2 className="text-xl font-semibold mb-2">Education</h2>
+          {educationArray.fields.map((item, idx) => (
+            <div key={item.id} className="border p-4 rounded mb-4 space-y-2">
+              <input
+                {...register(`education.${idx}.institute`)}
+                placeholder="Institute Name"
+                className="input w-full"
+              />
+              <input
+                {...register(`education.${idx}.degree`)}
+                placeholder="Degree"
+                className="input w-full"
+              />
+              <input
+                {...register(`education.${idx}.startYear`)}
+                placeholder="Start Year"
+                className="input w-full"
+              />
+              <input
+                {...register(`education.${idx}.endYear`)}
+                placeholder="End Year"
+                className="input w-full"
+              />
+              <button
+                type="button"
+                onClick={() => educationArray.remove(idx)}
+                className="btn btn-outline bg-gray-300 border-none"
+              >
+                Remove Education
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() =>
+              educationArray.append({
+                institute: "",
+                degree: "",
+                startYear: "",
+                endYear: "",
+              })
+            }
+            className="btn text-white bg-gradient-to-r from-[#7405de] to-[#a626ec] border-none"
+          >
+            + Add Education
           </button>
         </section>
 
@@ -191,7 +262,7 @@ const PortfolioBuilder = () => {
               <button
                 type="button"
                 onClick={() => projectsArray.remove(idx)}
-                className="btn btn-error"
+                className="btn btn-outline bg-gray-300 border-none"
               >
                 Remove Project
               </button>
@@ -208,59 +279,9 @@ const PortfolioBuilder = () => {
                 techStack: "",
               })
             }
-            className="btn btn-primary"
+            className="btn text-white bg-gradient-to-r from-[#7405de] to-[#a626ec] border-none"
           >
             + Add Project
-          </button>
-        </section>
-
-        {/* Education */}
-        <section>
-          <h2 className="text-xl font-semibold mb-2">Education</h2>
-          {educationArray.fields.map((item, idx) => (
-            <div key={item.id} className="border p-4 rounded mb-4 space-y-2">
-              <input
-                {...register(`education.${idx}.institute`)}
-                placeholder="Institute Name"
-                className="input w-full"
-              />
-              <input
-                {...register(`education.${idx}.degree`)}
-                placeholder="Degree"
-                className="input w-full"
-              />
-              <input
-                {...register(`education.${idx}.startYear`)}
-                placeholder="Start Year"
-                className="input w-full"
-              />
-              <input
-                {...register(`education.${idx}.endYear`)}
-                placeholder="End Year"
-                className="input w-full"
-              />
-              <button
-                type="button"
-                onClick={() => educationArray.remove(idx)}
-                className="btn btn-error"
-              >
-                Remove Education
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={() =>
-              educationArray.append({
-                institute: "",
-                degree: "",
-                startYear: "",
-                endYear: "",
-              })
-            }
-            className="btn btn-primary"
-          >
-            + Add Education
           </button>
         </section>
 
@@ -299,7 +320,7 @@ const PortfolioBuilder = () => {
               <button
                 type="button"
                 onClick={() => experienceArray.remove(idx)}
-                className="btn btn-error"
+                className="btn btn-outline bg-gray-300 border-none"
               >
                 Remove Experience
               </button>
@@ -316,12 +337,11 @@ const PortfolioBuilder = () => {
                 description: "",
               })
             }
-            className="btn btn-primary"
+            className="btn text-white bg-gradient-to-r from-[#7405de] to-[#a626ec] border-none"
           >
             + Add Experience
           </button>
         </section>
-
 
         {/* Certifications */}
         <section>
@@ -352,7 +372,7 @@ const PortfolioBuilder = () => {
               <button
                 type="button"
                 onClick={() => certificationsArray.remove(idx)}
-                className="btn btn-error"
+                className="btn btn-outline bg-gray-300 border-none"
               >
                 Remove Certification
               </button>
@@ -368,7 +388,7 @@ const PortfolioBuilder = () => {
                 certificateUrl: "",
               })
             }
-            className="btn btn-primary"
+            className="btn text-white bg-gradient-to-r from-[#7405de] to-[#a626ec] border-none"
           >
             + Add Certification
           </button>
@@ -397,7 +417,7 @@ const PortfolioBuilder = () => {
               <button
                 type="button"
                 onClick={() => blogsArray.remove(idx)}
-                className="btn btn-error"
+                className="btn btn-outline bg-gray-300 border-none"
               >
                 Remove Blog
               </button>
@@ -408,7 +428,7 @@ const PortfolioBuilder = () => {
             onClick={() =>
               blogsArray.append({ title: "", link: "", description: "" })
             }
-            className="btn btn-primary"
+            className="btn text-white bg-gradient-to-r from-[#7405de] to-[#a626ec] border-none"
           >
             + Add Blog
           </button>
@@ -439,21 +459,22 @@ const PortfolioBuilder = () => {
           />
         </section>
 
-        <button type="submit" className="btn btn-primary w-full mt-6">
+        <button type="submit" className="btn btn-primary w-full mt-6 bg-gradient-to-r from-[#7405de] to-[#a626ec]">
           Save Portfolio
         </button>
       </form>
 
-      {/* Preview: Right */}
+  
       <div className="flex-1 sticky top-6 max-h-screen overflow-auto bg-gray-50 p-6 rounded-lg shadow">
         <PortfolioPreview
           data={{
             fullName: formData.basicInfo.fullName || "Your Name",
             title: formData.basicInfo.title || "Professional Title",
             bio: formData.basicInfo.bio || "A short bio will show here.",
+            about:formData.basicInfo.about || "enter your bio",
             profileImage:
               formData.basicInfo.profileImage ||
-              "https://via.placeholder.com/80",
+              "https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-600nw-2470054311.jpg",
             skills: formData.skills?.filter((s) => s.name) || [],
             projects:
               formData.projects
