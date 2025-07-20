@@ -2,19 +2,19 @@ import { Link, NavLink } from "react-router-dom";
 import { useCurrentUser } from "../../hooks/useAuth";
 import { UserDropdown } from "./UserDropdown";
 import { useState } from "react";
-import { FaUserTie, FaUserGraduate } from "react-icons/fa";
+import { FaUserTie, FaUserGraduate, FaGraduationCap } from "react-icons/fa";
 
 export const Navbar = () => {
   const { data } = useCurrentUser();
   const user = data?.user;
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-const navElements = (
-  <>
-    {!user ? (
-      // User Not Logged In
-      <>
-        <li>
+  const navElements = (
+    <>
+      {!user ? (
+        // User Not Logged In
+        <>
+          {/* <li>
           <NavLink
             to="/SignIn"
             className={({ isActive }) =>
@@ -33,44 +33,44 @@ const navElements = (
           >
             Register
           </NavLink>
-        </li>
-      </>
-    ) : null}
+        </li> */}
+        </>
+      ) : null}
 
-    <li>
-      <NavLink
-        to="/alljobs"
-        className={({ isActive }) =>
-          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
-        }
-      >
-        Home
-      </NavLink>
-    </li>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-gray-600"
+          }
+        >
+          Home
+        </NavLink>
+      </li>
 
-    <li>
-      <NavLink
-        to="/interview-questions"
-        className={({ isActive }) =>
-          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
-        }
-      >
-        FAQs
-      </NavLink>
-    </li>
+      <li>
+        <NavLink
+          to="/interview-questions"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-gray-600"
+          }
+        >
+          FAQs
+        </NavLink>
+      </li>
 
-    <li>
-      <NavLink
-        to="/allcompanies"
-        className={({ isActive }) =>
-          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
-        }
-      >
-        Companies
-      </NavLink>
-    </li>
+      <li>
+        <NavLink
+          to="/allcompanies"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-gray-600"
+          }
+        >
+          Companies
+        </NavLink>
+      </li>
 
-    <li>
+      {/* <li>
       <NavLink
         to="/about"
         className={({ isActive }) =>
@@ -79,17 +79,21 @@ const navElements = (
       >
         About Us
       </NavLink>
-    </li>
-  </>
-);
-
+    </li> */}
+    </>
+  );
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <nav className="bg-white shadow-sm sticky top-0 z-50 ">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Left - Logo */}
-        <Link to="/" className="text-xl font-bold text-black">
-          Job<span className="text-r-primary">Portal</span>
+        <Link to="/" className="">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 flex items-center justify-center bg-purple-700 text-white rounded-md">
+              <FaGraduationCap />
+            </div>
+            <h2 className="font-bold text-black text-lg">JobPortal</h2>
+          </div>
         </Link>
 
         {/* Center - Links */}
@@ -140,7 +144,6 @@ const navElements = (
                       </div>
                     </div>
                   </div>
-                  
 
                   {/* Employer */}
                   <div className="p-4 flex items-start gap-4">
@@ -150,7 +153,8 @@ const navElements = (
                     <div>
                       <h3 className="text-lg font-semibold">Employer</h3>
                       <p className="text-gray-500 text-sm">
-                        Post jobs, view applications and manage your company profile.
+                        Post jobs, view applications and manage your company
+                        profile.
                       </p>
                       <div className="flex gap-2 mt-3">
                         <Link

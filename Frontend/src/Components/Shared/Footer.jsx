@@ -1,64 +1,97 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaLinkedin,
+  FaTwitter,
+  FaFacebookF,
+  FaInstagram,
+  FaGraduationCap,
+} from "react-icons/fa";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-[#f7f1fb] to-[#f6effb]  py-10 ">
-      <div className="max-w-screen-xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* AlwaysApply Brand Section */}
-          <div>
-            <h2 className="text-xl font-semibold flex items-center gap-2 text-purple-700">
-              <span className="text-purple-600 ">🔍</span> AlwaysApply
-            </h2>
-            <p className="mt-2">
-              Call now: <a href="tel:+919591776078" className="text-purple-600 font-semibold">+91 9591776078</a>
-            </p>
-            <p className="mt-2 text-sm">
-              465 Chandni Chowk Street, Near Red Fort, Old Delhi, New Delhi, Delhi 110006, India
-            </p>
+    <footer className="bg-gray-900 text-gray-300 pt-16 pb-6 px-4">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* Left Section */}
+        <div>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 flex items-center justify-center bg-purple-700 text-white rounded-md">
+              <FaGraduationCap />
+            </div>
+            <h2 className="font-bold text-white text-lg">JobPortal</h2>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-purple-700">Quick Link</h3>
-            <ul className="space-y-2">
-              <li><Link to="/about" className="hover:text-purple-600">About</Link></li>
-              <li><Link to="/contact" className="hover:text-purple-600">Contact</Link></li>
-              <li><Link to="/admin" className="hover:text-purple-600">Admin</Link></li>
-            </ul>
-          </div>
-
-          {/* Candidate Section */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-purple-700">Candidate</h3>
-            <ul className="space-y-2">
-              <li><Link to="/jobs" className="hover:text-purple-600">Browse Jobs</Link></li>
-              <li><Link to="/employers" className="hover:text-purple-600">Browse Employers</Link></li>
-              <li><Link to="/dashboard" className="hover:text-purple-600">Candidate Dashboard</Link></li>
-              <li><Link to="/saved-jobs" className="hover:text-purple-600">Saved Jobs</Link></li>
-            </ul>
-          </div>
-
-          {/* Employers Section */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-purple-700">Employers</h3>
-            <ul className="space-y-2">
-              <li><Link to="/post-job" className="hover:text-purple-600">Post a Job</Link></li>
-              <li><Link to="/candidates" className="hover:text-purple-600">Browse Candidates</Link></li>
-              <li><Link to="/employer-dashboard" className="hover:text-purple-600">Employers Dashboard</Link></li>
-              <li><Link to="/applications" className="hover:text-purple-600">Applications</Link></li>
-            </ul>
-          </div>
+          <p className="text-sm mb-4">
+            Empowering students and connecting them with top employers. Your gateway to a successful career starts here.
+          </p>
+          <ul className="text-sm space-y-2">
+            <li className="flex items-center gap-2">
+              <FaEnvelope className="text-purple-700" /> contact@careerlaunch.edu
+            </li>
+            <li className="flex items-center gap-2">
+              <FaPhoneAlt className="text-purple-700" /> +1 (555) 123–4567
+            </li>
+            <li className="flex items-center gap-2">
+              <FaMapMarkerAlt className="text-purple-700" /> 123 University Ave, Education City
+            </li>
+          </ul>
         </div>
 
-       
+        {/* Company */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">Company</h4>
+          <ul className="space-y-2 text-sm">
+            <li>About Us</li>
+            <li>Contact Us</li>
+            <li>Privacy Policy</li>
+            <li>Terms & Conditions</li>
+            <li>FAQ</li>
+          </ul>
+        </div>
 
-      
+        {/* For Students */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">For Students</h4>
+          <ul className="space-y-2 text-sm">
+            <li>Job Search</li>
+            <li>Internships</li>
+            <li>Resume Builder</li>
+            <li>Career Counseling</li>
+            <li>Skill Assessment</li>
+          </ul>
+        </div>
+
+        {/* For Employers */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">For Employers</h4>
+          <ul className="space-y-2 text-sm">
+            <li>Post a Job</li>
+            <li>Browse Candidates</li>
+            <li>Pricing Plans</li>
+            <li>Employer Resources</li>
+            <li>Campus Hiring</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-sm">&copy; 2025 CareerLaunch. All rights reserved.</p>
+        <div className="flex gap-3">
+          <a href="#" className="w-8 h-8 flex items-center justify-center bg-gray-800 hover:bg-purple-700 rounded-md text-white">
+            <FaLinkedin />
+          </a>
+          <a href="#" className="w-8 h-8 flex items-center justify-center bg-gray-800 hover:bg-purple-700 rounded-md text-white">
+            <FaTwitter />
+          </a>
+          <a href="#" className="w-8 h-8 flex items-center justify-center bg-gray-800 hover:purple-700 rounded-md text-white">
+            <FaFacebookF />
+          </a>
+          <a href="#" className="w-8 h-8 flex items-center justify-center bg-gray-800 hover:bg-pink-600 rounded-md text-white">
+            <FaInstagram />
+          </a>
+        </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

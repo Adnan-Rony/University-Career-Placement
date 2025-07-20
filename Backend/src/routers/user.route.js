@@ -13,6 +13,7 @@ router.get("/logout", logout);
 
 router.put("/profile/update",verifyToken ,updateUserProfile);
 
+
 router.get("/me",verifyToken,getCurrentUser)
 
 

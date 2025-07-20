@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CreateMyCompany, fetchCompany, fetchMyCompany } from "../api/company.js";
+import { CreateMyCompany, fetchCompany, fetchMyCompany, fetchSingleCompany } from "../api/company.js";
+
 
 export const UseMyCompany = () => {
   return useQuery({
@@ -32,3 +33,14 @@ export const useFetchCompanies=()=>{
   })
 
 }
+
+
+export const UseFetchSingleCompanyById = (id) => {
+  return useQuery({
+    queryKey: ["company", id],
+    queryFn: () => fetchSingleCompany(id),
+    enabled: !!id,
+  
+    select: (data) => data.company,
+  });
+};

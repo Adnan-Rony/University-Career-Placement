@@ -22,7 +22,7 @@ const PopulerJob = () => {
 
         <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-6">
           {jobs.slice(0,6).map((job,index) => (
-           <JobsCards index={index} job={job}></JobsCards>
+           <JobsCards key={index} job={job}></JobsCards>
           ))}
         </div>
 

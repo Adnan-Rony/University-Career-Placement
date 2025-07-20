@@ -15,7 +15,7 @@ const JobsCards = ({ job, index }) => {
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
             <img
-              src={job?.logo || img}
+              src={job?.company?.logo || img}
               alt="company logo"
               className="w-14 h-14 rounded-md object-cover"
             />

@@ -33,3 +33,16 @@ export const CurrentUser = async () => {
     throw new Error(error.response?.data?.message || 'Fetching user failed');
   }
 };
+
+
+
+//update profile details
+
+export const UpdateProfileUser = async (formData) => {
+  try {
+    const res = await axiosInstance.put('/user/profile/update', formData);
+    return res.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || 'Profile update failed');
+  }
+};

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { CurrentUser, LoginUser, LogoutUser, RegisterUser } from "../api/auth.js";
+import { CurrentUser, LoginUser, LogoutUser, RegisterUser, UpdateProfileUser } from "../api/auth.js";
 
 
 
@@ -51,3 +51,20 @@ export const useCurrentUser = () => {
   });
 };
 
+
+export const useUpdateProfile = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: UpdateProfileUser,
+    onSuccess: (data) => {
+    
+      queryClient.invalidateQueries(['currentUser']);
+     
+      console.log('Profile updated successfully:', data);
+    },
+    onError: (error) => {
+      console.error('Profile update error:', error.message);
+    },
+  });
+};
