@@ -7,13 +7,11 @@ import { BlogDetails } from "../Pages/BlogDetails";
 import { Home } from "../Pages/Home";
 import JobDetails from "../Pages/JobDetails.jsx";
 
-import CreateCompany from "../Pages/Empoloyer/CreateCompany.jsx";
-
 import { AdminDashboardMenu } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/AdminDashboard/AdminDashboardMenu.jsx";
 import { ManageCompany } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageCompany/ManageCompany.jsx";
 
-import JobsShowAll from "../Pages/JobsShowAll.jsx";
 import AllCompany from "../Pages/company/AllCompany.jsx";
+import JobsShowAll from "../Pages/jobs/JobsShowAll.jsx";
 
 import { EmployerDashboardMenu } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerDashboard/EmployerDashboardMenu.jsx";
 import { PostedJobs } from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/PostedJobs/PostedJobs.jsx";
@@ -23,11 +21,17 @@ import { JobseekerProfile } from "../Components/Drawer/SidebarMenus/JobSeekerSid
 
 import { JobSeekerDashboardMenu } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerDashboard/JobSeekerDashboardMenu.jsx";
 
-
 import EmployerSignUP from "../Features/Authentication/EmployerSignUP.jsx";
 import AllFaqs from "../Pages/AllFaqs.jsx";
-import { CreateJob } from "../Pages/Empoloyer/CreateJob.jsx";
-
+import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
+import CompanyDetails from "../Pages/company/CompanyDetails.jsx";
+import EmployerCompany from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerCompanys/EmployerCompany.jsx";
+import EmployerApplication from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerCompanys/EmployerApplications/EmployerApplication.jsx";
+import ScheduleInterviewForm from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerInterview/ScheduleInterviewForm.jsx";
+import EmployerShowAllApplication from "../Components/Drawer/SidebarMenus/EmployerSidebarMenus/EmployerInterview/EmployerShowAllApplication.jsx";
+import JobSeekerAppliedJobs from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/JobSeekerAppliedJobs/JobSeekerAppliedJobs.jsx";
+import PortfolioBuilder from "../Pages/portfolio/Portfolio.jsx";
+import { PortfolioPreview } from "../Components/portfolio/PortfolioPreview.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -67,6 +71,10 @@ export const AppRouter = createBrowserRouter([
         element: <AllCompany />,
       },
       {
+        path: "/companydetails/:id",
+        element: <CompanyDetails />,
+      },
+      {
         path: "/interview-questions",
         element: <AllFaqs />,
       },
@@ -78,61 +86,59 @@ export const AppRouter = createBrowserRouter([
         path: "/create-job",
         element: <CreateJob />,
       },
+      {
+        path: "/company",
+        element: <CompanyDetails />,
+      },
+      {
+        path: "/portfolio",
+        element: <PortfolioBuilder />,
+      },
+      {
+        path: "/portfolioo",
+        element: <PortfolioPreview />,
+      },
     ],
   },
   {
     path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
+      { path: "jobseekerDashboard", element: <JobSeekerDashboardMenu /> },
+      {
+        path: "jobseekerProfile",
+        element: <JobseekerProfile />,
+      },
+      {
+        path: "jobseekerAppliedJob",
+        element: <JobSeekerAppliedJobs />,
+      },
 
-       { path: "jobseekerDashboard",
-         element:<JobSeekerDashboardMenu/>
-         },
-        {
-          path:"jobseekerProfile",
-          element:<JobseekerProfile/>
-        }
-
-,
 
       // For Employer
-      { path: "employerDashboard",
-         element: <EmployerDashboardMenu/>
-         },
+      { path: "employerDashboard", element: <EmployerDashboardMenu /> },
 
-
-        //  { path: "employer/post-job",
-        //  element: <PostJob />
-        //  },
-
-      { path: "employer/postedJobs",
-         element: <PostedJobs/>
-         },
-
- // For Admin
-
-    
-
-      // For Employer
-     
-      { path: "employer/post-job", element: <CreateCompany /> },
+      { path: "employer/create-job", element: <CreateJob /> },
       { path: "employer/postedJobs", element: <PostedJobs /> },
+      { path: "employer/managecompany", element: <EmployerCompany /> },
+      { path: "employer/applications", element: <EmployerApplication /> },
+      { path: "employer/alljobs", element: <JobsShowAll /> },
+      { path: "employer/interview", element: <EmployerShowAllApplication /> },
 
 
+      //for admin
       {
         path: "adminDashboard",
         element: <AdminDashboardMenu />,
       },
       {
-
-        path:"manageCompany",
-        element:<ManageCompany/>
+        path: "manageCompany",
+        element: <ManageCompany />,
       },
       {
-        path:"manageUsers",
-        element:<ManageUsers/>
-      }
-
+        path: "manageUsers",
+        element: <ManageUsers />,
+      },
     ],
   },
 ]);

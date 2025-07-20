@@ -16,8 +16,7 @@ export const ProfileTab = () => {
     <AboutForm/>
     <SocialProfiles/>
     <EducationForm/>
-    
-  <WorkExperienceForm/>
+    <WorkExperienceForm/>
    </div>
   );
 };

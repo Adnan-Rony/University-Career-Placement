@@ -26,10 +26,10 @@ export const UserDropdown = ({ user }) => {
         tabIndex={0}
         className="btn btn-ghost px-3 py-1.5 flex items-center gap-2 border rounded-full hover:bg-gray-100 transition"
       >
-        <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-purple-700">
+        <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-purple-200">
           <img
             className="w-full h-full object-cover"
-            src={avatar}
+            src={ user?.picture ||avatar}
             alt="avatar"
           />
         </div>
