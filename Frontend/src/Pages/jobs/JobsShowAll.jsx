@@ -87,7 +87,7 @@ const JobsShowAll = () => {
     <div className="mx-auto container">
       <div className="container mx-auto px-4 py-2 grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Filter Sidebar */}
-        <aside className="bg-white p-5 rounded-lg shadow-sm space-y-6 h-screen sticky top-4 overflow-y-auto">
+        <aside className="bg-white p-5 rounded-lg shadow-sm space-y-6 md:h-screen md:sticky top-4 overflow-y-auto">
           {/* Keyword */}
           <div>
             <label className="block text-sm font-semibold mb-1">
