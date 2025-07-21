@@ -12,7 +12,7 @@ export const Navbar = () => {
 
   const navElements = (
     <>
-       <li>
+
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -95,9 +95,9 @@ export const Navbar = () => {
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-80 bg-white md:border border-gray-200 rounded-lg shadow-lg z-50">
                   {/* Job Seeker */}
-                  <div className="p-4 border-b flex items-start gap-4">
+                  <div className="p-4 md:border-b flex items-start gap-4">
                     <div className="bg-gray-100 p-2 rounded-full">
                       <FaUserGraduate className="text-xl text-purple-700" />
                     </div>
