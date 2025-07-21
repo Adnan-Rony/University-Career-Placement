@@ -465,7 +465,7 @@ const PortfolioBuilder = () => {
       </form>
 
   
-      <div className="flex-1 sticky top-6 max-h-screen overflow-auto bg-gray-50 p-6 rounded-lg shadow">
+      {/* <div className="flex-1 sticky top-6 max-h-screen overflow-auto bg-gray-50 p-6 rounded-lg shadow">
         <PortfolioPreview
           data={{
             fullName: formData.basicInfo.fullName || "Your Name",
@@ -502,7 +502,7 @@ const PortfolioBuilder = () => {
             socials: formData.socialLinks || {},
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

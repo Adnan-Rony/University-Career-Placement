@@ -17,7 +17,7 @@ const SingleJobCard = ({ job, setActiveJobId, activeJobId, handleApply }) => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
             <img
-              src={job?.company?.logo || img}
+              src={job?.company?.logo || 'https://img.icons8.com/?size=100&id=V1IkfkcRwvRl&format=png&color=000000'}
               alt="company logo"
               className="w-14 h-14 rounded-md object-cover"
             />

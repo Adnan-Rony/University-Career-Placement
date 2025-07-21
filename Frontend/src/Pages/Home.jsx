@@ -36,8 +36,9 @@ export const Home = () => {
       <Article/>
       <FeatureSection/>
       <FaqSection showall={false}/>
-      <Newsletter></Newsletter>
+     
       {/* <Testimonails /> */}
+       <Newsletter></Newsletter>
     </div>
   );
 };
