@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { ProfileContext} from '../../../../../../Context/ProfileProvider';
-
+import img from "../../../../../../assets/defavatar.png"
 export const AboutForm = () => {
     // Calling ProvderContext:Context APi
     const {profileData,updateProfileSection}=useContext(ProfileContext)
@@ -48,7 +48,7 @@ export const AboutForm = () => {
         </div>
         {/* Image */}
         <div className="flex items-center">
-          <img src="/defavatar.png"
+          <img src={img}
            alt="Profile"
             className="w-20 h-20 rounded-full mr-4 animate-pulse" />
           <button type="button" 
