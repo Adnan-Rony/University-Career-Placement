@@ -3,6 +3,7 @@ import { useCurrentUser } from "../../hooks/useAuth";
 import { UserDropdown } from "./UserDropdown";
 import { useState } from "react";
 import { FaUserTie, FaUserGraduate, FaGraduationCap } from "react-icons/fa";
+import { AlignJustify } from "lucide-react";
 
 export const Navbar = () => {
   const { data } = useCurrentUser();
@@ -11,14 +12,7 @@ export const Navbar = () => {
 
   const navElements = (
     <>
-      {!user ? (
-       
-        <>
-        
-        </>
-      ) : null}
 
-      <li>
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -29,18 +23,7 @@ export const Navbar = () => {
         </NavLink>
       </li>
 
-      <li>
-        <NavLink
-          to="/interview-questions"
-          className={({ isActive }) =>
-            isActive ? "text-r-primary font-semibold" : "text-gray-600"
-          }
-        >
-          FAQs
-        </NavLink>
-      </li>
-
-      <li>
+        <li>
         <NavLink
           to="/allcompanies"
           className={({ isActive }) =>
@@ -51,16 +34,32 @@ export const Navbar = () => {
         </NavLink>
       </li>
 
-      {/* <li>
-      <NavLink
-        to="/about"
-        className={({ isActive }) =>
-          isActive ? 'text-primary' : 'text-gray-500'
-        }
-      >
-        About Us
-      </NavLink>
-    </li> */}
+       <li>
+        <NavLink
+          to="/interview-questions"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-gray-600"
+          }
+        >
+          FAQs
+        </NavLink>
+        </li>
+     
+    {
+      user?
+      <div>
+
+     
+
+    
+      </div>
+      :
+       <div>
+      </div>
+    }
+
+      
+
     </>
   );
 
@@ -163,10 +162,10 @@ export const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className="lg:hidden border-t px-4 pb-4">
+      <div className="lg:hidden border px-4 pb-4">
         <details className="dropdown w-full">
           <summary className="btn btn-ghost w-full justify-start text-left mt-2">
-            Menu
+            <AlignJustify />
           </summary>
           <ul className="menu bg-white w-full pt-2 space-y-2">{navElements}</ul>
         </details>
