@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-import img from "../../assets/company.png";
+
 import { Link } from "react-router";
 const CompanyCard = ({ job }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,7 +11,7 @@ const CompanyCard = ({ job }) => {
       <div className="p-6 rounded-xl  text-gray-800 bg-gradient-to-r from-[#f7f1fb] to-[#f6effb] ">
         <div className="flex items-center gap-4">
           <img
-            src={job?.company?.logo || img}
+            src={job?.company?.logo }
             alt="Company Logo"
             className="w-14 h-14 rounded-lg object-cover "
           />

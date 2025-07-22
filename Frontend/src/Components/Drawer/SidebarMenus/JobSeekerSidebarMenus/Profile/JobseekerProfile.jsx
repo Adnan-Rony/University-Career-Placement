@@ -37,7 +37,7 @@ export const JobseekerProfile = () => {
       </h1>
 
       <div>
-        <ul className="flex space-x-8 text-lg border-b">
+        <ul className="flex space-x-8 text-lg border-b py-2 overflow-x-auto">
           {tabs.map((tab, idx) => (
             <li
               key={idx}

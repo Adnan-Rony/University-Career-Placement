@@ -33,11 +33,13 @@ import PortfolioBuilder from "../Pages/portfolio/Categories/Webdeveloper/Portfol
 import ViewMyPortfolio from "../Pages/portfolio/ViewMyPortfolio.jsx";
 
 import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
+import { NotFOund } from "../Pages/NotFound/NotFOund.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
     path: "/",
     element: <MainLayouts />,
+    errorElement:<NotFOund/>,
     children: [
       {
         path: "/",
