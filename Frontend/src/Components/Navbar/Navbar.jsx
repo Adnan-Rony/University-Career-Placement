@@ -12,18 +12,16 @@ export const Navbar = () => {
 
   const navElements = (
     <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? "text-r-primary font-semibold" : "text-gray-600"
+        }
+      >
+        Home
+      </NavLink>
 
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "text-r-primary font-semibold" : "text-gray-600"
-          }
-        >
-          Home
-        </NavLink>
-      </li>
-
-        <li>
+      <li>
         <NavLink
           to="/allcompanies"
           className={({ isActive }) =>
@@ -34,7 +32,7 @@ export const Navbar = () => {
         </NavLink>
       </li>
 
-       <li>
+      <li>
         <NavLink
           to="/interview-questions"
           className={({ isActive }) =>
@@ -43,23 +41,9 @@ export const Navbar = () => {
         >
           FAQs
         </NavLink>
-        </li>
-     
-    {
-      user?
-      <div>
+      </li>
 
-     
-
-    
-      </div>
-      :
-       <div>
-      </div>
-    }
-
-      
-
+      {user ? <div></div> : <div></div>}
     </>
   );
 

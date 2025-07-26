@@ -5,9 +5,10 @@ import CompaniesCards from "../company/CompaniesCard.jsx";
 import { Link } from "react-router";
 import CompanyCardSkeleton from "../loading/SponserCompanyCardSkeleton.jsx";
 import CompanyDetails from "../../Pages/company/CompanyDetails.jsx";
-
+import { useMediaQuery } from "react-responsive";
 const SponserCompany = () => {
-  const { data, isLoading, isError } = useFetchCompanies();
+   const { data, isLoading, isError } = useFetchCompanies();
+  const isMobile = useMediaQuery({ maxWidth: 640 }); // Tailwind 'sm' breakpoint
 
   const companies = Array.isArray(data?.companies) ? data.companies : [];
 
@@ -23,9 +24,13 @@ const SponserCompany = () => {
       ? companies
       : companies.filter((c) => c.industry === activeIndustry);
 
+  const visibleCompanies = isMobile
+    ? filteredCompanies.slice(0, 4)
+    : filteredCompanies.slice(0, 8);
+
   return (
     <section className="container mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-center mb-6">
+      <h2 className="lg:text-3xl text-2xl font-semibold text-center mb-6">
         Sponsored Companies
       </h2>
 
@@ -47,7 +52,7 @@ const SponserCompany = () => {
               <button
                 key={idx}
                 onClick={() => setActiveIndustry(industry)}
-                className={`px-4 py-1 border rounded-full text-sm transition ${
+                className={`px-4 py-1 border border-gray-300 rounded-full text-sm transition ${
                   activeIndustry === industry
                     ? "bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white"
                     : "hover:bg-blue-100"
@@ -60,17 +65,16 @@ const SponserCompany = () => {
 
           {/* Company Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredCompanies.length > 0 ? (
-              filteredCompanies
-                .slice(0, 8)
-                .map((company, index) => (
-                  <CompaniesCards key={index} company={company} />
-                ))
-            ) : (
-              <p className="col-span-full text-center text-gray-500">
-                No companies found in this category.
-              </p>
-            )}
+       {visibleCompanies.length > 0 ? (
+  visibleCompanies.map((company, index) => (
+    <CompaniesCards key={index} company={company} />
+  ))
+) : (
+  <p className="col-span-full text-center text-gray-500">
+    No companies found in this category.
+  </p>
+)}
+
           </div>
 
           {/* View All Button */}
