@@ -9,13 +9,10 @@ import {
 import img from "../../assets/defavatar.png";
 export const DashboardNavbar = () => {
   return (
-    <div className="navbar bg-base-100  shadow-sm border-1 border-gray-300 rounded-xl my-4">
-      <div className="navbar-start p-4">
-        {/* <label className="input border-0 hidden md:block bg-base-300">
- 
-  <input type="search" className="grow" placeholder="Search" />
- 
-</label> */}
+    <div className="navbar bg-base-100 
+     shadow-sm border-1 border-gray-300 md:rounded-xl md:my-4 ">
+      <div className="navbar-start md:p-4">
+     
 
         {/* Menubar for mobile */}
         <div className=" w-full">
@@ -30,11 +27,6 @@ export const DashboardNavbar = () => {
         {/*  */}
       </div>
       <div className="navbar-center hidden lg:flex">
-        {/* <ul className="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
-    
-      <li><a>Item 3</a></li>
-    </ul> */}
       </div>
       <div className="navbar-end space-x-5">
         <ul className=" font-bold flex items-center justify-center gap-3 ">
@@ -45,7 +37,7 @@ export const DashboardNavbar = () => {
             <MdOutlineNotificationsActive className="text-2xl" />
           </li>
         </ul>
-        <div className="w-12 h-12  ">
+        <div className="w-9 h-9  md:w-12 md:h-12  ">
           <img className="w-full h-full rounded-xl" src={img} />
         </div>
       </div>

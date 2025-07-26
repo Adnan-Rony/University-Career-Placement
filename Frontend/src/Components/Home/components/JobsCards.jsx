@@ -1,4 +1,4 @@
-import img from "../../../assets/company.PNG";
+
 import { CiBookmark, CiCalendar } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
@@ -15,7 +15,7 @@ const JobsCards = ({ job, index }) => {
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
             <img
-              src={job?.company?.logo || img}
+              src={job?.company?.logo }
               alt="company logo"
               className="w-14 h-14 rounded-md object-cover"
             />

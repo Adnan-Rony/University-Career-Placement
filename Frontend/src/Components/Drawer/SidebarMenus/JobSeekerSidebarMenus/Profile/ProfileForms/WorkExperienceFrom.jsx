@@ -26,15 +26,15 @@ export const WorkExperienceForm = () => {
   }
 
   return (
-    <div className="p-6 flex">
-      <div className="w-2/6">
+    <div className="p-6 flex flex-col md:flex-row">
+      <div className="md:w-2/6">
         <h1 className="text-2xl font-bold">Work Experience</h1>
         <p className="text-gray-500 mb-4">
           What jobs or internships have you done?
         </p>
       </div>
 
-      <div className="w-full px-8">
+      <div className="w-full md:px-8">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           {fields.map((field, index) => (
             <section key={field.id} className="mb-6 rounded">

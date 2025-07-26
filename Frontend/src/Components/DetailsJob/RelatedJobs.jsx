@@ -3,7 +3,7 @@ import { CiBookmark, CiCalendar, CiClock1 } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { UseRelatedJobs } from "../../hooks/useJobs.js";
-import img from "../../assets/company.png";
+
 import { Link } from "react-router";
 import AllJobsCards from "../jobs/AllJobsCards.jsx";
 import { RxTimer } from "react-icons/rx";
@@ -48,7 +48,7 @@ export default function RelatedJobs({ jobId }) {
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   <img
-                    src={job?.company?.logo || img}
+                    src={job?.company?.logo }
                     alt="company logo"
                     className="w-14 h-14 rounded-md object-cover"
                   />

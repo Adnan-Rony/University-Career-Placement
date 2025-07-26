@@ -7,8 +7,7 @@ import "swiper/css/navigation";
 
 import { Autoplay, Navigation } from "swiper/modules";
 
-import img1 from "../../assets/download.png";
-import img2 from "../../assets/360_F_516276029_aMcP4HU81RVrYX8f5qCAOCCuOiCsu5UF.JPG";
+
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import { useFetchCompanies } from "../../hooks/useCompany.js";
 import CardCompanySkeleton from "../loading/CardCompanySkeleton.jsx";
@@ -42,7 +41,7 @@ const CardCompany = () => {
               {/* Banner */}
               <div className="relative">
                 <img
-                  src={company?.cover || img1}
+                  src={company?.cover }
                   alt={`${company.name} Banner`}
                   className="lg:h-[195px] w-full object-cover"
                 />
@@ -55,7 +54,7 @@ const CardCompany = () => {
               <div className="p-4 space-y-3">
                 <div className="flex items-center gap-2">
                   <img
-                    src={company?.logo || img2}
+                    src={company?.logo }
                     alt={`${company.name} Logo`}
                     className="w-8 h-8 object-cover rounded-full"
                   />
@@ -72,10 +71,7 @@ const CardCompany = () => {
                 </div>
 
                 <div className="flex justify-end items-center text-sm mt-2">
-                  {/* <div className="flex items-center gap-1 text-blue-600 font-medium">
-                    <Briefcase size={16} />
-                    <span>industry {company.industry}</span>
-                  </div> */}
+                
                   <button className="text-sm font-medium bg-r-primary text-white py-2 px-3 rounded-lg hover:bg-r-accent transition">
                     View Profile
                   </button>
