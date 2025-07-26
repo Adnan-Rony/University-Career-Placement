@@ -21,7 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: "http://localhost:5173", // Adjust as needed
+    origin: ["http://localhost:5173",
+             "https://smartjob-clientside.vercel.app"
+    ],
+
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +32,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Routes
-app.use("/api/v1", indexRoutes);  // Base route
+app.use("/api/v1", indexRoutes); 
+
 
 app.use("/api/v1/user", userRoutes); // User-related routes
 app.use("/api/v1/company", companyRoute); // User-related routes

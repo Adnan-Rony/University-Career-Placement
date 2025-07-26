@@ -11,21 +11,28 @@ const userSchema = new mongoose.Schema(
       enum: ['job-seeker', 'employer', 'admin'],
       default: 'job-seeker',
     },
-
+   
+    primaryRole:{type:String},
+    location :{type:String},
     bio: { type: String },
     picture: { type: String },
     skills: [{ type: String }],
-    experience: { type: String },
+    
+    yearsExperience: { type: String },
+
+   
+
+
     resume: { type: String },
 
     education: [
       {
-        degree: String,
-        institution: String,
-        fieldOfStudy: String,
+        
+        college: String,
+         degreeType: String,
         startYear: String,
         endYear: String,
-        grade: String,
+        
       },
     ],
 
@@ -35,6 +42,27 @@ const userSchema = new mongoose.Schema(
       portfolio: String,
       twitter: String,
     },
+   workExperience:[
+    {
+      company:{
+        type:String
+      },
+      title:{
+        type:String
+      },
+      startDate:{
+        type:Date
+      },
+      endDate:{
+        type:Date
+      },
+      description:{
+        type:String
+      }
+    }
+   ],
+
+
 
     certifications: [
       {
