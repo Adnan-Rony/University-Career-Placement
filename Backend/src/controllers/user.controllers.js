@@ -10,31 +10,38 @@ export const register = async (req, res) => {
   const { name, email, password, role } = req.body;
 
   try {
+    // Check if user exists
     let existingUser = await User.findOne({ email });
     if (existingUser) {
-      // 
-      const token = generateToken(existingUser);
-      return res.status(200).json({
-        success: true,
-        message: 'User already exists (logged in)',
-        user: {
-          id: existingUser._id,
-          name: existingUser.name,
-          email: existingUser.email,
-          role: existingUser.role,
-        },
-        token,
+      // For Google sign-in, treat as login (no password check)
+      if (!password) {
+        const token = generateToken(existingUser);
+        return res.status(200).json({
+          success: true,
+          message: 'User already exists (logged in)',
+          user: {
+            id: existingUser._id,
+            name: existingUser.name,
+            email: existingUser.email,
+            role: existingUser.role,
+          },
+          token,
+        });
+      }
+      // For password-based registration, return error
+      return res.status(400).json({
+        success: false,
+        message: 'User already exists. Please log in.',
       });
     }
 
-    const hashedPassword = password
-      ? await bcrypt.hash(password, 10)
-      : undefined;
+    // Create new user
+    const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
 
     const newUser = new User({
       name,
       email,
-      password: hashedPassword || '', // Or just skip password
+      password: hashedPassword, // Set to null for Google sign-in
       role: role || 'job-seeker',
     });
 

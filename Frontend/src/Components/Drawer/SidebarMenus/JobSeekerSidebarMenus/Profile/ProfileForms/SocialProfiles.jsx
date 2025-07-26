@@ -5,6 +5,8 @@ import { HiGlobeAlt } from "react-icons/hi";
 import { useContext } from "react";
 import { ProfileContext } from "../../../../../../Context/ProfileProvider";
 import { useUpdateProfile } from "../../../../../../hooks/useUpdateProfile";
+
+
 export const SocialProfiles = () => {
   const { mutate,isPending,isSuccess,isError   }=useUpdateProfile()
   const {profileData,setProfileData}=useContext(ProfileContext)

@@ -6,7 +6,7 @@ import {
   MdOutlineNotificationsActive,
   MdOutlineNotificationsNone,
 } from "react-icons/md";
-import img from "../../../public/defavatar.png";
+import img from "../../assets/defavatar.png";
 export const DashboardNavbar = () => {
   return (
     <div className="navbar bg-base-100 
