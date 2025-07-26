@@ -23,6 +23,17 @@ export const Navbar = () => {
 
       <li>
         <NavLink
+          to="/alljobs"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-gray-600"
+          }
+        >
+          Jobs
+        </NavLink>
+      </li>
+
+        <li>
+        <NavLink
           to="/allcompanies"
           className={({ isActive }) =>
             isActive ? "text-r-primary font-semibold" : "text-gray-600"

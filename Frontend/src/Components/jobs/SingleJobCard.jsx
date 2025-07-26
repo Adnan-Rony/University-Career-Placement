@@ -3,7 +3,7 @@ import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { RxTimer } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import img from "../../assets/company.PNG";
+
 import ApplyJob from "../DetailsJob/ApplyJob.jsx";
 
 const SingleJobCard = ({ job, setActiveJobId, activeJobId, handleApply }) => {

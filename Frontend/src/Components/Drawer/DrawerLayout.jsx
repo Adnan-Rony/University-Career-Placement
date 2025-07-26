@@ -11,7 +11,7 @@ export const DrawerLayout = () => {
 
   const user = data?.user;
   const role = user?.role;
-  console.log(role);
+ 
 
   const RenderSidebars = () => {
     switch (role) {
