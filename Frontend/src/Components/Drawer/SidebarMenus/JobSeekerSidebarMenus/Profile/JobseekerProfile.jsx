@@ -8,7 +8,7 @@ export const JobseekerProfile = () => {
   const [activeTab, setActiveTab] = useState("Overview");
 
   const tabs = ["Overview", "Profile", "Resume / CV", "Preferences"];
-  console.log(activeTab);
+
 
   const renederTabsByClick = () => {
     switch (activeTab) {
@@ -21,8 +21,6 @@ export const JobseekerProfile = () => {
       case "Resume / CV":
         return <ResumeCvTab />;
 
-      // case "Profile":
-      //   return <ProfileTab />
 
       case "Preferences":
         return <PreferencesTab />;
