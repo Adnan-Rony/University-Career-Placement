@@ -5,27 +5,38 @@ import { MdDashboard, MdKeyboardArrowDown } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { UseLogout } from "../../hooks/useAuth.js";
 import toast from "react-hot-toast";
+import { Authcontext } from "../../Context/Authprovider.jsx";
+import { useContext } from "react";
 
 
 export const UserDropdown = ({ user }) => {
   const { mutate: logout, isPending } = UseLogout();
+   const { googlelogout } = useContext(Authcontext);
   const navigate = useNavigate();
 
   const avatar =
     "https://thumbs.dreamstime.com/b/minimalist-male-avatar-brown-hair-teal-shirt-flat-style-perfect-user-profile-social-media-illustration-colors-384307770.jpg";
 
-const handleLogout = () => {
-  logout(undefined, {
-    onSuccess: () => {
-      toast.success("Logout successfully");
-      navigate("/");
-    },
-    onError: (error) => {
-      console.error("Logout error:", error);
-      toast.error(error.message || "Logout failed");
-    },
-  });
-};
+const handleLogout = async () => {
+    try {
+      // Clear Firebase auth session
+      await googlelogout();
+      // Clear backend JWT token
+      logout(undefined, {
+        onSuccess: () => {
+          toast.success("Logout successfully");
+          navigate("/");
+        },
+        onError: (error) => {
+          console.error("Backend logout error:", error);
+          toast.error(error.message || "Logout failed");
+        },
+      });
+    } catch (error) {
+      console.error("Google logout error:", error);
+      toast.error("Google logout failed");
+    }
+  };
 
 
   return (
