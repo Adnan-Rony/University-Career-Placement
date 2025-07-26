@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { UseLoginUser } from "../../hooks/useAuth.js";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { GoogleSignIN } from "./GoogleSignIN.jsx";
 
 export const SignIn = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -80,6 +81,8 @@ export const SignIn = () => {
             {isPending ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        <GoogleSignIN/>
 
         {/* Register Link */}
         <p className="text-sm text-center mt-6 text-gray-600">
