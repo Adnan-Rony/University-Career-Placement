@@ -5,7 +5,7 @@ export const UpdateProfile=async(data)=>{
      try{
     const response = await axiosInstance.put('/user/profile/update', data);
     console.log("Profile updated successfully", response.data);
-    toast("Success")
+    toast.success("Success")
     return response.data;
   } 
   catch (error){

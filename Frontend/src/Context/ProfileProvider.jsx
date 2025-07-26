@@ -17,8 +17,10 @@ export const ProfileProvider = ({children}) => {
         },
         education:
           [
-            {college:"Daffodil Internatinal University",
-              graduationYear:" ",
+            {
+              college:"Daffodil Internatinal University",
+              startYear:" ",
+              endYear:" ",
               degreeType:""
              }
           ],
@@ -40,7 +42,7 @@ const updateProfileSection=(section,data)=>{
 }
 
 useEffect(() => {
-  console.log("Updated Profile Data:", profileData);
+  
 }, [profileData]);
 
 const value={

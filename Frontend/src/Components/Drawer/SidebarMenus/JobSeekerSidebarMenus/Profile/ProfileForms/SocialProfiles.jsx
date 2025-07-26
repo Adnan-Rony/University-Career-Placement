@@ -26,7 +26,7 @@ export const SocialProfiles = () => {
       }
     }
     console.log('Social Profiles:',formData);
-    mutate(data)
+    mutate(formData)
   };
 
   return (
