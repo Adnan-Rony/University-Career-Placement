@@ -133,7 +133,7 @@ export const Navbar = () => {
                       </p>
                       <div className="flex gap-2 mt-3">
                         <Link
-                          to="/SignIn"
+                          to="/employer-signIn"
                           onClick={() => setDropdownOpen(false)}
                           className="text-sm text-white bg-green-600 px-3 py-1 rounded hover:bg-green-700"
                         >
