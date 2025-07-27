@@ -18,7 +18,7 @@ async function main() {
         });
     } catch (err) {
         console.error(" Failed to connect to the database", err);
-        process.exit(1); // Exit process on failure
+        process.exit(1);
     }
 }
 
