@@ -1,10 +1,11 @@
 import { useContext } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import { ProfileContext } from "../../../../../../Context/ProfileProvider"
+import { useUpdateProfile } from "../../../../../../hooks/useUpdateProfile"
 
 export const WorkExperienceForm = () => {
   const { profileData, updateProfileSection } = useContext(ProfileContext)
-
+   const { mutate,isPending,isSuccess,isError   }=useUpdateProfile()
   const {
     register,
     handleSubmit,
@@ -22,7 +23,9 @@ export const WorkExperienceForm = () => {
   })
 
   const onSubmit = (data) => {
-    updateProfileSection("workExperience", data.workExperience)
+    // updateProfileSection("workExperience", data.workExperience)
+    // console.log(data);
+    mutate(data)
   }
 
   return (

@@ -1,29 +1,67 @@
-import { useContext } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { ProfileContext } from '../../../../../../Context/ProfileProvider';
+
+import toast from 'react-hot-toast';
+import { useUpdateProfile } from '../../../../../../hooks/useAuth';
 
 export const AboutForm = () => {
   // Calling ProvderContext:Context APi
   const { profileData, updateProfileSection } = useContext(ProfileContext)
-  const { register, control, handleSubmit, watch, formState: { errors } } = useForm({
-    defaultValues: {
-      name: 'Tamjid Ahmed Razin',
-      location: 'Bangladesh, Bangladesh',
-      primaryRole: 'Frontend Engineer',
-      yearsExperience: '< 1 Year',
-      openRoles: ['Full-Stack Engineer'],
-      bio: "I'm a Junior MERN Stack Web Developer with a strong passion for building responsive, user-friendly web applications. Proficient in MongoDB, Express.js, React, and Node.js"
-    }
-  });
+  const { mutate,isPending,isSuccess,isError   }=useUpdateProfile()
+  const fileInputRef = useRef();
+  const [cover, setCover] = useState("");
+  const [isUploading,setIsUploading]=useState(false)
+  const { register, control, handleSubmit, watch, formState: { errors } } = useForm(
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "openRoles"
-  });
+);
+
+
+//  Image Upload
+  const handleCoverUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+     setIsUploading(true); 
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "blogging");
+
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dnpycgwch/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+      setCover(data.secure_url);
+      toast.success("Profile photo uploaded!");
+    } catch (error) {
+      console.error("Upload failed:", error);
+      toast.error("Failed to upload photo");
+    }finally{
+      setIsUploading(false);
+    }
+  };
+
+  // Handle Submit
 
   const onSubmit = (data) => {
     updateProfileSection('about', data);
+    const payload = {
+      name: data.name,
+      location: data.location,
+      primaryRole: data.primaryRole,
+      yearsExperience: data.yearsExperience,
+      bio: data.bio,
+      picture: cover ,
+    };
+    console.log(payload);
+    mutate(payload)
   };
+ 
   return (
     <div>
       <div className="p-6 flex flex-col md:flex-row">
@@ -47,13 +85,36 @@ export const AboutForm = () => {
             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
           </div>
           {/* Image */}
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <img src="/defavatar.png"
               alt="Profile"
               className="w-20 h-20 rounded-full mr-4 animate-pulse" />
             <button type="button"
               className="btn btn-outline">Upload a new photo</button>
+          </div> */}
+           {/* Profile Image Upload */}
+          <div className="flex items-center">
+            <img
+              src={ cover || "/defavatar.png"}
+              alt="Profile"
+              className="w-20 h-20 rounded-full mr-4  animate-pulse  border-gray-400 object-cover"
+            />
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleCoverUpload}
+              className="hidden"
+            />
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => fileInputRef.current.click()}
+            >
+              {isUploading ? "Uploading image..." : "Upload a new photo"}
+            </button>
           </div>
+          {/* ........ */}
           {/* Location */}
           <div className="">
             <label className="block text-sm font-medium text-gray-700">Where are you based?*</label>
@@ -71,6 +132,7 @@ export const AboutForm = () => {
               className="mt-1  w-full 
              select"
             >
+               <option value="">Select Select Role</option>
               <option>Frontend Engineer</option>
               <option>Full-Stack Engineer</option>
               <option>Select role</option>
@@ -107,6 +169,13 @@ export const AboutForm = () => {
               rows="4"
             />
             {errors.bio && <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>}
+          </div>
+          <div>
+            <button 
+            type='submit'
+            className="btn">
+              Submit
+            </button>
           </div>
 
         </form>
