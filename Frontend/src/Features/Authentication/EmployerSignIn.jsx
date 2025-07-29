@@ -6,7 +6,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { GoogleSignIN } from "./GoogleSignIN.jsx";
 
-export const SignIn = () => {
+export const EmployerSignIn = () => {
   const { register, handleSubmit, reset } = useForm();
   const { mutate: loginUser, isPending } = UseLoginUser();
   const navigate = useNavigate();
@@ -82,13 +82,13 @@ export const SignIn = () => {
           </button>
         </form>
 
-        <GoogleSignIN />
+        {/* <GoogleSignIN /> */}
 
         {/* Register Link */}
         <p className="text-sm text-center mt-6 text-gray-600">
           Don’t have an account?{" "}
           <Link
-            to="/SignUp"
+            to="/employer-create-company"
             className="text-purple-600 hover:underline font-medium"
           >
             Register here
@@ -99,4 +99,4 @@ export const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default EmployerSignIn;
