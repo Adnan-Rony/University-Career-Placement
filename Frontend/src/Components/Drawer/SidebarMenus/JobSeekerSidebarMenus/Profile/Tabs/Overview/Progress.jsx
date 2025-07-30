@@ -1,10 +1,9 @@
+import React from 'react'
+import { useCurrentUser } from '../../../../../../../hooks/useAuth'
+import Loading from '../../../../../../loading/Loading'
 
-import { useCurrentUser } from '../../../../../../hooks/useAuth'
-
-import Loading from '../../../../../loading/Loading'
-
-export const OverViewTab = () => {
-  const {data,isPending}=useCurrentUser()
+export const Progress = () => {
+      const {data,isPending}=useCurrentUser()
   const profileInfo=data?.user
  
   if(isPending) return <Loading/>
@@ -38,9 +37,9 @@ const isCompleteProfile=(profile)=>{
    return Math.round((completefileds/totalfields)*100)
 }
 const checkPercentage=isCompleteProfile(profileInfo)
-console.log(checkPercentage);
+
   return (
-    <div className='py-6 border m-4 border-gray-300 rounded-xl px-8'>
+     <div className='py-6 border m-4 border-gray-300 rounded-xl px-8'>
       {checkPercentage < 100 && (
         <p className="text-gray-600 mb-4 text-lg font-semibold ">
           Your profile is {checkPercentage}% complete. Completing your profile will help employers find you more easily.
