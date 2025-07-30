@@ -13,9 +13,17 @@ export const AboutForm = () => {
   const [cover, setCover] = useState("");
   const [isUploading,setIsUploading]=useState(false)
   const { register, control, handleSubmit, watch, formState: { errors } } = useForm(
-
+{
+  defaultValues:{
+    name:profileData.name,
+    location:profileData.location,
+    primaryRole:profileData?.primaryRole,
+    bio:profileData.bio,
+    yearsExperience: profileData.yearsExperience,
+  }
+}
 );
-
+console.log(profileData.primaryRole);
 
 //  Image Upload
   const handleCoverUpload = async (e) => {
@@ -85,14 +93,7 @@ export const AboutForm = () => {
             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
           </div>
           {/* Image */}
-          {/* <div className="flex items-center">
-            <img src="/defavatar.png"
-              alt="Profile"
-              className="w-20 h-20 rounded-full mr-4 animate-pulse" />
-            <button type="button"
-              className="btn btn-outline">Upload a new photo</button>
-          </div> */}
-           {/* Profile Image Upload */}
+      
           <div className="flex items-center">
             <img
               src={ cover || "/defavatar.png"}
@@ -132,10 +133,11 @@ export const AboutForm = () => {
               className="mt-1  w-full 
              select"
             >
-               <option value="">Select Select Role</option>
-              <option>Frontend Engineer</option>
-              <option>Full-Stack Engineer</option>
-              <option>Select role</option>
+               <option defaultValue={profileData.primaryRole} value="">Select Select Role</option>
+               <option  value="Full-Stack Engineer">Full-Stack Engineer</option>
+              <option value="Frontend Engineer">Frontend Engineer</option>
+              <option value="Backend Engineer">Backend Engineer</option>
+             
             </select>
             {errors.primaryRole && <p className="text-red-500 text-sm mt-1">{errors.primaryRole.message}</p>}
           </div>

@@ -50,7 +50,8 @@ export const JobseekerProfile = () => {
             </li>
           ))}
         </ul>
-        <div className="border rounded-md border-gray-300 my-6 bg-white">
+        <div className="border rounded-md border-gray-300
+         my-6 bg-white min-h-dvh">
           {renederTabsByClick()}
         </div>
       </div>
