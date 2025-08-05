@@ -1,21 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { UseMyJobs } from "../../../../../hooks/useJobs";
 import { format } from "date-fns";
 import PostedJobsSkeleton from "../../../../loading/PostedJobsSkeleton.jsx";
-import { Link } from 'react-router';
+import { Link } from "react-router";
 import { PostedJobActions } from "./PostedJobActions.jsx";
 
 export const PostedJobs = () => {
   const { data: allJobs, isLoading } = UseMyJobs();
   const jobs = allJobs?.jobs || [];
 
+  // Pagination calculation
+ 
+  const [currentPage, setCurrentPage] = useState(1);
+  const postedJobsPerPage = 10;
+
+  const indexOfLastJob = postedJobsPerPage * currentPage;
+  const indexOfFirstJob = indexOfLastJob - postedJobsPerPage;
+  const currentPostedJob = jobs.slice(indexOfFirstJob, indexOfLastJob);
+
+  const totalPages = Math.ceil(jobs?.length / postedJobsPerPage);
+
 
   if (isLoading) return <PostedJobsSkeleton />;
 
-
-  
   return (
-    <div className="overflow-x-auto bg-white p-5 md:mx-5 rounded-xl shadow-lg border border-gray-300">
+    <div
+      className="overflow-x-auto bg-white p-5 md:mx-5 
+    rounded-xl shadow-lg border border-gray-300 mb-6"
+    >
       <h2 className="text-xl font-semibold mb-4">My Posted Jobs</h2>
 
       {jobs.length === 0 ? (
@@ -37,7 +49,7 @@ export const PostedJobs = () => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            {jobs.map((job) => (
+            {currentPostedJob.map((job) => (
               <tr key={job._id} className="hover">
                 {/* Job title + logo + company */}
                 <td>
@@ -118,12 +130,50 @@ export const PostedJobs = () => {
                     Delete
                   </button>
                 </td> */}
-                <PostedJobActions job={job}/>
+                <PostedJobActions job={job} />
               </tr>
             ))}
           </tbody>
         </table>
       )}
+      {/* Handaling pagination controls */}
+    {
+      totalPages>1 && (
+          <div className="flex justify-center mt-6 gap-2">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+          className="px-3 btn py-1 border rounded "
+        >
+          Prev
+        </button>
+        <ul className="flex gap-2">
+          {[...Array(totalPages)].map((_, index) => (
+            <li key={index}>
+              <button
+                className={`px-3 py-1 rounded btn ${
+                  currentPage === index + 1
+                    ? "bg-purple-600 text-white"
+                    : "text-gray-700"
+                }`}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          disabled={currentPage === totalPages}
+          className="btn px-3 py-1 border rounded "
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
+          Next
+        </button>
+      </div>
+      )
+    }
     </div>
   );
 };
