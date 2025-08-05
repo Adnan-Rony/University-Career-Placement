@@ -11,12 +11,12 @@ export const ProfileProvider = ({children}) => {
    const profileInfo= data?.user || {};
    console.log(profileInfo);
     const [profileData,setProfileData]=useState({
-        name:"Tamjid Razin",
-        location:'Uttara Dhaka',
+        name:"",
+        location:'',
 
         social:{
-        website: 'https://mehnazjahanportfolio.netlify.app/',
-        linkedin: 'https://www.linkedin.com/in/mehnazjahan-profile59326b/',
+        website: '',
+        linkedin: '',
         github: 'https://github.com/mehnazjahan',
         twitter: 'https://twitter.com/mehnazjahan',
         },

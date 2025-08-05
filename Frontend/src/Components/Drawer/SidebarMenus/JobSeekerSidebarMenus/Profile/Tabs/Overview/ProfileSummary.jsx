@@ -8,7 +8,9 @@ export const ProfileSummary = () => {
     const {data}=useCurrentUser()
     const infos=data?.user
     console.log(infos);
-    const {name,email,picture,location,primaryRole,bio}=infos
+    const {name,email,picture,
+socialLinks,primaryRole,bio,address,education,workExperience}=infos
+    console.log(address.city);
   return (
     <div className='py-6 border m-4  border-gray-300 rounded-xl px-8'>
     
@@ -21,24 +23,26 @@ export const ProfileSummary = () => {
         </figure>
         {/* name,location */}
         <div>
-            <h2  className='text-2xl font-semibold'>{name}</h2>
-            <h3 className='font-medium text-gray-400'>{location}</h3>
+            <h2  className='text-2xl font-semibold capitalize'>{name}</h2>
+            <h3 className='font-medium text-gray-400'>{address.city}</h3>
         </div>
       </div>
       <div className='flex gap-2 text-sm text-gray-600'>
-        <a href="" target='_blank' className=''>
+        <a href={socialLinks.github} target='_blank' className=''>
             <Github/>
             <span className='sr-only'>visit my github</span>
         </a>
-        <a href="" target='_blank' className=''>
+        <a href={socialLinks.linkedin
+} target='_blank' className=''>
              <Linkedin/>
-            <span className='sr-only'>visit my github</span>
+            <span className='sr-only'>visit my linkedin
+</span>
         </a>
-        <a href="" target='_blank' className=''>
+        <a href={socialLinks.portfolio} target='_blank' className=''>
            <span>Website</span>
-            <span className='sr-only'>visit my github</span>
+            <span className='sr-only'>visit my portfolio</span>
         </a>
-        <a href="" target='_blank' className=''>
+        <a href={socialLinks.portfolio} target='_blank' className=''>
            <span>Resume</span>
             <span className='sr-only'>visit my github</span>
         </a>
@@ -48,91 +52,38 @@ export const ProfileSummary = () => {
     <section className='my-4'>
         <h2 className='font-medium text-gray-600'>About Me</h2>
         <div className=''>
-            {/* <VerticalTimeline 
-            layout='1-column-left'
-            >
-           
-
-
-
-   <VerticalTimelineElement
-    className="vertical-timeline-element--work"
-    date="2010 - 2011"
-    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-    icon={<WorkflowIcon />}
-  >
-    <h3 className="vertical-timeline-element-title">Art Director</h3>
-    <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
-    <p>
-      Creative Direction, User Experience, Visual Design, SEO, Online Marketing
-    </p>
-  </VerticalTimelineElement>
-  <VerticalTimelineElement
-    className="vertical-timeline-element--work"
-    date="2008 - 2010"
-    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-    icon={<WorkflowIcon/>}
-  >
-    <h3 className="vertical-timeline-element-title">Web Designer</h3>
-    <h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
-    <p>
-      User Experience, Visual Design
-    </p>
-  </VerticalTimelineElement>
-  <VerticalTimelineElement
-    className="vertical-timeline-element--work"
-    date="2006 - 2008"
-    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-    icon={<WorkflowIcon/>}
-  >
-    <h3 className="vertical-timeline-element-title">Web Designer</h3>
-    <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
-    <p>
-      User Experience, Visual Design
-    </p>
-  </VerticalTimelineElement>
-  <VerticalTimelineElement
-    className="vertical-timeline-element--education"
-    date="April 2013"
-    iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-    icon={<WorkflowIcon/>}
-  >
-    <h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
-    <h4 className="vertical-timeline-element-subtitle">Online Course</h4>
-    <p>
-      Strategy, Social Media
-    </p>
-  </VerticalTimelineElement>
-  <VerticalTimelineElement
-    className="vertical-timeline-element--education"
-    date="November 2012"
-    iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-    icon={<WorkflowIcon/>}
-  >
-    <h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
-    <h4 className="vertical-timeline-element-subtitle">Certification</h4>
-    <p>
-      Creative Direction, User Experience, Visual Design
-    </p>
-  </VerticalTimelineElement>
-  <VerticalTimelineElement
-    className="vertical-timeline-element--education"
-    date="2002 - 2006"
-    iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-    icon={<WorkflowIcon />}
-  >
-    <h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
-    <h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
-    <p>
-      Creative Direction, Visual Design
-    </p>
-  </VerticalTimelineElement>
-  <VerticalTimelineElement
-    iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
-    icon={<WorkflowIcon />}
-  />
-            </VerticalTimeline> */}  
+      
            <h1 className='text-sm text-gray-600'>{bio}</h1>
+        </div>
+    </section>
+    <section className='my-4'>
+        <h2 className='font-medium text-gray-600'>Education</h2>
+          <div className=''>
+          {
+            education.map(edu=><div>
+              <h1 className='text-lg capitalize font-medium'>{edu.degreeType}</h1>
+      <h1 className='text-purple-700 font-semibold'>{edu.college}</h1>
+      <h1 className='text-sm '>Start Year:{edu.startYear}</h1>
+      <h1 className='text-sm '>End Year:{edu.endYear}</h1>
+            </div>)
+          }
+         
+        </div>
+    </section>
+    <section className='my-4'>
+        <h2 className='font-medium text-gray-600'>Work Experience</h2>
+          <div className=''>
+          {
+            workExperience.map(exp=><div className='my-2'>
+              <h1 className='text-lg capitalize font-medium'>{exp.company}</h1>
+      <h1 className='font-semibold text-purple-700'>{exp.title
+}</h1>
+      {/* <h1 className='text-sm '>Start Year:{exp.startDate}</h1>
+      <h1 className='text-sm '>End Year:{exp.endDate}</h1> */}
+      <h1 className='text-sm '>{exp.description}</h1>
+            </div>)
+          }
+         
         </div>
     </section>
     </div>

@@ -13,7 +13,7 @@ import { Testimonails } from "../Components/Home/Testimonails";
 
 export const Home = () => {
   return (
-    <div className="">
+    <div className="bg-base-100   text-base-content">
       <title>Job Portal || Home</title>
       <meta
         name="description"
@@ -28,6 +28,10 @@ export const Home = () => {
       />
 
       <HeroSection />
+
+
+
+
       <PopulerJob/>
       {/* <FeatureCompany></FeatureCompany> */}
       {/* <FeaturedJob /> */}

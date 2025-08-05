@@ -27,6 +27,10 @@ const degreeOptions = {
     { label: "Doctor of Medicine (MD)", value: "md" },
     { label: "Juris Doctor (JD)", value: "jd" },
 
+    { label: "Higher Secondary Certificate (HSC)", value: "hsc" },
+    { label: "Secondary School Certificate (SSC)", value: "ssc" },
+
+
     // Non-Degree Programs
     { label: "Diploma", value: "diploma" },
     { label: "Certificate Program", value: "certificate" },

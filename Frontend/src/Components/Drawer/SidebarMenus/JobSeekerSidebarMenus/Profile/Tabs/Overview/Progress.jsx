@@ -55,7 +55,7 @@ const ProgressBar = ({ percentage }) => {
     <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
       <div
         className={`h-4 rounded-full transition-all duration-500 ${
-          percentage < 50 ? 'bg-red-500' : percentage < 80 ? 'bg-gradient-to-r from-purple-500 to-purple-700 animate-pulse' : 'bg-green-500'
+          percentage < 50 ? 'bg-red-600' : percentage < 80 ? 'bg-gradient-to-r from-purple-500 to-purple-700 animate-pulse' : 'bg-green-500'
         }`}
         style={{ width: `${percentage}%` }}
       ></div>

@@ -57,11 +57,11 @@ const Article = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {articles.map((article) => (
             <div
               key={article.id}
-              className="bg-white rounded-xl overflow-hidden shadow hover:shadow-md transition"
+              className="bg-base-100 rounded-xl overflow-hidden shadow hover:shadow-md transition"
             >
               <img
                 src={article.image}
@@ -78,7 +78,7 @@ const Article = () => {
                 <p className="text-gray-600 text-sm mb-4">{article.excerpt}</p>
 
                 <Link>
-                  <button className="btn bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white btn-outline">
+                  <button className="btn bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white btn-outline border-none">
                     Read More
                   </button>
                 </Link>

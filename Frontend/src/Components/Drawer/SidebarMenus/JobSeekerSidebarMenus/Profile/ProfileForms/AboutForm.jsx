@@ -74,7 +74,8 @@ console.log(profileData.primaryRole);
     <div>
       <div className="p-6 flex flex-col md:flex-row">
         <div className=" md:w-2/6">
-          <h1 className='text-2xl font-bold'>About</h1>
+          <h1 className='text-2xl font-bold text-base-content
+           dark:text-black'>About</h1>
           <p className="text-gray-500 mb-4">
             Tell us about yourself so startups know who you are.
           </p>
@@ -121,7 +122,7 @@ console.log(profileData.primaryRole);
             <label className="block text-sm font-medium text-gray-700">Where are you based?*</label>
             <input
               {...register('location', { required: "Location is required" })}
-              className="mt-1 input w-full"
+              className="mt-1 input w-full  dark:bg-gray-200"
             />
             {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>}
           </div>
@@ -167,7 +168,7 @@ console.log(profileData.primaryRole);
                   message: "Bio must be at least 20 characters"
                 }
               })}
-              className="mt-1 textarea  w-full"
+              className="mt-1 textarea  w-full bg-base-100"
               rows="4"
             />
             {errors.bio && <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>}
