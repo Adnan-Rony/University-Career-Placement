@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { Authcontext } from "../../Context/Authprovider";
 import axiosInstance from "../../api/axiosInstance.js";
+import { FcGoogle } from "react-icons/fc";
 
 export const GoogleSignIN = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export const GoogleSignIN = () => {
   const [error, setError] = useState(null);
 
   const handleGoogleSignIn = async () => {
-    setError(null); // Clear previous errors
+    setError(null); 
     try {
       const result = await googleSignIn();
       const user = result.user;
@@ -22,11 +23,11 @@ export const GoogleSignIN = () => {
           name: user.displayName,
           email: user.email,
         },
-        { withCredentials: true } // Ensure cookies are sent
+        { withCredentials: true } 
       );
 
       if (response.data.success) {
-        navigate('/'); // Navigate to home on success
+        navigate('/'); 
       } else {
         setError(response.data.message || 'Google sign-in failed');
       }
@@ -37,14 +38,17 @@ export const GoogleSignIN = () => {
   };
 
   return (
-    <div className="my-3">
-      <button
-        onClick={handleGoogleSignIn}
-        className="w-full py-2 px-4 bg-black text-white font-semibold rounded-md hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50"
-      >
-        Continue With Google
-      </button>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-    </div>
+    <div className="my-4">
+  <button
+    onClick={handleGoogleSignIn}
+    className="w-full flex items-center justify-center gap-2 py-2 px-4  rounded-md shadow-sm bg-gray-100 text-gray-700 font-medium  transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+  >
+    <FcGoogle className="text-xl" />
+    Continue with Google
+  </button>
+
+  {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
+</div>
+
   );
 };

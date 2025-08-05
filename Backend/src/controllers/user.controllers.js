@@ -13,7 +13,7 @@ export const register = async (req, res) => {
     // Check if user exists
     let existingUser = await User.findOne({ email });
     if (existingUser) {
-      // For Google sign-in, treat as login (no password check)
+     
       if (!password) {
         const token = generateToken(existingUser);
         return res.status(200).json({
