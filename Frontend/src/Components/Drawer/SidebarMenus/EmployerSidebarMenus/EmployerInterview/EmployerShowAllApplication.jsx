@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { UseInterviewSheddule } from "../../../../../hooks/useInterview.js";
 import { format } from "date-fns";
 import { AlertCircle } from "lucide-react";
 import PostedJobsSkeleton from "../../../../loading/PostedJobsSkeleton.jsx";
+import { PaginationControl } from "../../../../Shared/PaginationControl/PaginationControl.jsx";
 
 const EmployerShowAllApplication = () => {
   const { data, isLoading, isError, error } = UseInterviewSheddule();
   const interviews = data?.interviews || [];
+
+ // Pagination 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  // Calculate pagination data
+  const totalPages = Math.ceil(interviews.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentInterviews = interviews.slice(indexOfFirstItem, indexOfLastItem);
+
+
 
   if (isLoading) return <PostedJobsSkeleton />;
 
@@ -28,6 +41,7 @@ const EmployerShowAllApplication = () => {
       {interviews.length === 0 ? (
         <p className="text-gray-500">No interviews scheduled yet.</p>
       ) : (
+        <>
         <div className="w-full">
           <table className="min-w-full text-sm table-auto">
             <thead className="bg-gray-100 text-gray-700 sticky top-0 z-10">
@@ -97,6 +111,14 @@ const EmployerShowAllApplication = () => {
             </tbody>
           </table>
         </div>
+         {/* Pagination Control */}
+          <PaginationControl
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={totalPages}
+          />
+        </>
+       
       )}
     </div>
   );

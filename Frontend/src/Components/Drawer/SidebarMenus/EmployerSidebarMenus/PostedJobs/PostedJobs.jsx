@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import PostedJobsSkeleton from "../../../../loading/PostedJobsSkeleton.jsx";
 import { Link } from "react-router";
 import { PostedJobActions } from "./PostedJobActions.jsx";
+import { PaginationControl } from "../../../../Shared/PaginationControl/PaginationControl.jsx";
 
 export const PostedJobs = () => {
   const { data: allJobs, isLoading } = UseMyJobs();
@@ -137,43 +138,16 @@ export const PostedJobs = () => {
         </table>
       )}
       {/* Handaling pagination controls */}
-    {
-      totalPages>1 && (
-          <div className="flex justify-center mt-6 gap-2">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage(currentPage - 1)}
-          className="px-3 btn py-1 border rounded "
-        >
-          Prev
-        </button>
-        <ul className="flex gap-2">
-          {[...Array(totalPages)].map((_, index) => (
-            <li key={index}>
-              <button
-                className={`px-3 py-1 rounded btn ${
-                  currentPage === index + 1
-                    ? "bg-purple-600 text-white"
-                    : "text-gray-700"
-                }`}
-                onClick={() => setCurrentPage(index + 1)}
-              >
-                {index + 1}
-              </button>
-            </li>
-          ))}
-        </ul>
 
-        <button
-          disabled={currentPage === totalPages}
-          className="btn px-3 py-1 border rounded "
-          onClick={() => setCurrentPage(currentPage + 1)}
-        >
-          Next
-        </button>
-      </div>
-      )
-    }
+     <PaginationControl
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
+
+    {/* .... */}
     </div>
   );
 };
+
+
