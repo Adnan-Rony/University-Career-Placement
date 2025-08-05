@@ -36,6 +36,7 @@ import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
 import { NotFOund } from "../Pages/NotFound/NotFOund.jsx";
 import EmployerSignIn from "../Features/Authentication/EmployerSignIn.jsx";
 
+
 export const AppRouter = createBrowserRouter([
   {
     path: "/",
@@ -70,6 +71,7 @@ export const AppRouter = createBrowserRouter([
         path: "/alljobs",
         element: <JobsShowAll />,
       },
+     
       {
         path: "/allcompanies",
         element: <AllCompany />,

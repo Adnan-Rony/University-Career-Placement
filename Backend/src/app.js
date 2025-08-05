@@ -44,9 +44,6 @@ app.use("/api/v1/interviews",interviewRoute ); // User-related routes
 app.use("/api/v1/portfolio",portfolioRoute ); // User-related routes
 
 
-// //firebase auth route
-// app.use("/api/v1/userNew", UserNewroute); // User-related routes
-
 
 
 
