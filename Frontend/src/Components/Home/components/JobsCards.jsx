@@ -10,7 +10,7 @@ const JobsCards = ({ job, index }) => {
         <Link to={`/job/details/${job._id}`}>
            <div
         key={index}
-        className="bg-white p-5 rounded-lg shadow hover:shadow-md transition w-full space-y-2 py-8 border border-gray-200"
+        className=" p-5 rounded-lg shadow hover:shadow-md transition w-full space-y-2 py-8 border border-gray-200"
       >
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">

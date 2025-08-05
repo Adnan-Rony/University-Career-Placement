@@ -17,7 +17,7 @@ const JobDetails = () => {
   if (isLoading) return <JobDetailsSkeleton />;
 
   return (
-    <div className="min-h-screen  pb-20">
+    <div className="min-h-screen  pb-20 bg-base-100">
       {/* Job Header */}
       <HeaderJobCard job={job} />
 

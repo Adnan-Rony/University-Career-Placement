@@ -4,6 +4,7 @@ import { UserDropdown } from "./UserDropdown";
 import { useState } from "react";
 import { FaUserTie, FaUserGraduate, FaGraduationCap } from "react-icons/fa";
 import { AlignJustify } from "lucide-react";
+import ThemeToggle from "../Shared/Toggle/ThemeToggle";
 
 export const Navbar = () => {
   const { data } = useCurrentUser();
@@ -25,7 +26,7 @@ export const Navbar = () => {
         <NavLink
           to="/alljobs"
           className={({ isActive }) =>
-            isActive ? "text-r-primary font-semibold" : "text-gray-600"
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
           }
         >
           Jobs
@@ -36,7 +37,7 @@ export const Navbar = () => {
         <NavLink
           to="/allcompanies"
           className={({ isActive }) =>
-            isActive ? "text-r-primary font-semibold" : "text-gray-600"
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
           }
         >
           Companies
@@ -47,19 +48,24 @@ export const Navbar = () => {
         <NavLink
           to="/interview-questions"
           className={({ isActive }) =>
-            isActive ? "text-r-primary font-semibold" : "text-gray-600"
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
           }
         >
           FAQs
         </NavLink>
       </li>
+      {/* <li>
+        <ThemeToggle/>
+      </li> */}
 
       {user ? <div></div> : <div></div>}
     </>
   );
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50 ">
+    <nav className="
+
+    bg-white shadow-sm sticky top-0 z-50 ">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Left - Logo */}
         <Link to="/" className="">

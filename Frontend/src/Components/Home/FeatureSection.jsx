@@ -25,25 +25,25 @@ const features = [
 
 export default function FeatureSection() {
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-base-100 py-16">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Everything You Need to Succeed
         </h2>
-        <p className="text-gray-600 mb-12 text-lg">
+        <p className="text-info-content-content  mb-12 text-lg">
           Comprehensive tools and resources to help you land your dream job
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white border border-gray-200 rounded-lg shadow p-6 hover:shadow-md transition text-center"
+              className="bg-base-100 border border-gray-200 rounded-lg shadow p-6 hover:shadow-md transition text-center"
             >
               <div className="w-12 h-12 mx-auto flex items-center justify-center bg-purple-600 rounded-md mb-4">
                 {feature.icon}
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
-              <p className="text-sm text-gray-600">{feature.description}</p>
+              <h3 className="font-semibold text-gray-900 dark:text-base-content mb-2">{feature.title}</h3>
+              <p className="text-sm text-gray-600 ">{feature.description}</p>
             </div>
           ))}
         </div>

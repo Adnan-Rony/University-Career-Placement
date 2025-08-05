@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ProfileTab } from "./Tabs/ProfileTab";
 import { ResumeCvTab } from "./Tabs/ResumeCvTab";
 import { PreferencesTab } from "./Tabs/PreferencesTab";
-import { OverViewTab } from "./Tabs/OverViewTab";
+import { OverViewTab } from "./Tabs/Overview/OverViewTab";
 
 export const JobseekerProfile = () => {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -50,7 +50,8 @@ export const JobseekerProfile = () => {
             </li>
           ))}
         </ul>
-        <div className="border rounded-md border-gray-300 my-6 bg-white">
+        <div className="border rounded-md border-gray-300
+         my-6 bg-white min-h-dvh">
           {renederTabsByClick()}
         </div>
       </div>

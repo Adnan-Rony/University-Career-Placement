@@ -5,6 +5,7 @@ import EmployerApplicationsSkeleton from "../../../../../loading/AppliedJobsSkel
 
 import ScheduleInterviewForm from "../../EmployerInterview/ScheduleInterviewForm.jsx";
 import Modal from "../../../../../Dashboard/Modal.jsx";
+import { PaginationControl } from "../../../../../Shared/PaginationControl/PaginationControl.jsx";
 
 const EmployerApplication = () => {
   const {
@@ -13,6 +14,15 @@ const EmployerApplication = () => {
     refetch,
   } = UseMyCompanyApplications();
   const applications = applicationsData?.applications || [];
+
+  // Pagination state & calculation
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(applications.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentApplications = applications.slice(indexOfFirstItem, indexOfLastItem);
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedApp, setSelectedApp] = useState(null);
@@ -133,6 +143,13 @@ const EmployerApplication = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      <PaginationControl
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {selectedApp?.applicant?._id && selectedApp?.job?._id ? (

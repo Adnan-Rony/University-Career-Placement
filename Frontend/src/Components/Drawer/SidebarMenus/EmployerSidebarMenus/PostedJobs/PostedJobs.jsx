@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { UseMyJobs } from "../../../../../hooks/useJobs";
 import { format } from "date-fns";
 import PostedJobsSkeleton from "../../../../loading/PostedJobsSkeleton.jsx";
-import { Link } from 'react-router';
+import { Link } from "react-router";
+import { PostedJobActions } from "./PostedJobActions.jsx";
+import { PaginationControl } from "../../../../Shared/PaginationControl/PaginationControl.jsx";
 
 export const PostedJobs = () => {
   const { data: allJobs, isLoading } = UseMyJobs();
   const jobs = allJobs?.jobs || [];
 
+  // Pagination calculation
+ 
+  const [currentPage, setCurrentPage] = useState(1);
+  const postedJobsPerPage = 10;
+
+  const indexOfLastJob = postedJobsPerPage * currentPage;
+  const indexOfFirstJob = indexOfLastJob - postedJobsPerPage;
+  const currentPostedJob = jobs.slice(indexOfFirstJob, indexOfLastJob);
+
+  const totalPages = Math.ceil(jobs?.length / postedJobsPerPage);
+
 
   if (isLoading) return <PostedJobsSkeleton />;
 
-
-  
   return (
-    <div className="overflow-x-auto bg-white p-5 md:mx-5 rounded-xl shadow-lg border border-gray-300">
+    <div
+      className="overflow-x-auto bg-white p-5 md:mx-5 
+    rounded-xl shadow-lg border border-gray-300 mb-6"
+    >
       <h2 className="text-xl font-semibold mb-4">My Posted Jobs</h2>
 
       {jobs.length === 0 ? (
@@ -36,7 +50,7 @@ export const PostedJobs = () => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            {jobs.map((job) => (
+            {currentPostedJob.map((job) => (
               <tr key={job._id} className="hover">
                 {/* Job title + logo + company */}
                 <td>
@@ -106,7 +120,7 @@ export const PostedJobs = () => {
                 </td>
 
                 {/* Actions */}
-                <td className="flex gap-2">
+                {/* <td className="flex gap-2">
                   <Link to={`/job/details/${job._id}`} className="btn btn-xs bg-r-primary text-white hover:bg-r-primary/90 border-none">
                     View
                   </Link>
@@ -116,12 +130,24 @@ export const PostedJobs = () => {
                   <button className="btn btn-xs bg-red-100 text-red-700 hover:bg-red-200 border border-red-300">
                     Delete
                   </button>
-                </td>
+                </td> */}
+                <PostedJobActions job={job} />
               </tr>
             ))}
           </tbody>
         </table>
       )}
+      {/* Handaling pagination controls */}
+
+     <PaginationControl
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
+
+    {/* .... */}
     </div>
   );
 };
+
+

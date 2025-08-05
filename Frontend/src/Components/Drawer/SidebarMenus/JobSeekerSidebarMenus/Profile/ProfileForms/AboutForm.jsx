@@ -11,16 +11,23 @@ export const AboutForm = () => {
   const { mutate, isPending, isSuccess, isError } = useUpdateProfile();
   const fileInputRef = useRef();
   const [cover, setCover] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
 
-  //  Image Upload
+  const [isUploading,setIsUploading]=useState(false)
+  const { register, control, handleSubmit, watch, formState: { errors } } = useForm(
+{
+  defaultValues:{
+    name:profileData.name,
+    location:profileData.location,
+    primaryRole:profileData?.primaryRole,
+    bio:profileData.bio,
+    yearsExperience: profileData.yearsExperience,
+  }
+}
+);
+console.log(profileData.primaryRole);
+
+//  Image Upload
+
   const handleCoverUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -69,7 +76,10 @@ export const AboutForm = () => {
     <div>
       <div className="p-6 flex flex-col md:flex-row">
         <div className=" md:w-2/6">
-          <h1 className="text-2xl font-bold">About</h1>
+
+          <h1 className='text-2xl font-bold text-base-content
+           dark:text-black'>About</h1>
+
           <p className="text-gray-500 mb-4">
             Tell us about yourself so startups know who you are.
           </p>
@@ -94,14 +104,7 @@ export const AboutForm = () => {
             )}
           </div>
           {/* Image */}
-          {/* <div className="flex items-center">
-            <img src="/defavatar.png"
-              alt="Profile"
-              className="w-20 h-20 rounded-full mr-4 animate-pulse" />
-            <button type="button"
-              className="btn btn-outline">Upload a new photo</button>
-          </div> */}
-          {/* Profile Image Upload */}
+
           <div className="flex items-center">
             <img
               src={cover || "/defavatar.png"}
@@ -130,8 +133,10 @@ export const AboutForm = () => {
               Where are you based?*
             </label>
             <input
-              {...register("location", { required: "Location is required" })}
-              className="mt-1 input w-full"
+
+              {...register('location', { required: "Location is required" })}
+              className="mt-1 input w-full  dark:bg-gray-200"
+
             />
             {errors.location && (
               <p className="text-red-500 text-sm mt-1">
@@ -149,10 +154,13 @@ export const AboutForm = () => {
               className="mt-1  w-full 
              select"
             >
-              <option value="">Select Select Role</option>
-              <option>Frontend Engineer</option>
-              <option>Full-Stack Engineer</option>
-              <option>Select role</option>
+
+               <option defaultValue={profileData.primaryRole} value="">Select Select Role</option>
+               <option  value="Full-Stack Engineer">Full-Stack Engineer</option>
+              <option value="Frontend Engineer">Frontend Engineer</option>
+              <option value="Backend Engineer">Backend Engineer</option>
+             
+
             </select>
             {errors.primaryRole && (
               <p className="text-red-500 text-sm mt-1">
@@ -196,7 +204,7 @@ export const AboutForm = () => {
                   message: "Bio must be at least 20 characters",
                 },
               })}
-              className="mt-1 textarea  w-full"
+              className="mt-1 textarea  w-full bg-base-100"
               rows="4"
             />
             {errors.bio && (
