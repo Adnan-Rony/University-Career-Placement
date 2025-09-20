@@ -10,7 +10,7 @@ export const ProfileSummary = () => {
     console.log(infos);
     const {name,email,picture,
 socialLinks,primaryRole,bio,address,education,workExperience}=infos
-    console.log(address.city);
+    console.log(address?.city);
   return (
     <div className='py-6 border m-4  border-gray-300 rounded-xl px-8'>
     
@@ -24,7 +24,7 @@ socialLinks,primaryRole,bio,address,education,workExperience}=infos
         {/* name,location */}
         <div>
             <h2  className='text-2xl font-semibold capitalize'>{name}</h2>
-            <h3 className='font-medium text-gray-400'>{address.city}</h3>
+            <h3 className='font-medium text-gray-400'>{address?.city?address?.city:'N/A'}</h3>
         </div>
       </div>
       <div className='flex gap-2 text-sm text-gray-600'>
@@ -38,7 +38,7 @@ socialLinks,primaryRole,bio,address,education,workExperience}=infos
             <span className='sr-only'>visit my linkedin
 </span>
         </a>
-        <a href={socialLinks.portfolio} target='_blank' className=''>
+        <a href={socialLinks?.portfolio} target='_blank' className=''>
            <span>Website</span>
             <span className='sr-only'>visit my portfolio</span>
         </a>

@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
       {
         
         college: String,
-         degreeType: String,
+        degreeType: String,
         startYear: String,
         endYear: String,
         

@@ -171,6 +171,7 @@ export const updateUserProfile = async (req, res) => {
       gender
     } = req.body;
 
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       {

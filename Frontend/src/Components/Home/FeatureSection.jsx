@@ -27,7 +27,7 @@ export default function FeatureSection() {
   return (
     <section className="bg-base-100 py-16">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 className="text-3xl font-bold text-gray-900  mb-4">
           Everything You Need to Succeed
         </h2>
         <p className="text-info-content-content  mb-12 text-lg">
