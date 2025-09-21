@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import { ProfileContext } from "../../../../../../Context/ProfileProvider"
 import { useUpdateProfile } from "../../../../../../hooks/useUpdateProfile";
+import { useCurrentUser } from "../../../../../../hooks/useAuth";
 
 const degreeOptions = {
   degrees: [
@@ -44,8 +45,9 @@ const degreeOptions = {
 };
 
 export const EducationForm = () => {
-    const [date,setDate]=useState()
-    const { profileData, setProfileData } = useContext(ProfileContext)
+
+  const { data, isPending: userloading } = useCurrentUser();
+  const userinfos = data?.user;
    const { mutate,isPending,isSuccess,isError   }=useUpdateProfile()
     const {
         register,
@@ -54,15 +56,18 @@ export const EducationForm = () => {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            education: profileData.education
+            education: userinfos.education
         }
     })
+  
+console.log(userinfos);
+
 
     const { fields, append, prepend, remove } = useFieldArray({
         control, name: "education"
     })
     const onSubmit = (data) => {
-        // updateProfileSection("education", data.education);
+        
         console.log(data);
         mutate(data)
     };

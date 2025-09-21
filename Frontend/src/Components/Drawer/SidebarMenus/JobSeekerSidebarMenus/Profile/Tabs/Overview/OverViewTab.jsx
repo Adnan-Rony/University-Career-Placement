@@ -7,7 +7,7 @@ import { Progress } from './Progress'
 
 export const OverViewTab = () => {
   const {data,isPending}=useCurrentUser()
-  const profileInfo=data?.user
+
  
   if(isPending) return <Loading/>
 

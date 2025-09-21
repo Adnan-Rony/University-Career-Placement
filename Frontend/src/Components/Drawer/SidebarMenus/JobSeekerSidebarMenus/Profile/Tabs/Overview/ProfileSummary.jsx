@@ -7,10 +7,10 @@ import 'react-vertical-timeline-component/style.min.css';
 export const ProfileSummary = () => {
     const {data}=useCurrentUser()
     const infos=data?.user
-    console.log(infos);
+  
     const {name,email,picture,
 socialLinks,primaryRole,bio,address,education,workExperience}=infos
-    console.log(address?.city);
+  
   return (
     <div className='py-6 border m-4  border-gray-300 rounded-xl px-8'>
     
@@ -28,11 +28,11 @@ socialLinks,primaryRole,bio,address,education,workExperience}=infos
         </div>
       </div>
       <div className='flex gap-2 text-sm text-gray-600'>
-        <a href={socialLinks.github} target='_blank' className=''>
+        <a href={socialLinks?.github} target='_blank' className=''>
             <Github/>
             <span className='sr-only'>visit my github</span>
         </a>
-        <a href={socialLinks.linkedin
+        <a href={socialLinks?.linkedin
 } target='_blank' className=''>
              <Linkedin/>
             <span className='sr-only'>visit my linkedin
@@ -42,7 +42,7 @@ socialLinks,primaryRole,bio,address,education,workExperience}=infos
            <span>Website</span>
             <span className='sr-only'>visit my portfolio</span>
         </a>
-        <a href={socialLinks.portfolio} target='_blank' className=''>
+        <a href={socialLinks?.portfolio} target='_blank' className=''>
            <span>Resume</span>
             <span className='sr-only'>visit my github</span>
         </a>
