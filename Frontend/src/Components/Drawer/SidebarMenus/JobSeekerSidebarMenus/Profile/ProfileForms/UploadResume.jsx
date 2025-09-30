@@ -23,7 +23,7 @@ export const UploadResume  = () => {
     }
   };
 
-  const currentResume = watch('resume');
+  const currentResume = watch('resume');   
 
   return (
     <div className="p-6 flex">

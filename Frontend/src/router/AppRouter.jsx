@@ -35,6 +35,8 @@ import ViewMyPortfolio from "../Pages/portfolio/ViewMyPortfolio.jsx";
 import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
 import { NotFOund } from "../Pages/NotFound/NotFOund.jsx";
 import EmployerSignIn from "../Features/Authentication/EmployerSignIn.jsx";
+import { ResumeBuilder } from "../Pages/ResumeBuilder/ResumeBuilder.jsx";
+import { SelectOption } from "../Pages/ResumeBuilder/ResumeUi/SelectOption.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -108,6 +110,16 @@ export const AppRouter = createBrowserRouter([
         path: "/myportfolio",
         element: <ViewMyPortfolio />,
       },
+      //Resume Builder
+      {
+        path:"/resumebuilder",
+        element:<ResumeBuilder/>,
+        children:[
+         { path:"selectoption",
+          element:<SelectOption/>
+        }
+        ]
+      }
     ],
   },
   {
