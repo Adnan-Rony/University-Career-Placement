@@ -33,7 +33,7 @@ export const Navbar = () => {
         </NavLink>
       </li>
 
-        <li>
+      <li>
         <NavLink
           to="/allcompanies"
           className={({ isActive }) =>
@@ -41,6 +41,16 @@ export const Navbar = () => {
           }
         >
           Companies
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/resumebuilder"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
+          }
+        >
+          Resume Builder
         </NavLink>
       </li>
 
@@ -63,9 +73,11 @@ export const Navbar = () => {
   );
 
   return (
-    <nav className="
+    <nav
+      className="
 
-    bg-white shadow-sm sticky top-0 z-50 ">
+    bg-white shadow-sm sticky top-0 z-50 "
+    >
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Left - Logo */}
         <Link to="/" className="">

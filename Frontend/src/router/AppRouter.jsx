@@ -114,12 +114,11 @@ export const AppRouter = createBrowserRouter([
       {
         path:"/resumebuilder",
         element:<ResumeBuilder/>,
-        children:[
-         { path:"selectoption",
+       
+      },
+       { path:"/resumebuilder/selectoption",
           element:<SelectOption/>
         }
-        ]
-      }
     ],
   },
   {

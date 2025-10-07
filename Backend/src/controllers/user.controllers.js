@@ -157,12 +157,12 @@ export const updateUserProfile = async (req, res) => {
       primaryRole,
       bio,
       skills,
-      experience,
+      yearsExperience,
       picture,
       resume,
       education,
       workExperience,
-      socialLinks,
+      socialLinks,//socialLinks
       certifications,
       languages,
       projects,
@@ -177,11 +177,11 @@ export const updateUserProfile = async (req, res) => {
       {
         name,
         phone,
-        location,   //added newly
+        location, 
          primaryRole,
         bio,
         skills,
-        experience,
+       yearsExperience,
         picture,
         resume,
         education,

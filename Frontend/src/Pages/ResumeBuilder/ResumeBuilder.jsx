@@ -15,7 +15,8 @@ export const ResumeBuilder = () => {
                 with our easy-to-use resume builder platform.
               </p>
               <div>
-                <Link className="btn btn-primary text-xl py-6">
+                <Link to="/resumebuilder/selectoption"
+                 className="btn btn-primary text-xl py-6">
                     Create Resume Now
                 </Link>
                 <button className=""></button>
