@@ -37,6 +37,7 @@ import { NotFOund } from "../Pages/NotFound/NotFOund.jsx";
 import EmployerSignIn from "../Features/Authentication/EmployerSignIn.jsx";
 import { ResumeBuilder } from "../Pages/ResumeBuilder/ResumeBuilder.jsx";
 import { SelectOption } from "../Pages/ResumeBuilder/ResumeUi/SelectOption.jsx";
+import BuildYourResume from "../Pages/ResumeBuilder/ResumeUi/BuildYourResume.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -118,6 +119,9 @@ export const AppRouter = createBrowserRouter([
       },
        { path:"/resumebuilder/selectoption",
           element:<SelectOption/>
+        },{
+          path:"/resumebuilder/build-your-resume/:id",
+          element:<BuildYourResume/>
         }
     ],
   },

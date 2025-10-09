@@ -1,13 +1,8 @@
 import { templatesData } from "../lib/templatedata";
 
 const ProfessionSelect = ({ selectedProfession, setSelectedProfession }) => {
-  
- const professions = [...new Set(templatesData.map(t => t.profession))];
+  const professions = [...new Set(templatesData.map((t) => t.profession))];
 
-
-  
-  // const professions = ["Developer", "Teacher", "Designer","Student"];
- 
   const handleSelect = (prof) => {
     if (selectedProfession === prof) {
       setSelectedProfession("");
@@ -28,7 +23,7 @@ const ProfessionSelect = ({ selectedProfession, setSelectedProfession }) => {
         {professions.map((prof) => (
           <button
             key={prof}
-            className={`px-6 py-3 rounded font-semibold transition-colors ease-in-out delay-150
+            className={`uppercase px-6 py-3 rounded font-semibold transition-colors ease-in-out delay-150
               ${
                 selectedProfession === prof
                   ? "bg-purple-500 text-white"
