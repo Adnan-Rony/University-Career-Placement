@@ -19,7 +19,7 @@ export const ResumeBuilder = () => {
                  className="btn btn-primary text-xl py-6">
                     Create Resume Now
                 </Link>
-                <button className=""></button>
+              
               </div>
       </div>
       <div className="border w-[400px]">

@@ -11,27 +11,31 @@ export const templatesData=[
     title:"Student Template 1",
     image:resume2,
     component:StudentTemp1,
-    profession: "student"
+    profession: "student",
+    steps: ["About", "Education", "Skills", "Projects"]
   },  {
     id: "temp02",
     title: "Software Engineer Template",
     image: softwareEng,
     component: StudentTemp1,
-    profession: "Engineer"
+    profession: "Engineer",
+       steps: ["About", "Education", "Experience", "Skills", "Projects"]
   },
   {
     id: "temp03",
     title: "Engineer Template 1",
     image: engineer01,
     component: StudentTemp1,
-    profession: "Engineer"
+    profession: "Engineer",
+     steps: ["About", "Education", "Experience", "Skills", "Projects"]
   },
   {
     id: "temp04",
     title: "UI Designer Template",
     image: uidesigner,
     component: StudentTemp1,
-    profession: "Designer"
+    profession: "Designer",
+    steps: ["About", "Education", "Skills", "Portfolio"] 
   }
 
 ]

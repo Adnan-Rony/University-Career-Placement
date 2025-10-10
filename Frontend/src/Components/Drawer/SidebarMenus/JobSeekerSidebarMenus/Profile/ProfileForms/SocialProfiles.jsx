@@ -2,21 +2,21 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { HiGlobeAlt } from "react-icons/hi";
-import { useContext, useEffect } from "react";
-import { ProfileContext } from "../../../../../../Context/ProfileProvider";
+
+
 import { useUpdateProfile } from "../../../../../../hooks/useUpdateProfile";
 import { useCurrentUser } from "../../../../../../hooks/useAuth";
 
 export const SocialProfiles = () => {
   const { mutate, isPending, isSuccess, isError } = useUpdateProfile();
-  // const {profileData,setProfileData}=useContext(ProfileContext)
+
   const { data: userinfos, isPending: userloading } =
    useCurrentUser();
 
   const {
     register,
     handleSubmit,
-    reset,
+ 
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -27,16 +27,6 @@ export const SocialProfiles = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (userinfos?.user?.social) {
-  //     reset({
-  //       portfolio: userinfos.user.socialLinks.portfolio || "",
-  //       linkedin: userinfos.user.socialLinks.linkedin || "",
-  //       github: userinfos.user.socialLinks.github || "",
-  //       twitter: userinfos.user.socialLinks.twitter || "",
-  //     });
-  //   }
-  // }, [userinfos, reset]);
 
   const onSubmit = (data) => {
     const formData = {

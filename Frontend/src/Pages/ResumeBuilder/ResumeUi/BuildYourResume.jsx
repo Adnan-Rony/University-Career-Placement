@@ -15,21 +15,26 @@ export default function BuildYourResume() {
 const [currentIdx, setcurrentIdx] = useState(1);
 
   const { id } = useParams();
-  console.log(id);
+  
 
   const mytemplate = templatesData.find((template) => template.id === id);
 
 const renderStepComponent=()=>{
-      switch (currentIdx) {
-      case 1:
+
+  if (!mytemplate) return <p>Template not found!</p>;
+
+  const step = mytemplate.steps[currentIdx - 1];
+ 
+      switch (step) {
+      case "About":
         return <ResumeAboutForm/>;
-      case 2:
+      case "Education":
         return <ResumeEducationForm/>;
-      case 3:
+      case "Experience":
         return <ResumeExperienceForm/>;
-      case 4:
+      case "Skills":
         return <ResumeSkillForm/>;
-      case 5:
+      case "Projects":
         return <ResumeProjectForm/>;
       default:
         return <p className="mt-6 text-center"> All steps completed!</p>;
@@ -40,7 +45,8 @@ const renderStepComponent=()=>{
   return (
     <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 my-16">
       <div>
-        <Stepper currentIdx={currentIdx} setcurrentIdx={setcurrentIdx} />
+       
+        <Stepper currentIdx={currentIdx} setcurrentIdx={setcurrentIdx} steps={mytemplate.steps} />
       </div>
 
 
