@@ -12,14 +12,14 @@ export const templatesData=[
     image:resume2,
     component:StudentTemp1,
     profession: "student",
-    steps: ["About", "Education", "Skills", "Projects"]
+    steps: ["About", "Education", "Skills", "Projects","Preview"]
   },  {
     id: "temp02",
     title: "Software Engineer Template",
     image: softwareEng,
     component: StudentTemp1,
     profession: "Engineer",
-       steps: ["About", "Education", "Experience", "Skills", "Projects"]
+       steps: ["About", "Education", "Experience", "Skills", "Projects","Preview"]
   },
   {
     id: "temp03",
@@ -27,7 +27,7 @@ export const templatesData=[
     image: engineer01,
     component: StudentTemp1,
     profession: "Engineer",
-     steps: ["About", "Education", "Experience", "Skills", "Projects"]
+     steps: ["About", "Education", "Experience", "Skills", "Projects","Preview"]
   },
   {
     id: "temp04",
@@ -35,7 +35,7 @@ export const templatesData=[
     image: uidesigner,
     component: StudentTemp1,
     profession: "Designer",
-    steps: ["About", "Education", "Skills", "Portfolio"] 
+    steps: ["About", "Education", "Skills", "Portfolio","Preview"] 
   }
 
 ]

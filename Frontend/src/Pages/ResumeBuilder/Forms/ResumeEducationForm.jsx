@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
+import { useResumeContext } from '../../../Context/ResumeProvider'
 
 export default function ResumeEducationForm() {
 
@@ -16,13 +17,20 @@ export default function ResumeEducationForm() {
     name: "education"
   })
 
+
+ const {  addEducation, setSubmit, setTriggerSubmit }=useResumeContext()
+ const formRef = useRef(null);
   const onSubmit = (data) => {
-    console.log(data)
+     data.education.forEach((edu) => addEducation(edu));
+     setSubmit(false);
   }
+    useEffect(() => {
+      setTriggerSubmit(() => handleSubmit(onSubmit)); 
+    }, []);
 
   return (
  <div className="p-6 bg-gray-100 rounded-lg">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      <form  ref={formRef} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         
         {fields.map((item, index) => (
           <div key={item.id} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-white rounded-lg shadow-sm border">

@@ -1,27 +1,38 @@
-import { useState } from "react";
-import { stepArray } from "../lib/stepData";
-import { Check, ChevronLeft, ChevronRight, MarsIcon } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight } from "lucide-react";
+import { useResumeContext } from "../../../Context/ResumeProvider";
 
-export const Stepper = ({ currentIdx, setcurrentIdx,steps }) => {
+export const Stepper = ({ currentIdx, setcurrentIdx, steps }) => {
   const totalSteps = steps.length;
-
- console.log("currentidx",currentIdx);
+const {submitAction, setSubmit,triggerSubmit}=useResumeContext()
   const handlePrev = () => {
     if (currentIdx > 1) {
       setcurrentIdx(currentIdx - 1);
     }
   };
-  const handleNext = () => {
-    if (currentIdx <= totalSteps) {
-      setcurrentIdx(currentIdx + 1);
+  // const handleNext = () => {
+  //   if (currentIdx <= totalSteps) {
+  //     setcurrentIdx(currentIdx + 1);
+  //   } 
+ 
+  //   setSubmit(true)
+    
+  // };
+
+const handleNext = () => {
+  if (currentIdx <= totalSteps) {
+    setcurrentIdx(currentIdx + 1);
+    if (triggerSubmit) {
+      triggerSubmit(); // Call the submit function
     }
-  };
+  }
+};
+
   return (
     <>
       <div className=" flex space-x-2 justify-center ">
         <div>
           <button onClick={handlePrev} className="btn">
-                     <ChevronLeft />
+            <ChevronLeft />
           </button>
         </div>
         {steps.map((step, idx) => {
@@ -29,7 +40,9 @@ export const Stepper = ({ currentIdx, setcurrentIdx,steps }) => {
           const isActive = currentIdx === stepNumber;
           const isCompleted = stepNumber < currentIdx;
           return (
-            <button key={idx}
+            <button
+              key={idx}
+        
               className={`btn  ${
                 isActive
                   ? "bg-purple-700 text-white"
@@ -38,7 +51,7 @@ export const Stepper = ({ currentIdx, setcurrentIdx,steps }) => {
                   : "btn-outline border-purple-200"
               }`}
             >
-           {isCompleted && <Check />}   {step}
+              {isCompleted && <Check />} {step}
             </button>
           );
         })}
@@ -48,8 +61,9 @@ export const Stepper = ({ currentIdx, setcurrentIdx,steps }) => {
             disabled={currentIdx === totalSteps}
             onClick={handleNext}
             className="btn"
+            type="submit"
           >
-           <ChevronRight />
+            <ChevronRight />
           </button>
         </div>
       </div>
