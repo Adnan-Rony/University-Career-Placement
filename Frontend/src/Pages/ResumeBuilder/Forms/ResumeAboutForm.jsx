@@ -44,7 +44,7 @@ export default function ResumeAboutForm() {
         </div>
 
         {/* Email */}
-        {/* <div className='flex flex-col'>
+        <div className='flex flex-col'>
           <label className='label mb-1'>Email</label>
           <input
             className='input  w-full rounded-lg shadow-sm'
@@ -57,7 +57,7 @@ export default function ResumeAboutForm() {
             })}
           />
           {errors.email && <span className='text-red-400 mt-1'>{errors.email.message}</span>}
-        </div> */}
+        </div>
 
         {/* Phone */}
         <div className="flex flex-col">
@@ -78,17 +78,17 @@ export default function ResumeAboutForm() {
         </div>
 
         {/* Location */}
-        {/* <div className='flex flex-col'>
+        <div className='flex flex-col'>
           <label className='label mb-1'>Location</label>
           <input
             className='input  w-full rounded-lg shadow-sm'
             {...register("location", { required: "Please mention your current location." })}
           />
           {errors.location && <span className='text-red-400 mt-1'>{errors.location.message}</span>}
-        </div> */}
+        </div>
 
         {/* LinkedIn */}
-        {/* <div className='flex flex-col'>
+        <div className='flex flex-col'>
           <label className='label mb-1'>LinkedIn</label>
           <input
             className='input rounded-lg shadow-sm w-full '
@@ -97,31 +97,27 @@ export default function ResumeAboutForm() {
             })}
           />
           {errors.linkedin && <span className='text-red-400 mt-1'>{errors.linkedin.message}</span>}
-        </div> */}
+        </div>
 
         {/* Portfolio (Optional) */}
-        {/* <div className='flex flex-col'>
+        <div className='flex flex-col'>
           <label className='label mb-1'>Portfolio (Optional)</label>
           <input
             className='input rounded-lg shadow-sm w-full'
             {...register("portfolio")}
           />
-        </div> */}
+        </div>
 
         {/* Professional Summary (2 cols) */}
-        {/* <div className='flex flex-col md:col-span-2'>
+        <div className='flex flex-col md:col-span-2'>
           <label className='label mb-1'>Professional Summary</label>
           <textarea
             className='textarea rounded-lg shadow-sm h-32 w-full'
             {...register("summary", { required: "Please write a short professional summary." })}
           />
           {errors.summary && <span className='text-red-400 mt-1'>{errors.summary.message}</span>}
-        </div> */}
-        <div>
-          <button type="submit" className="btn btn-active">
-            Save
-          </button>
         </div>
+   
       </form>
     </div>
   );

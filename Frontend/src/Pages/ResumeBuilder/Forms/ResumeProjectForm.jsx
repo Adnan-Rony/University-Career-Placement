@@ -37,7 +37,8 @@ export default function ResumeProjectForm() {
         {fields.map((item, index) => (
           <div
             key={item.id}
-            className="grid grid-cols-1 gap-4 bg-white p-4 rounded-lg shadow-sm border"
+            className="grid grid-cols-1 gap-4 bg-white p-4
+             rounded-lg shadow-sm "
           >
             {/* Project Title */}
             <div className="flex flex-col">

@@ -9,14 +9,16 @@ import ResumeEducationForm from "../Forms/ResumeEducationForm";
 import ResumeExperienceForm from "../Forms/ResumeExperienceForm";
 import ResumeSkillForm from "../Forms/ResumeSkillForm";
 import ResumeProjectForm from "../Forms/ResumeProjectForm";
+import { useResumeContext } from "../../../Context/ResumeProvider";
+import ResumePreview from "../Forms/ResumePreview";
 
 export default function BuildYourResume() {
   const [currentIdx, setcurrentIdx] = useState(1);
-
+   const {setTemplate}=useResumeContext()
   const { id } = useParams();
 
   const mytemplate = templatesData.find((template) => template.id === id);
-
+  setTemplate(mytemplate)
   const renderStepComponent = () => {
     if (!mytemplate) return <p>Template not found!</p>;
 
@@ -33,6 +35,8 @@ export default function BuildYourResume() {
         return <ResumeSkillForm />;
       case "Projects":
         return <ResumeProjectForm />;
+      case "Preview":
+        return <ResumePreview/>
       default:
         return <p className="mt-6 text-center"> All steps completed!</p>;
     }

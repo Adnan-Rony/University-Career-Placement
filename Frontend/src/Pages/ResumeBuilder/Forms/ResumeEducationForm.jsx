@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useResumeContext } from '../../../Context/ResumeProvider'
+import { Trash } from 'lucide-react'
 
 export default function ResumeEducationForm() {
 
@@ -33,7 +34,8 @@ export default function ResumeEducationForm() {
       <form  ref={formRef} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         
         {fields.map((item, index) => (
-          <div key={item.id} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-white rounded-lg shadow-sm border">
+          <div key={item.id} className="grid grid-cols-1 
+          md:grid-cols-2 gap-4 p-4 bg-white rounded-lg shadow-sm ">
 
             {/* Degree */}
             <div className="flex flex-col">
@@ -90,7 +92,7 @@ export default function ResumeEducationForm() {
                   className="btn btn-error text-white"
                   onClick={() => remove(index)}
                 >
-                  Remove
+               <Trash className='text-red-600'/>
                 </button>
               </div>
             )}
@@ -101,7 +103,7 @@ export default function ResumeEducationForm() {
         <div className="flex justify-between items-center mt-2">
           <button
             type="button"
-            className="btn bg-[#0E7A81] text-white"
+            className="btn bg-purple-700 text-white"
             onClick={() =>
               append({ degree: "", institution: "", startYear: "", endYear: "", grade: "" })
             }
@@ -109,9 +111,7 @@ export default function ResumeEducationForm() {
             + Add Education
           </button>
 
-          <button type="submit" className="btn bg-[#0E7A81] text-white px-6">
-            Save & Continue
-          </button>
+     
         </div>
 
       </form>

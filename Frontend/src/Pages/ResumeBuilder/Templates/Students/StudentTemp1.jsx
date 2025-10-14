@@ -1,6 +1,7 @@
 import React from "react";
-
- const StudentTemp1 = ({ data }) => {
+import { data } from "../../lib/templatedata";
+ 
+ const StudentTemp1 = () => {
   return (
     <div className="my-12 max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg border">
       {/* Header */}

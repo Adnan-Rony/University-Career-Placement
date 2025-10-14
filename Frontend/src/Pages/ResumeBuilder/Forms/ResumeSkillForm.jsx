@@ -19,7 +19,8 @@ export default function ResumeSkillForm() {
   const formRef = useRef(null)
 
   const onSubmit = (data) => {
-    data.skills.forEach((skill) => updateSkills(skill))
+    data.skills.forEach((skill) => updateSkills(skill));
+
     setSubmit(false)
   }
 
@@ -29,13 +30,15 @@ export default function ResumeSkillForm() {
 
   return (
     <div className="p-6 bg-gray-100 rounded-lg">
-      <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      <form ref={formRef} onSubmit={handleSubmit(onSubmit)}
+       className="flex flex-col gap-6">
         <h2 className="text-xl font-bold">Skills</h2>
 
         {fields.map((item, index) => (
           <div
             key={item.id}
-            className="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm border"
+            className="flex items-center gap-3
+             bg-white p-4 rounded-lg shadow-sm "
           >
             <input
               className="input w-full rounded-lg shadow-sm"
@@ -64,9 +67,7 @@ export default function ResumeSkillForm() {
             + Add Skill
           </button>
 
-          <button type="submit" className="btn bg-purple-700 text-white px-6">
-            Save & Continue
-          </button>
+    
         </div>
       </form>
     </div>

@@ -5,8 +5,8 @@ const ResumeContext = createContext();
 // ২. Provider component
 export const ResumeProvider = ({ children }) => {
   const [submitAction, setSubmit] = useState(false);
-  const [triggerSubmit, setTriggerSubmit] = useState(null); 
-  
+  const [triggerSubmit, setTriggerSubmit] = useState(null);
+  const [selectedtemplate, setTemplate] = useState(null);
   const [resumeData, setResumeData] = useState({
     about: {},
     education: [],
@@ -31,8 +31,11 @@ export const ResumeProvider = ({ children }) => {
     }));
   };
 
-  const updateSkills = (skills) => {
-    setResumeData((prev) => ({ ...prev, skills }));
+  const updateSkills = (newSkill) => {
+    setResumeData((prev) => ({
+      ...prev,
+      skills: [...prev.skills, newSkill],
+    }));
   };
 
   const addProject = (project) => {
@@ -41,9 +44,6 @@ export const ResumeProvider = ({ children }) => {
       projects: [...prev.projects, project],
     }));
   };
-
-  
-
 
   //Reset all data
   const resetResume = () => {
@@ -56,7 +56,7 @@ export const ResumeProvider = ({ children }) => {
     });
   };
 
-  console.log("show resumeprovider",resumeData);
+  console.log("show resumeinfos", resumeData);
 
   return (
     <ResumeContext.Provider
@@ -69,7 +69,11 @@ export const ResumeProvider = ({ children }) => {
         addProject,
         resetResume,
         submitAction,
-        setSubmit,triggerSubmit, setTriggerSubmit
+        setSubmit,
+        triggerSubmit,
+        setTriggerSubmit,
+        setTemplate,
+        selectedtemplate,
       }}
     >
       {children}

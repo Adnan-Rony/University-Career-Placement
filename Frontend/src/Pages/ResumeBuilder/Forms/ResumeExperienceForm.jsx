@@ -37,7 +37,8 @@ export default function ResumeExperienceForm() {
         {fields.map((item, index) => (
           <div
             key={item.id}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-sm border"
+            className="grid grid-cols-1
+             md:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-sm "
           >
             {/* Company */}
             <div className="flex flex-col">
