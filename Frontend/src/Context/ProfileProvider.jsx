@@ -9,7 +9,7 @@ export const ProfileProvider = ({children}) => {
   const {data,isPending}=useCurrentUser()
   
    const profileInfo= data?.user || {};
-   console.log(profileInfo);
+   
     const [profileData,setProfileData]=useState({
         name:"",
         location:'',

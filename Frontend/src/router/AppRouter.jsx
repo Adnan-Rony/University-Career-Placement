@@ -35,13 +35,16 @@ import ViewMyPortfolio from "../Pages/portfolio/ViewMyPortfolio.jsx";
 import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
 import { NotFOund } from "../Pages/NotFound/NotFOund.jsx";
 import EmployerSignIn from "../Features/Authentication/EmployerSignIn.jsx";
-
+import { ResumeBuilder } from "../Pages/ResumeBuilder/ResumeBuilder.jsx";
+import { SelectOption } from "../Pages/ResumeBuilder/ResumeUi/SelectOption.jsx";
+import BuildYourResume from "../Pages/ResumeBuilder/ResumeUi/BuildYourResume.jsx";
+import { ResumeProvider } from "../Context/ResumeProvider.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
     path: "/",
     element: <MainLayouts />,
-    errorElement:<NotFOund/>,
+    errorElement: <NotFOund />,
     children: [
       {
         path: "/",
@@ -71,7 +74,7 @@ export const AppRouter = createBrowserRouter([
         path: "/alljobs",
         element: <JobsShowAll />,
       },
-     
+
       {
         path: "/allcompanies",
         element: <AllCompany />,
@@ -109,6 +112,22 @@ export const AppRouter = createBrowserRouter([
         path: "/myportfolio",
         element: <ViewMyPortfolio />,
       },
+      //Resume Builder
+      {
+        path:"/resumebuilder",
+        element:<ResumeBuilder/>,
+       
+      },
+       { path:"/resumebuilder/selectoption",
+          element:<SelectOption/>
+        },{
+          path:"/resumebuilder/build-your-resume/:id",
+          element:(
+          <ResumeProvider>
+            <BuildYourResume />
+          </ResumeProvider>
+        ),
+        }
     ],
   },
   {
