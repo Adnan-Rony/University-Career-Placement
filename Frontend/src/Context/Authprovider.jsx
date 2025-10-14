@@ -16,22 +16,25 @@ export const Authprovider = ({ children }) => {
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
 
-  // Logout
 
-  const logout = () => {
-    return signOut(auth);
-  };
 
   // SigninWithGoogle
 
   const googleSignIn=()=>{
     return signInWithPopup(auth,provider)
   }
+  
+    // Logout
+
+  const googlelogout = () => {
+    return signOut(auth);
+  };
 
 
   const Authinfo = {
     user,
-    logout,googleSignIn
+   googlelogout,
+   googleSignIn
   };
 
   // Observer Funtion

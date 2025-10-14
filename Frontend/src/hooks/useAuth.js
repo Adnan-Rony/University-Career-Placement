@@ -1,53 +1,70 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { CurrentUser, LoginUser, LogoutUser, RegisterUser } from "../api/auth.js";
+import {
+  CurrentUser,
+  LoginUser,
+  LogoutUser,
+  RegisterUser,
+  UpdateProfileUser,
+} from "../api/auth.js";
 
-
-
-export const UseLoginUser = () => { 
+export const UseLoginUser = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: LoginUser, 
+    mutationFn: LoginUser,
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']); 
+      queryClient.invalidateQueries(["user"]);
     },
   });
 };
 
 //registation
-export const UseRegister=()=>{
-        const queryClient=useQueryClient();
+export const UseRegister = () => {
+  const queryClient = useQueryClient();
 
-        return useMutation({
-             mutationFn: RegisterUser, 
+  return useMutation({
+    mutationFn: RegisterUser,
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']); 
+      queryClient.invalidateQueries(["user"]);
     },
-        })
-}
-
+  });
+};
 
 //Logout
 
-export const UseLogout=()=>{
-        const queryClient=useQueryClient();
+export const UseLogout = () => {
+  const queryClient = useQueryClient();
 
-        return useMutation({
-             mutationFn: LogoutUser, 
+  return useMutation({
+    mutationFn: LogoutUser,
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']); 
+      queryClient.removeQueries(["user"]);
     },
-        })
-}
+  });
+};
 
 // Fetch User Informations
 
-
 export const useCurrentUser = () => {
   return useQuery({
-    queryKey: ['user'],
+    queryKey: ["user"],
     queryFn: CurrentUser,
   });
 };
 
+export const useUpdateProfile = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: UpdateProfileUser,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["currentUser"]);
+
+      console.log("Profile updated successfully:", data);
+    },
+    onError: (error) => {
+      console.error("Profile update error:", error.message);
+    },
+  });
+};

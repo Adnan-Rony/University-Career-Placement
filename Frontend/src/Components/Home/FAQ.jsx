@@ -66,20 +66,24 @@ const FaqSection = ({ showall = false }) => {
   const visibleFaqs = showall ? faqData : faqData.slice(0, 5);
 
   return (
-    <section className="container mx-auto px-4 py-16">
-      <h2 className="text-3xl font-bold text-center mb-10">
+    <section className="container mx-auto px-4 py-16 ">
+      <h2 className="
+      text-3xl font-bold text-center mb-10
+  
+   bg-base-100   text-base-content ">
         Common Job Interview Questions
       </h2>
 
-      <div className="">
+      <div className="bg-base-100 ">
         {visibleFaqs.map((item, index) => (
           <div
             key={index}
-            className="border border-gray-200  rounded-md overflow-hidden shadow-sm"
+            className="border border-gray-200 
+           bg-base-100  rounded-md overflow-hidden shadow-sm"
           >
             <button
               onClick={() => toggle(index)}
-              className="w-full flex justify-between items-center px-6 py-4 text-left text-lg font-medium bg-white hover:bg-gray-50 transition"
+              className="bg-base-100  w-full flex justify-between items-center px-6 py-4 text-left text-lg font-medium  hover:bg-gray-50 dark:hover:bg-gray-700  transition"
             >
               <span>{item.question}</span>
               <span className="text-gray-400 text-xl">
@@ -98,7 +102,7 @@ const FaqSection = ({ showall = false }) => {
       {!showall && (
         <div className="text-center mt-10">
           <Link to="/interview-questions" className="inline-block">
-            <button className="btn bg-purple-700 text-white btn-outline">
+            <button className="btn bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white btn-outline">
               Read More
             </button>
           </Link>

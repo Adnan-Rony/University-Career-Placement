@@ -2,94 +2,91 @@ import { Link, NavLink } from "react-router-dom";
 import { useCurrentUser } from "../../hooks/useAuth";
 import { UserDropdown } from "./UserDropdown";
 import { useState } from "react";
-import { FaUserTie, FaUserGraduate } from "react-icons/fa";
+import { FaUserTie, FaUserGraduate, FaGraduationCap } from "react-icons/fa";
+import { AlignJustify } from "lucide-react";
+import ThemeToggle from "../Shared/Toggle/ThemeToggle";
 
 export const Navbar = () => {
   const { data } = useCurrentUser();
   const user = data?.user;
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-const navElements = (
-  <>
-    {!user ? (
-      // User Not Logged In
-      <>
-        <li>
-          <NavLink
-            to="/SignIn"
-            className={({ isActive }) =>
-              isActive ? 'text-primary' : 'text-gray-500'
-            }
-          >
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/SignUp"
-            className={({ isActive }) =>
-              isActive ? 'text-primary' : 'text-gray-500'
-            }
-          >
-            Register
-          </NavLink>
-        </li>
-      </>
-    ) : null}
-
-    <li>
+  const navElements = (
+    <>
       <NavLink
-        to="/alljobs"
+        to="/"
         className={({ isActive }) =>
-          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
+          isActive ? "text-r-primary font-semibold" : "text-gray-600"
         }
       >
         Home
       </NavLink>
-    </li>
 
-    <li>
-      <NavLink
-        to="/interview-questions"
-        className={({ isActive }) =>
-          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
-        }
-      >
-        FAQs
-      </NavLink>
-    </li>
+      <li>
+        <NavLink
+          to="/alljobs"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
+          }
+        >
+          Jobs
+        </NavLink>
+      </li>
 
-    <li>
-      <NavLink
-        to="/allcompanies"
-        className={({ isActive }) =>
-          isActive ? 'text-r-primary font-semibold' : 'text-gray-600'
-        }
-      >
-        Companies
-      </NavLink>
-    </li>
+      <li>
+        <NavLink
+          to="/allcompanies"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
+          }
+        >
+          Companies
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/resumebuilder"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
+          }
+        >
+          Resume Builder
+        </NavLink>
+      </li>
 
-    <li>
-      <NavLink
-        to="/about"
-        className={({ isActive }) =>
-          isActive ? 'text-primary' : 'text-gray-500'
-        }
-      >
-        About Us
-      </NavLink>
-    </li>
-  </>
-);
+      <li>
+        <NavLink
+          to="/interview-questions"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
+          }
+        >
+          FAQs
+        </NavLink>
+      </li>
+      {/* <li>
+        <ThemeToggle/>
+      </li> */}
 
+      {user ? <div></div> : <div></div>}
+    </>
+  );
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <nav
+      className="
+
+    bg-white shadow-sm sticky top-0 z-50 "
+    >
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Left - Logo */}
-        <Link to="/" className="text-xl font-bold text-black">
-          Job<span className="text-r-primary">Portal</span>
+        <Link to="/" className="">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 flex items-center justify-center bg-purple-700 text-white rounded-md">
+              <FaGraduationCap />
+            </div>
+            <h2 className="font-bold text-black text-lg">JobPortal</h2>
+          </div>
         </Link>
 
         {/* Center - Links */}
@@ -111,9 +108,9 @@ const navElements = (
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-80 bg-white md:border border-gray-200 rounded-lg shadow-lg z-50">
                   {/* Job Seeker */}
-                  <div className="p-4 border-b flex items-start gap-4">
+                  <div className="p-4 md:border-b flex items-start gap-4">
                     <div className="bg-gray-100 p-2 rounded-full">
                       <FaUserGraduate className="text-xl text-purple-700" />
                     </div>
@@ -140,7 +137,6 @@ const navElements = (
                       </div>
                     </div>
                   </div>
-                  
 
                   {/* Employer */}
                   <div className="p-4 flex items-start gap-4">
@@ -150,11 +146,12 @@ const navElements = (
                     <div>
                       <h3 className="text-lg font-semibold">Employer</h3>
                       <p className="text-gray-500 text-sm">
-                        Post jobs, view applications and manage your company profile.
+                        Post jobs, view applications and manage your company
+                        profile.
                       </p>
                       <div className="flex gap-2 mt-3">
                         <Link
-                          to="/SignIn"
+                          to="/employer-signIn"
                           onClick={() => setDropdownOpen(false)}
                           className="text-sm text-white bg-green-600 px-3 py-1 rounded hover:bg-green-700"
                         >
@@ -178,10 +175,10 @@ const navElements = (
       </div>
 
       {/* Mobile Menu */}
-      <div className="lg:hidden border-t px-4 pb-4">
+      <div className="lg:hidden border px-4 pb-4">
         <details className="dropdown w-full">
           <summary className="btn btn-ghost w-full justify-start text-left mt-2">
-            Menu
+            <AlignJustify />
           </summary>
           <ul className="menu bg-white w-full pt-2 space-y-2">{navElements}</ul>
         </details>

@@ -1,4 +1,4 @@
-import img from "../../../assets/company.PNG";
+
 import { CiBookmark, CiCalendar } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
@@ -10,12 +10,12 @@ const JobsCards = ({ job, index }) => {
         <Link to={`/job/details/${job._id}`}>
            <div
         key={index}
-        className="bg-white p-5 rounded-lg shadow hover:shadow-md transition w-full space-y-2 py-8 border border-gray-200"
+        className=" p-5 rounded-lg shadow hover:shadow-md transition w-full space-y-2 py-8 border border-gray-200"
       >
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
             <img
-              src={job?.company?.logo || img}
+              src={job?.company?.logo }
               alt="company logo"
               className="w-14 h-14 rounded-md object-cover"
             />

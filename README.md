@@ -3,6 +3,8 @@
 ## Project Overview
 The **Smart Job Placement Portal** is a web application designed to streamline the recruitment process for students, employers, and university administrators. This MERN (MongoDB, Express.js, React.js, Node.js) stack-based platform helps students create resumes, build portfolios, apply for jobs, and get matched with suitable job opportunities. Employers can easily review candidates and schedule interviews, while university administrators can monitor placement statistics and success rates.
 
+
+
 ## Features
 - **Resume Builder**: AI-powered tool that helps students create optimized resumes.
 - **Portfolio Builder**: Allows students to create and showcase their professional portfolios.
@@ -10,6 +12,12 @@ The **Smart Job Placement Portal** is a web application designed to streamline t
 - **Employer Dashboard**: Employers can post jobs, view applications, shortlist candidates, and schedule interviews.
 - **Admin Dashboard**: University admins can track student placements, monitor job applications, and generate reports.
 - **Real-time Notifications**: Instant updates via email and push notifications for job applications and interview schedules.
+
+
+## Live Demo
+[Click Here To Visit The Live Site](https://smartjob-clientside.vercel.app/)
+
+
 
 ## Technologies Used
 - **Frontend**: React.js, React Router, Tailwind CSS, DaisyUI

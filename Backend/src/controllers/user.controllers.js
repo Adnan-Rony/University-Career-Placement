@@ -10,31 +10,38 @@ export const register = async (req, res) => {
   const { name, email, password, role } = req.body;
 
   try {
+    // Check if user exists
     let existingUser = await User.findOne({ email });
     if (existingUser) {
-      // ✅ If user already exists, just return success with their data
-      const token = generateToken(existingUser);
-      return res.status(200).json({
-        success: true,
-        message: 'User already exists (logged in)',
-        user: {
-          id: existingUser._id,
-          name: existingUser.name,
-          email: existingUser.email,
-          role: existingUser.role,
-        },
-        token,
+     
+      if (!password) {
+        const token = generateToken(existingUser);
+        return res.status(200).json({
+          success: true,
+          message: 'User already exists (logged in)',
+          user: {
+            id: existingUser._id,
+            name: existingUser.name,
+            email: existingUser.email,
+            role: existingUser.role,
+          },
+          token,
+        });
+      }
+      // For password-based registration, return error
+      return res.status(400).json({
+        success: false,
+        message: 'User already exists. Please log in.',
       });
     }
 
-    const hashedPassword = password
-      ? await bcrypt.hash(password, 10)
-      : undefined;
+    // Create new user
+    const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
 
     const newUser = new User({
       name,
       email,
-      password: hashedPassword || '', // Or just skip password
+      password: hashedPassword, // Set to null for Google sign-in
       role: role || 'job-seeker',
     });
 
@@ -140,56 +147,92 @@ export const logout = async (req, res) => {
 
 
 export const updateUserProfile = async (req, res) => {
-    try {
-        const userId = req.user.id; // from protect middleware
-        const { name, phone, bio, skills, experience, resume } = req.body;
+  try {
+    const userId = req.user.id; // from protect middleware
 
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
-            {
-                name,
-                phone,
-                bio,
-                skills,
-                experience,
-                resume,
-            },
-            { new: true, runValidators: true }
-        ).select('-password');
+    const {
+      name,
+      phone,
+      location,
+      primaryRole,
+      bio,
+      skills,
+      yearsExperience,
+      picture,
+      resume,
+      education,
+      workExperience,
+      socialLinks,//socialLinks
+      certifications,
+      languages,
+      projects,
+      address,
+      dob,
+      gender
+    } = req.body;
 
-        res.status(200).json({
-            success: true,
-            message: 'Profile updated successfully',
-            user: updatedUser,
-        });
 
-    } catch (error) {
-        console.error('Update profile error:', error);
-        res.status(500).json({ success: false, message: 'Server error' });
-    }
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        name,
+        phone,
+        location, 
+         primaryRole,
+        bio,
+        skills,
+       yearsExperience,
+        picture,
+        resume,
+        education,
+        workExperience,
+        socialLinks,
+        certifications,
+        languages,
+        projects,
+        address,
+        dob,
+        gender
+      },
+      { new: true, runValidators: true }
+    ).select('-password');
+
+    res.status(200).json({
+      success: true,
+      message: 'Profile updated successfully',
+      user: updatedUser
+    });
+
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
 };
+
 
 
 export const getCurrentUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password'); // Exclude password
+
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
+
     res.status(200).json({
       success: true,
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-       
-      },
+      user, // Return full user object
     });
+
   } catch (err) {
-    res.status(500).json({ success: false, message: 'Failed to fetch user', error: err.message });
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch user',
+      error: err.message,
+    });
   }
 };
+
 
 
 

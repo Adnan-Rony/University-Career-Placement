@@ -15,7 +15,7 @@ const PopulerJob = () => {
   return (
     <div className="container mx-auto ">
       <div className="w-full h-full p-4 text-center">
-        <h2 className="text-3xl font-bold text-center mb-6">Popular Jobs</h2>
+        <h2 className=" text-base-content text-3xl font-bold text-center mb-6">Popular Jobs</h2>
         <p className="text-gray-600 mb-6">
           Explore the most sought-after job listings in various industries.
         </p>

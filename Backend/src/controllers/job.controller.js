@@ -6,7 +6,7 @@ export const createJob = async (req, res) => {
   try {
     const {
       title, description, company, location,country,city, salaryRange,
-      jobType, deadline, skillsRequired,image,vacancy,industry
+      jobType, deadline, skillsRequired,image,vacancy,industry,salaryType,currency,jobLevel,jobShift,gender,minEducationLevel,preferredEducationLevel,totalExperience,minExperience,maxExperience,minAge,maxAge,jobRequirements
     } = req.body;
 
     const employerId = req.user.id; 
@@ -32,6 +32,19 @@ export const createJob = async (req, res) => {
       image,
       skillsRequired,
       country,city,
+      salaryType,
+      currency,
+      jobLevel,
+      jobShift,
+      gender,
+      minEducationLevel,
+      preferredEducationLevel,
+      totalExperience,
+      minExperience,
+      maxExperience,
+      minAge,
+      maxAge,
+      jobRequirements
     });
 
     await newJob.save();
@@ -46,7 +59,7 @@ export const getAllJobs = async (req, res) => {
   try {
     const { companyName, jobTitle } = req.query;
 
-    let jobs = await Job.find()
+    let jobs = await Job.find().sort({ createdAt: -1 })
       .populate('company' )
       .populate('postedBy', 'email');
 
@@ -70,6 +83,7 @@ export const getAllJobs = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch jobs' });
   }
 };
+
 
 export const getJobById = async (req, res) => {
   
@@ -103,7 +117,7 @@ export const updateJob = async (req, res) => {
     }
 
     // Update allowed fields
-    const allowedUpdates = ['title', 'description','industry', 'location', 'salaryRange','location','city', 'jobType', 'deadline', 'skillsRequired','image','vacancy'];
+    const allowedUpdates = ['title', 'description','industry', 'location', 'salaryRange','location','city', 'jobType', 'deadline', 'skillsRequired','image','vacancy',"salaryType","currency","jobLevel","jobShift","gender","minEducationLevel","preferredEducationLevel","totalExperience","minExperience","maxExperience","minAge","maxAge","jobRequirements"];
     allowedUpdates.forEach(field => {
       if (req.body[field] !== undefined) {
         job[field] = req.body[field];
@@ -223,6 +237,22 @@ export const getRecommendedJobs = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch recommended jobs', error: error.message });
   }
 };
+
+
+export const getMyJobs=async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const jobs = await Job.find({ postedBy: userId })
+      .populate('company', 'name logo')
+      .populate('postedBy', 'email');
+
+    res.status(200).json({ success: true, jobs });
+  } catch (error) {
+    console.error("Get My Jobs Error:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch your jobs" });
+  }
+}
 
 
 

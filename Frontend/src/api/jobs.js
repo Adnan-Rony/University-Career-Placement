@@ -28,6 +28,12 @@ export const fetchSingleJobs = async (id) => {
 };
 
 
+export const fetchSingleMyJobs = async () => {
+  const res = await axiosInstance.get('/job/my-jobs');
+  return res.data;
+};
+
+
 export const createJob = async (jobData) => {
   const res = await axiosInstance.post('/job', jobData);
   return res.data;

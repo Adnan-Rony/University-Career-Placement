@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
 import { DashboardNavbar } from "../Dashboard/DashboardNavbar";
-import { FaBriefcase, FaHome } from "react-icons/fa";
+import { FaBriefcase, FaGraduationCap, FaHome } from "react-icons/fa";
 import { AdminSidebar } from "./Sidebars/AdminSidebar";
 import { EmployerSidebar } from "./Sidebars/EmployerSidebar";
 import { JobSeekerSidebar } from "./Sidebars/JobSeekerSidebar";
@@ -11,7 +11,7 @@ export const DrawerLayout = () => {
 
   const user = data?.user;
   const role = user?.role;
-  console.log(role);
+ 
 
   const RenderSidebars = () => {
     switch (role) {
@@ -27,7 +27,7 @@ export const DrawerLayout = () => {
 
   return (
     <div>
-      <div className="drawer lg:drawer-open bg-[#f9f9f9]">
+      <div className="drawer lg:drawer-open bg-[#f9f9f9] ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div
           className="drawer-content flex flex-col  container space-y-4
@@ -53,12 +53,13 @@ export const DrawerLayout = () => {
           >
             {/* Sidebar content here */}
             <li>
-              <Link to={'/'} className="">
-                <h1 className="text-2xl font-extrabold text-nowrap mb-2">
-                  Job
-                  <span className="text-r-primary"> Portal</span>
-                </h1>
-                <sub className="text-black/50">Dashboard</sub>
+              <Link to={"/"} className="">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 flex items-center justify-center bg-purple-700 text-white rounded-md">
+                    <FaGraduationCap />
+                  </div>
+                  <h2 className="font-bold text-black text-lg">JobPortal</h2>
+                </div>
               </Link>
             </li>
 
