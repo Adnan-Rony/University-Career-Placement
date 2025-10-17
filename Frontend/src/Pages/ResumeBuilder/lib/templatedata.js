@@ -2,8 +2,11 @@ import resume2 from "../../../assets/resume/resume2.png"
 import softwareEng from "../../../assets/resume/softwareEng.png"
 import engineer01 from "../../../assets/resume/eng2.png"
 import uidesigner from "../../../assets/resume/ux1.png"
+import student2 from "../../../assets/resume/student2.png"
 import StudentTemp1 from "../Templates/Students/StudentTemp1";
 import { PdfEngineerTemp1 } from "../PdfTemplates/PdfEngineerTemp1";
+import { StudentTemp2 } from "../Templates/Students/StudentTemp2";
+import { PdfStudentTemp2 } from "../PdfTemplates/PdfStudentTemp2"
 
 
 export const templatesData=[
@@ -14,7 +17,10 @@ export const templatesData=[
     component:StudentTemp1,
     profession: "student",
     steps: ["About", "Education", "Skills", "Projects","Preview"]
-  },  {
+  },
+  
+  
+  {
     id: "temp02",
     title: "Software Engineer Template",
     image: softwareEng,
@@ -38,6 +44,16 @@ export const templatesData=[
     component: StudentTemp1,
     profession: "Designer",
     steps: ["About", "Education", "Skills", "Portfolio","Preview"] 
+  }
+,
+  {
+    id: "temp05",
+    title: "Student Template",
+    image: student2,
+    component: StudentTemp2,
+    pdfComponent:PdfStudentTemp2,
+    profession: "student",
+    steps: ["About", "Education", "Skills", "Experience","Preview"] 
   }
 
 ]

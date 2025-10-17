@@ -22,7 +22,8 @@ export default function ResumeEducationForm() {
  const {  addEducation, setSubmit, setTriggerSubmit }=useResumeContext()
  const formRef = useRef(null);
   const onSubmit = (data) => {
-     data.education.forEach((edu) => addEducation(edu));
+    //  data.education.forEach((edu) => addEducation(edu));
+    addEducation(data.education)
      setSubmit(false);
   }
     useEffect(() => {

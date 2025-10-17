@@ -20,29 +20,19 @@ export const ResumeProvider = ({ children }) => {
     setResumeData((prev) => ({ ...prev, about: data }));
   };
 
-  const addEducation = (edu) => {
-    setResumeData((prev) => ({ ...prev, education: [...prev.education, edu] }));
+   const addEducation = (edu) => {
+    setResumeData((prev) => ({ ...prev, education: edu }));
   };
-
   const addExperience = (exp) => {
-    setResumeData((prev) => ({
-      ...prev,
-      experience: [...prev.experience, exp],
-    }));
+    setResumeData((prev) => ({ ...prev, experience: exp }));
   };
 
-  const updateSkills = (newSkill) => {
-    setResumeData((prev) => ({
-      ...prev,
-      skills: [...prev.skills, newSkill],
-    }));
+   const updateSkills = (newSkill) => {
+    setResumeData((prev) => ({ ...prev, skills: newSkill }));
   };
 
-  const addProject = (project) => {
-    setResumeData((prev) => ({
-      ...prev,
-      projects: [...prev.projects, project],
-    }));
+ const addProject = (project) => {
+    setResumeData((prev) => ({ ...prev, projects: project }));
   };
 
   //Reset all data

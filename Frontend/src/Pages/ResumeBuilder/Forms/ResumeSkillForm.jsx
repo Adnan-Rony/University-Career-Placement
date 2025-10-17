@@ -19,8 +19,8 @@ export default function ResumeSkillForm() {
   const formRef = useRef(null)
 
   const onSubmit = (data) => {
-    data.skills.forEach((skill) => updateSkills(skill));
-
+    // data.skills.forEach((skill) => updateSkills(skill));
+updateSkills(data.skills)
     setSubmit(false)
   }
 
