@@ -41,7 +41,7 @@ export const Blog = () => {
                 <div className="card-actions">
                   <Link to={`/blog/blogdetails/${blog.id}`}>
                     <button className="btn btn-ghost btn-outline text-r-accent">
-                      Read More
+                      Read Moreeee
                     </button>
                   </Link>
                 </div>
