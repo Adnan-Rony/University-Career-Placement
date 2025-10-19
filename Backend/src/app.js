@@ -10,7 +10,7 @@ import applicationRoute from "./routers/application.route.js";
 import adminRoute from "./routers/admin.route.js";
 import interviewRoute from "./routers/interview.route.js";
 import portfolioRoute from "./routers/portfolio.route.js";
-
+import paymentRoute from "./routers/payment.route.js"
 dotenv.config();
 
 const app = express();
@@ -35,13 +35,14 @@ app.use(cors(corsOptions));
 app.use("/api/v1", indexRoutes); 
 
 
-app.use("/api/v1/user", userRoutes); // User-related routes
-app.use("/api/v1/company", companyRoute); // User-related routes
-app.use("/api/v1/job",jobRoute ); // User-related routes
-app.use("/api/v1/application",applicationRoute ); // User-related routes
-app.use("/api/v1/admin",adminRoute ); // User-related routes
-app.use("/api/v1/interviews",interviewRoute ); // User-related routes
-app.use("/api/v1/portfolio",portfolioRoute ); // User-related routes
+app.use("/api/v1/user", userRoutes); 
+app.use("/api/v1/company", companyRoute); 
+app.use("/api/v1/job",jobRoute );
+app.use("/api/v1/application",applicationRoute ); 
+app.use("/api/v1/admin",adminRoute ); 
+app.use("/api/v1/interviews",interviewRoute ); 
+app.use("/api/v1/portfolio",portfolioRoute ); 
+app.use("/api/v1/payment",paymentRoute); 
 
 
 

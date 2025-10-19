@@ -37,9 +37,10 @@ export default function ResumePreview() {
         </PDFDownloadLink>
         <div className="">
           {/*  PDF Preview  */}
-           <PDFViewer >
+           {/* <PDFViewer >
               <PdfTemplate resumeData={resumeData} />
-            </PDFViewer>
+            </PDFViewer> */}
+            <PreviewTemplate resumeData={resumeData}/>
         </div>
       </div>
     </div>

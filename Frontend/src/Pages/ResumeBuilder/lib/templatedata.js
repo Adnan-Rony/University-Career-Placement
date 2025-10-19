@@ -15,7 +15,7 @@ export const templatesData=[
     title:"Student Template 1",
     image:resume2,
     component:StudentTemp1,
-    profession: "student",
+    profession:[ "student","non-tech"],
     steps: ["About", "Education", "Skills", "Projects","Preview"]
   },
   
@@ -25,7 +25,7 @@ export const templatesData=[
     title: "Software Engineer Template",
     image: softwareEng,
     component: StudentTemp1,
-    profession: "Engineer",
+    profession: ["Engineer"],
        steps: ["About", "Education", "Experience", "Skills", "Projects","Preview"]
   },
   {
@@ -34,7 +34,7 @@ export const templatesData=[
     image: engineer01, //Jackline Thomson
     component: StudentTemp1,
     pdfComponent:PdfEngineerTemp1,
-    profession: "Engineer",
+    profession: ["Engineer"],
      steps: ["About", "Education", "Experience", "Skills", "Projects","Preview"]
   },
   {
@@ -42,7 +42,7 @@ export const templatesData=[
     title: "UI Designer Template",
     image: uidesigner,
     component: StudentTemp1,
-    profession: "Designer",
+    profession: ["Designer"],
     steps: ["About", "Education", "Skills", "Portfolio","Preview"] 
   }
 ,
@@ -52,7 +52,7 @@ export const templatesData=[
     image: student2,
     component: StudentTemp2,
     pdfComponent:PdfStudentTemp2,
-    profession: "student",
+    profession: ["student","non-tech"],
     steps: ["About", "Education", "Skills", "Experience","Preview"] 
   }
 

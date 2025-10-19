@@ -3,7 +3,14 @@ import { templatesData } from '../lib/templatedata'
 import { useNavigate } from 'react-router'
 
 export default function RecommendedTemplates({selectedProfession}) {
- const recommendedtemplates=templatesData.filter((template)=>(template.profession.toLowerCase())===(selectedProfession.toLowerCase()))
+//  const recommendedtemplates=templatesData.filter((template)=>(template.profession.toLowerCase())===(selectedProfession.toLowerCase()))
+
+const recommendedtemplates = templatesData.filter((template) =>
+  template.profession.some(
+    (p) => p.toLowerCase() === selectedProfession.toLowerCase()
+  )
+);
+
 const navigate=useNavigate()
   return (
     <div>
