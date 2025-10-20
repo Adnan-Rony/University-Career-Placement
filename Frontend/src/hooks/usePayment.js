@@ -9,6 +9,8 @@ export const usePayment=()=>{
         mutationFn:paymentfnc,
         onSuccess:()=>{
             queryClient.invalidateQueries({queryKey:['Job']})
+           
+         
         }
     })
 }

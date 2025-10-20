@@ -2,20 +2,43 @@ import { CheckCircle2, Lock } from "lucide-react";
 import React from "react";
 import { useCurrentUser } from "../../../hooks/useAuth";
 import Loading from "../../../Components/loading/Loading";
+import { usePayment } from "../../../hooks/usePayment";
+import toast from "react-hot-toast";
+import axios from "axios";
+import axiosInstance from "../../../api/axiosInstance";
 
 export default function FeaturedPayment() {
   const {data,isPending}=useCurrentUser()
-  console.log(data);
-  const currentuser=data?.user?.email
-  const userdata={
-   email:currentuser,
-   name:data?.user?.name,
-   userId:data?.user?._id,
-   
+  const {mutate,isSuccess,isPending:paymentInProgress}=usePayment()
 
-  }
-  console.log(currentuser);
+  
+
+const handlePayment = () => {
+
+    if (isPending || !data?.user?.email) {
+      console.log("User data not ready yet");
+      toast.error("User data not loaded. Please wait.");
+      return;
+    }
+
+    const userdata = {
+      email: data.user.email,
+      name: data.user.name,
+      userId: data.user._id,
+      amount: 500
+    };
+
+console.log("Sending to mutate:", userdata);
+    mutate(userdata);
+
+ 
+    
+  };
+  
   if(isPending){
+    return <Loading/>
+  }
+  if(paymentInProgress){
     return <Loading/>
   }
   return (
@@ -80,7 +103,7 @@ export default function FeaturedPayment() {
       <div className="mb-6 border border-gray-200 bg-white p-6 shadow-sm rounded-lg">
         <h2 className="mb-4 text-lg font-semibold text-gray-800">Payment Method</h2>
 
-        <button
+        <button onClick={handlePayment}
           className="btn w-full  bg-purple-800 hover:bg-purple-600 text-white h-14 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-3 shadow-md hover:shadow-lg"
         >
           <svg

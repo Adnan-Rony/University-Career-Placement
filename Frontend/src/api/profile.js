@@ -10,6 +10,6 @@ export const UpdateProfile=async(data)=>{
   } 
   catch (error){
     console.error("Failed to update profile", error.response?.data || error.message);
-    toast("Failed")
+    toast.error("Failed")
   }
 }
