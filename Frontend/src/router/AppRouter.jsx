@@ -40,6 +40,9 @@ import { SelectOption } from "../Pages/ResumeBuilder/ResumeUi/SelectOption.jsx";
 import BuildYourResume from "../Pages/ResumeBuilder/ResumeUi/BuildYourResume.jsx";
 import { ResumeProvider } from "../Context/ResumeProvider.jsx";
 import { Demo } from "../Pages/Demo/demo.jsx";
+import PaymentSuccess from "../Components/Payments/FeauturedJobPayment/PaymentSuccess.jsx";
+import PaymentFailed from "../Components/Payments/FeauturedJobPayment/PaymentFailed.jsx";
+import Paymentcancel from "../Components/Payments/FeauturedJobPayment/Paymentcancel.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -116,6 +119,19 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/myportfolio",
         element: <ViewMyPortfolio />,
+      },
+      //payment,
+      {
+        path:"/payment-success",
+        element:<PaymentSuccess/>
+      },
+      {
+        path:"/payment-fail",
+        element:<PaymentFailed/>
+      },
+      {
+        path:"/payment-cancel",
+        element:<Paymentcancel/>
       },
       //Resume Builder
       {

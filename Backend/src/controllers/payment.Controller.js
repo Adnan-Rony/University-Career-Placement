@@ -25,8 +25,8 @@ const createPayment = async (req, res) => {
       store_passwd: process.env.STORE_PASSWORD,
       tran_id: trx_id.toString(),
       success_url: "http://localhost:3002/api/v1/payment/success-payment",
-      fail_url: "http://localhost:3002/fail",
-      cancel_url: "http://localhost:3002/cancel",
+      fail_url: "http://localhost:3002/payment-fail",
+      cancel_url: "http://localhost:3002/payment-cancel",
       total_amount: amount,
       shipping_method: "NO",
       product_name: "featured",
@@ -63,6 +63,7 @@ const createPayment = async (req, res) => {
 };
 const successPayment = async (req, res) => {
   const paymentSuccess = req.body;
+    const FRONTEND_URL = process.env.FRONTEND_URL;
   // console.log("✅ Payment Success Data:", paymentSuccess);
   try {
     const store_id = process.env.STORE_ID;
@@ -75,16 +76,18 @@ const successPayment = async (req, res) => {
 
     const validationData = isValidatePayment.data;
     //find the tansaction id from db
-    const payment = await paymentModel.findOne({ trx_id: validationData.tran_id });
- if (!payment) {
+    const payment = await paymentModel.findOne({
+      trx_id: validationData.tran_id,
+    });
+    if (!payment) {
       return res.status(404).json({ message: "Payment record not found" });
     }
 
     if (validationData.status === "VALID") {
       //update to db
-     payment.status = "success";
-    await payment.save();
-   return res.redirect("http://localhost:5173/payment-success");
+      payment.status = "success";
+      await payment.save();
+      return res.redirect(`${FRONTEND_URL}/payment-success`);
     } else {
       return res.send({
         message: "Invalid Payment",
@@ -101,7 +104,17 @@ const successPayment = async (req, res) => {
   }
 };
 
+const failPayment = (req, res) => {
+  const FRONTEND_URL = process.env.FRONTEND_URL;
+  return res.redirect(`${FRONTEND_URL}/payment-fail`);
+};
+
+const cancelPayment = (req, res) => {
+  const FRONTEND_URL = process.env.FRONTEND_URL;
+  return res.redirect(`${FRONTEND_URL}/payment-cancel`);
+};
+
 export const paymentController = {
   createPayment,
-  successPayment,
+  successPayment,failPayment,cancelPayment
 };
