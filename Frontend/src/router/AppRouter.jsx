@@ -56,7 +56,7 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: "/demo",
-        element: <Demo/>,
+        element: <Demo />,
       },
       {
         path: "/SignUp",
@@ -74,10 +74,7 @@ export const AppRouter = createBrowserRouter([
         path: "/job/details/:id",
         element: <JobDetails />,
       },
-      // {
-      //   path: "/company",
-      //   element: <CreateCompany />,
-      // },
+    
       {
         path: "/alljobs",
         element: <JobsShowAll />,
@@ -121,34 +118,34 @@ export const AppRouter = createBrowserRouter([
         element: <ViewMyPortfolio />,
       },
       //payment,
+   
+
       {
-        path:"/payment-success",
-        element:<PaymentSuccess/>
+        path: "/payment-success",
+        element: <PaymentSuccess />,
       },
       {
-        path:"/payment-fail",
-        element:<PaymentFailed/>
+        path: "/payment-fail",
+        element: <PaymentFailed />,
       },
       {
-        path:"/payment-cancel",
-        element:<Paymentcancel/>
+        path: "/payment-cancel",
+        element: <Paymentcancel />,
       },
       //Resume Builder
       {
-        path:"/resumebuilder",
-        element:<ResumeBuilder/>,
-       
+        path: "/resumebuilder",
+        element: <ResumeBuilder />,
       },
-       { path:"/resumebuilder/selectoption",
-          element:<SelectOption/>
-        },{
-          path:"/resumebuilder/build-your-resume/:id",
-          element:(
+      { path: "/resumebuilder/selectoption", element: <SelectOption /> },
+      {
+        path: "/resumebuilder/build-your-resume/:id",
+        element: (
           <ResumeProvider>
             <BuildYourResume />
           </ResumeProvider>
         ),
-        }
+      },
     ],
   },
   {

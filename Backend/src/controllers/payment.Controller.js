@@ -20,13 +20,16 @@ const createPayment = async (req, res) => {
 
     //save to db
     const savedPayment = await newpayment.save();
+
+    const BACKEND_URL = process.env.BACKEND_URL;
+
     const initiate = {
       store_id: process.env.STORE_ID,
       store_passwd: process.env.STORE_PASSWORD,
       tran_id: trx_id.toString(),
-      success_url: "http://localhost:3002/api/v1/payment/success-payment",
-      fail_url: "http://localhost:3002/payment-fail",
-      cancel_url: "http://localhost:3002/payment-cancel",
+      success_url: `${BACKEND_URL}/api/v1/payment/success-payment`,
+      fail_url: `${BACKEND_URL}/api/v1/payment/payment-fail`,
+      cancel_url: `${BACKEND_URL}/api/v1/payment/payment-cancel`,
       total_amount: amount,
       shipping_method: "NO",
       product_name: "featured",
@@ -72,7 +75,7 @@ const successPayment = async (req, res) => {
       `https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php?val_id=${paymentSuccess.val_id}&
       store_id=${store_id}&store_passwd=${store_passwd}&format=json`
     );
-    console.log("isvalidate or not:", isValidatePayment);
+   
 
     const validationData = isValidatePayment.data;
     //find the tansaction id from db
@@ -112,6 +115,8 @@ const failPayment = (req, res) => {
 const cancelPayment = (req, res) => {
   const FRONTEND_URL = process.env.FRONTEND_URL;
   return res.redirect(`${FRONTEND_URL}/payment-cancel`);
+
+
 };
 
 export const paymentController = {

@@ -31,6 +31,7 @@ export const Navbar = () => {
          Demo
         </NavLink>
       </li>
+
       <li>
         <NavLink
           to="/alljobs"

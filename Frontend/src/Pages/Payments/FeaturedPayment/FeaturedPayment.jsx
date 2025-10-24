@@ -8,13 +8,10 @@ import axios from "axios";
 import axiosInstance from "../../../api/axiosInstance";
 
 export default function FeaturedPayment() {
-  const {data,isPending}=useCurrentUser()
-  const {mutate,isSuccess,isPending:paymentInProgress}=usePayment()
+  const { data, isPending } = useCurrentUser();
+  const { mutate, isSuccess, isPending: paymentInProgress } = usePayment();
 
-  
-
-const handlePayment = () => {
-
+  const handlePayment = () => {
     if (isPending || !data?.user?.email) {
       console.log("User data not ready yet");
       toast.error("User data not loaded. Please wait.");
@@ -25,21 +22,18 @@ const handlePayment = () => {
       email: data.user.email,
       name: data.user.name,
       userId: data.user._id,
-      amount: 500
+      amount: 500,
     };
 
-console.log("Sending to mutate:", userdata);
+    console.log("Sending to mutate:", userdata);
     mutate(userdata);
-
- 
-    
   };
-  
-  if(isPending){
-    return <Loading/>
+
+  if (isPending) {
+    return <Loading />;
   }
-  if(paymentInProgress){
-    return <Loading/>
+  if (paymentInProgress) {
+    return <Loading />;
   }
   return (
     <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
@@ -47,7 +41,9 @@ console.log("Sending to mutate:", userdata);
       <div className="mb-6 border border-gray-200 p-6 shadow-sm rounded-lg bg-white">
         <div className="mb-4 flex items-start justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-gray-800">Selected Plan</h2>
+            <h2 className="text-lg font-semibold text-gray-800">
+              Selected Plan
+            </h2>
             <p className="mt-1 text-sm text-gray-500">
               Your chosen job posting package
             </p>
@@ -59,7 +55,9 @@ console.log("Sending to mutate:", userdata);
 
         <div className="mt-4 rounded-lg p-4  bg-purple-100/45">
           <p className="text-sm text-gray-600">Plan Type</p>
-          <p className="mt-1 text-2xl font-bold text-gray-800">Premium Job Post</p>
+          <p className="mt-1 text-2xl font-bold text-gray-800">
+            Premium Job Post
+          </p>
           <p className="mt-2 text-sm text-gray-500">
             Get featured placement, priority visibility, and advanced analytics
             for 30 days
@@ -69,7 +67,9 @@ console.log("Sending to mutate:", userdata);
 
       {/* Payment Summary Card */}
       <div className="mb-6 border border-gray-200 bg-white p-6 shadow-sm rounded-lg">
-        <h2 className="mb-4 text-lg font-semibold text-gray-800">Payment Summary</h2>
+        <h2 className="mb-4 text-lg font-semibold text-gray-800">
+          Payment Summary
+        </h2>
 
         <div className="space-y-3 border-b border-gray-200 pb-4">
           <div className="flex justify-between">
@@ -94,16 +94,21 @@ console.log("Sending to mutate:", userdata);
         </div>
 
         <div className="flex justify-between pt-4">
-          <span className="text-base font-semibold text-gray-800">Total Amount</span>
+          <span className="text-base font-semibold text-gray-800">
+            Total Amount
+          </span>
           <span className="text-2xl font-bold text-[#0E7A81]">$27.50</span>
         </div>
       </div>
 
       {/* Payment Method Card */}
       <div className="mb-6 border border-gray-200 bg-white p-6 shadow-sm rounded-lg">
-        <h2 className="mb-4 text-lg font-semibold text-gray-800">Payment Method</h2>
+        <h2 className="mb-4 text-lg font-semibold text-gray-800">
+          Payment Method
+        </h2>
 
-        <button onClick={handlePayment}
+        <button
+          onClick={handlePayment}
           className="btn w-full  bg-purple-800 hover:bg-purple-600 text-white h-14 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-3 shadow-md hover:shadow-lg"
         >
           <svg
