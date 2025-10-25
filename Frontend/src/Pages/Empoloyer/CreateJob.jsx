@@ -19,7 +19,7 @@ export const CreateJob = () => {
   const {
     register,
     handleSubmit,
-    reset,
+    reset,getValues,
     formState: { errors },
   } = useForm();
 
@@ -45,7 +45,7 @@ export const CreateJob = () => {
         max: isNaN(salaryMax) ? 0 : salaryMax,
       },
     };
-
+console.log("Job Data",jobData);
     // Remove salaryMin/Max from flat form fields
     delete jobData.salaryMin;
     delete jobData.salaryMax;
@@ -62,6 +62,13 @@ export const CreateJob = () => {
       },
     });
   };
+  const handlenavigate=()=>{
+    const formdata=getValues();
+  
+    navigate('/featured-payment',{
+      state:{formdata}
+    })
+  }
 
   if (loadingCompany) return <div>Loading your company data...</div>;
   if (companyError) return <div>Error loading your company data.</div>;
@@ -488,7 +495,7 @@ export const CreateJob = () => {
               className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
             />
           </div>
-
+   
           <div className="md:col-span-2">
             <label className="block font-semibold mb-1">
               Skills Required (comma separated) *
@@ -518,6 +525,7 @@ export const CreateJob = () => {
           >
             {isLoading ? "Creating..." : "Create Job"}
           </button>
+          <button type="button" onClick={handlenavigate} className="btn">Navigate</button>
         </div>
       </form>
     </div>

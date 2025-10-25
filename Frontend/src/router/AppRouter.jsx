@@ -43,6 +43,8 @@ import { Demo } from "../Pages/Demo/demo.jsx";
 import PaymentSuccess from "../Components/Payments/FeauturedJobPayment/PaymentSuccess.jsx";
 import PaymentFailed from "../Components/Payments/FeauturedJobPayment/PaymentFailed.jsx";
 import Paymentcancel from "../Components/Payments/FeauturedJobPayment/Paymentcancel.jsx";
+import { CreateJobSteps } from "../Pages/Empoloyer/CreateJobSteps.jsx";
+import FeaturedPayment from "../Pages/Payments/FeaturedPayment/FeaturedPayment.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -119,7 +121,10 @@ export const AppRouter = createBrowserRouter([
       },
       //payment,
    
-
+{
+  path:"/featured-payment",
+  element:<FeaturedPayment/>
+},
       {
         path: "/payment-success",
         element: <PaymentSuccess />,
@@ -173,7 +178,7 @@ export const AppRouter = createBrowserRouter([
       // For Employer
       { path: "employerDashboard", element: <EmployerDashboardMenu /> },
 
-      { path: "employer/create-job", element: <CreateJob /> },
+      { path: "employer/create-job", element: <CreateJob/> },
       { path: "employer/postedJobs", element: <PostedJobs /> },
       { path: "employer/managecompany", element: <EmployerCompany /> },
       { path: "employer/applications", element: <EmployerApplication /> },

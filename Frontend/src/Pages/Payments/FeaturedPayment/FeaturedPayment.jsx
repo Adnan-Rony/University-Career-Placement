@@ -1,15 +1,30 @@
 import { CheckCircle2, Lock } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { useCurrentUser } from "../../../hooks/useAuth";
 import Loading from "../../../Components/loading/Loading";
 import { usePayment } from "../../../hooks/usePayment";
 import toast from "react-hot-toast";
 import axios from "axios";
 import axiosInstance from "../../../api/axiosInstance";
+import { useLocation } from "react-router";
+import { UseMyCompany } from "../../../hooks/useCompany";
 
 export default function FeaturedPayment() {
   const { data, isPending } = useCurrentUser();
+  const [selectedPlan, setSelectedPlan] = useState("free");
   const { mutate, isSuccess, isPending: paymentInProgress } = usePayment();
+   const {
+      data: myCompanyData,
+      isLoading: loadingCompany,
+      isError: companyError,
+    } = UseMyCompany();
+    console.log(myCompanyData);
+const location=useLocation();
+const formdata=location.state?.formdata;
+console.log(formdata);
+console.log(selectedPlan);
+
+
 
   const handlePayment = () => {
     if (isPending || !data?.user?.email) {
@@ -42,7 +57,7 @@ export default function FeaturedPayment() {
         <div className="mb-4 flex items-start justify-between">
           <div>
             <h2 className="text-lg font-semibold text-gray-800">
-              Selected Plan
+              Select Your Plan
             </h2>
             <p className="mt-1 text-sm text-gray-500">
               Your chosen job posting package
@@ -53,16 +68,45 @@ export default function FeaturedPayment() {
           </div>
         </div>
 
-        <div className="mt-4 rounded-lg p-4  bg-purple-100/45">
-          <p className="text-sm text-gray-600">Plan Type</p>
-          <p className="mt-1 text-2xl font-bold text-gray-800">
-            Premium Job Post
-          </p>
-          <p className="mt-2 text-sm text-gray-500">
-            Get featured placement, priority visibility, and advanced analytics
-            for 30 days
-          </p>
-        </div>
+      
+
+          {/* Free Plan */}
+  <label
+   className="mt-3 rounded-lg p-4 bg-purple-100/45 flex items-start gap-4
+    cursor-pointer hover:bg-purple-200 transition">
+    <input
+      type="radio"
+      name="plan"
+      value="free"
+       checked={selectedPlan === "free"}
+       onChange={(e) => setSelectedPlan(e.target.value)}
+      className="radio radio-primary mt-2"
+    />
+    <div>
+      <p className="text-lg font-semibold text-gray-800">Free Job Post</p>
+      <p className="text-sm text-gray-500 mt-1">
+        Basic visibility for 7 days. Suitable for small job posts.
+      </p>
+    </div>
+  </label>
+
+  {/* Premium Plan */}
+  <label className="mt-3 rounded-lg p-4 bg-purple-100/45 flex items-start gap-4 cursor-pointer hover:bg-purple-200 transition">
+    <input
+      type="radio"
+      name="plan"
+      value="premium"
+        checked={selectedPlan === "premium"}
+      onChange={(e)=>setSelectedPlan(e.target.value)}
+      className="radio radio-primary mt-2"
+    />
+    <div>
+      <p className="text-lg font-semibold text-gray-800">Premium Job Post</p>
+      <p className="text-sm text-gray-500 mt-1">
+        Get featured placement, priority visibility, and analytics for 30 days.
+      </p>
+    </div>
+  </label>
       </div>
 
       {/* Payment Summary Card */}
@@ -119,7 +163,11 @@ export default function FeaturedPayment() {
           >
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
           </svg>
-          Pay with SSLCommerz (Secure Payment)
+          {
+            selectedPlan=="premium"?" Pay with SSLCommerz (Secure Payment)"
+          :"Send for Admin Approval"
+          }
+         
         </button>
 
         <p className="mt-4 text-center text-xs text-gray-500">
