@@ -20,7 +20,7 @@ export const Navbar = () => {
       >
         Home
       </NavLink>
-
+{/* 
       <li>
         <NavLink
           to="/demo"
@@ -30,7 +30,7 @@ export const Navbar = () => {
         >
          Demo
         </NavLink>
-      </li>
+      </li> */}
 
       <li>
         <NavLink

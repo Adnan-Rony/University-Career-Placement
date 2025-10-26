@@ -20,8 +20,8 @@ export const CreateJob = () => {
     register,
     handleSubmit,
     reset,getValues,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange",});
 
   const navigate = useNavigate();
 
@@ -543,8 +543,14 @@ const handlenavigate = () => {
             {isLoading ? "Creating..." : "Create Job"}
           </button>
           <button type="button"
+          disabled={!isValid}
            onClick={handlenavigate} 
-           className="btn bg-purple-700 text-white p-3 rounded-lg">Next</button>
+           className="font-semibold px-6 bg-purple-700 hover:bg-purple-600 text-white p-3 rounded-lg transition-all duration-200 ease-in-out transform ">Next</button>
+          {!isValid && (
+    <span className="absolute -top-6 left-0 text-xs text-red-500">
+      Please fill all required fields to continue
+    </span>
+  )}
         </div>
       </form>
     </div>

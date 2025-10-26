@@ -1,44 +1,59 @@
-import resume2 from "../../../assets/resume/resume2.png"
-import softwareEng from "../../../assets/resume/softwareEng.png"
-import engineer01 from "../../../assets/resume/eng2.png"
-import uidesigner from "../../../assets/resume/ux1.png"
-import designertemp1 from "../../../assets/resume/designertemp1.webp"
-import student2 from "../../../assets/resume/student2.png"
+import resume2 from "../../../assets/resume/resume2.png";
+import softwareEng from "../../../assets/resume/softwareEng.png";
+import engineer01 from "../../../assets/resume/eng2.png";
+import uidesigner from "../../../assets/resume/ux1.png";
+import designertemp1 from "../../../assets/resume/designertemp1.webp";
+import student2 from "../../../assets/resume/student2.png";
 import StudentTemp1 from "../Templates/Students/StudentTemp1";
 import { PdfEngineerTemp1 } from "../PdfTemplates/PdfEngineerTemp1";
 import { StudentTemp2 } from "../Templates/Students/StudentTemp2";
-import { PdfStudentTemp2 } from "../PdfTemplates/PdfStudentTemp2"
-import Designertemplate from "../Templates/Designer/Designertemplate"
-import PdfDesignerTemp1 from "../PdfTemplates/PdfDesignerTemp1"
+import { PdfStudentTemp2 } from "../PdfTemplates/PdfStudentTemp2";
+import Designertemplate from "../Templates/Designer/Designertemplate";
+import PdfDesignerTemp1 from "../PdfTemplates/PdfDesignerTemp1";
 
-
-export const templatesData=[
+export const templatesData = [
   {
-    id:"temp01",
-    title:"Student Template 1",
-    image:resume2,
-    component:StudentTemp1,
-    profession:[ "student","non-tech"],
-    steps: ["About", "Education", "Skills", "Projects","Preview"]
+    id: "temp01",
+    title: "Student Template 1",
+    image: resume2,
+    component: StudentTemp1,
+    profession: ["student", "non-tech"],
+    steps: ["About", "Education", "Skills", "Projects", "Preview"],
+    locked: true,
   },
-  
-  
+
   {
     id: "temp02",
     title: "Software Engineer Template",
     image: softwareEng,
     component: StudentTemp1,
     profession: ["Engineer"],
-       steps: ["About", "Education", "Experience", "Skills", "Projects","Preview"]
+    steps: [
+      "About",
+      "Education",
+      "Experience",
+      "Skills",
+      "Projects",
+      "Preview",
+    ],
+    locked: true,
   },
   {
     id: "temp03",
     title: "Engineer Template 1",
     image: engineer01, //Jackline Thomson
     component: StudentTemp1,
-    pdfComponent:PdfEngineerTemp1,
+    pdfComponent: PdfEngineerTemp1,
     profession: ["Engineer"],
-     steps: ["About", "Education", "Experience", "Skills", "Projects","Preview"]
+    steps: [
+      "About",
+      "Education",
+      "Experience",
+      "Skills",
+      "Projects",
+      "Preview",
+    ],
+    locked: false,
   },
   {
     id: "temp04",
@@ -46,29 +61,37 @@ export const templatesData=[
     image: uidesigner,
     component: StudentTemp1,
     profession: ["Designer"],
-    steps: ["About", "Education", "Skills", "Portfolio","Preview"] 
-  }
-,
+    steps: ["About", "Education", "Skills", "Portfolio", "Preview"],
+    locked: true,
+  },
   {
     id: "temp05",
     title: "Student Template",
     image: student2,
     component: StudentTemp2,
-    pdfComponent:PdfStudentTemp2,
-    profession: ["student","non-tech"],
-    steps: ["About", "Education", "Skills", "Experience","Preview"] 
+    pdfComponent: PdfStudentTemp2,
+    profession: ["student", "non-tech"],
+    steps: ["About", "Education", "Skills", "Experience", "Preview"],
+    locked: false,
   },
   {
     id: "temp06",
     title: "Designer Template",
     image: designertemp1,
     component: Designertemplate,
-    pdfComponent:PdfDesignerTemp1,
-    profession: ["Designer","non-tech"],
-    steps: ["About", "Education", "Skills", "Experience","Additional","Preview"] 
-  }
-
-]
+    pdfComponent: PdfDesignerTemp1,
+    profession: ["Designer", "non-tech"],
+    steps: [
+      "About",
+      "Education",
+      "Skills",
+      "Experience",
+      "Additional",
+      "Preview",
+    ],
+    locked: false,
+  },
+];
 export const data = {
   name: "Tamjid Ahmed",
   email: "tamjid@example.com",

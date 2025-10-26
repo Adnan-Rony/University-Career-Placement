@@ -33,8 +33,15 @@ const navigate=useNavigate()
 
                 <div className='absolute  bottom-10 w-full flex justify-center'>
                   <button
+                  disabled={template.locked}
                   onClick={()=>navigate(`/resumebuilder/build-your-resume/${template.id}`)}
-                  className='btn bg-purple-500 border-0 text-white'> Select Template</button>
+                  className={`btn bg-purple-500 border-0 text-white
+                  ${template.locked?
+                    'bg-gray-800 text-black cursor-not-allowed':
+                    'bg-purple-500 hover:bg-purple-600'
+                  }
+                  `}>
+                    {template.locked ? 'Locked' : 'Select Template'}</button>
                 </div>
               </div>
             ))}
