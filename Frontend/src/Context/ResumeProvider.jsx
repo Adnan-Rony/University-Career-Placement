@@ -13,6 +13,7 @@ export const ResumeProvider = ({ children }) => {
     experience: [],
     skills: [],
     projects: [],
+     additional: {}
   });
 
   // update functions
@@ -34,6 +35,10 @@ export const ResumeProvider = ({ children }) => {
  const addProject = (project) => {
     setResumeData((prev) => ({ ...prev, projects: project }));
   };
+  // Additional
+const updateAdditional = (data) => {
+  setResumeData((prev) => ({ ...prev, additional: data }));
+};
 
   //Reset all data
   const resetResume = () => {
@@ -56,6 +61,7 @@ export const ResumeProvider = ({ children }) => {
         addEducation,
         addExperience,
         updateSkills,
+        updateAdditional,
         addProject,
         resetResume,
         submitAction,

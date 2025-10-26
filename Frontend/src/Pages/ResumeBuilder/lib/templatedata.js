@@ -2,11 +2,14 @@ import resume2 from "../../../assets/resume/resume2.png"
 import softwareEng from "../../../assets/resume/softwareEng.png"
 import engineer01 from "../../../assets/resume/eng2.png"
 import uidesigner from "../../../assets/resume/ux1.png"
+import designertemp1 from "../../../assets/resume/designertemp1.webp"
 import student2 from "../../../assets/resume/student2.png"
 import StudentTemp1 from "../Templates/Students/StudentTemp1";
 import { PdfEngineerTemp1 } from "../PdfTemplates/PdfEngineerTemp1";
 import { StudentTemp2 } from "../Templates/Students/StudentTemp2";
 import { PdfStudentTemp2 } from "../PdfTemplates/PdfStudentTemp2"
+import Designertemplate from "../Templates/Designer/Designertemplate"
+import PdfDesignerTemp1 from "../PdfTemplates/PdfDesignerTemp1"
 
 
 export const templatesData=[
@@ -54,6 +57,15 @@ export const templatesData=[
     pdfComponent:PdfStudentTemp2,
     profession: ["student","non-tech"],
     steps: ["About", "Education", "Skills", "Experience","Preview"] 
+  },
+  {
+    id: "temp06",
+    title: "Designer Template",
+    image: designertemp1,
+    component: Designertemplate,
+    pdfComponent:PdfDesignerTemp1,
+    profession: ["Designer","non-tech"],
+    steps: ["About", "Education", "Skills", "Experience","Additional","Preview"] 
   }
 
 ]
