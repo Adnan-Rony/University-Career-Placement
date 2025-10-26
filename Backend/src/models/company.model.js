@@ -72,6 +72,7 @@ const companySchema = new mongoose.Schema(
       enum: ["trusted", "top-recuiter", "regular-recuiter"],
       default: "regular-recuiter",
     },
+  
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

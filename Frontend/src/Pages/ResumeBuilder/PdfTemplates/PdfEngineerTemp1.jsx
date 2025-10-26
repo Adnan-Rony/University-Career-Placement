@@ -127,36 +127,33 @@ export const PdfEngineerTemp1 = ({ resumeData }) => {
         {/* Education */}
         <View style={styles.section}>
           <Text style={styles.subHeader}>Education</Text>
-          {education.length > 0 ?
-           (
+          {education.length > 0 ? (
             education.map((edu, i) => (
-           <View key={i} style={{ marginBottom: 6 }}>
-          {/* Row: Degree and Year */}
-          <View
-            style={{
-              display:"flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              fontWeight: "bold"
-            }}
-          >
-            <Text style={{ fontSize: 12, fontWeight: "bold" }}>
-              {edu.degree || "Degree"}
-            </Text>
-            <Text style={{ fontSize: 12 }}>
-              ({edu.startYear || "----"} - {edu.endYear || "----"})
-            </Text>
-          </View>
+              <View key={i} style={{ marginBottom: 6 }}>
+                {/* Row: Degree and Year */}
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <Text style={{ fontSize: 12, fontWeight: "bold" }}>
+                    {edu.degree || "Degree"}
+                  </Text>
+                  <Text style={{ fontSize: 12 }}>
+                    ({edu.startYear || "----"} - {edu.endYear || "----"})
+                  </Text>
+                </View>
 
-          {/* Column: Institution */}
-          <Text style={{ fontSize: 12, marginTop: 2 }}>
-            {edu.institution || "Institution"}
-          </Text>
-        </View>
+                {/* Column: Institution */}
+                <Text style={{ fontSize: 12, marginTop: 2 }}>
+                  {edu.institution || "Institution"}
+                </Text>
+              </View>
             ))
-          ) 
-          
-          : (
+          ) : (
             <>
               <Text style={styles.text}>
                 B.Sc. in Computer Science - Daffodil University (2020)
@@ -183,24 +180,24 @@ export const PdfEngineerTemp1 = ({ resumeData }) => {
           <Text style={styles.subHeader}>Projects</Text>
           {projects.length > 0 ? (
             projects.map((proj, index) => (
-                 <View
-        key={index}
-        style={{ 
-          flexDirection: "column", 
-         
-          marginBottom: 4 
-        }}
-      >
-        <Text style={{ fontSize: 13, fontWeight: "bold"}}>
-          {proj.title || "Project Title"}
-        </Text>
-        <Text style={{ fontSize: 12}}>
-          {proj.description || "No description"}
-        </Text>
-        <Text style={{ fontSize: 12, color: "blue" }}>
-          {proj.link || "No link"}
-        </Text>
-      </View>
+              <View
+                key={index}
+                style={{
+                  flexDirection: "column",
+
+                  marginBottom: 4,
+                }}
+              >
+                <Text style={{ fontSize: 13, fontWeight: "bold" }}>
+                  {proj.title || "Project Title"}
+                </Text>
+                <Text style={{ fontSize: 12 }}>
+                  {proj.description || "No description"}
+                </Text>
+                <Text style={{ fontSize: 12, color: "blue" }}>
+                  {proj.link || "No link"}
+                </Text>
+              </View>
             ))
           ) : (
             <>

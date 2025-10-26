@@ -62,13 +62,30 @@ console.log("Job Data",jobData);
       },
     });
   };
-  const handlenavigate=()=>{
-    const formdata=getValues();
-  
-    navigate('/featured-payment',{
-      state:{formdata}
-    })
-  }
+const handlenavigate = () => {
+  const data = getValues();
+
+
+  const salaryMin = parseInt(data.salaryMin, 10);
+  const salaryMax = parseInt(data.salaryMax, 10);
+
+  const jobData = {
+    ...data,
+    company: myCompanyData.company[0]._id,
+    salaryRange: {
+      min: isNaN(salaryMin) ? 0 : salaryMin,
+      max: isNaN(salaryMax) ? 0 : salaryMax,
+    },
+  };
+
+  delete jobData.salaryMin;
+  delete jobData.salaryMax;
+
+  navigate('/featured-payment', {
+    state: { jobData },
+  });
+};
+
 
   if (loadingCompany) return <div>Loading your company data...</div>;
   if (companyError) return <div>Error loading your company data.</div>;
@@ -518,14 +535,16 @@ console.log("Job Data",jobData);
         <div className="flex justify-end mt-6">
           <button
             type="submit"
-            className={`bg-purple-700 text-white p-3 rounded-lg font-semibold ${
+            className={`hidden bg-purple-700 text-white p-3 rounded-lg font-semibold ${
               isLoading ? "opacity-70 cursor-not-allowed" : ""
             }`}
             disabled={isLoading}
           >
             {isLoading ? "Creating..." : "Create Job"}
           </button>
-          <button type="button" onClick={handlenavigate} className="btn">Navigate</button>
+          <button type="button"
+           onClick={handlenavigate} 
+           className="btn bg-purple-700 text-white p-3 rounded-lg">Next</button>
         </div>
       </form>
     </div>

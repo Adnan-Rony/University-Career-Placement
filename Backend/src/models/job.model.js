@@ -96,6 +96,11 @@ const jobSchema = new mongoose.Schema({
   maxAge: { type: Number },
 
   jobRequirements: { type: String },
+    status:{   //new
+       type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
+      },
 
 
 

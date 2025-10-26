@@ -6,25 +6,33 @@ import { usePayment } from "../../../hooks/usePayment";
 import toast from "react-hot-toast";
 import axios from "axios";
 import axiosInstance from "../../../api/axiosInstance";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { UseMyCompany } from "../../../hooks/useCompany";
+import { UseCreateJob } from "../../../hooks/useJobs";
 
 export default function FeaturedPayment() {
   const { data, isPending } = useCurrentUser();
   const [selectedPlan, setSelectedPlan] = useState("free");
   const { mutate, isSuccess, isPending: paymentInProgress } = usePayment();
-   const {
-      data: myCompanyData,
-      isLoading: loadingCompany,
-      isError: companyError,
-    } = UseMyCompany();
-    console.log(myCompanyData);
+ const { mutate: createJob, isLoading } = UseCreateJob();
+ const navigate = useNavigate();
 const location=useLocation();
-const formdata=location.state?.formdata;
-console.log(formdata);
-console.log(selectedPlan);
+const formdata=location.state?.jobData;
 
 
+const handleFreePost=()=>{
+        createJob(formdata, {
+          onSuccess: () => {
+            toast.success("Job created successfully");
+           
+            navigate("/");
+          },
+          onError: (error) => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            toast.error(error.response?.data?.message || "Failed to create job");
+          },
+        });
+}
 
   const handlePayment = () => {
     if (isPending || !data?.user?.email) {
@@ -39,9 +47,20 @@ console.log(selectedPlan);
       userId: data.user._id,
       amount: 500,
     };
+        createJob(formdata, {
+          onSuccess: () => {
+            toast.success("Job created successfully");
+           
+           
+          },
+          onError: (error) => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            toast.error(error.response?.data?.message || "Failed to create job");
+          },
+        });
 
     console.log("Sending to mutate:", userdata);
-    mutate(userdata);
+    mutate(userdata); //[payment api]
   };
 
   if (isPending) {
@@ -126,14 +145,16 @@ console.log(selectedPlan);
           </div>
           <div className="flex justify-between">
             <span className="text-sm text-gray-500">Base Price</span>
-            <span className="font-medium text-gray-800">$25.00</span>
+            <span className="font-medium text-gray-800">
+              {selectedPlan==="premium"?"500BDT":"0"}
+            </span>
           </div>
         </div>
 
         <div className="space-y-3 py-4 border-b border-gray-200">
           <div className="flex justify-between">
-            <span className="text-sm text-gray-500">Tax (10%)</span>
-            <span className="font-medium text-gray-800">$2.50</span>
+            <span className="text-sm text-gray-500">Tax </span>
+            <span className="font-medium text-gray-800">0</span>
           </div>
         </div>
 
@@ -141,7 +162,7 @@ console.log(selectedPlan);
           <span className="text-base font-semibold text-gray-800">
             Total Amount
           </span>
-          <span className="text-2xl font-bold text-[#0E7A81]">$27.50</span>
+          <span className="text-2xl font-bold text-[#0E7A81]"> {selectedPlan==="premium"?"500 BDT":"0"}</span>
         </div>
       </div>
 
@@ -151,24 +172,26 @@ console.log(selectedPlan);
           Payment Method
         </h2>
 
-        <button
-          onClick={handlePayment}
-          className="btn w-full  bg-purple-800 hover:bg-purple-600 text-white h-14 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-3 shadow-md hover:shadow-lg"
-        >
-          <svg
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
-          </svg>
-          {
-            selectedPlan=="premium"?" Pay with SSLCommerz (Secure Payment)"
-          :"Send for Admin Approval"
-          }
-         
-        </button>
+    {/* Premium Plan Button */}
+{selectedPlan === "premium" && (
+  <button
+    onClick={handlePayment}
+    className="btn w-full bg-purple-800 hover:bg-purple-600 text-white h-14 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-3 shadow-md hover:shadow-lg"
+  >
+    Pay with SSLCommerz (Secure Payment)
+  </button>
+)}
+
+{/* Free Plan Button */}
+{selectedPlan === "free" && (
+  <button
+    onClick={handleFreePost} // new function for free plan
+    className="btn w-full  bg-purple-800 hover:bg-purple-600 text-white h-14 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-3 shadow-md hover:shadow-lg"
+  >
+    Send for Admin Approval
+  </button>
+)}
+
 
         <p className="mt-4 text-center text-xs text-gray-500">
           <Lock className="inline h-3 w-3 mr-1" />

@@ -80,7 +80,7 @@ const ExperienceEntry = ({ index, control, register, remove }) => {
         ))}
         <button
           type="button"
-          className="btn bg-blue-500 text-white text-sm px-4 py-1 mt-2"
+          className="btn btn-outline mt-2"
           onClick={() => appendDescription('')}
         >
           + Add Bullet Point

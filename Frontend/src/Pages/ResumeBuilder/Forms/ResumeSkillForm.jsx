@@ -27,7 +27,7 @@ updateSkills(data.skills)
   useEffect(() => {
     setTriggerSubmit(() => handleSubmit(onSubmit))
   }, [])
-
+  const skillLevels = ["Beginner", "Intermediate", "Advanced", "Expert"];
   return (
     <div className="p-6 bg-gray-100 rounded-lg">
       <form ref={formRef} onSubmit={handleSubmit(onSubmit)}
@@ -45,7 +45,19 @@ updateSkills(data.skills)
               placeholder="Enter a skill (e.g. React, Tailwind, SQL)"
               {...register(`skills.${index}.name`, { required: true })}
             />
-
+   
+      {/* .......... */}
+    <select
+              className="input w-1/3 rounded-lg shadow-sm"
+              {...register(`skills.${index}.level`)}
+            >
+              {skillLevels.map((level) => (
+                <option key={level} value={level}>
+                  {level}
+                </option>
+              ))}
+            </select>
+            {/* .......... */}
             {fields.length > 1 && (
               <button
                 type="button"
