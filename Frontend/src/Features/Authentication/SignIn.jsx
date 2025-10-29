@@ -5,15 +5,15 @@ import { UseLoginUser } from "../../hooks/useAuth.js";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { GoogleSignIN } from "./GoogleSignIN.jsx";
+import { OauthGoogleSignin } from "./OauthGoogleSignin.jsx";
 
 export const SignIn = () => {
-  const { register, handleSubmit, reset,setValue } = useForm();
+  const { register, handleSubmit, reset, setValue } = useForm();
   const { mutate: loginUser, isPending } = UseLoginUser();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-
-    // Default credential handler
+  // Default credential handler
   const fillCredentials = (role) => {
     switch (role) {
       case "user":
@@ -56,7 +56,7 @@ export const SignIn = () => {
         <p className="text-gray-500 text-center mt-2 mb-6">
           Welcome back! Please enter your credentials.
         </p>
-    {/* 🔹 Quick Login Buttons */}
+        {/* 🔹 Quick Login Buttons */}
         <div className="flex justify-center gap-3 mb-5">
           <button
             type="button"
@@ -128,6 +128,7 @@ export const SignIn = () => {
 
         <div className="my-5">
           <GoogleSignIN />
+        
         </div>
 
         {/* Register Link */}

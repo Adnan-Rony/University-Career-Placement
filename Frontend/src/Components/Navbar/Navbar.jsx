@@ -20,8 +20,8 @@ export const Navbar = () => {
       >
         Home
       </NavLink>
-{/* 
-      <li>
+
+      {/* <li>
         <NavLink
           to="/demo"
           className={({ isActive }) =>
