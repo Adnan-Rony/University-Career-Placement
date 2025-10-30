@@ -4,7 +4,6 @@ import { UserDropdown } from "./UserDropdown";
 import { useState } from "react";
 import { FaUserTie, FaUserGraduate, FaGraduationCap } from "react-icons/fa";
 import { AlignJustify } from "lucide-react";
-import ThemeToggle from "../Shared/Toggle/ThemeToggle";
 
 export const Navbar = () => {
   const { data } = useCurrentUser();
@@ -21,6 +20,17 @@ export const Navbar = () => {
       >
         Home
       </NavLink>
+
+      {/* <li>
+        <NavLink
+          to="/demo"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
+          }
+        >
+         Demo
+        </NavLink>
+      </li> */}
 
       <li>
         <NavLink

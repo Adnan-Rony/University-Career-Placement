@@ -13,6 +13,7 @@ export const ResumeProvider = ({ children }) => {
     experience: [],
     skills: [],
     projects: [],
+     additional: {}
   });
 
   // update functions
@@ -20,30 +21,24 @@ export const ResumeProvider = ({ children }) => {
     setResumeData((prev) => ({ ...prev, about: data }));
   };
 
-  const addEducation = (edu) => {
-    setResumeData((prev) => ({ ...prev, education: [...prev.education, edu] }));
+   const addEducation = (edu) => {
+    setResumeData((prev) => ({ ...prev, education: edu }));
   };
-
   const addExperience = (exp) => {
-    setResumeData((prev) => ({
-      ...prev,
-      experience: [...prev.experience, exp],
-    }));
+    setResumeData((prev) => ({ ...prev, experience: exp }));
   };
 
-  const updateSkills = (newSkill) => {
-    setResumeData((prev) => ({
-      ...prev,
-      skills: [...prev.skills, newSkill],
-    }));
+   const updateSkills = (newSkill) => {
+    setResumeData((prev) => ({ ...prev, skills: newSkill }));
   };
 
-  const addProject = (project) => {
-    setResumeData((prev) => ({
-      ...prev,
-      projects: [...prev.projects, project],
-    }));
+ const addProject = (project) => {
+    setResumeData((prev) => ({ ...prev, projects: project }));
   };
+  // Additional
+const updateAdditional = (data) => {
+  setResumeData((prev) => ({ ...prev, additional: data }));
+};
 
   //Reset all data
   const resetResume = () => {
@@ -66,6 +61,7 @@ export const ResumeProvider = ({ children }) => {
         addEducation,
         addExperience,
         updateSkills,
+        updateAdditional,
         addProject,
         resetResume,
         submitAction,

@@ -35,9 +35,26 @@ const defaultStyles = StyleSheet.create({
   },
 });
 
-export default function PdfTemp1() {
+export default function PdfTemp1({resumeData}) {
   const styles = defaultStyles;
+ // ✅ Destructure resumeData safely with defaults
+  const {
+    about = {},
+    education = [],
+    experience = [],
+    skills = [],
+    projects = [],
+  } = resumeData || {};
 
+    const {
+    name = "John Doe",
+    email = "johndoe@example.com",
+    phone = "+1 (000) 000-0000",
+    location = "New York, USA",
+    linkedin = "linkedin.com/in/johndoe",
+    portfolio = "johndoe.dev",
+    summary = "A passionate developer skilled in modern web technologies.",
+  } = about;
   return (
     <Document>
       <Page size="A4" style={styles.page}>

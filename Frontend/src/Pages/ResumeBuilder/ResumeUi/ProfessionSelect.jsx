@@ -1,8 +1,8 @@
 import { templatesData } from "../lib/templatedata";
 
 const ProfessionSelect = ({ selectedProfession, setSelectedProfession }) => {
-  const professions = [...new Set(templatesData.map((t) => t.profession))];
-
+  const professions = [...new Set(templatesData.flatMap((t) => t.profession))];
+ console.log(professions);
   const handleSelect = (prof) => {
     if (selectedProfession === prof) {
       setSelectedProfession("");

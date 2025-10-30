@@ -11,6 +11,7 @@ import ResumeSkillForm from "../Forms/ResumeSkillForm";
 import ResumeProjectForm from "../Forms/ResumeProjectForm";
 import { useResumeContext } from "../../../Context/ResumeProvider";
 import ResumePreview from "../Forms/ResumePreview";
+import ResumeAdditionalForm from "../Forms/ResumeAdditionalForm";
 
 export default function BuildYourResume() {
   const [currentIdx, setcurrentIdx] = useState(1);
@@ -35,6 +36,8 @@ export default function BuildYourResume() {
         return <ResumeSkillForm />;
       case "Projects":
         return <ResumeProjectForm />;
+      case "Additional":
+        return <ResumeAdditionalForm/>  
       case "Preview":
         return <ResumePreview/>
       default:

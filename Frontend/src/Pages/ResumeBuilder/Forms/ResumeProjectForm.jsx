@@ -21,7 +21,8 @@ export default function ResumeProjectForm() {
   const formRef = useRef(null)
 
   const onSubmit = (data) => {
-    data.projects.forEach((proj) => addProject(proj))
+    // data.projects.forEach((proj) => addProject(proj))
+    addProject(data.projects)
     setSubmit(false)
   }
 

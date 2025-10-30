@@ -3,7 +3,14 @@ import { templatesData } from '../lib/templatedata'
 import { useNavigate } from 'react-router'
 
 export default function RecommendedTemplates({selectedProfession}) {
- const recommendedtemplates=templatesData.filter((template)=>(template.profession.toLowerCase())===(selectedProfession.toLowerCase()))
+//  const recommendedtemplates=templatesData.filter((template)=>(template.profession.toLowerCase())===(selectedProfession.toLowerCase()))
+
+const recommendedtemplates = templatesData.filter((template) =>
+  template.profession.some(
+    (p) => p.toLowerCase() === selectedProfession.toLowerCase()
+  )
+);
+
 const navigate=useNavigate()
   return (
     <div>
@@ -26,8 +33,15 @@ const navigate=useNavigate()
 
                 <div className='absolute  bottom-10 w-full flex justify-center'>
                   <button
+                  disabled={template.locked}
                   onClick={()=>navigate(`/resumebuilder/build-your-resume/${template.id}`)}
-                  className='btn bg-purple-500 border-0 text-white'> Select Template</button>
+                  className={`btn bg-purple-500 border-0 text-white
+                  ${template.locked?
+                    'bg-gray-800 text-black cursor-not-allowed':
+                    'bg-purple-500 hover:bg-purple-600'
+                  }
+                  `}>
+                    {template.locked ? 'Locked' : 'Select Template'}</button>
                 </div>
               </div>
             ))}
