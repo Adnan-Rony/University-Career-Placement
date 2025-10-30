@@ -7,10 +7,10 @@ const DashboardManageCompanySkeleton = () => {
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Field</th>
-            <th>Add Tags</th>
-            <th>Remove</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
