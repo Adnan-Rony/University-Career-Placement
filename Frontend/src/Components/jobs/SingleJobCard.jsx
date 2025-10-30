@@ -42,8 +42,11 @@ const SingleJobCard = ({ job, setActiveJobId, activeJobId, handleApply }) => {
           </span>
 
           <span className="flex items-center gap-1">
-            <MdOutlineLocationOn className="text-lg text-gray-500" />
-            {job?.city}, {job?.location}, {job?.country}
+            <MdOutlineLocationOn className="text-lg text-gray-500 capitalize" />
+           <span className="capitalize">
+            
+            {job?.city}
+            </span> , {job?.location}, {job?.country}
           </span>
 
           <span className="flex items-center gap-1">
