@@ -72,5 +72,14 @@ export const fetchSearchJobs = async (title, location) => {
   });
   return res.data.jobs; 
 }
+//admin
 
-
+export const updateJobStatus=async(payload)=>{
+const {jobId,status}=payload
+  try {
+      const res = await axiosInstance.put(`/job/admin/${payload.jobId}/status`, {status});
+  return res.data;
+  } catch (error) {
+    console.log("Error updating status");
+  }
+}

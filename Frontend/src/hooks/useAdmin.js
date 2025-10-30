@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteSingleCompanyByAdmin, deletesingleJobsByAdmin, deleteUserByAdmin, fetchAdminAllApplication, fetchAdminAllCompany, fetchAdminAllJobs, fetchAdminAllUsers, fetchSingleCompanyByAdmin, fetchSingleJobsByAdmin, UpdateSingleCompanyByAdmin } from "../api/admin.js";
+import { updateJobStatus } from "../api/jobs.js";
 
 
 //user
@@ -109,3 +110,16 @@ export const UseFetchAllApplicationByAdmin = () => {
     queryFn: fetchAdminAllApplication,
   });
 };
+
+//Approve-Reject Jobs
+
+export const UseupdateJobStatus=()=>{
+   const queryClient = useQueryClient();
+
+   return useMutation({
+    mutationFn:(payload)=>updateJobStatus(payload),
+      onSuccess: () => {
+      queryClient.invalidateQueries(["job"]); // refetch jobs after update
+    },
+   })
+}

@@ -1,11 +1,14 @@
 import React from "react";
 import { UseJobsForAdmin } from "../../../../../hooks/useJobs";
 import DashboardManageCompanySkeleton from "../../../../loading/DashboardManageCompanySkeleton";
+import { UseupdateJobStatus } from "../../../../../hooks/useAdmin";
+import { Action } from "./Action";
 
 export const ManageJobs = () => {
   const { data: jobs, isPending } = UseJobsForAdmin();
   console.log(jobs);
- 
+ const {mutate}=UseupdateJobStatus()
+
   if (isPending) {
     return <DashboardManageCompanySkeleton />;
   }
@@ -53,17 +56,8 @@ export const ManageJobs = () => {
                     </span>
                   </td>
                   <td>{new Date(job.createdAt).toLocaleDateString()}</td>
-                  <td className="flex gap-2">
-                    <button className="px-3 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded hover:bg-blue-200">
-                      View
-                    </button>
-                    <button className="px-3 py-1 text-sm font-medium text-green-700 bg-green-100 rounded hover:bg-green-200">
-                      Approve
-                    </button>
-                    <button className="px-3 py-1 text-sm font-medium text-red-700 bg-red-100 rounded hover:bg-red-200">
-                      Reject
-                    </button>
-                  </td>
+              
+                  <Action id={job._id}/>
                 </tr>
               ))
             ) : (

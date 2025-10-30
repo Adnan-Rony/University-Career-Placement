@@ -362,3 +362,37 @@ export const getAllJobsForAdmin = async (req, res) => {
   }
 };
 
+
+//status update for admin
+export const updateJobStatus = async (req, res) => {
+  try {
+    const {id}=req.params
+    const {status}=req.body
+    console.log(id,status);
+  
+    if(!status){
+      return res.status(400).json({ message: "Invalid status" });
+    }
+    if(!id){
+      return res.status(400).json({ message: "Invalid Post Id" });
+    }
+      const updatedJob = await Job.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+   if (!updatedJob) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+
+    return res.status(200).json({
+      message:"Status Changed Successfully",
+      job: updatedJob
+    })
+  } catch (error) {
+     return res.status(500).json({
+      message:"Status Change Failed"
+    })
+  }
+}
