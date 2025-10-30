@@ -100,6 +100,12 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    provider: {
+      type: String,
+    },
+    providerId: { type: String },
+    avatar: { type: String },
   },
   { timestamps: true }
 );

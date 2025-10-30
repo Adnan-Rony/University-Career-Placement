@@ -133,23 +133,26 @@ export const ManageCompany = () => {
                     <td>
                       <div className="flex items-center gap-3">
                         <div className="avatar">
-                          <div className="mask mask-squircle h-12 w-12">
+                          <div className="mask mask-squircle h-12 w-12  ">
                             <img src={company?.logo} alt="Company Logo" />
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{company?.name}</div>
-                          <div className="text-sm opacity-50">
+                          <div className="font-bold capitalize">{company?.name}</div>
+                          <div className="text-sm opacity-50 capitalize">
                             {company?.location}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="flex flex-col justify-start items-start ">
-                      <span className="font-semibold">{company?.industry}</span>
-
-                      <span className="">Name: {company?.createdBy?.name}</span>
-                    </td>
+          <td className="flex flex-col justify-start items-start space-y-1 p-2">
+  <span className="font-semibold text-gray-800 text-sm">
+    {company?.industry}
+  </span>
+  <span className="text-gray-600 text-xs">
+    📧 Email: {company?.createdBy?.email}
+  </span>
+</td>
 
 
                     <th>

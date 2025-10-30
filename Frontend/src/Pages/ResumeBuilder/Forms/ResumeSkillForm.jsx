@@ -19,15 +19,15 @@ export default function ResumeSkillForm() {
   const formRef = useRef(null)
 
   const onSubmit = (data) => {
-    data.skills.forEach((skill) => updateSkills(skill));
-
+    // data.skills.forEach((skill) => updateSkills(skill));
+updateSkills(data.skills)
     setSubmit(false)
   }
 
   useEffect(() => {
     setTriggerSubmit(() => handleSubmit(onSubmit))
   }, [])
-
+  const skillLevels = ["Beginner", "Intermediate", "Advanced", "Expert"];
   return (
     <div className="p-6 bg-gray-100 rounded-lg">
       <form ref={formRef} onSubmit={handleSubmit(onSubmit)}
@@ -45,7 +45,19 @@ export default function ResumeSkillForm() {
               placeholder="Enter a skill (e.g. React, Tailwind, SQL)"
               {...register(`skills.${index}.name`, { required: true })}
             />
-
+   
+      {/* .......... */}
+    <select
+              className="input w-1/3 rounded-lg shadow-sm"
+              {...register(`skills.${index}.level`)}
+            >
+              {skillLevels.map((level) => (
+                <option key={level} value={level}>
+                  {level}
+                </option>
+              ))}
+            </select>
+            {/* .......... */}
             {fields.length > 1 && (
               <button
                 type="button"

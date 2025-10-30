@@ -19,9 +19,9 @@ export const CreateJob = () => {
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+    reset,getValues,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange",});
 
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ export const CreateJob = () => {
         max: isNaN(salaryMax) ? 0 : salaryMax,
       },
     };
-
+console.log("Job Data",jobData);
     // Remove salaryMin/Max from flat form fields
     delete jobData.salaryMin;
     delete jobData.salaryMax;
@@ -62,6 +62,30 @@ export const CreateJob = () => {
       },
     });
   };
+const handlenavigate = () => {
+  const data = getValues();
+
+
+  const salaryMin = parseInt(data.salaryMin, 10);
+  const salaryMax = parseInt(data.salaryMax, 10);
+
+  const jobData = {
+    ...data,
+    company: myCompanyData.company[0]._id,
+    salaryRange: {
+      min: isNaN(salaryMin) ? 0 : salaryMin,
+      max: isNaN(salaryMax) ? 0 : salaryMax,
+    },
+  };
+
+  delete jobData.salaryMin;
+  delete jobData.salaryMax;
+
+  navigate('/featured-payment', {
+    state: { jobData },
+  });
+};
+
 
   if (loadingCompany) return <div>Loading your company data...</div>;
   if (companyError) return <div>Error loading your company data.</div>;
@@ -488,7 +512,7 @@ export const CreateJob = () => {
               className="mt-1 w-full px-4 py-2 border border-purple-300 focus:outline-none focus:ring-0 rounded-md"
             />
           </div>
-
+   
           <div className="md:col-span-2">
             <label className="block font-semibold mb-1">
               Skills Required (comma separated) *
@@ -511,13 +535,22 @@ export const CreateJob = () => {
         <div className="flex justify-end mt-6">
           <button
             type="submit"
-            className={`bg-purple-700 text-white p-3 rounded-lg font-semibold ${
+            className={`hidden bg-purple-700 text-white p-3 rounded-lg font-semibold ${
               isLoading ? "opacity-70 cursor-not-allowed" : ""
             }`}
             disabled={isLoading}
           >
             {isLoading ? "Creating..." : "Create Job"}
           </button>
+          <button type="button"
+          disabled={!isValid}
+           onClick={handlenavigate} 
+           className="font-semibold px-6 bg-purple-700 hover:bg-purple-600 text-white p-3 rounded-lg transition-all duration-200 ease-in-out transform ">Next</button>
+          {!isValid && (
+    <span className="absolute -top-6 left-0 text-xs text-red-500">
+      Please fill all required fields to continue
+    </span>
+  )}
         </div>
       </form>
     </div>

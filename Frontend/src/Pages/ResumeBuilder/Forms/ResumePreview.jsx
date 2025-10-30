@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useResumeContext } from "../../../Context/ResumeProvider";
 import {
   Document,
@@ -13,28 +13,34 @@ import {
 import { PdfEngineerTemp1 } from "../PdfTemplates/PdfEngineerTemp1";
 
 export default function ResumePreview() {
+   const [refreshKey, setRefreshKey] = useState(0);
   const { selectedtemplate, resumeData } = useResumeContext();
+    useEffect(() => {
+    setRefreshKey((prev) => prev + 1);
+  }, [resumeData]);
+
   if (!selectedtemplate) return <p>No template selected.</p>;
   const PreviewTemplate = selectedtemplate.component;
-
+ 
   const PdfTemplate = selectedtemplate.pdfComponent;
   const { about, education, experience, skills, projects } = resumeData;
 
   return (
     <div className="bg-gray-300 border flex flex-col justify-center items-center">
       <div className="flex ">
-        <PDFDownloadLink
+        <PDFDownloadLink  key={refreshKey}
           className="btn text-white bg-purple-700 px-4 py-2 rounded-lg self-center"
-          document={<PdfTemplate resumeData={resumeData} />}
+          document={<PdfTemplate key={refreshKey} resumeData={resumeData} />}
           fileName={`${about?.name || "resume"}.pdf`}
         >
           {({ loading }) => (loading ? "Preparing PDF..." : "Download Resume")}
         </PDFDownloadLink>
-        <div className="w-1/2">
+        <div className="">
           {/*  PDF Preview  */}
-          <div className="h-[90vh] w-full border rounded-lg overflow-hidden bg-white shadow-md">
-            <PdfTemplate resumeData={resumeData} />
-          </div>
+           {/* <PDFViewer >
+              <PdfTemplate resumeData={resumeData} />
+            </PDFViewer> */}
+            <PreviewTemplate resumeData={resumeData}/>
         </div>
       </div>
     </div>

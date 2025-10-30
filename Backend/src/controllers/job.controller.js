@@ -44,7 +44,8 @@ export const createJob = async (req, res) => {
       maxExperience,
       minAge,
       maxAge,
-      jobRequirements
+      jobRequirements,
+      status:"pending"
     });
 
     await newJob.save();

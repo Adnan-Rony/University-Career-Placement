@@ -67,6 +67,7 @@ export const createCompany = async (req, res) => {
        trusted,
       badges,
       createdBy: req.user.id,
+     
     });
 
     await newCompany.save();
