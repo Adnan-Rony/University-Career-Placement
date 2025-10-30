@@ -6,6 +6,17 @@ export const fetchJobs = async () => {
   const res = await axiosInstance.get('/job');
   return res.data;
 };
+//for admin
+export const fetchJobsForAdmin = async () => {
+  try {
+    const res = await axiosInstance.get('/job/admin/alljobs');
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch admin jobs:", error);
+    throw error;
+  }
+};
+
 
 export const fetchRelatedJobs = async (jobId) => {
   try {
@@ -13,7 +24,7 @@ export const fetchRelatedJobs = async (jobId) => {
     console.log("Fetched Related Jobs:", res.data);
     if (!res.data.success) {
       console.warn("Related Jobs Error:", res.data.message);
-      return []; // Return empty array on error
+      return []; 
     }
     return res.data.data || []; // Extract jobs array or return empty
   } catch (error) {

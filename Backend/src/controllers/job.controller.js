@@ -1,21 +1,62 @@
 import { Job } from "../models/job.model.js";
 import { Company } from "../models/company.model.js";
+// ===========================
+// JOB CONTROLLER
+// ===========================
 
+// Endpoints handled in this file:
+// 1. createJob          -> Create a new job
+// 2. getAllJobs         -> Fetch all jobs (with optional filtering by companyName or jobTitle)
+// 3. getJobById         -> Fetch single job by ID
+// 4. updateJob          -> Update a job
+// 5. deleteJob          -> Delete a job
+// 6. searchJobs         -> Search jobs with multiple query parameters
+// 7. getRecommendedJobs -> Get recommended jobs based on a current job
+// 8. getMyJobs          -> Get jobs posted by the logged-in user
 
+//Create - job
 export const createJob = async (req, res) => {
   try {
     const {
-      title, description, company, location,country,city, salaryRange,
-      jobType, deadline, skillsRequired,image,vacancy,industry,salaryType,currency,jobLevel,jobShift,gender,minEducationLevel,preferredEducationLevel,totalExperience,minExperience,maxExperience,minAge,maxAge,jobRequirements
+      title,
+      description,
+      company,
+      location,
+      country,
+      city,
+      salaryRange,
+      jobType,
+      deadline,
+      skillsRequired,
+      image,
+      vacancy,
+      industry,
+      salaryType,
+      currency,
+      jobLevel,
+      jobShift,
+      gender,
+      minEducationLevel,
+      preferredEducationLevel,
+      totalExperience,
+      minExperience,
+      maxExperience,
+      minAge,
+      maxAge,
+      jobRequirements,
     } = req.body;
 
-    const employerId = req.user.id; 
-
+    const employerId = req.user.id;
 
     // Validate that the employer owns the company
-    const companyExists = await Company.findOne({ _id: company, createdBy: employerId });
+    const companyExists = await Company.findOne({
+      _id: company,
+      createdBy: employerId,
+    });
     if (!companyExists) {
-      return res.status(403).json({ success: false, message: "You do not own this company." });
+      return res
+        .status(403)
+        .json({ success: false, message: "You do not own this company." });
     }
 
     const newJob = new Job({
@@ -31,7 +72,8 @@ export const createJob = async (req, res) => {
       deadline,
       image,
       skillsRequired,
-      country,city,
+      country,
+      city,
       salaryType,
       currency,
       jobLevel,
@@ -45,53 +87,60 @@ export const createJob = async (req, res) => {
       minAge,
       maxAge,
       jobRequirements,
-      status:"pending"
+      status: "pending",
     });
 
     await newJob.save();
-    res.status(201).json({ success: true, message: "Job created successfully", job: newJob });
+    res
+      .status(201)
+      .json({
+        success: true,
+        message: "Job created successfully",
+        job: newJob,
+      });
   } catch (error) {
     console.error("Create Job Error:", error);
     res.status(500).json({ success: false, message: "Failed to create job" });
   }
 };
 
+//Get all  jobs
+
 export const getAllJobs = async (req, res) => {
   try {
     const { companyName, jobTitle } = req.query;
 
-    let jobs = await Job.find().sort({ createdAt: -1 })
-      .populate('company' )
-      .populate('postedBy', 'email');
+    let jobs = await Job.find({ status: "approved" })
+      .sort({ createdAt: -1 })
+      .populate("company")
+      .populate("postedBy", "email");
 
     if (companyName) {
       const lowerCompany = companyName.toLowerCase();
-      jobs = jobs.filter(job =>
+      jobs = jobs.filter((job) =>
         job.company?.name?.toLowerCase().includes(lowerCompany)
       );
     }
 
     if (jobTitle) {
       const lowerTitle = jobTitle.toLowerCase();
-      jobs = jobs.filter(job =>
-        job.title.toLowerCase().includes(lowerTitle)
-      );
+      jobs = jobs.filter((job) => job.title.toLowerCase().includes(lowerTitle));
     }
 
     res.status(200).json({ success: true, jobs });
   } catch (error) {
-    console.error('Get Jobs Error:', error);
-    res.status(500).json({ success: false, message: 'Failed to fetch jobs' });
+    console.error("Get Jobs Error:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch jobs" });
   }
 };
 
+//Get Job By Id
 
 export const getJobById = async (req, res) => {
-  
   try {
     const job = await Job.findById(req.params.id)
-      .populate('company')
-      .populate('postedBy', 'email');
+      .populate("company")
+      .populate("postedBy", "email");
 
     if (!job) {
       return res.status(404).json({ success: false, message: "Job not found" });
@@ -104,6 +153,7 @@ export const getJobById = async (req, res) => {
   }
 };
 
+//Update Job
 export const updateJob = async (req, res) => {
   try {
     const job = await Job.findById(req.params.id);
@@ -114,12 +164,40 @@ export const updateJob = async (req, res) => {
 
     // Check ownership - only poster can update
     if (job.postedBy.toString() !== req.user.id) {
-      return res.status(403).json({ success: false, message: "Not authorized to update this job" });
+      return res
+        .status(403)
+        .json({ success: false, message: "Not authorized to update this job" });
     }
 
     // Update allowed fields
-    const allowedUpdates = ['title', 'description','industry', 'location', 'salaryRange','location','city', 'jobType', 'deadline', 'skillsRequired','image','vacancy',"salaryType","currency","jobLevel","jobShift","gender","minEducationLevel","preferredEducationLevel","totalExperience","minExperience","maxExperience","minAge","maxAge","jobRequirements"];
-    allowedUpdates.forEach(field => {
+    const allowedUpdates = [
+      "title",
+      "description",
+      "industry",
+      "location",
+      "salaryRange",
+      "location",
+      "city",
+      "jobType",
+      "deadline",
+      "skillsRequired",
+      "image",
+      "vacancy",
+      "salaryType",
+      "currency",
+      "jobLevel",
+      "jobShift",
+      "gender",
+      "minEducationLevel",
+      "preferredEducationLevel",
+      "totalExperience",
+      "minExperience",
+      "maxExperience",
+      "minAge",
+      "maxAge",
+      "jobRequirements",
+    ];
+    allowedUpdates.forEach((field) => {
       if (req.body[field] !== undefined) {
         job[field] = req.body[field];
       }
@@ -127,13 +205,15 @@ export const updateJob = async (req, res) => {
 
     await job.save();
 
-    res.status(200).json({ success: true, message: "Job updated successfully", job });
+    res
+      .status(200)
+      .json({ success: true, message: "Job updated successfully", job });
   } catch (error) {
     console.error("Update Job Error:", error);
     res.status(500).json({ success: false, message: "Failed to update job" });
   }
 };
-
+//Delete Job
 export const deleteJob = async (req, res) => {
   try {
     const job = await Job.findById(req.params.id);
@@ -144,25 +224,34 @@ export const deleteJob = async (req, res) => {
 
     // Check ownership - only poster can delete
     if (job.postedBy.toString() !== req.user.id) {
-      return res.status(403).json({ success: false, message: "Not authorized to delete this job" });
+      return res
+        .status(403)
+        .json({ success: false, message: "Not authorized to delete this job" });
     }
- 
 
+    await job.deleteOne();
 
-  await job.deleteOne();
-
-
-    res.status(200).json({ success: true, message: "Job deleted successfully" });
+    res
+      .status(200)
+      .json({ success: true, message: "Job deleted successfully" });
   } catch (error) {
     console.error("Delete Job Error:", error);
     res.status(500).json({ success: false, message: "Failed to delete job" });
   }
 };
 
-
 export const searchJobs = async (req, res) => {
   try {
-    const { title, companyName,country,city,industry, location, jobType, skills } = req.query;
+    const {
+      title,
+      companyName,
+      country,
+      city,
+      industry,
+      location,
+      jobType,
+      skills,
+    } = req.query;
     let query = {};
 
     if (title) {
@@ -174,7 +263,12 @@ export const searchJobs = async (req, res) => {
     }
 
     if (location) {
-      const locationRegex = { $regex: location, $regex:city, $regex:country, $options: "i" };
+      const locationRegex = {
+        $regex: location,
+        $regex: city,
+        $regex: country,
+        $options: "i",
+      };
       query.$or = [
         ...(query.$or || []),
         { "location.city": locationRegex },
@@ -205,57 +299,66 @@ export const searchJobs = async (req, res) => {
   }
 };
 
-
-
-
 export const getRecommendedJobs = async (req, res) => {
   try {
     const { jobId } = req.params;
 
-    const currentJob = await Job.findById(jobId).populate('company');
+    const currentJob = await Job.findById(jobId).populate("company");
     if (!currentJob) {
-      return res.status(404).json({ success: false, message: 'Job not found' });
+      return res.status(404).json({ success: false, message: "Job not found" });
     }
 
-    const titleKeywords = currentJob.title.split(' ').slice(0, 2).join(' '); // Use first two words
+    const titleKeywords = currentJob.title.split(" ").slice(0, 2).join(" "); // Use first two words
 
     const recommendedJobs = await Job.find({
       _id: { $ne: jobId },
       $or: [
         { company: currentJob.company._id },
-        { title: { $regex: titleKeywords, $options: 'i' } },
+        { title: { $regex: titleKeywords, $options: "i" } },
         { industry: currentJob.industry || { $exists: false } }, // Fallback if industry is missing
       ],
     })
       .limit(5)
       .sort({ createdAt: -1 })
-      .populate('company')
-      .populate('postedBy', 'email');
+      .populate("company")
+      .populate("postedBy", "email");
 
     res.status(200).json({ success: true, data: recommendedJobs });
   } catch (error) {
-    console.error('Get Recommended Jobs Error:', error);
-    res.status(500).json({ success: false, message: 'Failed to fetch recommended jobs', error: error.message });
+    console.error("Get Recommended Jobs Error:", error);
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Failed to fetch recommended jobs",
+        error: error.message,
+      });
   }
 };
 
-
-export const getMyJobs=async (req, res) => {
+export const getMyJobs = async (req, res) => {
   try {
     const userId = req.user.id;
 
     const jobs = await Job.find({ postedBy: userId })
-      .populate('company', 'name logo')
-      .populate('postedBy', 'email');
+      .populate("company", "name logo")
+      .populate("postedBy", "email");
 
     res.status(200).json({ success: true, jobs });
   } catch (error) {
     console.error("Get My Jobs Error:", error);
-    res.status(500).json({ success: false, message: "Failed to fetch your jobs" });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to fetch your jobs" });
   }
-}
+};
 
-
-
-
+export const getAllJobsForAdmin = async (req, res) => {
+  try {
+    const jobs = await Job.find().sort({ createdAt: -1 });
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).json({ message:"Failed To fetch Jobs" });
+  }
+};
 

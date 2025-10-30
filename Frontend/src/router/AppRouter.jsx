@@ -46,6 +46,7 @@ import Paymentcancel from "../Components/Payments/FeauturedJobPayment/Paymentcan
 
 import FeaturedPayment from "../Pages/Payments/FeaturedPayment/FeaturedPayment.jsx";
 import { Privateroute } from "../Components/privateroute/Privateroute.jsx";
+import { ManageJobs } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageJob/ManageJobs.admin.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -202,6 +203,10 @@ export const AppRouter = createBrowserRouter([
       {
         path: "manageUsers",
         element: <ManageUsers />,
+      },
+      {
+        path: "manageJobs",
+        element:<ManageJobs/>,
       },
     ],
   },
