@@ -22,11 +22,13 @@ export const AdminSidebar = () => {
           <FaUsers /> Manage Users
         </Link>
       </li>
-      {/* <li>
-        <Link to="" className="flex items-center gap-2">
+          <li>
+        <Link to="manageJobs" className="flex items-center gap-2">
           <FaBriefcase /> Manage Jobs
         </Link>
       </li>
+      {/* 
+  
       <li>
         <Link to="" className="flex items-center gap-2">
           <FaChartBar /> Reports
