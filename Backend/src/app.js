@@ -12,6 +12,7 @@ import interviewRoute from "./routers/interview.route.js";
 import portfolioRoute from "./routers/portfolio.route.js";
 import paymentRoute from "./routers/payment.route.js"
 import resumeRoute from "./routers/resume.route.js"
+import skillAssesmentRoute from "./routers/skillAssesment.route.js"
 dotenv.config();
 
 const app = express();
@@ -45,6 +46,7 @@ app.use("/api/v1/interviews",interviewRoute );
 app.use("/api/v1/portfolio",portfolioRoute ); 
 app.use("/api/v1/payment",paymentRoute); 
 app.use("/api/v1/resumebuilder",resumeRoute)
+app.use("/api/v1/skillAssesment",skillAssesmentRoute)
 
 
 
