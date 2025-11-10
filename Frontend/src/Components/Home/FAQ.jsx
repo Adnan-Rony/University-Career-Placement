@@ -67,10 +67,12 @@ const FaqSection = ({ showall = false }) => {
 
   return (
     <section className="container mx-auto px-4 py-16 ">
-      <h2 className="
+      <h2
+        className="
       text-3xl font-bold text-center mb-10
   
-   bg-base-100   text-base-content ">
+   bg-base-100   text-base-content "
+      >
         Common Job Interview Questions
       </h2>
 
@@ -79,11 +81,14 @@ const FaqSection = ({ showall = false }) => {
           <div
             key={index}
             className="border border-gray-200 
-           bg-base-100  rounded-md overflow-hidden shadow-sm"
+           rounded-md overflow-hidden shadow-sm"
           >
             <button
               onClick={() => toggle(index)}
-              className="bg-base-100  w-full flex justify-between items-center px-6 py-4 text-left text-lg font-medium  hover:bg-gray-50 dark:hover:bg-gray-700  transition"
+              className="bg-base-100 
+               w-full flex justify-between 
+               items-center px-6 py-4 text-left text-lg font-medium 
+                hover:bg-gray-50 hover:bg-purple-200  transition"
             >
               <span>{item.question}</span>
               <span className="text-gray-400 text-xl">

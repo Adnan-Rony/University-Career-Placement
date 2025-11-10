@@ -66,12 +66,12 @@ export const templatesData = [
   },
   {
     id: "temp05",
-    title: "Student Template",
+    title: "Student Template",  //Orange template
     image: student2,
     component: StudentTemp2,
     pdfComponent: PdfStudentTemp2,
     profession: ["student", "non-tech"],
-    steps: ["About", "Education", "Skills", "Experience", "Preview"],
+    steps: ["About", "Education", "Skills","Projects", "Experience", "Preview"],
     locked: false,
   },
   {

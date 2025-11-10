@@ -1,39 +1,45 @@
-import { Page, Text, View, Document, StyleSheet, Link } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Link,
+} from "@react-pdf/renderer";
 import React from "react";
 
 // Styles for the PDF
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 30,
     maxWidth: 600,
   },
   headerBanner: {
     height: 80,
-    backgroundColor: '#f97316', // orange-500
+    backgroundColor: "#f97316", // orange-500
     marginBottom: 14,
   },
   headerContainer: {
-    display: 'flex',
-    flexDirection:"row",
-    justifyContent: 'space-between',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 24,
-    marginTop: 24,
   },
   name: {
     fontSize: 28,
-    fontWeight: 'extrabold',
-    color: '#2563eb', // blue-600
+    fontWeight: "extrabold",
+    color: "#2563eb", // blue-600
     marginBottom: 4,
   },
   title: {
     fontSize: 16,
-    color: 'black',
+    color: "black",
   },
   contactContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    color: '#1e40af', // blue-800
+    display: "flex",
+    flexDirection: "column",
+    color: "#1e40af", // blue-800
     fontWeight: 600,
     gap: 4,
   },
@@ -42,223 +48,215 @@ const styles = StyleSheet.create({
   },
   portfolioLink: {
     fontSize: 12,
-    color: '#1e40af',
-
+    color: "#1e40af",
   },
   sectionTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom:6,
-    color: '#1e3a8a', // blue-800
-  
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 8,
+    color: "#1e3a8a", // blue-800
+  },
+  sectionContainer: {
+    marginBottom: 24,
   },
   experienceContainer: {
     marginLeft: 16,
-    marginBottom: 24,
-    gap: 16,
+  },
+  experienceItem: {
+    marginBottom: 16,
   },
   jobTitle: {
-    fontSize: 10,
-    fontWeight: 'bold',
+    fontSize: 12,
+    fontWeight: "bold",
     marginBottom: 4,
   },
   company: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: 500,
     marginBottom: 4,
   },
   date: {
     fontSize: 10,
-    color: '#6b7280', // gray-600
+    color: "#6b7280", // gray-600
     fontWeight: 500,
     marginBottom: 8,
   },
   bulletList: {
     marginLeft: 16,
-    marginBottom: 8,
   },
   bulletItem: {
     fontSize: 10,
-    color: '#374151', // gray-700
+    color: "#374151", // gray-700
     marginBottom: 4,
+    lineHeight: 1.4,
   },
   twoColumnContainer: {
-    display: 'flex',
-    flexDirection:"row",
-    justifyContent: "space-between"
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 24,
   },
   leftColumn: {
-    width: '50%',
+    width: "48%",
   },
   rightColumn: {
-    width: '50%',
+    width: "48%",
+  },
+  educationItem: {
+    marginLeft: 16,
+    marginBottom: 12,
   },
   educationDegree: {
-    fontSize: 10,
-    fontWeight: 'bold',
+    fontSize: 12,
+    fontWeight: "bold",
     marginBottom: 4,
   },
   educationInfo: {
     fontSize: 10,
-    color: '#6b7280', // gray-600
-    marginBottom: 8,
+    color: "#6b7280", // gray-600
+    marginBottom: 4,
   },
   skillsList: {
     marginLeft: 16,
   },
   skillItem: {
-    fontSize: 12,
-    color: '#374151', // gray-700
+    fontSize: 10,
+    color: "#374151", // gray-700
     marginBottom: 4,
   },
-  listDisc: {
-    listStyleType: 'disc',
+  projectsContainer: {
     marginLeft: 16,
+  },
+  projectItem: {
+    marginBottom: 12,
+  },
+  projectTitle: {
+    fontSize: 12,
+    fontWeight: "bold",
+    marginBottom: 4,
+    color: "#374151",
+  },
+  projectDescription: {
+    fontSize: 10,
+    color: "#374151",
+    marginLeft: 16,
+    lineHeight: 1.4,
   },
 });
 
-export const PdfStudentTemp2 = () => {
+export const PdfStudentTemp2 = ({ resumeData }) => {
+  const { about, education, experience, skills, projects } = resumeData || {};
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         {/* Header Banner */}
         <View style={styles.headerBanner} />
 
-        {/* Header with Name and Contact Info */}
+        {/* Header Section */}
         <View style={styles.headerContainer}>
           <View>
-            <Text style={styles.name}>Tamjid Ahmed</Text>
-            <Text style={styles.title}>Student</Text>
+            <Text style={styles.name}>{about?.name || "Your Name"}</Text>
+            <Text style={styles.title}>{about?.portfolio || "Student"}</Text>
           </View>
-          
+
           <View style={styles.contactContainer}>
-            <Text style={styles.contactItem}>
-              <Link src="https://linkedin.com/in/name" style={styles.contactItem}>
-                linkedin
-              </Link>
-            </Text>
-            <Text style={styles.contactItem}>01813382223</Text>
-            <Text style={styles.contactItem}>
-              <Link src="mailto:tamjidahmed@gmail.com" style={styles.contactItem}>
-                tamjidahmed@gmail.com
-              </Link>
-            </Text>
-            <Text style={styles.portfolioLink}>
-              <Link src="#" style={styles.portfolioLink}>
-                Click here for my portfolio
-              </Link>
-            </Text>
+            {about?.linkedin && (
+              <Text style={styles.contactItem}>
+                <Link src={about.linkedin}>{about.linkedin}</Link>
+              </Text>
+            )}
+            {about?.phone && (
+              <Text style={styles.contactItem}>{about.phone}</Text>
+            )}
+            {about?.email && (
+              <Text style={styles.contactItem}>
+                <Link src={`mailto:${about.email}`}>{about.email}</Link>
+              </Text>
+            )}
+            {about?.portfolio && (
+              <Text style={styles.portfolioLink}>
+                <Link src={about.portfolio}>Portfolio</Link>
+              </Text>
+            )}
           </View>
         </View>
 
         {/* Experience Section */}
-        <View style={styles.experienceContainer}>
-          <Text style={styles.sectionTitle}>Experience</Text>
-          
-          {/* First Job */}
-          <View>
-            <Text style={styles.jobTitle}>Art Director</Text>
-            <Text style={styles.company}>
-              Lotus Design Consultancy - a global design firm that specializes
-              in digital content for various industries
-            </Text>
-            <Text style={styles.date}>
-              March 2022 to August 2025 (3 years, 5 months)
-            </Text>
-            <View style={styles.bulletList}>
-              <Text style={styles.bulletItem}>
-                • Increased productivity by 70% year over year by leading a team
-                of 20 senior and junior designers
-              </Text>
-              <Text style={styles.bulletItem}>
-                • Maintained a client satisfaction rate of 100% after being in
-                charge of overseeing multiple projects simultaneously
-              </Text>
-              <Text style={styles.bulletItem}>
-                • Increased client partnerships to 50% year over year by
-                consistently liaising with clients for creative requests
-              </Text>
+        {experience?.length > 0 && (
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Experience</Text>
+            <View style={styles.experienceContainer}>
+              {experience.map((exp, i) => (
+                <View key={i} style={styles.experienceItem}>
+                  <Text style={styles.jobTitle}>{exp.position}</Text>
+                  <Text style={styles.company}>{exp.company}</Text>
+                  <Text style={styles.date}>
+                    {exp.startYear} - {exp.endYear}
+                  </Text>
+                  {exp.description?.length > 0 && (
+                    <View style={styles.bulletList}>
+                      {exp.description.map((desc, j) => (
+                        <Text key={j} style={styles.bulletItem}>
+                          • {desc}
+                        </Text>
+                      ))}
+                    </View>
+                  )}
+                </View>
+              ))}
             </View>
           </View>
+        )}
 
-          {/* Second Job */}
-          <View>
-            <Text style={styles.jobTitle}>Senior Graphic Designer</Text>
-            <Text style={styles.company}>Schuester Digital Media Group</Text>
-            <Text style={styles.date}>
-              November 2020 to January 2022 (1 year, 2 months)
-            </Text>
-            <View style={styles.bulletList}>
-              <Text style={styles.bulletItem}>
-                • Received a 100% rating from clients after working closely with
-                the marketing team to produce editorial concepts for major
-                magazines
-              </Text>
-              <Text style={styles.bulletItem}>
-                • Boosted team efficiency by 90% by managing up to five projects
-                at a time
-              </Text>
-              <Text style={styles.bulletItem}>
-                • Designed more than 80% of the team's marketing campaigns for the
-                year, which included graphics for online and offline layouts
-              </Text>
-              <Text style={styles.bulletItem}>
-                • Mentored junior designers on projects
-              </Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Two Column Layout for Education and Skills */}
+        {/* Education + Skills */}
         <View style={styles.twoColumnContainer}>
-          {/* Education Column */}
+          {/* Education */}
           <View style={styles.leftColumn}>
             <Text style={styles.sectionTitle}>Education</Text>
-            <View style={{ marginLeft: 16 }}>
-              <View>
-                <Text style={styles.educationDegree}>
-                  Master of Fine Arts in Digital Media
-                </Text>
+            {education?.map((edu, i) => (
+              <View key={i} style={styles.educationItem}>
+                <Text style={styles.educationDegree}>{edu.degree}</Text>
                 <Text style={styles.educationInfo}>
-                  The University of Roseton, 2020
+                  {edu.institution}, {edu.endYear}
                 </Text>
-                <View style={styles.bulletList}>
-                  <Text style={styles.bulletItem}>• Best Creative Thesis</Text>
-                  <Text style={styles.bulletItem}>• Awardee, Roseton Scholarship</Text>
-                  <Text style={styles.bulletItem}>• Art Director, University of Roseton Magazine</Text>
-                  <Text style={styles.bulletItem}>• Founding Member, Roseton Creative Circle</Text>
-                </View>
+                {edu.grade && (
+                  <Text style={styles.bulletItem}>• Grade: {edu.grade}</Text>
+                )}
               </View>
-
-              <View style={{ marginTop: 16 }}>
-                <Text style={styles.educationDegree}>
-                  Bachelor of Arts in Graphic Design
-                </Text>
-                <Text style={styles.educationInfo}>
-                  Croalstead State University, 2016
-                </Text>
-                <View style={styles.bulletList}>
-                  <Text style={styles.bulletItem}>• Graduated Magna Cum Laude</Text>
-                  <Text style={styles.bulletItem}>• Art Director, Croalstead U Magazine</Text>
-                  <Text style={styles.bulletItem}>• President, University Art Club</Text>
-                </View>
-              </View>
-            </View>
+            ))}
           </View>
 
-          {/* Skills Column */}
-          <View style={styles.rightColumn}>
-            <Text style={styles.sectionTitle}>Skills</Text>
-            <View style={styles.skillsList}>
-              <Text style={styles.skillItem}>• Print and Web Design</Text>
-              <Text style={styles.skillItem}>• Illustration</Text>
-              <Text style={styles.skillItem}>• Photography</Text>
-              <Text style={styles.skillItem}>• Motion Graphics</Text>
-              <Text style={styles.skillItem}>• Videography</Text>
-              <Text style={styles.skillItem}>• Photo and Video Editing</Text>
+          {/* Skills */}
+          {skills?.length > 0 && (
+            <View style={styles.rightColumn}>
+              <Text style={styles.sectionTitle}>Skills</Text>
+              <View style={styles.skillsList}>
+                {skills.map((skill, i) => (
+                  <Text key={i} style={styles.skillItem}>
+                    • {skill.name} — {skill.level}
+                  </Text>
+                ))}
+              </View>
             </View>
-          </View>
+          )}
         </View>
+
+        {/* Projects Section */}
+        {projects?.length > 0 && (
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Projects</Text>
+            <View style={styles.projectsContainer}>
+              {projects.map((p, i) => (
+                <View key={i} style={styles.projectItem}>
+                  <Text style={styles.projectTitle}>{p.title}</Text>
+                  <Text style={styles.projectDescription}>
+                    • {p.description}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        )}
       </Page>
     </Document>
   );

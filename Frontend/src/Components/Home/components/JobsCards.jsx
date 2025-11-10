@@ -30,7 +30,7 @@ const JobsCards = ({ job, index }) => {
         </div>
 
         <div className="mt-4  space-x-2 flex flex-wrap gap-2 text-sm text-gray-600">
-          <span className="flex items-center gap-1 bg-purple-100 text-purple-700 text-x font-medium px-3 py-1 rounded-full">
+          <span className="capitalize flex items-center gap-1 bg-purple-100 text-purple-700 text-x font-medium px-3 py-1 rounded-full">
             {job?.jobType}
           </span>
           <span className="flex items-center gap-1">

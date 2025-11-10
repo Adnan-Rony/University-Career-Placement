@@ -16,7 +16,7 @@ const CompaniesCards = ({ company }) => {
         />
         <div>
           <h3 className="text-lg font-semibold">{company.name}</h3>
-          <p className="text-sm text-gray-500">{company.location}</p>
+          <p className="text-sm text-gray-500 capitalize">{company.location}</p>
         </div>
       </div>
 
