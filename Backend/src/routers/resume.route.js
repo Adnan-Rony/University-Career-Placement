@@ -10,4 +10,7 @@ router.post('/',resumebuilderController.createResume)
 
 router.get("/user/:userId", resumebuilderController.getUserResumes);
 router.delete("/:id", resumebuilderController.deleteResume);
+
+
+
 export default router;
