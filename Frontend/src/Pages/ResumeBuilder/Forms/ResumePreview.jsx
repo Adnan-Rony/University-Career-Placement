@@ -11,6 +11,7 @@ import {
 } from "@react-pdf/renderer";
 
 import { PdfEngineerTemp1 } from "../PdfTemplates/PdfEngineerTemp1";
+import { Save } from "lucide-react";
 
 export default function ResumePreview() {
    const [refreshKey, setRefreshKey] = useState(0);
@@ -46,6 +47,11 @@ export default function ResumePreview() {
                   </div>
                 )}
               </PDFDownloadLink>
+
+              <button className="btn flex btn-lg">
+                <span><Save /></span>
+                <span>Save Resume</span>
+              </button>
             </div>
             <div className="w-full overflow-hidden rounded-lg border border-gray-200 bg-white">
               {/*  PDF Preview  */}
