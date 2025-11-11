@@ -45,6 +45,23 @@ const assessmentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+
+const attemptSchema = new mongoose.Schema({
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  assessment_id: { type: mongoose.Schema.Types.ObjectId, ref: "QuestionAns", required: true },
+  start_time: { type: Date, default: Date.now },
+  status: { type: String, default: "in_progress" },
+  answers: [
+    {
+      question_id: { type: mongoose.Schema.Types.ObjectId },
+      selected_options: [String],
+      points_scored: Number,
+    }
+  ]
+});
+
+export const Attempt = mongoose.model("Attempt", attemptSchema);
+
 export const SkillAssessmentQuestions=mongoose.model("QuestionAns",assessmentSchema)
 
 export const SkillAssessment = mongoose.model(

@@ -1,43 +1,73 @@
-import { SkillAssessment, SkillAssessmentQuestions } from "../models/skillAssesment.model.js";
-
+import {
+  SkillAssessment,
+  SkillAssessmentQuestions,
+  Attempt,
+} from "../models/skillAssesment.model.js";
 
 //create skill
-const createSkillAssessment = async (req, res) =>{
+const createSkillAssessment = async (req, res) => {
   try {
     const skill = new SkillAssessment(req.body);
     await skill.save();
-    res.status(201).json({ success: true, message: "Skill assessment created", data: skill });
+    res.status(201).json({
+      success: true,
+      message: "Skill assessment created",
+      data: skill,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-}
+};
 
-
-//create assesment
-const createassesment=async(req, res)=>{
-  try{
-const body=req.body;
-  const assessment = await SkillAssessmentQuestions.create(req.body);
-      res.status(201).json({ success: true, data: assessment });
-  }catch(error){
-    res.status(500).json({
-      success:false,
-      message:"error.message"
+const getSkills=async(req,res)=>{
+  try {
+    const skills=await SkillAssessment.find()
+    res.status(200).json({
+      success:true,
+      data:skills,
+      message:"Skill assesmment fetched succesfully"
     })
+  } catch (error) {
     
   }
-
 }
-    // Find all assessments with this skill_id
+
+//create assesment
+const createassesment = async (req, res) => {
+  try {
+    const body = req.body;
+    const assessment = await SkillAssessmentQuestions.create(req.body);
+    res.status(201).json({ success: true, data: assessment });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "error.message",
+    });
+  }
+};
+// Find all assessments with skill_id
 const getAssessmentsBySkill = async (req, res) => {
   try {
     const { skillId } = req.params;
 
-
-    const assessments = await SkillAssessmentQuestions.find({ skill_id: skillId });
+    const assessments = await SkillAssessmentQuestions.find(
+      {
+        skill_id: skillId,
+      },
+      {
+        _id: 1,
+        skill_id: 1,
+        title: 1,
+        description: 1,
+        duration_seconds: 1,
+      }
+    );
 
     if (!assessments || assessments.length === 0) {
-      return res.status(404).json({ success: false, message: "No assessments found for this skill" });
+      return res.status(404).json({
+        success: false,
+        message: "No assessments found for this skill",
+      });
     }
 
     res.status(200).json({ success: true, data: assessments });
@@ -45,9 +75,78 @@ const getAssessmentsBySkill = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+const startAttempt = async (req, res) => {
+  try {
+    const { assessmentId } = req.params;
+    const { userId } = req.body;
+    if (!userId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User ID is required" });
+    }
+    // Check if assessment exists
+    const assessment = await SkillAssessmentQuestions.findById(assessmentId);
+    if (!assessment) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Assessment not found" });
+    }
+
+    // Create new attempt
+    const attempt = new Attempt({
+      user_id: userId,
+      assessment_id: assessment._id,
+      start_time: new Date(),
+      status: "in_progress",
+      answers: [],
+    });
+
+    await attempt.save();
+
+    res.status(201).json({
+      success: true,
+      attemptId: attempt._id,
+      message: "Attempt started successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const getQuestionsForAttempt = async (req, res) => {
+  try {
+    const { attemptId } = req.params;
+
+    // Find the attempt
+    const attempt = await Attempt.findById(attemptId);
+    if (!attempt) {
+      return res.status(404).json({ success: false, message: "Attempt not found" });
+    }
+
+    // Fetch assessment questions
+    const assessment = await SkillAssessmentQuestions.findById(attempt.assessment_id)
+      .select("title questions"); 
+
+    if (!assessment) {
+      return res.status(404).json({ success: false, message: "Assessment not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      attemptId: attempt._id,
+      assessmentId: assessment._id,
+      title: assessment.title,
+      questions: assessment.questions
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 export const skillAssessmentController = {
-  createSkillAssessment,createassesment,
-  getAssessmentsBySkill
-
+  createSkillAssessment,
+  createassesment,
+  getAssessmentsBySkill,
+  startAttempt,
+  getQuestionsForAttempt
 };
