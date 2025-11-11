@@ -1,4 +1,4 @@
-import { text } from "body-parser";
+
 import mongoose, { mongo } from "mongoose";
 
 const skillAssessmentSchema = new mongoose.Schema(
