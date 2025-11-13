@@ -49,6 +49,7 @@ import { Privateroute } from "../Components/privateroute/Privateroute.jsx";
 import { ManageJobs } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageJob/ManageJobs.admin.jsx";
 import { SkillAssesmentHome } from "../Pages/SkillAssesment/SkillAssesmentHome.jsx";
 import { Assesments } from "../Pages/SkillAssesment/AssesMents/Assesments.jsx";
+import { AllQuestions } from "../Pages/SkillAssesment/AllQuestions.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -148,6 +149,9 @@ export const AppRouter = createBrowserRouter([
       },{
         path:`/skills/:id`,
         element:<Assesments/>
+      },{
+        path:'/quiz-started/questions',
+        element:<AllQuestions/>
       },
 
       //..........

@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAllAssesmentBySkillId, getAllSkillAssessments,
+   getAssessmentQuestions,
    startSkillAssessment } from "../api/skillAssesment";
 
 export const useAllSkillAssessments = () => {
@@ -30,5 +31,15 @@ export const useStartSkillAssessment = () => {
     onError: (error) => {
       console.error('Error starting assessment:', error.response?.data || error.message)
     }
+  })
+}
+
+// Hook to fetch assessment questions
+export const useGetAssessmentQuestions = (attemptId) => {
+  return useQuery({
+    queryKey: ['assessmentQuestions', attemptId],
+    queryFn: () => getAssessmentQuestions(attemptId),
+    enabled: !!attemptId,
+  
   })
 }

@@ -46,3 +46,16 @@ try {
     throw error
 }
 }
+// API Function to get assessment questions
+export const getAssessmentQuestions = async (attemptId) => {
+  try {
+    const response = await axiosInstance.get(
+      `/skillAssesment/attempts/${attemptId}/questions`
+    )
+   
+    return response.data
+  } catch (error) {
+    console.error('Error fetching questions:', error.response?.data || error.message)
+    throw error
+  }
+}
