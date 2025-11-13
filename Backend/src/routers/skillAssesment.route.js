@@ -6,6 +6,7 @@ const router = express.Router();
 
 
 router.post("/",skillAssessmentController.createSkillAssessment);
+router.get("/",skillAssessmentController.getSkills);
 router.post("/createassesment",skillAssessmentController.createassesment);
 router.get('/skills/:skillId',skillAssessmentController.getAssessmentsBySkill)
 router.post("/assessments/:assessmentId/start",skillAssessmentController.startAttempt)

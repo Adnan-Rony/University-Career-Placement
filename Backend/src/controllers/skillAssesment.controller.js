@@ -18,7 +18,7 @@ const createSkillAssessment = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
+// GET all skill assessments
 const getSkills=async(req,res)=>{
   try {
     const skills=await SkillAssessment.find()
@@ -49,7 +49,7 @@ const createassesment = async (req, res) => {
 const getAssessmentsBySkill = async (req, res) => {
   try {
     const { skillId } = req.params;
-
+  
     const assessments = await SkillAssessmentQuestions.find(
       {
         skill_id: skillId,
@@ -75,6 +75,7 @@ const getAssessmentsBySkill = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+//Start Attempt for tesr
 const startAttempt = async (req, res) => {
   try {
     const { assessmentId } = req.params;
@@ -84,7 +85,7 @@ const startAttempt = async (req, res) => {
         .status(400)
         .json({ success: false, message: "User ID is required" });
     }
-    // Check if assessment exists
+
     const assessment = await SkillAssessmentQuestions.findById(assessmentId);
     if (!assessment) {
       return res
@@ -146,6 +147,7 @@ const getQuestionsForAttempt = async (req, res) => {
 export const skillAssessmentController = {
   createSkillAssessment,
   createassesment,
+  getSkills,
   getAssessmentsBySkill,
   startAttempt,
   getQuestionsForAttempt

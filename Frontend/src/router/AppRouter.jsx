@@ -48,6 +48,7 @@ import FeaturedPayment from "../Pages/Payments/FeaturedPayment/FeaturedPayment.j
 import { Privateroute } from "../Components/privateroute/Privateroute.jsx";
 import { ManageJobs } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageJob/ManageJobs.admin.jsx";
 import { SkillAssesmentHome } from "../Pages/SkillAssesment/SkillAssesmentHome.jsx";
+import { Assesments } from "../Pages/SkillAssesment/AssesMents/Assesments.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -144,6 +145,9 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/skill-assessment",
         element:<SkillAssesmentHome/>,
+      },{
+        path:`/skills/:id`,
+        element:<Assesments/>
       },
 
       //..........
