@@ -112,6 +112,33 @@ const startAttempt = async (req, res) => {
   }
 };
 
+//For development pupose
+const getAllatempts = async (req, res) => {
+  try {
+    const allattempts = await Attempt.find();
+
+    if (!allattempts || allattempts.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No attempts found.",
+        data: [],
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      total_Attempts: allattempts.length,
+      data: allattempts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server error while retrieving attempts.",
+      error: error.message,
+    });
+  }
+};
+
 const getQuestionsForAttempt = async (req, res) => {
   try {
     const { attemptId } = req.params;
@@ -151,17 +178,113 @@ const getQuestionsForAttempt = async (req, res) => {
 const submitAnswers = async (req, res) => {
   try {
     const { attemptId } = req.params;
-    const { answers } = req.body;
-  } catch (error) {}
+    const { answers } = req.body; // Expected: [{ question_id, selected_options: [] }]
+    if (!answers || !Array.isArray(answers)) {
+      return res.status(400).json({
+        success: false,
+        message: "Answers array is required",
+      });
+    }
+
+    //find attempt
+    const attempt = await Attempt.findById(attemptId);
+    if (!attempt) {
+      return res.status(404).json({
+        success: false,
+        message: "Attempt not found",
+      });
+    }
+
+    if (attempt.status !== "in_progress") {
+      return res.status(400).json({
+        success: false,
+        message: "Attempt is already completed or expired",
+      });
+    }
+    const assessment = await SkillAssessmentQuestions.findById(
+      attempt.assessment_id
+    );
+    // Get the assessment to access questions and correct answers
+    if (!assessment) {
+      return res.status(404).json({
+        success: false,
+        message: "Assessment not found",
+      });
+    }
+    // ---- MAIN LOOP: process each submitted answer ----
+    for (const answer of answers) {
+      const { question_id, selected_options } = answer;
+
+      // Find the question in assessment
+      const question = assessment.questions.id(question_id);
+      if (!question) continue; // Skip invalid question IDs
+
+      // Check if this question already has an answer in the attempt
+      const existingAnswerIndex = attempt.answers.findIndex(
+        (a) => a.question_id.toString() === question_id.toString()
+      );
+
+      // Calculate points
+      let points_scored = 0;
+      if (["MCQ", "Multiple", "TrueFalse"].includes(question.type)) {
+        const correctOptions = question.options
+          .filter((opt) => opt.is_correct)
+          .map((opt) => opt.text);
+
+        if (question.type === "MCQ" || question.type === "TrueFalse") {
+          if (
+            selected_options.length === 1 &&
+            correctOptions.includes(selected_options[0])
+          ) {
+            points_scored = question.points;
+          }
+        } else if (question.type === "Multiple") {
+          const selectedSet = new Set(selected_options);
+          const correctSet = new Set(correctOptions);
+
+          if (
+            selectedSet.size === correctSet.size &&
+            [...selectedSet].every((opt) => correctSet.has(opt))
+          ) {
+            points_scored = question.points;
+          }
+        }
+      }
+
+      // Prepare answer object
+      const answerData = {
+        question_id,
+        selected_options,
+        points_scored,
+      };
+
+      // Update existing answer or push new
+      if (existingAnswerIndex !== -1) {
+        attempt.answers[existingAnswerIndex] = answerData;
+      } else {
+        attempt.answers.push(answerData);
+      }
+    }
+
+    await attempt.save();
+    res.status(200).json({
+      success: true,
+      message: "Answers submitted successfully",
+      data: {
+        attemptId: attempt._id,
+        answersCount: attempt.answers.length,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
+//Submit or complete the assesment
 const submitAssessment = async (req, res) => {
   try {
-    
-  } catch (error) {
-    
-  }
-}
+  } catch (error) {}
+};
 
 export const skillAssessmentController = {
   createSkillAssessment,
@@ -169,7 +292,8 @@ export const skillAssessmentController = {
   getSkills,
   getAssessmentsBySkill,
   startAttempt,
+  getAllatempts,
   getQuestionsForAttempt,
   submitAnswers,
-  submitAssessment
+  submitAssessment,
 };

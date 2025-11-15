@@ -12,6 +12,10 @@ router.post(
   skillAssessmentController.startAttempt
 );
 router.get(
+  "/assessments/attempt/getAllatempts",
+  skillAssessmentController.getAllatempts
+);
+router.get(
   "/attempts/:attemptId/questions",
   skillAssessmentController.getQuestionsForAttempt
 );
