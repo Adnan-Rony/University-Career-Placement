@@ -1,4 +1,4 @@
-import { text } from "body-parser";
+
 import mongoose, { mongo } from "mongoose";
 
 const skillAssessmentSchema = new mongoose.Schema(
@@ -44,6 +44,56 @@ const assessmentSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+
+// const attemptSchema = new mongoose.Schema({
+//   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+//   assessment_id: { type: mongoose.Schema.Types.ObjectId, ref: "QuestionAns", required: true },
+//   start_time: { type: Date, default: Date.now },
+//   status: { type: String, default: "in_progress" },
+//   answers: [
+//     {
+//       question_id: { type: mongoose.Schema.Types.ObjectId },
+//       selected_options: [String],
+//       points_scored: Number,
+//     }
+//   ]
+// });
+
+const attemptSchema = new mongoose.Schema(
+  {
+    user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    assessment_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "QuestionAns", 
+      required: true,
+    },
+    start_time: { type: Date, default: Date.now },
+    end_time: { type: Date },
+    status: {
+      type: String,
+      enum: ["in_progress", "completed", "expired"],
+      default: "in_progress",
+    },
+    answers: [
+      {
+        question_id: { type: mongoose.Schema.Types.ObjectId },
+        selected_options: [String],
+        points_scored: { type: Number, default: 0 },
+      },
+    ],
+    total_score: { type: Number, default: 0 },
+    max_score: { type: Number, default: 0 },
+    percentage: { type: Number, default: 0 },
+  },
+  { timestamps: true }
+);
+
+export const Attempt = mongoose.model("Attempt", attemptSchema);
 
 export const SkillAssessmentQuestions=mongoose.model("QuestionAns",assessmentSchema)
 

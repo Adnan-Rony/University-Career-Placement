@@ -47,6 +47,9 @@ import Paymentcancel from "../Components/Payments/FeauturedJobPayment/Paymentcan
 import FeaturedPayment from "../Pages/Payments/FeaturedPayment/FeaturedPayment.jsx";
 import { Privateroute } from "../Components/privateroute/Privateroute.jsx";
 import { ManageJobs } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageJob/ManageJobs.admin.jsx";
+import { SkillAssesmentHome } from "../Pages/SkillAssesment/SkillAssesmentHome.jsx";
+import { Assesments } from "../Pages/SkillAssesment/AssesMents/Assesments.jsx";
+import { AllQuestions } from "../Pages/SkillAssesment/AllQuestions.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -60,11 +63,7 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: "/demo",
-        element: (
-     
-            <Demo />
-          
-        ),
+        element: <Demo />,
       },
       {
         path: "/SignUp",
@@ -143,6 +142,19 @@ export const AppRouter = createBrowserRouter([
         path: "/payment-cancel",
         element: <Paymentcancel />,
       },
+      //Skill Assesmnet
+      {
+        path: "/skill-assessment",
+        element:<SkillAssesmentHome/>,
+      },{
+        path:`/skills/:id`,
+        element:<Assesments/>
+      },{
+        path:'/quiz-started/questions',
+        element:<AllQuestions/>
+      },
+
+      //..........
       //Resume Builder
       {
         path: "/resumebuilder",
@@ -206,7 +218,7 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: "manageJobs",
-        element:<ManageJobs/>,
+        element: <ManageJobs />,
       },
     ],
   },
