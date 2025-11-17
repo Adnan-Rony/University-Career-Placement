@@ -21,41 +21,63 @@ export const getAllAssesmentBySkillId = async (skillId) => {
     console.log(skillId);
     const res = await axiosInstance.get(`/skillAssesment/skills/${skillId}`);
 
-    if (!res.data.success ) {
+    if (!res.data.success) {
       console.error("success false");
       return [];
     }
     return res.data?.data;
   } catch (error) {
     console.error(
-      "Error fetching assessment by skill ID:",error.response?.data || error.message
+      "Error fetching assessment by skill ID:",
+      error.response?.data || error.message
     );
     throw error;
   }
 };
 //Start attempt
 export const startSkillAssessment = async (assessmentId, userId) => {
-try {
+  try {
     const response = await axiosInstance.post(
-    `/skillAssesment/assessments/${assessmentId}/start`,
-    { userId }
-  )
-  return response.data
-} catch (error) {
- console.error('Error starting assessment:', error.response?.data || error.message)
-    throw error
-}
-}
-// API Function to get assessment questions
+      `/skillAssesment/assessments/${assessmentId}/start`,
+      { userId }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error starting assessment:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+//  get assessment questions
 export const getAssessmentQuestions = async (attemptId) => {
   try {
     const response = await axiosInstance.get(
       `/skillAssesment/attempts/${attemptId}/questions`
-    )
-   
-    return response.data
+    );
+
+    return response.data;
   } catch (error) {
-    console.error('Error fetching questions:', error.response?.data || error.message)
-    throw error
+    console.error(
+      "Error fetching questions:",
+      error.response?.data || error.message
+    );
+    throw error;
   }
-}
+};
+
+//Submit Your Answers
+
+export const submitAnswers = async (attemptId, answers) => {
+  try {
+    const res = await axiosInstance.post(
+      `/skillAssesment/attempts/${attemptId}/answers`,
+      { answers }
+    );
+    return res.data;
+  } catch (error) {
+    console.log("Error Submit the answers", error.message);
+    throw error;
+  }
+};

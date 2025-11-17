@@ -177,8 +177,12 @@ const getQuestionsForAttempt = async (req, res) => {
 
 const submitAnswers = async (req, res) => {
   try {
+    const body = req.body;
+
     const { attemptId } = req.params;
     const { answers } = req.body; // Expected: [{ question_id, selected_options: [] }]
+
+    console.log(attemptId, answers);
     if (!answers || !Array.isArray(answers)) {
       return res.status(400).json({
         success: false,
@@ -283,7 +287,103 @@ const submitAnswers = async (req, res) => {
 //Submit or complete the assesment
 const submitAssessment = async (req, res) => {
   try {
-  } catch (error) {}
+    const { attemptId } = req.body;
+    const attempt = await Attempt.findById(attemptId);
+    if (!attempt) {
+      return res.status(400).json({
+        success: false,
+        message: "Attempt not found",
+      });
+    }
+    // Check if attempt is already completed
+    if (attempt.status === "completed") {
+      return res.status(400).json({
+        success: false,
+        message: "Attempt is already completed",
+      });
+    }
+
+    // Get the assessment
+    const assessment = await SkillAssessmentQuestions.findById(
+      attempt.assessment_id
+    );
+    if (!assessment) {
+      return res.status(404).json({
+        success: false,
+        message: "Assessment not found",
+      });
+    }
+
+    const totalScore = attempt.answers.reduce(
+      (sum, answer) => sum + (answer.points_scored || 0),
+      0
+    );
+    const maxScore = assessment.questions.reduce(
+      (sum, question) => sum + question.points,
+      0
+    );
+    // Calculate percentage
+    const percentage = maxScore > 0 ? (totalScore / maxScore) * 100 : 0;
+
+    //All Answers
+    const detailedResults = assessment.questions.map((question) => {
+      const userAnswer = attempt.answers.find(
+        (ans) => ans.question_id.toString() === question._id.toString()
+      );
+
+      const correctOptions = question.options
+        .filter((opt) => opt.is_correct)
+        .map((opt) => opt.text);
+      let isCorrect = false;
+
+      if (userAnswer) {
+        if (question.type === "MCQ" || question.type == "TrueFalse") {
+          isCorrect =
+            userAnswer.selected_options.length === 1 &&
+            correctOptions.includes(userAnswer.selected_options[0]);
+        }
+      }
+      return {
+        question_id: question._id,
+        question_text: question.text,
+        question_type: question.type,
+        points: question.points,
+        user_answer: userAnswer ? userAnswer.selected_options : [],
+        correct_answer: correctOptions,
+        is_correct: isCorrect,
+        points_scored: userAnswer ? userAnswer.points_scored : 0,
+        explanation: question.explanation || null,
+        options: question.options.map((opt) => ({
+          text: opt.text,
+          is_correct: opt.is_correct,
+        })),
+      };
+    });
+    attempt.status = "completed";
+    attempt.end_time = new Date();
+    attempt.total_score = totalScore;
+    attempt.max_score = maxScore;
+    attempt.percentage = percentage;
+    await attempt.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Assessment completed successfully",
+      data: {
+        attemptId: attempt._id,
+        status: attempt.status,
+        totalScore,
+        maxScore,
+        percentage: percentage.toFixed(2),
+        answeredQuestions: attempt.answers.length,
+        totalQuestions: assessment.questions.length,
+        timeTaken: Math.floor((attempt.end_time - attempt.start_time) / 1000),
+        results: detailedResults,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 export const skillAssessmentController = {

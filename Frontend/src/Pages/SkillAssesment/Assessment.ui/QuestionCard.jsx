@@ -6,7 +6,9 @@ const QuestionCard = ({
   setAnswers,
   showExplanation,
 }) => {
+  // console.log(question);
   const handleAnswer = (id) => {
+
     if (question.type === "Multiple") {
       const old = answers[question._id] || [];
       const updated = old.includes(id)
@@ -19,11 +21,12 @@ const QuestionCard = ({
     }
   };
 
-  const isSelected = (id) => {
+  const isSelected = (value) => {
+
     if (question.type === "Multiple") {
-      return (answers[question._id] || []).includes(id);
+      return (answers[question._id] || []).includes(value);
     }
-    return answers[question._id] === id;
+    return answers[question._id] === value;
   };
 
   return (
@@ -52,16 +55,16 @@ const QuestionCard = ({
           {question.options.map((o) => (
             <button
               key={o._id}
-              onClick={() => handleAnswer(o._id)}
+              onClick={() => handleAnswer(o.text)}
               className={`w-full p-4 rounded-lg border-2
                  flex text-left items-center gap-3 hover:border-purple-300
               ${
-                isSelected(o._id)
+                isSelected(o.text)
                   ? "border-purple-500 bg-indigo-50"
                   : "border-gray-200"
               }`}
             >
-              {isSelected(o._id) ? (
+              {isSelected(o.text) ? (
                 <CheckCircle2 className="w-5 h-5 text-purple-500" />
               ) : (
                 <Circle className="w-5 h-5 text-gray-300" />

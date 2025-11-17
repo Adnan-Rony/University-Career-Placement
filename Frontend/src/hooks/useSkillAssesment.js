@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAllAssesmentBySkillId, getAllSkillAssessments,
    getAssessmentQuestions,
-   startSkillAssessment } from "../api/skillAssesment";
+   startSkillAssessment, 
+   submitAnswers} from "../api/skillAssesment";
 
 export const useAllSkillAssessments = () => {
   return useQuery({
@@ -41,5 +42,24 @@ export const useGetAssessmentQuestions = (attemptId) => {
     queryFn: () => getAssessmentQuestions(attemptId),
     enabled: !!attemptId,
   
+  })
+}
+
+// Hook to submit assessment answers
+export const useSubmitSkillAssessmentAnswers = () => {
+  return useMutation({
+    mutationFn: ({ attemptId, answers }) =>
+      submitAnswers(attemptId, answers),
+
+    onSuccess: (data) => {
+      console.log("Answers submitted successfully:", data)
+    },
+
+    onError: (error) => {
+      console.error(
+        "Error submitting answers:",
+        error.response?.data || error.message
+      )
+    }
   })
 }

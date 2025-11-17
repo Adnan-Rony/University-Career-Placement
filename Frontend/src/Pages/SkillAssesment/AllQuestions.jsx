@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { useGetAssessmentQuestions } from "../../hooks/useSkillAssesment";
+import { useGetAssessmentQuestions, useSubmitSkillAssessmentAnswers } from "../../hooks/useSkillAssesment";
 import Loading from "../../Components/loading/Loading";
 import { CheckCircle2, Circle, Code, AlertCircle } from "lucide-react";
 import NavigationButtons from "./Assessment.ui/NavigationButtons";
@@ -14,7 +14,7 @@ export const AllQuestions = () => {
   const { attemptId } = location.state || {};
   const { data: questionsData, isLoading: isStarting } =
     useGetAssessmentQuestions(attemptId);
-
+const {mutate}=useSubmitSkillAssessmentAnswers()
   const questions = questionsData?.questions || [];
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -27,10 +27,29 @@ export const AllQuestions = () => {
   const question = questions[currentQuestion];
   const totalQuestions = questions.length;
 
+  const formatAnswersForBackend = () => {
+  return {
+    answers: Object.entries(answers).map(([question_id, selected_options]) => ({
+      question_id,
+      selected_options: Array.isArray(selected_options)
+        ? selected_options
+        : [selected_options] // handle MCQ (single select)
+    }))
+  };
+};
   // ----------- Submit (NO Score) ------------
   const handleSubmit = () => {
     setIsSubmitted(true);
-    console.log(answers);
+    const formatted = formatAnswersForBackend();
+// console.log(formatted);
+let payload={
+  attemptId,
+  answers:formatted
+}
+console.log(payload);
+mutate({
+  attemptId,
+  answers:formatted.answers})
     // Later: Send answers to backend
     // submitAnswers(attemptId, answers)
   };

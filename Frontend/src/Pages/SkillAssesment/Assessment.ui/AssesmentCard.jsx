@@ -24,7 +24,7 @@ export const AssesmentCard = ({ assessment }) => {
         onSuccess: (response) => {
           console.log("Assesment started successfully");
           const attemptId = response.attemptId;
-          console.log(attemptId);
+       
           if (attemptId) {
             navigate(`/quiz-started/questions`, {
               state: {attemptId},
