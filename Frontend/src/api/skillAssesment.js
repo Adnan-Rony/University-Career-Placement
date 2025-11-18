@@ -1,4 +1,19 @@
 import axiosInstance from "./axiosInstance";
+//Create Skill Assesment
+export const createSkill=async(data)=>{
+try {
+  const res=await axiosInstance.post('/skillAssesment',data)
+  return res.data
+} catch (error) {
+  console.error('Error Creating Skill')
+  throw error
+}
+}
+
+
+
+
+
 
 // Fetch all skill assessments
 export const getAllSkillAssessments = async () => {
@@ -80,4 +95,12 @@ export const submitAnswers = async (attemptId, answers) => {
     console.log("Error Submit the answers", error.message);
     throw error;
   }
+};
+
+
+export const submitSkillAssessment = async (attemptId) => {
+  const response = await axiosInstance.post(
+    `/skillAssesment/attempts/${attemptId}/submit`
+  );
+  return response.data;
 };

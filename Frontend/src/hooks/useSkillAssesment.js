@@ -1,8 +1,24 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getAllAssesmentBySkillId, getAllSkillAssessments,
+import { createSkill, getAllAssesmentBySkillId, getAllSkillAssessments,
    getAssessmentQuestions,
    startSkillAssessment, 
-   submitAnswers} from "../api/skillAssesment";
+   submitAnswers,
+   submitSkillAssessment} from "../api/skillAssesment";
+
+//Create Skill
+
+export const useCreateSkill = () => {
+  return useMutation({
+    mutationFn: (data) => createSkill(data),
+    onSuccess: (res) => {
+      console.log("Skill Created Successfully", res);
+    },
+    onError: (err) => {
+      console.error("Failed to Create Skill", err);
+    },
+  });
+};
+
 
 export const useAllSkillAssessments = () => {
   return useQuery({
@@ -58,6 +74,23 @@ export const useSubmitSkillAssessmentAnswers = () => {
     onError: (error) => {
       console.error(
         "Error submitting answers:",
+        error.response?.data || error.message
+      )
+    }
+  })
+}
+export const useSubmitSkillAssessment = () => {
+  return useMutation({
+    mutationFn: ({ attemptId}) =>
+      submitSkillAssessment(attemptId),
+
+    onSuccess: (data) => {
+      console.log("Assesment Submission Complete", data)
+    },
+
+    onError: (error) => {
+      console.error(
+        "Error submitting Assesmetn:",
         error.response?.data || error.message
       )
     }

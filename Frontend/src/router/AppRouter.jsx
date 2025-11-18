@@ -50,6 +50,7 @@ import { ManageJobs } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/
 import { SkillAssesmentHome } from "../Pages/SkillAssesment/SkillAssesmentHome.jsx";
 import { Assesments } from "../Pages/SkillAssesment/AssesMents/Assesments.jsx";
 import { AllQuestions } from "../Pages/SkillAssesment/AllQuestions.jsx";
+import { ManageSkillAssessment } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageSkillAssessment/ManageSkillAssessment.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -219,7 +220,10 @@ export const AppRouter = createBrowserRouter([
       {
         path: "manageJobs",
         element: <ManageJobs />,
-      },
+      },{
+         path: "manage-skill-assessment",
+        element: <ManageSkillAssessment/>,
+      }
     ],
   },
 

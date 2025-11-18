@@ -73,6 +73,8 @@ const getAssessmentsBySkill = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
 //Start Attempt for tesr
 const startAttempt = async (req, res) => {
   try {
@@ -287,7 +289,7 @@ const submitAnswers = async (req, res) => {
 //Submit or complete the assesment
 const submitAssessment = async (req, res) => {
   try {
-    const { attemptId } = req.body;
+    const { attemptId } = req.params;
     const attempt = await Attempt.findById(attemptId);
     if (!attempt) {
       return res.status(400).json({
