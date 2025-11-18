@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosInstance";
-//Create Skill Assesment
+//Create Skill 
 export const createSkill=async(data)=>{
 try {
   const res=await axiosInstance.post('/skillAssesment',data)
@@ -9,9 +9,17 @@ try {
   throw error
 }
 }
+// //Create Skill Assesment(Add quistions)
 
-
-
+export const createAssessment=async(data)=>{
+try {
+  const res=await axiosInstance.post('/skillAssesment/createassesment',data)
+  return res.data
+} catch (error) {
+  console.error('Error Creating Assessment')
+  throw error
+}
+}
 
 
 

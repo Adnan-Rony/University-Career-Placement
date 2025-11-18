@@ -2,6 +2,8 @@ import { useState } from "react";
 import { AddSkill } from "./AddSkill";
 
 import { Plus, HelpCircle, Settings } from "lucide-react";
+import { ManageQuestions } from "./ManageQuestions";
+import { AddQuestion } from "./AddQuestion";
 export const ManageSkillAssessment = () => {
   const [activeTab, setActiveTab] = useState("addSkill");
   const tabs = [
@@ -45,13 +47,14 @@ export const ManageSkillAssessment = () => {
         {activeTab === "addQuestion" && (
           <div>
             <h2 className="text-xl font-bold mb-4">Add Question</h2>
-            <p>Add Question component goes here</p>
+           
+             <AddQuestion/>
           </div>
         )}
         {activeTab === "manageSkills" && (
           <div>
             <h2 className="text-xl font-bold mb-4">Manage Skills</h2>
-            <p>Manage Questions component goes here</p>
+            <ManageQuestions/>
           </div>
         )}
       </div>

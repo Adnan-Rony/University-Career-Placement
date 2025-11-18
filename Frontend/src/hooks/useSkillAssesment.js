@@ -1,9 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { createSkill, getAllAssesmentBySkillId, getAllSkillAssessments,
+import { createAssessment, createSkill, getAllAssesmentBySkillId, getAllSkillAssessments,
    getAssessmentQuestions,
    startSkillAssessment, 
    submitAnswers,
    submitSkillAssessment} from "../api/skillAssesment";
+import Swal from "sweetalert2";
 
 //Create Skill
 
@@ -19,7 +20,28 @@ export const useCreateSkill = () => {
   });
 };
 
+// //Create Skill Assesment(Add quistions)
+export const useCreateAssessment = () => {
+  return useMutation({
+    mutationFn: (data) => createAssessment(data),
+    onSuccess: (res) => {
+      console.log("Skill Created Successfully", res);
+            Swal.fire({
+        title: "Success!",
+        text: "Assessment created successfully ",
+        icon: "success",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#7e22ce", 
+      });
+    },
+    onError: (err) => {
+      console.error("Failed to Create Skill", err);
+    },
+  });
+};
 
+
+//Get skills(Category)
 export const useAllSkillAssessments = () => {
   return useQuery({
     queryKey: ["skillAssessments"],

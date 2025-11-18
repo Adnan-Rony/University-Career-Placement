@@ -34,6 +34,7 @@ const getSkills = async (req, res) => {
 const createassesment = async (req, res) => {
   try {
     const body = req.body;
+    console.log(body);
     const assessment = await SkillAssessmentQuestions.create(req.body);
     res.status(201).json({ success: true, data: assessment });
   } catch (error) {
