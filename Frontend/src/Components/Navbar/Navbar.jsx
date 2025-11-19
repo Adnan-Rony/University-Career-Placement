@@ -52,6 +52,16 @@ export const Navbar = () => {
          Skill Assessment
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/portfolio-builder"
+          className={({ isActive }) =>
+            isActive ? "text-r-primary font-semibold" : "text-base-content"
+          }
+        >
+         Portfolio Builder
+        </NavLink>
+      </li>
 
       <li>
         <NavLink

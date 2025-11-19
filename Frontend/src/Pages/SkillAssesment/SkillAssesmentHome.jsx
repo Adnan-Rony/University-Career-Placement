@@ -5,7 +5,7 @@ import { SkillSection } from './SkillSection'
 export const SkillAssesmentHome = () => {
   return (
   <React.Fragment>
-  {/* <AssesmentBanner/> */}
+  <AssesmentBanner/>
 
   <div>
     <SkillSection/>

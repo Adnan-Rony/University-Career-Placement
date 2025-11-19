@@ -29,7 +29,7 @@ import EmployerSignUP from "../Features/Authentication/EmployerSignUP.jsx";
 import PortfolioLayout from "../Layouts/PortfolioLayout.jsx";
 import AllFaqs from "../Pages/AllFaqs.jsx";
 import CompanyDetails from "../Pages/company/CompanyDetails.jsx";
-import PortfolioBuilder from "../Pages/portfolio/Categories/Webdeveloper/Portfolio.jsx";
+
 import ViewMyPortfolio from "../Pages/portfolio/ViewMyPortfolio.jsx";
 
 import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
@@ -51,6 +51,9 @@ import { SkillAssesmentHome } from "../Pages/SkillAssesment/SkillAssesmentHome.j
 import { Assesments } from "../Pages/SkillAssesment/AssesMents/Assesments.jsx";
 import { AllQuestions } from "../Pages/SkillAssesment/AllQuestions.jsx";
 import { ManageSkillAssessment } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageSkillAssessment/ManageSkillAssessment.jsx";
+import BuildPortfolio from "../Pages/portfolio/BuildPortfolio.jsx";
+import { PortfolionBuilderHome } from "../Pages/portfolio/PortfolionBuilderHome.jsx";
+
 
 export const AppRouter = createBrowserRouter([
   {
@@ -116,10 +119,12 @@ export const AppRouter = createBrowserRouter([
         path: "/company",
         element: <CompanyDetails />,
       },
+      // --> Portfolio Builder
       {
-        path: "/portfolio",
-        element: <PortfolioBuilder />,
+        path: "/portfolio-builder",
+        element: <PortfolionBuilderHome/>,
       },
+       { path: "/portfolio-builder/create", element:<BuildPortfolio/> },
 
       {
         path: "/myportfolio",
@@ -185,10 +190,10 @@ export const AppRouter = createBrowserRouter([
         path: "jobseekerAppliedJob",
         element: <JobSeekerAppliedJobs />,
       },
-      {
-        path: "jobseekercreateportfolio",
-        element: <PortfolioBuilder />,
-      },
+      // {
+      //   path: "jobseekercreateportfolio",
+      //   element: <PortfolioBuilder />,
+      // },
       // {
       //   path: "jobseekerMyPortfolio",
       //   element: <ViewMyPortfolio />,
@@ -231,7 +236,8 @@ export const AppRouter = createBrowserRouter([
     path: "/portfoliobuilder",
     element: <PortfolioLayout />,
     children: [
-      { path: "create", element: <PortfolioBuilder /> },
+      { path: "create", element:<BuildPortfolio/> },
+      // { path: "create", element: <PortfolioBuilder /> },
       { path: "my", element: <ViewMyPortfolio /> },
     ],
   },

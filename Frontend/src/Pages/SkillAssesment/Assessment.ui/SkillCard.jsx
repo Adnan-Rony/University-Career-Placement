@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import Button from '../../../Components/Ui/Button'
 
 export const SkillCard = ({skill}) => {
   return (
@@ -22,8 +23,11 @@ export const SkillCard = ({skill}) => {
         </div>
 
         <div className="card-actions justify-end mt-4">
-          <Link to={`/skills/${skill._id}`} className="btn btn-primary">Learn More</Link>
+                 <Button variant='gradient' className='w-full'>
+ <Link to={`/skills/${skill._id}`} >Learn More</Link>
+        </Button>
         </div>
+
       </div>
     </div>
   )

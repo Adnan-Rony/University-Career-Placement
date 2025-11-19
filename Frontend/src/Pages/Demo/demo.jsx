@@ -1,15 +1,12 @@
-import { useEffect } from "react";
-import { LottieLoader } from "../../Components/loading/LottieLoader";
-import Loading from "../../Components/loading/Loading";
+import { ThreeDots } from "react-loader-spinner";
+import { Spinner } from "../../Components/loading/loader/Spinner";
 
-export const Demo = () => {
-  useEffect(()=>{
+export const Demo = ({name}) => {
 
-  },[])
-  return <div className="py-16 container mx-auto">
-    <h1 className="text-r-accent text-center text-5xl font-bold">React Js</h1>
-  <Loading/>
+  return (
+    <div className="py-16 container mx-auto">
+<Spinner/>
 
-  
-  </div>;
+    </div>
+  );
 };

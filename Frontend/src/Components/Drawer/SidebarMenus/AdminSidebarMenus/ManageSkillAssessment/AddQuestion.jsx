@@ -60,10 +60,9 @@ export const AddQuestion = () => {
     console.log("Form Data:", data);
     const payload={
         ...data,
-          title: "Python Complete Assessment",
-  description: "A comprehensive test to evaluate Python skills",
-  duration_seconds: 900,
-  total_questions: 15,
+  
+  duration_seconds: data.duration_minutes * 60,
+  total_questions: data.questions.length,
   is_active: true,
 
     }
@@ -95,6 +94,56 @@ export const AddQuestion = () => {
               {errors.skill_id.message}
             </span>
           )}
+        </div>
+   {/* Assessment Details */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="form-control flex flex-col">
+            <label className="label">
+              <span className="label-text font-medium">Title*</span>
+            </label>
+            <input
+              type="text"
+              {...register("title", { required: "Title is required" })}
+              className="input input-bordered input-sm focus:input-primary"
+            />
+          </div>
+
+          <div className="form-control flex flex-col">
+            <label className="label">
+              <span className="label-text font-medium">Difficulty*</span>
+            </label>
+            <select
+              {...register("difficulty_level")}
+              className="select select-bordered input-sm focus:input-primary"
+            >
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </div>
+
+          <div className="form-control flex flex-col">
+            <label className="label">
+              <span className="label-text font-medium">Duration (minutes)*</span>
+            </label>
+            <input
+              type="number"
+              {...register("duration_minutes", { min: 1 })}
+              className="input input-bordered input-sm focus:input-primary"
+              min="1"
+              defaultValue={15}
+            />
+          </div>
+        </div>
+
+        <div className="form-control flex flex-col">
+          <label className="label">
+            <span className="label-text font-medium">Description</span>
+          </label>
+          <textarea
+            {...register("description")}
+            className="textarea textarea-bordered textarea-sm focus:textarea-primary"
+          />
         </div>
 
         {/* Questions */}
