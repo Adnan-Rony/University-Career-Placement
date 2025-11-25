@@ -20,7 +20,7 @@ const projectSchema = new mongoose.Schema({
 });
 
 const educationSchema = new mongoose.Schema({
-  institute: String,
+  college: String,
   degree: String,
   startYear: String,
   endYear: String,
@@ -29,8 +29,8 @@ const educationSchema = new mongoose.Schema({
 const experienceSchema = new mongoose.Schema({
   company: String,
   role: String,
-  startDate: String,
-  endDate: String,
+  startDate: Date,
+  endDate: Date,
   description: String,
 });
 
@@ -55,21 +55,21 @@ const socialLinkSchema = new mongoose.Schema({
 });
 
 const basicInfoSchema = new mongoose.Schema({
-  fullName: String,
+  name: String,
   title: String,
   bio: String,
   about: String,
   email: String,
   phone: String,
   location: String,
-  profileImage: String,
+  picture: String,
 });
 
 const portfolioSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", 
+      ref: "User",
       required: true,
     },
     basicInfo: basicInfoSchema,

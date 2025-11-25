@@ -1,9 +1,47 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getAllAssesmentBySkillId, getAllSkillAssessments,
+import { createAssessment, createSkill, getAllAssesmentBySkillId, getAllSkillAssessments,
    getAssessmentQuestions,
    startSkillAssessment, 
-   submitAnswers} from "../api/skillAssesment";
+   submitAnswers,
+   submitSkillAssessment} from "../api/skillAssesment";
+import Swal from "sweetalert2";
 
+//Create Skill
+
+export const useCreateSkill = () => {
+  return useMutation({
+    mutationFn: (data) => createSkill(data),
+    onSuccess: (res) => {
+      console.log("Skill Created Successfully", res);
+    },
+    onError: (err) => {
+      console.error("Failed to Create Skill", err);
+    },
+  });
+};
+
+// //Create Skill Assesment(Add quistions)
+export const useCreateAssessment = () => {
+  return useMutation({
+    mutationFn: (data) => createAssessment(data),
+    onSuccess: (res) => {
+      console.log("Skill Created Successfully", res);
+            Swal.fire({
+        title: "Success!",
+        text: "Assessment created successfully ",
+        icon: "success",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#7e22ce", 
+      });
+    },
+    onError: (err) => {
+      console.error("Failed to Create Skill", err);
+    },
+  });
+};
+
+
+//Get skills(Category)
 export const useAllSkillAssessments = () => {
   return useQuery({
     queryKey: ["skillAssessments"],
@@ -58,6 +96,23 @@ export const useSubmitSkillAssessmentAnswers = () => {
     onError: (error) => {
       console.error(
         "Error submitting answers:",
+        error.response?.data || error.message
+      )
+    }
+  })
+}
+export const useSubmitSkillAssessment = () => {
+  return useMutation({
+    mutationFn: ({ attemptId}) =>
+      submitSkillAssessment(attemptId),
+
+    onSuccess: (data) => {
+      console.log("Assesment Submission Complete", data)
+    },
+
+    onError: (error) => {
+      console.error(
+        "Error submitting Assesmetn:",
         error.response?.data || error.message
       )
     }

@@ -34,6 +34,7 @@ const getSkills = async (req, res) => {
 const createassesment = async (req, res) => {
   try {
     const body = req.body;
+
     const assessment = await SkillAssessmentQuestions.create(req.body);
     res.status(201).json({ success: true, data: assessment });
   } catch (error) {
@@ -73,6 +74,7 @@ const getAssessmentsBySkill = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 //Start Attempt for tesr
 const startAttempt = async (req, res) => {
   try {
@@ -182,7 +184,6 @@ const submitAnswers = async (req, res) => {
     const { attemptId } = req.params;
     const { answers } = req.body; // Expected: [{ question_id, selected_options: [] }]
 
-    console.log(attemptId, answers);
     if (!answers || !Array.isArray(answers)) {
       return res.status(400).json({
         success: false,
@@ -287,7 +288,7 @@ const submitAnswers = async (req, res) => {
 //Submit or complete the assesment
 const submitAssessment = async (req, res) => {
   try {
-    const { attemptId } = req.body;
+    const { attemptId } = req.params;
     const attempt = await Attempt.findById(attemptId);
     if (!attempt) {
       return res.status(400).json({
