@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { LottieLoader } from "../../Components/loading/LottieLoader";
+import { ThreeDots } from "react-loader-spinner";
+import { Spinner } from "../../Components/loading/loader/Spinner";
+import { StudentTheme } from "../portfolio/Categories/Student/StudentTheme";
 
-export const Demo = () => {
-  useEffect(()=>{
+export const Demo = ({name}) => {
 
-  },[])
-  return <div className="py-16 container mx-auto">
-    <h1 className="text-r-accent text-center text-5xl font-bold">React Js</h1>
-  
-  
-  </div>;
+  return (
+    <div className="py-16 container mx-auto">
+<StudentTheme/>
+
+    </div>
+  );
 };
