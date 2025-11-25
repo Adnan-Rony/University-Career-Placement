@@ -1,32 +1,42 @@
 import { useContext, useRef, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import { ProfileContext } from "../../../../../../Context/ProfileProvider";
+
 
 import toast from "react-hot-toast";
-import { useUpdateProfile } from "../../../../../../hooks/useAuth";
+import {
+  useCurrentUser,
+  useUpdateProfile,
+} from "../../../../../../hooks/useAuth";
 
 export const AboutForm = () => {
   // Calling ProvderContext:Context APi
-  const { profileData, updateProfileSection } = useContext(ProfileContext);
+
   const { mutate, isPending, isSuccess, isError } = useUpdateProfile();
+  const { data, isPending: userloading } = useCurrentUser();
+  const userinfos = data?.user;
+
   const fileInputRef = useRef();
   const [cover, setCover] = useState("");
 
-  const [isUploading,setIsUploading]=useState(false)
-  const { register, control, handleSubmit, watch, formState: { errors } } = useForm(
-{
-  defaultValues:{
-    name:profileData.name,
-    location:profileData.location,
-    primaryRole:profileData?.primaryRole,
-    bio:profileData.bio,
-    yearsExperience: profileData.yearsExperience,
-  }
-}
-);
-console.log(profileData.primaryRole);
+  const [isUploading, setIsUploading] = useState(false);
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: userinfos.name || "",
+      location: userinfos.location || "",
+      primaryRole: userinfos?.primaryRole || "",
+      bio: userinfos.bio || "",
+      yearsExperience: userinfos.yearsExperience || "",
+    },
+  });
+  console.log(userinfos.primaryRole);
 
-//  Image Upload
+  //  Image Upload
 
   const handleCoverUpload = async (e) => {
     const file = e.target.files[0];
@@ -59,7 +69,6 @@ console.log(profileData.primaryRole);
   // Handle Submit
 
   const onSubmit = (data) => {
-    updateProfileSection("about", data);
     const payload = {
       name: data.name,
       location: data.location,
@@ -68,17 +77,20 @@ console.log(profileData.primaryRole);
       bio: data.bio,
       picture: cover,
     };
-    console.log(payload);
+    console.log("payload", payload);
     mutate(payload);
   };
-
+  if (userloading) return <p>Loading User details</p>;
   return (
     <div>
       <div className="p-6 flex flex-col md:flex-row">
         <div className=" md:w-2/6">
-
-          <h1 className='text-2xl font-bold text-base-content
-           dark:text-black'>About</h1>
+          <h1
+            className="text-2xl font-bold text-base-content
+           dark:text-black"
+          >
+            About
+          </h1>
 
           <p className="text-gray-500 mb-4">
             Tell us about yourself so startups know who you are.
@@ -133,10 +145,8 @@ console.log(profileData.primaryRole);
               Where are you based?*
             </label>
             <input
-
-              {...register('location', { required: "Location is required" })}
+              {...register("location", { required: "Location is required" })}
               className="mt-1 input w-full  dark:bg-gray-200"
-
             />
             {errors.location && (
               <p className="text-red-500 text-sm mt-1">
@@ -154,13 +164,10 @@ console.log(profileData.primaryRole);
               className="mt-1  w-full 
              select"
             >
-
-               <option defaultValue={profileData.primaryRole} value="">Select Select Role</option>
-               <option  value="Full-Stack Engineer">Full-Stack Engineer</option>
+              <option value="">Select Select Role</option>
+              <option value="Full-Stack Engineer">Full-Stack Engineer</option>
               <option value="Frontend Engineer">Frontend Engineer</option>
               <option value="Backend Engineer">Backend Engineer</option>
-             
-
             </select>
             {errors.primaryRole && (
               <p className="text-red-500 text-sm mt-1">

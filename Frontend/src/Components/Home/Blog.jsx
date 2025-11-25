@@ -40,7 +40,7 @@ export const Blog = () => {
                 <p className="line-clamp-2">{blog.excerpt}</p>
                 <div className="card-actions">
                   <Link to={`/blog/blogdetails/${blog.id}`}>
-                    <button className="btn btn-ghost btn-outline text-r-accent">
+                    <button className="btn btn-ghost btn-outline  text-r-accent">
                       Read Moreeee
                     </button>
                   </Link>

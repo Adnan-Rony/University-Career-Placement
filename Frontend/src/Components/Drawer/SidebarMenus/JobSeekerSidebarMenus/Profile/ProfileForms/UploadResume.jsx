@@ -8,7 +8,7 @@ export const UploadResume  = () => {
   const { profileData, updateProfileSection } = useContext(ProfileContext);
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: {
-      resume: profileData.education.resume || null // Assuming resume is stored under education section
+      resume: profileData.education.resume || null 
     }
   });
 
@@ -23,7 +23,7 @@ export const UploadResume  = () => {
     }
   };
 
-  const currentResume = watch('resume');
+  const currentResume = watch('resume');   
 
   return (
     <div className="p-6 flex">

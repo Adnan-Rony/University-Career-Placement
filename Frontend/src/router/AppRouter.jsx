@@ -35,17 +35,35 @@ import ViewMyPortfolio from "../Pages/portfolio/ViewMyPortfolio.jsx";
 import { CreateJob } from "./../Pages/Empoloyer/CreateJob";
 import { NotFOund } from "../Pages/NotFound/NotFOund.jsx";
 import EmployerSignIn from "../Features/Authentication/EmployerSignIn.jsx";
+import { ResumeBuilder } from "../Pages/ResumeBuilder/ResumeBuilder.jsx";
+import { SelectOption } from "../Pages/ResumeBuilder/ResumeUi/SelectOption.jsx";
+import BuildYourResume from "../Pages/ResumeBuilder/ResumeUi/BuildYourResume.jsx";
+import { ResumeProvider } from "../Context/ResumeProvider.jsx";
+import { Demo } from "../Pages/Demo/demo.jsx";
+import PaymentSuccess from "../Components/Payments/FeauturedJobPayment/PaymentSuccess.jsx";
+import PaymentFailed from "../Components/Payments/FeauturedJobPayment/PaymentFailed.jsx";
+import Paymentcancel from "../Components/Payments/FeauturedJobPayment/Paymentcancel.jsx";
 
+import FeaturedPayment from "../Pages/Payments/FeaturedPayment/FeaturedPayment.jsx";
+import { Privateroute } from "../Components/privateroute/Privateroute.jsx";
 
 export const AppRouter = createBrowserRouter([
   {
     path: "/",
     element: <MainLayouts />,
-    errorElement:<NotFOund/>,
+    errorElement: <NotFOund />,
     children: [
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/demo",
+        element: (
+     
+            <Demo />
+          
+        ),
       },
       {
         path: "/SignUp",
@@ -63,15 +81,12 @@ export const AppRouter = createBrowserRouter([
         path: "/job/details/:id",
         element: <JobDetails />,
       },
-      // {
-      //   path: "/company",
-      //   element: <CreateCompany />,
-      // },
+
       {
         path: "/alljobs",
         element: <JobsShowAll />,
       },
-     
+
       {
         path: "/allcompanies",
         element: <AllCompany />,
@@ -108,6 +123,38 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/myportfolio",
         element: <ViewMyPortfolio />,
+      },
+      //payment,
+
+      {
+        path: "/featured-payment",
+        element: <FeaturedPayment />,
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/payment-fail",
+        element: <PaymentFailed />,
+      },
+      {
+        path: "/payment-cancel",
+        element: <Paymentcancel />,
+      },
+      //Resume Builder
+      {
+        path: "/resumebuilder",
+        element: <ResumeBuilder />,
+      },
+      { path: "/resumebuilder/selectoption", element: <SelectOption /> },
+      {
+        path: "/resumebuilder/build-your-resume/:id",
+        element: (
+          <ResumeProvider>
+            <BuildYourResume />
+          </ResumeProvider>
+        ),
       },
     ],
   },

@@ -1,11 +1,14 @@
-import { useContext } from "react"
-import { useFieldArray, useForm } from "react-hook-form"
-import { ProfileContext } from "../../../../../../Context/ProfileProvider"
-import { useUpdateProfile } from "../../../../../../hooks/useUpdateProfile"
+import { useContext } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
+import { ProfileContext } from "../../../../../../Context/ProfileProvider";
+import { useUpdateProfile } from "../../../../../../hooks/useUpdateProfile";
+import { useCurrentUser } from "../../../../../../hooks/useAuth";
 
 export const WorkExperienceForm = () => {
-  const { profileData, updateProfileSection } = useContext(ProfileContext)
-   const { mutate,isPending,isSuccess,isError   }=useUpdateProfile()
+  const { profileData, updateProfileSection } = useContext(ProfileContext);
+  const { data, isPending: userloading } = useCurrentUser();
+  const userinfos = data?.user;
+  const { mutate, isPending, isSuccess, isError } = useUpdateProfile();
   const {
     register,
     handleSubmit,
@@ -13,20 +16,18 @@ export const WorkExperienceForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      workExperience: profileData.workExperience || [],
+      workExperience:userinfos.workExperience || [],
     },
-  })
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "workExperience",
-  })
+  });
 
   const onSubmit = (data) => {
-    // updateProfileSection("workExperience", data.workExperience)
-    // console.log(data);
-    mutate(data)
-  }
+    mutate(data);
+  };
 
   return (
     <div className="p-6 flex flex-col md:flex-row">
@@ -43,68 +44,98 @@ export const WorkExperienceForm = () => {
             <section key={field.id} className="mb-6 rounded">
               {/* Company Name */}
               <div className="flex flex-col mb-3 space-y-1">
-                <label className="text-sm font-medium text-gray-700">Company</label>
+                <label className="text-sm font-medium text-gray-700">
+                  Company
+                </label>
                 <input
                   type="text"
                   placeholder="Company Name"
                   className="input input-bordered w-full"
-                  {...register(`workExperience.${index}.company`, { required: "Company name is required" })}
+                  {...register(`workExperience.${index}.company`, {
+                    required: "Company name is required",
+                  })}
                 />
                 {errors.workExperience?.[index]?.company && (
-                  <p className="text-red-500 text-sm">{errors.workExperience[index].company.message}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.workExperience[index].company.message}
+                  </p>
                 )}
-        </div>
+              </div>
 
               {/* Job Title */}
               <div className="flex flex-col mb-3 space-y-1">
-                <label className="text-sm font-medium text-gray-700">Title</label>
+                <label className="text-sm font-medium text-gray-700">
+                  Title
+                </label>
                 <input
                   type="text"
                   placeholder="Job Title"
                   className="input input-bordered w-full"
-                  {...register(`workExperience.${index}.title`, { required: "Title is required" })}
+                  {...register(`workExperience.${index}.title`, {
+                    required: "Title is required",
+                  })}
                 />
                 {errors.workExperience?.[index]?.title && (
-                  <p className="text-red-500 text-sm">{errors.workExperience[index].title.message}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.workExperience[index].title.message}
+                  </p>
                 )}
               </div>
 
               {/* Start Date */}
               <div className="flex flex-col mb-3 space-y-1">
-                <label className="text-sm font-medium text-gray-700">Start Date</label>
+                <label className="text-sm font-medium text-gray-700">
+                  Start Date
+                </label>
                 <input
                   type="date"
                   className="input input-bordered w-full"
-                  {...register(`workExperience.${index}.startDate`, { required: "Start date is required" })}
+                  {...register(`workExperience.${index}.startDate`, {
+                    required: "Start date is required",
+                  })}
                 />
                 {errors.workExperience?.[index]?.startDate && (
-                  <p className="text-red-500 text-sm">{errors.workExperience[index].startDate.message}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.workExperience[index].startDate.message}
+                  </p>
                 )}
               </div>
 
               {/* End Date */}
               <div className="flex flex-col mb-3 space-y-1">
-                <label className="text-sm font-medium text-gray-700">End Date</label>
+                <label className="text-sm font-medium text-gray-700">
+                  End Date
+                </label>
                 <input
                   type="date"
                   className="input input-bordered w-full"
-                  {...register(`workExperience.${index}.endDate`, { required: "End date is required" })}
+                  {...register(`workExperience.${index}.endDate`, {
+                    required: "End date is required",
+                  })}
                 />
                 {errors.workExperience?.[index]?.endDate && (
-                  <p className="text-red-500 text-sm">{errors.workExperience[index].endDate.message}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.workExperience[index].endDate.message}
+                  </p>
                 )}
               </div>
 
               {/* Description */}
               <div className="flex flex-col mb-3 space-y-1">
-                <label className="text-sm font-medium text-gray-700">Description</label>
+                <label className="text-sm font-medium text-gray-700">
+                  Description
+                </label>
                 <textarea
                   placeholder="Describe your role/responsibilities"
                   className="textarea textarea-bordered w-full"
-                  {...register(`workExperience.${index}.description`, { required: "Description is required" })}
+                  {...register(`workExperience.${index}.description`, {
+                    required: "Description is required",
+                  })}
                 ></textarea>
                 {errors.workExperience?.[index]?.description && (
-                  <p className="text-red-500 text-sm">{errors.workExperience[index].description.message}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.workExperience[index].description.message}
+                  </p>
                 )}
               </div>
 
@@ -145,5 +176,5 @@ export const WorkExperienceForm = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

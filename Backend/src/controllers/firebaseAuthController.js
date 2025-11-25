@@ -26,7 +26,12 @@ export const googleLogin = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      maxAge: 5 * 24 * 60 * 60 * 1000, // 5 days
+      maxAge: 5 * 24 * 60 * 60 * 1000,// 5 days
+      domain: process.env.NODE_ENV === 'production'
+  ? '.smartjob-clientside.vercel.app'
+  : undefined,
+
+  
     });
 
     res.status(200).json({
