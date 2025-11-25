@@ -53,6 +53,8 @@ import { AllQuestions } from "../Pages/SkillAssesment/AllQuestions.jsx";
 import { ManageSkillAssessment } from "../Components/Drawer/SidebarMenus/AdminSidebarMenus/ManageSkillAssessment/ManageSkillAssessment.jsx";
 import BuildPortfolio from "../Pages/portfolio/BuildPortfolio.jsx";
 import { PortfolionBuilderHome } from "../Pages/portfolio/PortfolionBuilderHome.jsx";
+import { SelectPortfolioTemp } from "../Pages/portfolio/SelectPortfolioTemp.jsx";
+import { SelectedTemplate } from "../Pages/portfolio/Categories/SelectedTemplate.jsx";
 
 
 export const AppRouter = createBrowserRouter([
@@ -130,6 +132,18 @@ export const AppRouter = createBrowserRouter([
         path: "/myportfolio",
         element: <ViewMyPortfolio />,
       },
+      {
+        path: "/select-portfolio-template",
+        element: <SelectPortfolioTemp/>,
+      },
+      {
+        path: "/selected-template/:id",
+        element: <SelectedTemplate/>,
+      },
+
+
+
+
       //payment,
 
       {

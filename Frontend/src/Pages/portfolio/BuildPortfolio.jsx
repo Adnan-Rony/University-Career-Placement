@@ -11,8 +11,6 @@ import Education from "./Forms/Education";
 import Skills from "./Forms/Skills";
 import BasicInfo from "./Forms/BasicInfo";
 
-
-
 const steps = [
   "Basic Info",
   "Skills",
@@ -35,13 +33,34 @@ const BuildPortfolio = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      basicInfo: { name: "", title: "", bio: "",
-         about: "", email: "", phone: "", location: "",  picture: "" },
+      basicInfo: {
+        name: "",
+        title: "",
+        bio: "",
+        about: "",
+        email: "",
+        phone: "",
+        location: "",
+        picture: "",
+      },
       skills: [{ name: "", level: "Beginner", skillImageUrl: "" }],
-      projects: [{ title: "", image: "", description: "", githubUrl: "", liveUrl: "", techStack: "" }],
+      projects: [
+        {
+          title: "",
+          image: "",
+          description: "",
+          githubUrl: "",
+          liveUrl: "",
+          techStack: "",
+        },
+      ],
       education: [{ college: "", degree: "", startYear: "", endYear: "" }],
-      experience: [{ company: "", role: "", startDate: "", endDate: "", description: "" }],
-      certifications: [{ title: "", issuer: "", issueDate: "", certificateUrl: "" }],
+      experience: [
+        { company: "", role: "", startDate: "", endDate: "", description: "" },
+      ],
+      certifications: [
+        { title: "", issuer: "", issueDate: "", certificateUrl: "" },
+      ],
       blogs: [{ title: "", link: "", description: "" }],
       socialLinks: { github: "", linkedin: "", leetcode: "", portfolio: "" },
     },
@@ -53,85 +72,104 @@ const BuildPortfolio = () => {
   const projectsArray = useFieldArray({ control, name: "projects" });
   const educationArray = useFieldArray({ control, name: "education" });
   const experienceArray = useFieldArray({ control, name: "experience" });
-  const certificationsArray = useFieldArray({ control, name: "certifications" });
+  const certificationsArray = useFieldArray({
+    control,
+    name: "certifications",
+  });
   const blogsArray = useFieldArray({ control, name: "blogs" });
 
   const formData = watch();
 
   const onSubmit = (data) => {
-    mutate(data, {
-      onSuccess: () => toast.success("Portfolio created successfully!"),
-      onError: () => toast.error("Failed to create portfolio!"),
-    });
+    console.log(data);
+    mutate(data);
   };
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, steps.length - 1));
+  const nextStep = () =>
+    setStep((prev) => Math.min(prev + 1, steps.length - 1));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 0));
 
   return (
     <div className="flex gap-6  mx-auto p-6 overflow-hidden  max-w-7xl">
-      <form onSubmit={handleSubmit(onSubmit)}
-       className="flex-1 space-y-8  pr-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex-1 space-y-8  pr-4"
+      >
         <h1 className="text-3xl font-bold mb-4">Portfolio Builder</h1>
 
         {/* Stepper */}
- <div className="flex flex-wrap gap-2 mb-8 justify-start">
-  {steps.map((label, index) => (
-    <div
-      key={index}
-      className={`px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-medium whitespace-nowrap ${
-        index === step
-          ? "bg-gradient-to-br from-purple-600 to-indigo-600 text-white border border-purple-600"
-          : "bg-gray-100 text-gray-600 border border-gray-300"
-      }`}
-    >
-      {label}
-    </div>
-  ))}
-</div>
-
+        <div className="flex flex-wrap gap-2 mb-8 justify-start">
+          {steps.map((label, index) => (
+            <div
+              key={index}
+              className={`px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-medium whitespace-nowrap ${
+                index === step
+                  ? "bg-gradient-to-br from-purple-600 to-indigo-600 text-white border border-purple-600"
+                  : "bg-gray-100 text-gray-600 border border-gray-300"
+              }`}
+            >
+              {label}
+            </div>
+          ))}
+        </div>
 
         {/* Step Rendering */}
-          {step === 0 && <BasicInfo register={register} />}
+        {step === 0 && <BasicInfo register={register} />}
         {step === 1 && <Skills register={register} skillsArray={skillsArray} />}
-        {step === 2 && <Education register={register} educationArray={educationArray} />}
-        {step === 3 && <Projects register={register} projectsArray={projectsArray} />}
-        {step === 4 && <Experience register={register} experienceArray={experienceArray} />}
-        {step === 5 && <Certifications register={register} certificationsArray={certificationsArray} />}
+        {step === 2 && (
+          <Education register={register} educationArray={educationArray} />
+        )}
+        {step === 3 && (
+          <Projects register={register} projectsArray={projectsArray} />
+        )}
+        {step === 4 && (
+          <Experience register={register} experienceArray={experienceArray} />
+        )}
+        {step === 5 && (
+          <Certifications
+            register={register}
+            certificationsArray={certificationsArray}
+          />
+        )}
         {step === 6 && <Blogs register={register} blogsArray={blogsArray} />}
         {step === 7 && <SocialLinks register={register} />}
-        {/* {step === 0 && (
-          <section>
-            <h2 className="text-xl font-semibold mb-2">Basic Information</h2>
-            <input {...register("basicInfo.fullName")} placeholder="Full Name" className="input w-full mb-2" />
-            <input {...register("basicInfo.title")} placeholder="Professional Title" className="input w-full mb-2" />
-            <textarea {...register("basicInfo.bio")} placeholder="Short Bio" className="textarea w-full mb-2" />
-            <textarea {...register("basicInfo.about")} placeholder="About Yourself" className="textarea w-full mb-2" />
-            <input {...register("basicInfo.email")} placeholder="Email" className="input w-full mb-2" />
-            <input {...register("basicInfo.phone")} placeholder="Phone" className="input w-full mb-2" />
-            <input {...register("basicInfo.location")} placeholder="Location" className="input w-full mb-2" />
-            <input {...register("basicInfo.profileImage")} placeholder="Profile Image URL" className="input w-full mb-2" />
-          </section>
-        )}
-
-  
-
-
 
         {/* Navigation */}
         <div className="flex justify-between mt-6">
-          {step > 0 && <button type="button" onClick={prevStep} className="btn btn-outline">Previous</button>}
-          {step < steps.length - 1 ? (
-            <button type="button" onClick={nextStep} className="btn btn-primary">Next</button>
-          ) : (
-            <button type="submit" className="btn btn-primary bg-gradient-to-r from-[#7405de] to-[#a626ec]">Save Portfolio</button>
+          {step > 0 && (
+            <button
+              type="button"
+              onClick={prevStep}
+              className="btn btn-outline"
+            >
+              Previous
+            </button>
           )}
+          {step < steps.length - 1 && (
+            <button
+              type="button"
+              onClick={nextStep}
+              className="btn btn-primary border-none bg-gradient-to-r from-[#7405de] to-[#a626ec]"
+            >
+              Next
+            </button>
+          )
+          }
+          {
+            step ===steps.length-1 && <button 
+            className="btn btn-primary border-none bg-gradient-to-r from-[#7405de] to-[#a626ec]"
+            type="submit">
+
+               Save Portfolio
+            </button>
+          }
+
+      
         </div>
       </form>
-
-
     </div>
   );
 };
 
 export default BuildPortfolio;
+  
