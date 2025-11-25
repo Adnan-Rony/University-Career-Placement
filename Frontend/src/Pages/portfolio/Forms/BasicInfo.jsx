@@ -1,6 +1,8 @@
 import { User, Mail, Phone, MapPin, ImageIcon, FileText } from 'lucide-react';
+import { UseMyPortfolio } from '../../../hooks/usePortfolio';
 
 const BasicInfo = ({ register }) => (
+
   <section className="relative overflow-hidden border
    border-gray-200 rounded-xl p-4">
     {/* Header */}
