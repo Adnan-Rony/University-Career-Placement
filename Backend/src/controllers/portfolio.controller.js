@@ -5,11 +5,13 @@ import { Portfolio } from "../models/portfolio.model.js";
 
 export const createOrUpdatePortfolio = async (req, res) => {
   const userId = req.user.id;
+
   const data = req.body;
+
 
   try {
     const existing = await Portfolio.findOne({ user: userId });
-
+console.log("Existing portfolio:", existing);
     if (existing) {
       const updated = await Portfolio.findOneAndUpdate(
         { user: userId },

@@ -34,7 +34,7 @@ const CompanyCard = ({ companies }) => {
             {/* Location */}
             <p className="text-sm text-gray-500 flex items-center justify-center mt-1 gap-1">
                <MdOutlineLocationOn className="text-xl " />
-              {company?.location || "Unknown"}
+             <span className="capitalize"> {company?.location || "Unknown"}</span>
             </p>
 
             {/* Category */}

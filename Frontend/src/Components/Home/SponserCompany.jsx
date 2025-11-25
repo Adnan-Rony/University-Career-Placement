@@ -7,7 +7,7 @@ import CompanyCardSkeleton from "../loading/SponserCompanyCardSkeleton.jsx";
 import CompanyDetails from "../../Pages/company/CompanyDetails.jsx";
 import { useMediaQuery } from "react-responsive";
 const SponserCompany = () => {
-   const { data, isLoading, isError } = useFetchCompanies();
+  const { data, isLoading, isError } = useFetchCompanies();
   const isMobile = useMediaQuery({ maxWidth: 640 }); // Tailwind 'sm' breakpoint
 
   const companies = Array.isArray(data?.companies) ? data.companies : [];
@@ -65,16 +65,15 @@ const SponserCompany = () => {
 
           {/* Company Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-       {visibleCompanies.length > 0 ? (
-  visibleCompanies.map((company, index) => (
-    <CompaniesCards key={index} company={company} />
-  ))
-) : (
-  <p className="col-span-full text-center text-gray-500">
-    No companies found in this category.
-  </p>
-)}
-
+            {visibleCompanies.length > 0 ? (
+              visibleCompanies.map((company, index) => (
+                <CompaniesCards key={index} company={company} />
+              ))
+            ) : (
+              <p className="col-span-full text-center text-gray-500">
+                No companies found in this category.
+              </p>
+            )}
           </div>
 
           {/* View All Button */}

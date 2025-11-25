@@ -18,6 +18,7 @@ export default function FeaturedPayment() {
  const navigate = useNavigate();
 const location=useLocation();
 const formdata=location.state?.jobData;
+console.log(formdata);
 
 
 const handleFreePost=()=>{
