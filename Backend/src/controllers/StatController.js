@@ -48,7 +48,7 @@ export const UserStatistics = async (req, res) => {
   const averagePercentage = avgResult[0]?.averagePercentage || 0;
 
   return res.status(200).json({
-    message: "working",
+    message: "User Statistics Fetch SuccessFully",
     user,
     totalApplications,
     pendingApplications,

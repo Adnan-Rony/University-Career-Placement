@@ -195,7 +195,8 @@ export const AppRouter = createBrowserRouter([
     path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
-      { path: "jobseekerDashboard", element: <JobSeekerDashboardMenu /> },
+      { path: "jobseekerDashboard",
+         element: <JobSeekerDashboardMenu /> },
       {
         path: "jobseekerProfile",
         element: <JobseekerProfile />,

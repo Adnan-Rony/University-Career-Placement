@@ -9,7 +9,7 @@ const PortfolioContext = createContext();
 export const PortfolioProvider = ({ children }) => {
   const [portfolioData, setPortfolioData] = useState({});
   const { data,isPending } = UseMyPortfolio();
-  console.log(data);
+
 
    useEffect(() => {
     if (!isPending && data) {
@@ -22,7 +22,7 @@ if(isPending){
   return <Spinner/>
 }
 
-  console.log("Portfolio Datas", portfolioData);
+
 
   const updatePortfolioData = (newData) => {
     setPortfolioData((prev) => ({ ...prev, ...newData }));
