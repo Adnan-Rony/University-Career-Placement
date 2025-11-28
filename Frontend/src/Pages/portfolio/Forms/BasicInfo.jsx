@@ -1,7 +1,7 @@
 import { User, Mail, Phone, MapPin, ImageIcon, FileText } from 'lucide-react';
 import { UseMyPortfolio } from '../../../hooks/usePortfolio';
 
-const BasicInfo = ({ register }) => (
+const BasicInfo = ({ register,portfolioData }) => (
 
   <section className="relative overflow-hidden border
    border-gray-200 rounded-xl p-4">
@@ -26,6 +26,7 @@ const BasicInfo = ({ register }) => (
         </label>
         <input
           {...register("basicInfo.name")}
+          
           placeholder="Enter your full name"
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
         />
