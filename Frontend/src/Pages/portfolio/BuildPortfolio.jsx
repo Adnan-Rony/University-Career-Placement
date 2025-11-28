@@ -12,6 +12,7 @@ import Skills from "./Forms/Skills";
 import BasicInfo from "./Forms/BasicInfo";
 import { PortfolioNavigation } from "./Forms/PortfolioNavigation";
 import { usePortfolio } from "../../Context/PortfolioProvider";
+import { Spinner } from "../../Components/loading/loader/Spinner";
 
 const steps = [
   "Basic Info",
@@ -63,13 +64,13 @@ const   defaultValues={
     register,
     control,
     handleSubmit,
-    watch,reset,
+    watch,reset,setValue,
     formState: { errors },
   } = useForm({
   defaultValues
   });
 
-  const { mutate } = UseCreatePortfolio();
+  const { mutate,isPending } = UseCreatePortfolio();
 
   const skillsArray = useFieldArray({ control, name: "skills" });
   const projectsArray = useFieldArray({ control, name: "projects" });
@@ -83,7 +84,7 @@ const   defaultValues={
 
 useEffect(() => {
   if (portfolioData) {
-    reset({...defaultValues,       // always keep structure
+    reset({...defaultValues,       
       ...portfolioData,  }); 
   }
 }, [portfolioData, reset]);
@@ -95,10 +96,14 @@ useEffect(() => {
     mutate(data);
   };
 
+
+
   const nextStep = () =>
     setStep((prev) => Math.min(prev + 1, steps.length - 1));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 0));
-
+if(isPending){
+  return <Spinner/>
+}
   return (
     <div className="flex gap-6  mx-auto p-6 overflow-hidden  max-w-7xl">
       <form
@@ -124,7 +129,7 @@ useEffect(() => {
         </div>
 
         {/* Step Rendering */}
-        {step === 0 && <BasicInfo portfolioData={portfolioData} register={register} />}
+        {step === 0 && <BasicInfo setValue={setValue} portfolioData={portfolioData} register={register} />}
         {step === 1 && <Skills register={register} skillsArray={skillsArray} />}
         {step === 2 && (
           <Education register={register} educationArray={educationArray} />

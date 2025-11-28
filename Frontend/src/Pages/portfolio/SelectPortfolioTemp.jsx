@@ -2,26 +2,42 @@ import React, { useState } from "react";
 import ViewMyPortfolio from "./ViewMyPortfolio";
 import { Link, useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { UseMyPortfolio } from "../../hooks/usePortfolio";
+import { UseCreatePortfolio, UseMyPortfolio } from "../../hooks/usePortfolio";
 import { Spinner } from "../../Components/loading/loader/Spinner";
 import portfolioTemplates from "./templates.js";
 
 export const SelectPortfolioTemp = () => {
   const { data: portfolioData, isLoading, isError, error } = UseMyPortfolio();
+  const {mutate:updateTempId}=UseCreatePortfolio()
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const navigate = useNavigate();
 
   const handleSelect = (template) => {
     setSelectedTemplate(template.id);
   };
-     
+   console.log(selectedTemplate);  
   const handlenext = () => {
 
     if (!selectedTemplate) {
       toast.error("Please select a template first!");
       return;
     }
+
+    const updatePortfolio={
+      ...portfolioData,
+      templateId:selectedTemplate
+    }
+    updateTempId(updatePortfolio,{
+      onSuccess:()=>{
+        navigate(`/selected-template/${selectedTemplate}`)
+      }
+    })
   };
+
+
+
+
+
   if(isLoading) return <Spinner/> 
   if (!portfolioData) {
     return (
@@ -179,7 +195,7 @@ export const SelectPortfolioTemp = () => {
               </span>
             )}
           </div>
-   <Link to={`/selected-template/${selectedTemplate}`}>
+   <div>
           <button
             onClick={handlenext}
             disabled={!selectedTemplate}
@@ -204,7 +220,7 @@ export const SelectPortfolioTemp = () => {
               />
             </svg>
           </button>
-   </Link>
+   </div>
         </div>
       </div>
 
