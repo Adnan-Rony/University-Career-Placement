@@ -2,8 +2,9 @@ import mongoose from "mongoose";
 import { Application } from "../models/application.model.js";
 import { User } from "../models/user.model.js";
 import { Attempt } from "../models/skillAssesment.model.js";
+import { Job } from "../models/job.model.js";
 
-export const UserStatistics = async (req, res) => {
+ const UserStatistics = async (req, res) => {
   const userId = req.user.id;
   console.log(userId);
   const user = await User.findById(userId).select("name picture");
@@ -61,3 +62,82 @@ export const UserStatistics = async (req, res) => {
     },
   });
 };
+
+const EmployerStatistics=async(req,res)=>{
+try {
+
+const employerId = req.user.id;
+const totalJobcount = await Job.countDocuments({ postedBy: employerId });
+const totalApplicants = await Application.aggregate([
+  {
+    $lookup: {
+      from: "jobs",
+      localField: "job",
+      foreignField: "_id",
+      as: "jobDetails"
+    }
+  },
+  { $unwind: "$jobDetails" },
+  { $match: { "jobDetails.postedBy": new mongoose.Types.ObjectId(employerId) } },
+  { $count: "total" }
+]);
+
+
+const jobsOverTime=await Job.aggregate([
+   {
+      $match:{
+         postedBy:new mongoose.Types.ObjectId(employerId)
+      }
+   },
+   {
+      $group:{
+         _id:{
+            $dateToString:{format:"%Y-%m",date:"$createdAt"}
+         },
+         totalJobs: { $sum: 1 }
+      }
+   },
+   {
+      $sort:{_id:1}
+   }
+])
+
+const appStats = await Application.aggregate([
+  {
+    $lookup: {
+      from: "jobs",             
+      localField: "job",          
+      foreignField: "_id",         
+      as: "jobDetails"
+    }
+  },
+  { $unwind: "$jobDetails" },     
+  {
+    $match: {
+      "jobDetails.postedBy": new mongoose.Types.ObjectId(employerId)
+    }
+  },
+  {
+    $group: {
+      _id: "$status",
+      count: { $sum: 1 }
+    }
+  }
+]);
+
+
+   return res.status(200).json({
+      success:true,
+      totalJobcount,totalApplicants,jobsOverTime,appStats,
+   })
+} catch (error) {
+   
+}
+}
+
+
+
+export const Statistics={
+   UserStatistics,
+   EmployerStatistics
+}

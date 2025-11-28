@@ -55,6 +55,7 @@ import BuildPortfolio from "../Pages/portfolio/BuildPortfolio.jsx";
 import { PortfolionBuilderHome } from "../Pages/portfolio/PortfolionBuilderHome.jsx";
 import { SelectPortfolioTemp } from "../Pages/portfolio/SelectPortfolioTemp.jsx";
 import { SelectedTemplate } from "../Pages/portfolio/Categories/SelectedTemplate.jsx";
+import { ManagePortfolio } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/ManagePortfolio/ManagePortfolio.jsx";
 
 
 export const AppRouter = createBrowserRouter([
@@ -209,10 +210,10 @@ export const AppRouter = createBrowserRouter([
       //   path: "jobseekercreateportfolio",
       //   element: <PortfolioBuilder />,
       // },
-      // {
-      //   path: "jobseekerMyPortfolio",
-      //   element: <ViewMyPortfolio />,
-      // },
+      {
+        path: "jobseekerMyPortfolio",
+        element: <ManagePortfolio/>,
+      },
 
       // For Employer
       { path: "employerDashboard", element: <EmployerDashboardMenu /> },

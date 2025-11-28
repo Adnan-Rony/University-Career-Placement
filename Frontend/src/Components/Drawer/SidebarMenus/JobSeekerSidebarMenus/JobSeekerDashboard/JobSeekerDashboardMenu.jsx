@@ -27,7 +27,8 @@ console.log(stats);
   // === Skill Stats for PieChart ===
   const skillData = [
     { name: "Completed Attempts", value: stats?.skillStats?.completedAttempts || 0 },
-    { name: "Remaining Attempts", value: (stats?.skillStats?.totalAttempts || 0) - (stats?.skillStats?.completedAttempts || 0) },
+    { name: "Remaining Attempts",
+       value: (stats?.skillStats?.totalAttempts || 0) - (stats?.skillStats?.completedAttempts || 0) },
   ];
 
   
