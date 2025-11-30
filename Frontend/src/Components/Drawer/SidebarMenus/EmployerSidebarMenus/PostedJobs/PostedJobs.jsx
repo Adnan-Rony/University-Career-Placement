@@ -41,7 +41,7 @@ export const PostedJobs = () => {
             <tr>
               <th>Job</th>
               <th>Type</th>
-              <th>Location</th>
+              <th>Company Location</th>
               <th>Salary</th>
               <th>Deadline</th>
               <th>Applicants</th>

@@ -22,7 +22,7 @@ const JobSeekerAppliedJobs = () => {
 
   return (
     <div>
-      <div className="overflow-x-auto bg-white p-5 md:mx-5 rounded-xl shadow-lg border border-gray-300">
+      <div className=" overflow-x-auto bg-white p-5 md:mx-5 rounded-xl shadow-lg border border-gray-300">
         <h2 className="text-xl font-semibold mb-4">Applied Jobs</h2>
 
         {jobs.length === 0 ? (

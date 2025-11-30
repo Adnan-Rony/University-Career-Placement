@@ -34,9 +34,10 @@ export const DrawerLayout = () => {
          mx-auto "
         >
           <div>
+            
             <DashboardNavbar />
           </div>
-          <div className=" ">
+          <div className="">
             <Outlet />
           </div>
         </div>

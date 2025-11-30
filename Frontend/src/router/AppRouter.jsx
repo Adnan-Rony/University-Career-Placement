@@ -55,6 +55,8 @@ import BuildPortfolio from "../Pages/portfolio/BuildPortfolio.jsx";
 import { PortfolionBuilderHome } from "../Pages/portfolio/PortfolionBuilderHome.jsx";
 import { SelectPortfolioTemp } from "../Pages/portfolio/SelectPortfolioTemp.jsx";
 import { SelectedTemplate } from "../Pages/portfolio/Categories/SelectedTemplate.jsx";
+import { ManagePortfolio } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/ManagePortfolio/ManagePortfolio.jsx";
+import { PublicPortfolio } from "../Pages/portfolio/Categories/PublicPortfolio.jsx";
 
 
 export const AppRouter = createBrowserRouter([
@@ -195,7 +197,8 @@ export const AppRouter = createBrowserRouter([
     path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
-      { path: "jobseekerDashboard", element: <JobSeekerDashboardMenu /> },
+      { path: "jobseekerDashboard",
+         element: <JobSeekerDashboardMenu /> },
       {
         path: "jobseekerProfile",
         element: <JobseekerProfile />,
@@ -208,10 +211,10 @@ export const AppRouter = createBrowserRouter([
       //   path: "jobseekercreateportfolio",
       //   element: <PortfolioBuilder />,
       // },
-      // {
-      //   path: "jobseekerMyPortfolio",
-      //   element: <ViewMyPortfolio />,
-      // },
+      {
+        path: "jobseekerMyPortfolio",
+        element: <ManagePortfolio/>,
+      },
 
       // For Employer
       { path: "employerDashboard", element: <EmployerDashboardMenu /> },
@@ -247,12 +250,12 @@ export const AppRouter = createBrowserRouter([
   },
 
   {
-    path: "/portfoliobuilder",
-    element: <PortfolioLayout />,
-    children: [
-      { path: "create", element:<BuildPortfolio/> },
-      // { path: "create", element: <PortfolioBuilder /> },
-      { path: "my", element: <ViewMyPortfolio /> },
-    ],
+    path: "/portfolio/:slug",
+    element: <PublicPortfolio/>,
+    // children: [
+    //   { path: "create", element:<BuildPortfolio/> },
+    //   // { path: "create", element: <PortfolioBuilder /> },
+    //   { path: "my", element: <ViewMyPortfolio /> },
+    // ],
   },
 ]);

@@ -67,6 +67,7 @@ const basicInfoSchema = new mongoose.Schema({
 
 const portfolioSchema = new mongoose.Schema(
   {
+
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -80,6 +81,15 @@ const portfolioSchema = new mongoose.Schema(
     certifications: [certificationSchema],
     blogs: [blogSchema],
     socialLinks: socialLinkSchema,
+    templateId:{
+      type:String,
+      default:null
+    },
+    slug: {
+  type: String,
+  unique: true,
+
+}
   },
   {
     timestamps: true,

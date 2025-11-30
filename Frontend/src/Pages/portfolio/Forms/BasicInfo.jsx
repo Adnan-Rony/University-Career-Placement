@@ -1,7 +1,12 @@
 import { User, Mail, Phone, MapPin, ImageIcon, FileText } from 'lucide-react';
 import { UseMyPortfolio } from '../../../hooks/usePortfolio';
+import { ImageUpload } from './ImageUpload';
 
-const BasicInfo = ({ register }) => (
+const BasicInfo = ({ register,portfolioData ,setValue}) =>
+  
+  
+  
+{  return (
 
   <section className="relative overflow-hidden border
    border-gray-200 rounded-xl p-4">
@@ -26,6 +31,7 @@ const BasicInfo = ({ register }) => (
         </label>
         <input
           {...register("basicInfo.name")}
+          
           placeholder="Enter your full name"
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
         />
@@ -116,7 +122,7 @@ const BasicInfo = ({ register }) => (
       </div>
 
       {/* Profile Image URL */}
-      <div className="lg:col-span-2">
+      {/* <div className="lg:col-span-2">
         <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
           <ImageIcon className="w-4 h-4 text-gray-500" />
           Profile Image URL
@@ -126,10 +132,22 @@ const BasicInfo = ({ register }) => (
           placeholder="https://example.com/image.jpg"
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
         />
-        {/* <p className="text-xs text-gray-500 mt-1">Supported formats: JPG, PNG. Max 5MB</p> */}
-      </div>
+       
+      </div> */}
+
+      <div className="lg:col-span-2">
+  <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+    <ImageIcon className="w-4 h-4 text-gray-500" />
+    Profile Image
+  </label>
+
+  <ImageUpload
+    value={portfolioData?.basicInfo?.picture} 
+    onChange={(url) => setValue("basicInfo.picture", url)} 
+  />
+</div>
     </div>
   </section>
-);
+);}
 
 export default BasicInfo;
