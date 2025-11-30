@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { UseCreatePortfolio } from "../../hooks/usePortfolio";
@@ -10,6 +10,9 @@ import Projects from "./Forms/Projects";
 import Education from "./Forms/Education";
 import Skills from "./Forms/Skills";
 import BasicInfo from "./Forms/BasicInfo";
+import { PortfolioNavigation } from "./Forms/PortfolioNavigation";
+import { usePortfolio } from "../../Context/PortfolioProvider";
+import { Spinner } from "../../Components/loading/loader/Spinner";
 
 const steps = [
   "Basic Info",
@@ -24,15 +27,8 @@ const steps = [
 
 const BuildPortfolio = () => {
   const [step, setStep] = useState(0);
-
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
+const { updatePortfolioData,portfolioData } = usePortfolio();
+const   defaultValues={
       basicInfo: {
         name: "",
         title: "",
@@ -63,10 +59,18 @@ const BuildPortfolio = () => {
       ],
       blogs: [{ title: "", link: "", description: "" }],
       socialLinks: { github: "", linkedin: "", leetcode: "", portfolio: "" },
-    },
+    }
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,reset,setValue,
+    formState: { errors },
+  } = useForm({
+  defaultValues
   });
 
-  const { mutate } = UseCreatePortfolio();
+  const { mutate,isPending } = UseCreatePortfolio();
 
   const skillsArray = useFieldArray({ control, name: "skills" });
   const projectsArray = useFieldArray({ control, name: "projects" });
@@ -78,17 +82,28 @@ const BuildPortfolio = () => {
   });
   const blogsArray = useFieldArray({ control, name: "blogs" });
 
+useEffect(() => {
+  if (portfolioData) {
+    reset({...defaultValues,       
+      ...portfolioData,  }); 
+  }
+}, [portfolioData, reset]);
+
   const formData = watch();
 
   const onSubmit = (data) => {
-    console.log(data);
+   
     mutate(data);
   };
+
+
 
   const nextStep = () =>
     setStep((prev) => Math.min(prev + 1, steps.length - 1));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 0));
-
+if(isPending){
+  return <Spinner/>
+}
   return (
     <div className="flex gap-6  mx-auto p-6 overflow-hidden  max-w-7xl">
       <form
@@ -114,7 +129,7 @@ const BuildPortfolio = () => {
         </div>
 
         {/* Step Rendering */}
-        {step === 0 && <BasicInfo register={register} />}
+        {step === 0 && <BasicInfo setValue={setValue} portfolioData={portfolioData} register={register} />}
         {step === 1 && <Skills register={register} skillsArray={skillsArray} />}
         {step === 2 && (
           <Education register={register} educationArray={educationArray} />
@@ -135,41 +150,16 @@ const BuildPortfolio = () => {
         {step === 7 && <SocialLinks register={register} />}
 
         {/* Navigation */}
-        <div className="flex justify-between mt-6">
-          {step > 0 && (
-            <button
-              type="button"
-              onClick={prevStep}
-              className="btn btn-outline"
-            >
-              Previous
-            </button>
-          )}
-          {step < steps.length - 1 && (
-            <button
-              type="button"
-              onClick={nextStep}
-              className="btn btn-primary border-none bg-gradient-to-r from-[#7405de] to-[#a626ec]"
-            >
-              Next
-            </button>
-          )
-          }
-          {
-            step ===steps.length-1 && <button 
-            className="btn btn-primary border-none bg-gradient-to-r from-[#7405de] to-[#a626ec]"
-            type="submit">
 
-               Save Portfolio
-            </button>
-          }
-
-      
-        </div>
+        <PortfolioNavigation
+          step={step}
+          steps={steps}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
       </form>
     </div>
   );
 };
 
 export default BuildPortfolio;
-  

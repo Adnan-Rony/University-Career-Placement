@@ -11,7 +11,7 @@ const JobsShowAll = () => {
   const { data, isPending, error } = UseJobs();
   const jobs = data?.jobs || [];
 
-  // 🧩 Filter state
+  //  Filter state
   const [filters, setFilters] = useState({
     keyword: "",
     location: "",
@@ -23,7 +23,7 @@ const JobsShowAll = () => {
   const [activeJobId, setActiveJobId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // 🧠 Extract unique industries & job types
+  //  Extract unique industries & job types
   const industries = useMemo(
     () =>
       Array.from(
@@ -37,7 +37,7 @@ const JobsShowAll = () => {
     [jobs]
   );
 
-  // 🔍 Filter logic
+  //  Filter logic
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
       const keywordMatch =
@@ -77,7 +77,7 @@ const JobsShowAll = () => {
     });
   }, [jobs, filters]);
 
-  // 🧮 Pagination logic
+  //  Pagination logic
   const totalPages = Math.ceil(filteredJobs.length / JOBS_PER_PAGE);
   const startIndex = (currentPage - 1) * JOBS_PER_PAGE;
   const currentJobs = filteredJobs.slice(startIndex, startIndex + JOBS_PER_PAGE);
@@ -108,8 +108,9 @@ const JobsShowAll = () => {
       <aside className="bg-gray-50 p-6 rounded-xl shadow-md md:sticky top-6 space-y-6 overflow-y-auto md:h-screen">
         {/* Keyword */}
         <div>
+        
           <label className="block text-sm font-semibold mb-2">
-            Search by Keywords
+            Search by Keywords  
           </label>
           <input
             type="text"

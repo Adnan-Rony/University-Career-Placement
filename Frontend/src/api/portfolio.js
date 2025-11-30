@@ -1,9 +1,30 @@
 import axiosInstance from "./axiosInstance.js";
 
 export const fetchMyPortfolio = async () => {
-  const res = await axiosInstance.get("/portfolio/my");
+ try {
+   const res = await axiosInstance.get("/portfolio/my");
   return res.data;
+ } catch (err) {
+  if (err.response && err.response.status === 404) {
+      
+      return null;
+    }
+ }
 };
+
+
+export const fetchPublicPortfolio = async (slug) => {
+  try {
+    const res = await axiosInstance.get(`/portfolio/public/${slug}`);
+    return res.data; 
+  } catch (err) {
+    if (err.response && err.response.status === 404) {
+      return null; 
+    }
+    throw err; 
+  }
+};
+
 
 export const createportfolio = async (portfoliodata) => {
   try {

@@ -14,6 +14,7 @@ import {
 } from '@tanstack/react-query'
 import { Authprovider } from "./Context/Authprovider.jsx";
 import { ProfileProvider } from "./Context/ProfileProvider.jsx";
+import { PortfolioProvider } from "./Context/PortfolioProvider.jsx";
 
 
 // Create a client
@@ -24,7 +25,9 @@ createRoot(document.getElementById("root")).render(
     <Authprovider>
     <QueryClientProvider client={queryClient}>
      <ProfileProvider>
-       <RouterProvider router={AppRouter}></RouterProvider>
+     <PortfolioProvider>
+        <RouterProvider router={AppRouter}></RouterProvider>
+     </PortfolioProvider>
 
       <Toaster></Toaster>
      </ProfileProvider>

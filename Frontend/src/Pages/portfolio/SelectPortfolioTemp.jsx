@@ -2,27 +2,38 @@ import React, { useState } from "react";
 import ViewMyPortfolio from "./ViewMyPortfolio";
 import { Link, useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { UseMyPortfolio } from "../../hooks/usePortfolio";
+import { UseCreatePortfolio, UseMyPortfolio } from "../../hooks/usePortfolio";
 import { Spinner } from "../../Components/loading/loader/Spinner";
 import portfolioTemplates from "./templates.js";
 
 export const SelectPortfolioTemp = () => {
   const { data: portfolioData, isLoading, isError, error } = UseMyPortfolio();
+  const { mutate: updateTempId } = UseCreatePortfolio();
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const navigate = useNavigate();
 
   const handleSelect = (template) => {
     setSelectedTemplate(template.id);
   };
-     
+  console.log(selectedTemplate);
   const handlenext = () => {
-
     if (!selectedTemplate) {
       toast.error("Please select a template first!");
       return;
     }
+
+    const updatePortfolio = {
+      ...portfolioData,
+      templateId: selectedTemplate,
+    };
+    updateTempId(updatePortfolio, {
+      onSuccess: () => {
+        navigate(`/selected-template/${selectedTemplate}`);
+      },
+    });
   };
-  if(isLoading) return <Spinner/> 
+
+  if (isLoading) return <Spinner />;
   if (!portfolioData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
@@ -179,32 +190,32 @@ export const SelectPortfolioTemp = () => {
               </span>
             )}
           </div>
-   <Link to={`/selected-template/${selectedTemplate}`}>
-          <button
-            onClick={handlenext}
-            disabled={!selectedTemplate}
-            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-2 ${
-              selectedTemplate
-                ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:scale-105 cursor-pointer"
-                : "bg-gray-200 text-gray-500 cursor-not-allowed opacity-50"
-            }`}
-          >
-            <span>Next Step</span>
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div>
+            <button
+              onClick={handlenext}
+              disabled={!selectedTemplate}
+              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-2 ${
+                selectedTemplate
+                  ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:scale-105 cursor-pointer"
+                  : "bg-gray-200 text-gray-500 cursor-not-allowed opacity-50"
+              }`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
-          </button>
-   </Link>
+              <span>Next Step</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
