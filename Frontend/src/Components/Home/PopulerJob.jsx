@@ -1,5 +1,4 @@
-import React from "react";
-import AllJobsCards from "../jobs/AllJobsCards.jsx";
+
 import { UseJobs } from "../../hooks/useJobs.js";
 import AllJobsSkeleton from "../loading/AllJobsSkeleton.jsx";
 
@@ -10,6 +9,8 @@ import { Link } from "react-router";
 const PopulerJob = () => {
   const { data, isPending, error } = UseJobs();
   const jobs = data?.jobs || [];
+
+
   if (isPending) return <AllJobsSkeleton />;
 
   return (

@@ -3,19 +3,14 @@ import { Menu, X, Github, ExternalLink, Linkedin, MessageCircle } from "lucide-r
 import { UseMyPortfolio } from "../../hooks/usePortfolio";
 
 
-const ViewMyPortfolio = () => {
-  const { data, isLoading, isError, error } = UseMyPortfolio();
+const ViewMyPortfolio = ({portfolioData: data, isPending }) => {
+  // const { data, isLoading, isError, error } = UseMyPortfolio();
   console.log(data);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  if (isLoading)
+  if (isPending)
     return <div className="text-center p-10 text-white">Loading...</div>;
-  if (isError)
-    return (
-      <div className="text-center p-10 text-red-500">
-        Error: {error.message}
-      </div>
-    );
+
 
   const {
     basicInfo: {

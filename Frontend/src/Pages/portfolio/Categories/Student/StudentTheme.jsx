@@ -1,5 +1,7 @@
  import React, { useState } from "react";
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, Award, BookOpen, Code, Briefcase } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail, ExternalLink, Award, BookOpen, Code, Briefcase, MailIcon } from "lucide-react";
+import { UseMyPortfolio } from "../../../../hooks/usePortfolio";
+import { Spinner } from "../../../../Components/loading/loader/Spinner";
 
 // Static student data
 const studentData = {
@@ -127,11 +129,14 @@ const studentData = {
   }
 };
 
-export const StudentTheme = () => {
+export const StudentTheme = ({portfolioData,isPending}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("projects");
 
-  const scrollToSection = (id) => {
+ 
+
+ 
+ const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
   };
@@ -144,7 +149,12 @@ export const StudentTheme = () => {
     { id: "achievements", label: "Achievements" },
     { id: "contact", label: "Contact" }
   ];
+if(isPending){
+  return <Spinner/>
+}
 
+
+ const {basicInfo,blogs,socialLinks,skills,education,projects}=portfolioData
   return (
     <div className="border border-gray-200 bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
       {/* Navigation */}
@@ -152,7 +162,7 @@ export const StudentTheme = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {studentData.name}
+              {basicInfo.name}
             </h1>
             
             <ul className="hidden md:flex gap-8 text-sm font-medium">
@@ -195,14 +205,15 @@ export const StudentTheme = () => {
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1 space-y-6">
             <div className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-              👋 Available for Internships
+              Available for Internships
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
-              Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{studentData.name}</span>
+              Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                {basicInfo.name}</span>
             </h1>
-            <p className="text-xl text-gray-600">{studentData.title}</p>
+            {/* <p className="text-xl text-gray-600">{studentData.title}</p> */}
             <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-              {studentData.bio}
+              {basicInfo.bio}
             </p>
             
             <div className="flex gap-4 pt-4">
@@ -222,13 +233,13 @@ export const StudentTheme = () => {
             </div>
             
             <div className="flex gap-4 pt-2">
-              <a href={studentData.social.github} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <a href={socialLinks.github} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <Github size={24} className="text-gray-700" />
               </a>
-              <a href={studentData.social.linkedin} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <a href={socialLinks.linkedin} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <Linkedin size={24} className="text-gray-700" />
               </a>
-              <a href={`mailto:${studentData.social.email}`} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <a href={`mailto:${basicInfo.email}`} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <Mail size={24} className="text-gray-700" />
               </a>
             </div>
@@ -237,8 +248,8 @@ export const StudentTheme = () => {
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-2xl opacity-30"></div>
             <img
-              src={studentData.picture}
-              alt={studentData.name}
+              src={basicInfo.picture}
+              alt={basicInfo.name}
               className="relative w-80 h-80 object-cover rounded-full border-4 border-white shadow-2xl"
             />
           </div>
@@ -253,7 +264,7 @@ export const StudentTheme = () => {
             <h2 className="text-4xl font-bold text-gray-900">About Me</h2>
           </div>
           <p className="text-lg text-gray-600 leading-relaxed max-w-4xl">
-            {studentData.about}
+            {basicInfo.about}
           </p>
         </div>
       </section>
@@ -267,30 +278,33 @@ export const StudentTheme = () => {
           </div>
           
           <div className="space-y-6">
-            {studentData.education.map((edu, idx) => (
+            {education.map((edu, idx) => (
               <div key={idx} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{edu.school}</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{edu.college}</h3>
                     <p className="text-lg text-gray-700 mb-2">{edu.degree}</p>
-                    <p className="text-base text-gray-600">GPA: {edu.gpa}</p>
+                    <p className="text-base text-gray-600">
+                      {/* GPA: {edu.gpa} */}
+                      
+                      </p>
                   </div>
                   <span className="mt-2 md:mt-0 inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">
-                    {edu.period}
+                    {edu.startYear}-{edu.endYear || "Present"}
                   </span>
                 </div>
-                {edu.coursework && (
+                {/* {edu.coursework && (
                   <div className="mt-4">
                     <p className="text-sm font-semibold text-gray-700 mb-2">Relevant Coursework:</p>
                     <p className="text-sm text-gray-600">{edu.coursework}</p>
                   </div>
-                )}
-                {edu.achievements && (
+                )} */}
+                {/* {edu.achievements && (
                   <div className="mt-4">
                     <p className="text-sm font-semibold text-gray-700 mb-2">Achievements:</p>
                     <p className="text-sm text-gray-600">{edu.achievements}</p>
                   </div>
-                )}
+                )} */}
               </div>
             ))}
           </div>
@@ -306,15 +320,15 @@ export const StudentTheme = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {studentData.skills.map((skill, idx) => (
+            {skills.map((skill, idx) => (
               <div
                 key={idx}
                 className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl text-center hover:shadow-lg transition-shadow"
               >
                 <img
-                  src={skill.icon}
+                  src={skill?.skillImageUrl || "https://res.cloudinary.com/dto6ulc5n/image/upload/v1764508022/gmgmrod1fwepmasyvmr7.png"}
                   alt={skill.name}
-                  className="w-16 h-16 mx-auto mb-3 object-contain"
+                  className="w-16 h-16 mx-auto mb-3 object-contain "
                 />
                 <p className="font-semibold text-gray-900 mb-1">{skill.name}</p>
                 <p className="text-sm text-gray-600">{skill.level}</p>
@@ -359,28 +373,28 @@ export const StudentTheme = () => {
           {/* Projects Tab */}
           {activeTab === "projects" && (
             <div className="grid md:grid-cols-2 gap-8">
-              {studentData.projects.map((project, idx) => (
+              {projects.map((project, idx) => (
                 <div key={idx} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                   <img
-                    src={project.image}
+                    src={project?.image || "https://res.cloudinary.com/dto6ulc5n/image/upload/v1764508577/fck3vshlix3vlsnzdlx7.jpg"}
                     alt={project.title}
                     className="w-full h-56 object-cover"
                   />
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
-                      <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">
+                      {/* <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">
                         {project.type}
-                      </span>
+                      </span> */}
                     </div>
                     <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
                     
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech.map((tech, i) => (
+                      {/* {project.tech.map((tech, i) => (
                         <span key={i} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm">
                           {tech}
                         </span>
-                      ))}
+                      ))} */}
                     </div>
                     
                     <div className="flex gap-4">
@@ -391,13 +405,13 @@ export const StudentTheme = () => {
                         <Github size={18} />
                         <span className="text-sm font-medium">Code</span>
                       </a>
-                      {project.demo && (
+                      {project.liveUrl && (
                         <a
-                          href={project.demo}
+                          href={project.liveUrl}
                           className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors"
                         >
                           <ExternalLink size={18} />
-                          <span className="text-sm font-medium">Demo</span>
+                          <span className="text-sm font-medium">Live</span>
                         </a>
                       )}
                     </div>
@@ -430,7 +444,7 @@ export const StudentTheme = () => {
       </section>
 
       {/* Achievements Section */}
-      <section id="achievements" className="bg-white py-20">
+      {/* <section id="achievements" className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-gray-900 mb-12">Achievements & Awards</h2>
           
@@ -448,7 +462,7 @@ export const StudentTheme = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
       <section id="contact" className="py-20">
@@ -461,23 +475,23 @@ export const StudentTheme = () => {
             
             <div className="flex flex-col md:flex-row justify-center gap-4 mb-8">
               <a
-                href={`mailto:${studentData.email}`}
+                href={`mailto:${basicInfo.email}`}
                 className="px-8 py-4 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-100 transition-colors"
               >
                 Send Email
               </a>
               <a
-                href={studentData.social.linkedin}
+                href={basicInfo.linkedin}
                 className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-medium hover:bg-white hover:text-blue-600 transition-colors"
               >
                 Connect on LinkedIn
               </a>
             </div>
             
-            <div className="space-y-2 text-white/90">
-              <p className="text-lg"> {studentData.email}</p>
-              <p className="text-lg">📱 {studentData.phone}</p>
-              <p className="text-lg">📍 {studentData.location}</p>
+            <div className="space-y-2 text-white/90 ">
+              <p className="text-lg">{basicInfo.email}</p>
+              <p className="text-lg">{basicInfo.phone}</p>
+              <p className="text-lg">{basicInfo.location}</p>
             </div>
           </div>
         </div>
@@ -487,7 +501,7 @@ export const StudentTheme = () => {
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <p className="text-gray-400">
-            © 2024 {studentData.name}. Built with React & Tailwind CSS
+            © 2025 {basicInfo.name}. Built with React & Tailwind CSS
           </p>
         </div>
       </footer>

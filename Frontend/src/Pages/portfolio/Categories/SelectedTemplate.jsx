@@ -4,7 +4,7 @@ import portfolioTemplates from '../templates';
 import { UseMyPortfolio } from '../../../hooks/usePortfolio';
 
 export const SelectedTemplate = () => {
-    const { data: portfolioData, isLoading, isError, error } = UseMyPortfolio();
+    const { data: portfolioData, isPending, isError, error } = UseMyPortfolio();
     const {id}=useParams()
 const MyTemplate=portfolioTemplates.find((template)=>{
     return template.id===id
@@ -13,7 +13,9 @@ const MyTemplate=portfolioTemplates.find((template)=>{
 
   return (
     <div>
-   <TemplateComponent />
+   <TemplateComponent
+    portfolioData={portfolioData}
+     isPending={isPending} />
     </div>
   )
 }

@@ -19,8 +19,11 @@ const JobsCards = ({ job, index }) => {
               alt="company logo"
               className="w-14 h-14 rounded-md object-cover"
             />
-            <div>
-              <h3 className="text-lg font-semibold">{job.title}</h3>
+         <div className="">
+              <h3 className="text-start text-lg font-bold text-gray-900 line-clamp-2">
+                {job.title}
+              </h3>
+              <p className="text-sm text-gray-500 mt-1 text-start">{job?.company?.name}</p>
             </div>
           </div>
 
@@ -35,7 +38,7 @@ const JobsCards = ({ job, index }) => {
           </span>
           <span className="flex items-center gap-1">
             <MdOutlineLocationOn className="text-xl" />
-            {job?.location?.city}, {job?.location?.state},{" "}
+            {job?.location}, {job?.location?.state},{" "}
             {job?.location?.country}
           </span>
           <span className="flex items-center gap-1">

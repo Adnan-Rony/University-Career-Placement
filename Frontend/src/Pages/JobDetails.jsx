@@ -13,7 +13,7 @@ import JobDetailsSkeleton from "../Components/loading/JobDetailsSkeleton.jsx";
 const JobDetails = () => {
   const { id } = useParams();
   const { data: job, isLoading } = UseFetchSingleJobById(id);
-
+console.log(job);
   if (isLoading) return <JobDetailsSkeleton />;
 
   return (
@@ -26,7 +26,7 @@ const JobDetails = () => {
         {/* Left Content (Description + Related) */}
         <div className="lg:col-span-2 space-y-2">
           <section className=" rounded-xl  p-2">
-            <JobDescription />
+            <JobDescription job={job} />
           </section>
 
           <section className=" rounded-xl  p-2">

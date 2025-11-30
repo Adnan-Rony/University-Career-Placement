@@ -84,7 +84,12 @@ const portfolioSchema = new mongoose.Schema(
     templateId:{
       type:String,
       default:null
-    }
+    },
+    slug: {
+  type: String,
+  unique: true,
+
+}
   },
   {
     timestamps: true,

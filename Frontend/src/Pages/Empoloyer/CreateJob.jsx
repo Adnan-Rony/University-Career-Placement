@@ -260,7 +260,7 @@ console.log("Job Data",jobData);
             </label>
             <select
               {...register("gender", { required: false })}
-              defaultValue=""
+              defaultValue="Any"
               className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               <option value="" disabled>

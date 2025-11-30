@@ -12,11 +12,11 @@ export const fetchUserStatistics = async () => {
 };
 export const fetchEmployerStatistics = async () => {
   try {
-    const res =await axiosInstance.get("/statistics/userStat");
+    const res =await axiosInstance.get("/statistics/employerStat");
  
     return res.data;
   } catch (error) {
-    console.error("Failed to fetch user statistics:", error);
+    console.error("EMployer to fetch user statistics:", error);
     throw error;
   }
 };
