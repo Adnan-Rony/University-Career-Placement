@@ -14,7 +14,7 @@ const PopulerJob = () => {
   if (isPending) return <AllJobsSkeleton />;
 
   return (
-    <div className="container mx-auto ">
+    <div className="container mx-auto my-12">
       <div className="w-full h-full p-4 text-center">
         <h2 className=" text-base-content text-3xl font-bold text-center mb-6">Popular Jobs</h2>
         <p className="text-gray-600 mb-6">

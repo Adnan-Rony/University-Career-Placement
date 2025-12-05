@@ -15,7 +15,7 @@ export const createResume=async(resumeData)=>{
 export const getUserResumes = async (userId) => {
   try {
     const response = await axiosInstance.get(`/resumebuilder/user/${userId}`);
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error("Error fetching user resumes:", error.response?.data || error.message);
     throw error;

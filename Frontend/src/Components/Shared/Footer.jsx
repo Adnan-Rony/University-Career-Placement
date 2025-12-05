@@ -8,6 +8,7 @@ import {
   FaInstagram,
   FaGraduationCap,
 } from "react-icons/fa";
+import { Link } from "react-router";
 
 export default function Footer() {
   return (
@@ -26,13 +27,13 @@ export default function Footer() {
           </p>
           <ul className="text-sm space-y-2">
             <li className="flex items-center gap-2">
-              <FaEnvelope className="text-purple-700" /> contact@careerlaunch.edu
+              <FaEnvelope className="text-purple-700" /> contact-smartjob-portal@gmail.com
             </li>
             <li className="flex items-center gap-2">
-              <FaPhoneAlt className="text-purple-700" /> +1 (555) 123–4567
+              <FaPhoneAlt className="text-purple-700" /> +8801864943775
             </li>
             <li className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-purple-700" /> 123 University Ave, Education City
+              <FaMapMarkerAlt className="text-purple-700" />Daffodil Smart City 
             </li>
           </ul>
         </div>
@@ -44,8 +45,17 @@ export default function Footer() {
             <li>About Us</li>
             <li>Contact Us</li>
             <li>Privacy Policy</li>
-            <li>Terms & Conditions</li>
-            <li>FAQ</li>
+            <li>
+              <Link to={'/termsAndcondion'}>
+              Terms & Conditions
+              </Link>
+              </li>
+            <li>
+              <Link to={'/interview-questions'}>
+            FAQ
+              </Link>
+              </li>
+           
           </ul>
         </div>
 

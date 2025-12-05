@@ -4,7 +4,15 @@ import { FileText, Sparkles, Download, Zap, Check } from "lucide-react";
 
 import resume1 from "../../../../assets/resume/resume1.png"
 import banner from "../../../../assets/resume/resume-banner.jpg"
+import { useCurrentUser } from '../../../../hooks/useAuth';
+import { useUserResumes } from '../../../../hooks/useResume';
 export const ResumeHeroSection = () => {
+
+   const {data:userdata}=useCurrentUser()
+      const userId=userdata?.user._id
+  
+      const {data:myresume,isPending}=useUserResumes(userId)
+      console.log(myresume);
       const features = [
     "Professional templates",
     "ATS-friendly formats",
@@ -59,11 +67,22 @@ export const ResumeHeroSection = () => {
                 <span>Create Resume Now</span>
                 <Zap size={16} className="absolute -top-1 -right-1 text-yellow-300 animate-pulse" />
               </Link>
-
-              <button className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200">
+{
+  myresume &&  <Link
+  to={'/resumebuilder/selectoption'}
+  className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200">
+                <Download size={20} />
+                <span>Edit Existing Resume</span>
+              </Link>
+}
+              {/* 
+                
+                <button className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200">
                 <Download size={20} />
                 <span>View Samples</span>
               </button>
+              
+              */}
             </div>
 
             {/* Social Proof */}

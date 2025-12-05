@@ -57,6 +57,8 @@ import { SelectPortfolioTemp } from "../Pages/portfolio/SelectPortfolioTemp.jsx"
 import { SelectedTemplate } from "../Pages/portfolio/Categories/SelectedTemplate.jsx";
 import { ManagePortfolio } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/ManagePortfolio/ManagePortfolio.jsx";
 import { PublicPortfolio } from "../Pages/portfolio/Categories/PublicPortfolio.jsx";
+import { TermsAndCondition } from "../Pages/TermsAndCondition/TermsAndCondition.jsx";
+import { ManageResume } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/ManageResume/ManageResume.jsx";
 
 
 export const AppRouter = createBrowserRouter([
@@ -191,6 +193,11 @@ export const AppRouter = createBrowserRouter([
           </ResumeProvider>
         ),
       },
+// For footer
+      {
+path:"/termsAndcondion",
+element:<TermsAndCondition/>
+      }
     ],
   },
   {
@@ -214,6 +221,10 @@ export const AppRouter = createBrowserRouter([
       {
         path: "jobseekerMyPortfolio",
         element: <ManagePortfolio/>,
+      },
+      {
+        path:"jobseekerManageResume",
+        element:<ManageResume/>
       },
 
       // For Employer

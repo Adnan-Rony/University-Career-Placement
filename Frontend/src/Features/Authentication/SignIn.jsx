@@ -33,6 +33,7 @@ export const SignIn = () => {
     }
   };
   const onSubmit = (data) => {
+    console.log(data);
     loginUser(data, {
       onSuccess: () => {
         reset();

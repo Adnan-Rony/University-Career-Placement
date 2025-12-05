@@ -1,9 +1,14 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useUserResumes } from "../hooks/useResume";
+import { useCurrentUser } from "../hooks/useAuth";
 
 const ResumeContext = createContext();
 
 // ২. Provider component
 export const ResumeProvider = ({ children }) => {
+  const {data:user,isPending:isUserLoading}=useCurrentUser()
+const userId=user?.user?._id
+const {data:currentResumedata}=useUserResumes(userId)
   const [submitAction, setSubmit] = useState(false);
   const [triggerSubmit, setTriggerSubmit] = useState(null);
   const [selectedtemplate, setTemplate] = useState(null);
@@ -15,6 +20,20 @@ export const ResumeProvider = ({ children }) => {
     projects: [],
      additional: {}
   });
+
+  //if resume data found from database set as 
+    useEffect(() => {
+    if (currentResumedata) {
+      setResumeData({
+        about: currentResumedata.about || {},
+        education: currentResumedata.education || [],
+        experience: currentResumedata.experience || [],
+        skills: currentResumedata.skills || [],
+        projects: currentResumedata.projects || [],
+        additional: currentResumedata.additional || {}
+      });
+    }
+  }, [currentResumedata]);
 
   // update functions
   const updateAbout = (data) => {
@@ -39,6 +58,8 @@ export const ResumeProvider = ({ children }) => {
 const updateAdditional = (data) => {
   setResumeData((prev) => ({ ...prev, additional: data }));
 };
+
+
 
   //Reset all data
   const resetResume = () => {
@@ -69,7 +90,7 @@ const updateAdditional = (data) => {
         triggerSubmit,
         setTriggerSubmit,
         setTemplate,
-        selectedtemplate,
+        selectedtemplate,currentResumedata
       }}
     >
       {children}

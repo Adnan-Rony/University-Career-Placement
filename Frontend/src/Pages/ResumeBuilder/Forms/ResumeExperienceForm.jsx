@@ -1,76 +1,88 @@
 import React, { useEffect, useRef } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useResumeContext } from '../../../Context/ResumeProvider'
-import { Trash } from 'lucide-react'
+import { FileText, Trash, PlusCircle } from 'lucide-react'
 
-// Component for a single experience entry
+// Single Experience Entry Component
 const ExperienceEntry = ({ index, control, register, remove }) => {
-  const { fields: descriptionFields, append: appendDescription, remove: removeDescription } = useFieldArray({
-    control,
-    name: `experience.${index}.description`
-  })
+  const { fields: descriptionFields, append: appendDescription, remove: removeDescription } =
+    useFieldArray({
+      control,
+      name: `experience.${index}.description`,
+    })
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-sm">
-      {/* Company */}
-      <div className="flex flex-col">
-        <label className="label mb-1">Company</label>
-        <input
-          type="text"
-          placeholder="Company Name"
-          className="input w-full rounded-lg shadow-sm"
-          {...register(`experience.${index}.company`, { required: true })}
-        />
+    <div className="bg-white border border-gray-200 rounded-xl shadow-md p-6 space-y-4">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Company */}
+        <div className="flex flex-col space-y-1">
+          <label className="text-sm font-medium text-gray-700">Company</label>
+          <input
+            type="text"
+            placeholder="Company Name"
+            className="px-4 py-2.5 border rounded-lg w-full transition-all duration-200 
+            focus:outline-none focus:ring-2 focus:ring-purple-500 hover:border-gray-400 border-gray-300"
+            {...register(`experience.${index}.company`, { required: true })}
+          />
+        </div>
+
+        {/* Position */}
+        <div className="flex flex-col space-y-1">
+          <label className="text-sm font-medium text-gray-700">Position / Role</label>
+          <input
+            type="text"
+            placeholder="e.g. Frontend Developer"
+            className="px-4 py-2.5 border rounded-lg w-full transition-all duration-200 
+            focus:outline-none focus:ring-2 focus:ring-purple-500 hover:border-gray-400 border-gray-300"
+            {...register(`experience.${index}.position`, { required: true })}
+          />
+        </div>
+
+        {/* Start Year */}
+        <div className="flex flex-col space-y-1">
+          <label className="text-sm font-medium text-gray-700">Start Year</label>
+          <input
+            type="text"
+            placeholder="YYYY"
+            className="px-4 py-2.5 border rounded-lg w-full transition-all duration-200 
+            focus:outline-none focus:ring-2 focus:ring-purple-500 hover:border-gray-400 border-gray-300"
+            {...register(`experience.${index}.startYear`, { required: true })}
+          />
+        </div>
+
+        {/* End Year */}
+        <div className="flex flex-col space-y-1">
+          <label className="text-sm font-medium text-gray-700">End Year</label>
+          <input
+            type="text"
+            placeholder="YYYY or Present"
+            className="px-4 py-2.5 border rounded-lg w-full transition-all duration-200 
+            focus:outline-none focus:ring-2 focus:ring-purple-500 hover:border-gray-400 border-gray-300"
+            {...register(`experience.${index}.endYear`, { required: true })}
+          />
+        </div>
       </div>
 
-      {/* Position */}
-      <div className="flex flex-col">
-        <label className="label mb-1">Position / Role</label>
-        <input
-          type="text"
-          placeholder="e.g. Frontend Developer"
-          className="input w-full rounded-lg shadow-sm"
-          {...register(`experience.${index}.position`, { required: true })}
-        />
-      </div>
+      {/* Description List */}
+      <div className="flex flex-col space-y-2">
+        <label className="text-sm font-medium text-gray-700">
+          Description (Bullet Points)
+        </label>
 
-      {/* Start Year */}
-      <div className="flex flex-col">
-        <label className="label mb-1">Start Year</label>
-        <input
-          type="text"
-          placeholder="YYYY"
-          className="input w-full rounded-lg shadow-sm"
-          {...register(`experience.${index}.startYear`, { required: true })}
-        />
-      </div>
-
-      {/* End Year */}
-      <div className="flex flex-col">
-        <label className="label mb-1">End Year</label>
-        <input
-          type="text"
-          placeholder="YYYY or Present"
-          className="input w-full rounded-lg shadow-sm"
-          {...register(`experience.${index}.endYear`, { required: true })}
-        />
-      </div>
-
-      {/* Description as Bullet Points */}
-      <div className="flex flex-col md:col-span-2">
-        <label className="label mb-1">Description (Bullet Points)</label>
         {descriptionFields.map((descItem, descIndex) => (
-          <div key={descItem.id} className="flex items-center gap-2 mb-2">
+          <div key={descItem.id} className="flex items-center gap-2">
             <input
               type="text"
-              placeholder="Enter a bullet point"
-              className="input w-full rounded-lg shadow-sm"
+              placeholder="Enter a bullet point..."
+              className="px-4 py-2.5 border rounded-lg w-full transition-all duration-200 
+              focus:outline-none focus:ring-2 focus:ring-purple-500 hover:border-gray-400 border-gray-300"
               {...register(`experience.${index}.description.${descIndex}`, { required: true })}
             />
             {descriptionFields.length > 1 && (
               <button
                 type="button"
-                className="btn bg-red-100 text-white p-2"
+                className="bg-red-100 p-2 rounded-lg"
                 onClick={() => removeDescription(descIndex)}
               >
                 <Trash className="text-red-600" size={16} />
@@ -78,21 +90,22 @@ const ExperienceEntry = ({ index, control, register, remove }) => {
             )}
           </div>
         ))}
+
         <button
           type="button"
-          className="btn btn-outline mt-2"
           onClick={() => appendDescription('')}
+          className="flex items-center gap-2 text-purple-700 font-medium hover:underline"
         >
-          + Add Bullet Point
+          <PlusCircle size={18} /> Add Bullet Point
         </button>
       </div>
 
-      {/* Remove Experience Button */}
+      {/* Remove Entire Experience Block */}
       {index > 0 && (
-        <div className="md:col-span-2 flex justify-end">
+        <div className="flex justify-end">
           <button
             type="button"
-            className="btn bg-red-100 text-white"
+            className="bg-red-100 p-2 rounded-lg"
             onClick={() => remove(index)}
           >
             <Trash className="text-red-600" />
@@ -104,21 +117,30 @@ const ExperienceEntry = ({ index, control, register, remove }) => {
 }
 
 export default function ResumeExperienceForm() {
-  const { register, control, handleSubmit } = useForm({
-    defaultValues: {
-      experience: [
-        { company: '', position: '', startYear: '', endYear: '', description: [''] }
-      ]
-    }
-  })
-
+  const { addExperience, setSubmit, setTriggerSubmit,resumeData } = useResumeContext()
+  const { register, control, handleSubmit,reset } = useForm()
+ const formRef = useRef(null)
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'experience'
+    name: 'experience',
   })
 
-  const { addExperience, setSubmit, setTriggerSubmit } = useResumeContext()
-  const formRef = useRef(null)
+  useEffect(() => {
+  if (resumeData?.experience) {
+    reset({
+      experience: resumeData.experience.map(item => ({
+        company: item.company || "",
+        position: item.position || "",
+        startYear: item.startYear || "",
+        endYear: item.endYear || "",
+        description: item.description || [], // array of strings
+        _id: item._id || ""
+      }))
+    });
+  }
+}, [resumeData, reset]);
+
+ 
 
   const onSubmit = (data) => {
     addExperience(data.experience)
@@ -127,46 +149,58 @@ export default function ResumeExperienceForm() {
 
   useEffect(() => {
     setTriggerSubmit(() => handleSubmit(onSubmit))
-  }, [handleSubmit, setTriggerSubmit])
+  }, [])
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg">
-      <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-        <h2 className="text-xl font-bold mb-2">Experience</h2>
+    <div className="max-w-5xl mx-auto p-2 sm:p-6">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-6 py-5 rounded-t-xl shadow-lg">
+        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+          <FileText className="w-6 h-6" /> Experience
+        </h2>
+        <p className="text-blue-100 mt-1 text-sm">Add your professional work experience</p>
+      </div>
 
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white border border-gray-200 rounded-b-xl shadow-xl p-6 sm:p-8 space-y-6"
+      >
         {fields.map((item, index) => (
           <ExperienceEntry
             key={item.id}
             index={index}
-            control={control}
             register={register}
+            control={control}
             remove={remove}
           />
         ))}
 
-        {/* Add Experience + Submit */}
-        <div className="flex justify-between items-center mt-2">
+        {/* Footer Buttons */}
+        <div className="flex justify-between items-center pt-2">
           <button
             type="button"
-            className="btn bg-purple-700 text-white"
+            className="bg-purple-700 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-800"
             onClick={() =>
               append({
                 company: '',
                 position: '',
                 startYear: '',
                 endYear: '',
-                description: ['']
+                description: [''],
               })
             }
           >
             + Add Experience
           </button>
-
-          <button type="submit" className="btn bg-purple-700 text-white px-6">
-            Save & Continue
-          </button>
         </div>
+      {/* Tip */}
+          <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg text-sm text-purple-800">
+            <strong>Tip:</strong> Try to include at least <strong>3 bullet points</strong> for each experience role.  
+  Highlight measurable achievements, responsibilities, and impact.
+          </div>
       </form>
+      
     </div>
   )
 }

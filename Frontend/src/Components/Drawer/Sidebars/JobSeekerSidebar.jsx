@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBriefcase } from "react-icons/fa";
+import { ImProfile } from "react-icons/im";
 import { FaUserPen } from "react-icons/fa6";
 import { MdDashboard, MdManageAccounts } from "react-icons/md";
 import { Link } from "react-router";
@@ -25,16 +25,16 @@ export const JobSeekerSidebar = () => {
       </li>
       <li>
         <Link to={"jobseekerMyPortfolio"}>
-        <MdManageAccounts />
+          <MdManageAccounts />
           Manage Portfolio
         </Link>
       </li>
 
-      {/* <li>
-              <Link to={'jobseekerMyPortfolio'}>
-                <FaUserPen /> My Portfolio
-              </Link>
-            </li> */}
+      <li>
+        <Link to={"jobseekerManageResume"}>
+         <ImProfile/> My Resume
+        </Link>
+      </li>
     </div>
   );
 };

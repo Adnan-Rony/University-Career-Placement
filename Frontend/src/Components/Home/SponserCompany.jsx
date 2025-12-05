@@ -29,7 +29,7 @@ const SponserCompany = () => {
     : filteredCompanies.slice(0, 8);
 
   return (
-    <section className="container mx-auto px-4 py-10">
+    <section className="container mx-auto px-4 my-12">
       <h2 className="lg:text-3xl text-2xl font-semibold text-center mb-6">
         Sponsored Companies
       </h2>

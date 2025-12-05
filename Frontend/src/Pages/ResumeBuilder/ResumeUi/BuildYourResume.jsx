@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useParams } from "react-router";
 import { templatesData } from "../lib/templatedata";
 
-
 import { Stepper } from "./Stepper";
 import ResumeAboutForm from "../Forms/ResumeAboutForm";
 import ResumeEducationForm from "../Forms/ResumeEducationForm";
@@ -15,11 +14,13 @@ import ResumeAdditionalForm from "../Forms/ResumeAdditionalForm";
 
 export default function BuildYourResume() {
   const [currentIdx, setcurrentIdx] = useState(1);
-   const {setTemplate}=useResumeContext()
+  const { setTemplate } = useResumeContext();
   const { id } = useParams();
 
   const mytemplate = templatesData.find((template) => template.id === id);
-  setTemplate(mytemplate)
+  setTemplate(mytemplate);
+
+  
   const renderStepComponent = () => {
     if (!mytemplate) return <p>Template not found!</p>;
 
@@ -37,16 +38,20 @@ export default function BuildYourResume() {
       case "Projects":
         return <ResumeProjectForm />;
       case "Additional":
-        return <ResumeAdditionalForm/>  
+        return <ResumeAdditionalForm />;
       case "Preview":
-        return <ResumePreview/>
+        return <ResumePreview />;
       default:
         return <p className="mt-6 text-center"> All steps completed!</p>;
     }
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 my-16">
+    <div
+      className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 my-16
+   
+    "
+    >
       <div>
         <Stepper
           currentIdx={currentIdx}
