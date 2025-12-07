@@ -29,12 +29,12 @@ export const JobSeekerSidebar = () => {
           Manage Portfolio
         </Link>
       </li>
-
+{/* 
       <li>
         <Link to={"jobseekerManageResume"}>
          <ImProfile/> My Resume
         </Link>
-      </li>
+      </li> */}
     </div>
   );
 };

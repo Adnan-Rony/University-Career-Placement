@@ -6,6 +6,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { GoogleSignIN } from "./GoogleSignIN.jsx";
 import { OauthGoogleSignin } from "./OauthGoogleSignin.jsx";
+import { Spinner } from "../../Components/loading/loader/Spinner.jsx";
 
 export const SignIn = () => {
   const { register, handleSubmit, reset, setValue } = useForm();
@@ -45,7 +46,9 @@ export const SignIn = () => {
       },
     });
   };
-
+if(isPending){
+  return <Spinner/>
+}
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-white to-purple-100 px-4 sm:px-6 lg:px-8">
       <title>Job Portal | SignIn</title>

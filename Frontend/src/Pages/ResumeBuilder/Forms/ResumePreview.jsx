@@ -44,12 +44,14 @@ export default function ResumePreview() {
             {/* Left Sidebar - Actions */}
             <div className="lg:col-span-1">
               <div className="sticky top-8 space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Actions</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex flex-row md:flex-col ">Actions</h3>
                 
                 {/* Download Button */}
                 <PDFDownloadLink
                   key={refreshKey}
-                  className="w-full inline-flex items-center justify-center gap-3 px-6 py-3 text-base font-semibold rounded-lg text-white bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 shadow-md hover:shadow-lg transition-all duration-200"
+                  className="w-full inline-flex items-center justify-center gap-3 
+                   px-6 py-3 text-base font-semibold rounded-lg
+                    text-white bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 shadow-md hover:shadow-lg transition-all duration-200"
                   document={
                     <PdfTemplate key={refreshKey} resumeData={resumeData} />
                   }

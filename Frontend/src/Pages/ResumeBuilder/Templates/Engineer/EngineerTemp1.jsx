@@ -1,6 +1,7 @@
 import React from "react";
 
 export const EngineerTemp1 = ({ data }) => {
+  console.log(data);
   return (
     <div className="my-12 p-6 border bg-white rounded shadow-md max-w-3xl mx-auto">
       {/* Name & Contact */}
