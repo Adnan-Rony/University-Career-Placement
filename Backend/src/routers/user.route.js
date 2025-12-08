@@ -10,7 +10,8 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.post("/google-login", googleLogin);
-router.get("/logout", logout);
+//logout changed to post from get
+router.post("/logout", logout);
 
 
 router.put("/profile/update",verifyToken ,updateUserProfile);

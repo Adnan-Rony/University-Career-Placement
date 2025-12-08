@@ -59,7 +59,7 @@ export const useUpdateProfile = () => {
   return useMutation({
     mutationFn: UpdateProfileUser,
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["currentUser"]);
+      queryClient.invalidateQueries(["user"]);
 
       console.log("Profile updated successfully:", data);
     },

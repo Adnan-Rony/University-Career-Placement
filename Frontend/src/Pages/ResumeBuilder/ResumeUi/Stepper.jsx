@@ -9,14 +9,7 @@ const {submitAction, setSubmit,triggerSubmit}=useResumeContext()
       setcurrentIdx(currentIdx - 1);
     }
   };
-  // const handleNext = () => {
-  //   if (currentIdx <= totalSteps) {
-  //     setcurrentIdx(currentIdx + 1);
-  //   } 
- 
-  //   setSubmit(true)
-    
-  // };
+
 
 const handleNext = () => {
   if (currentIdx <= totalSteps) {
@@ -29,10 +22,12 @@ const handleNext = () => {
 
   return (
     <>
-      <div className=" flex space-x-2 justify-center ">
+      <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 md:gap-4">
+        {/* Previouse Button */}
         <div>
-          <button onClick={handlePrev} className="btn">
-            <ChevronLeft />
+          <button onClick={handlePrev}
+           className="btn btn-sm sm:btn-md md:btn-lg flex items-center justify-center">
+            <ChevronLeft  />
           </button>
         </div>
         {steps.map((step, idx) => {
@@ -43,7 +38,8 @@ const handleNext = () => {
             <button
               key={idx}
         
-              className={`btn  ${
+              className={`btn btn-sm sm:btn-md md:btn-lg min-w-[60px] sm:min-w-[80px] md:min-w-[100px] flex items-center
+                 justify-center text-xs sm:text-sm md:text-base  ${
                 isActive
                   ? "bg-purple-700 text-white"
                   : isCompleted
@@ -55,12 +51,12 @@ const handleNext = () => {
             </button>
           );
         })}
-
+{/* Next Button */}
         <div>
           <button
             disabled={currentIdx === totalSteps}
             onClick={handleNext}
-            className="btn"
+            className="btn btn-sm sm:btn-md md:btn-lg flex items-center justify-center"
             type="submit"
           >
             <ChevronRight />

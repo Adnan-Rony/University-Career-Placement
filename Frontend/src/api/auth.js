@@ -13,16 +13,25 @@ export const RegisterUser = async (userData) => {
 };
 
 
+// export const LogoutUser = async () => {
+//   try {
+//     const res = await axiosInstance.get('/user/logout');
+//     return res.data;
+//   } catch (error) {
+//     throw new Error(error.response?.data?.message || 'Logout failed');
+//   }
+// };
 export const LogoutUser = async () => {
   try {
-    const res = await axiosInstance.get('/user/logout');
+    const res = await axiosInstance.post('/user/logout',
+      {}, { withCredentials: true });
     return res.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Logout failed');
   }
 };
 
-
+// ............................
 
 // Fetch User Informations
 export const CurrentUser = async () => {

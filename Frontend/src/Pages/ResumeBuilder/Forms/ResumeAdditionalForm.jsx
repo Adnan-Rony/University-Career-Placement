@@ -3,20 +3,30 @@ import { useForm } from "react-hook-form";
 import { useResumeContext } from "../../../Context/ResumeProvider";
 
 export default function ResumeAdditionalForm() {
+  const { setSubmit, setTriggerSubmit, updateAdditional, resumeData } =
+    useResumeContext();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const { setSubmit, setTriggerSubmit, updateAdditional } = useResumeContext();
   const formRef = useRef(null);
 
   const onSubmit = (data) => {
-    console.log("Additional Info submitted:", data);
     updateAdditional(data);
     setSubmit(false);
   };
+  useEffect(() => {
+    if (resumeData?.additional) {
+      reset({
+        languages: resumeData.additional.languages || "",
+        certifications: resumeData.additional.certifications || "",
+        awards: resumeData.additional.awards || "",
+      });
+    }
+  }, [resumeData, reset]);
 
   // for auto submit trigger
   useEffect(() => {
@@ -24,7 +34,7 @@ export default function ResumeAdditionalForm() {
   }, []);
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg">
+    <div className="p-2 sm:p-6 bg-gray-100 rounded-lg">
       <form
         ref={formRef}
         onSubmit={handleSubmit(onSubmit)}
@@ -40,7 +50,9 @@ export default function ResumeAdditionalForm() {
             })}
           />
           {errors.languages && (
-            <span className="text-red-400 mt-1">{errors.languages.message}</span>
+            <span className="text-red-400 mt-1">
+              {errors.languages.message}
+            </span>
           )}
         </div>
 
@@ -50,7 +62,8 @@ export default function ResumeAdditionalForm() {
           <input
             className="input rounded-lg shadow-sm w-full"
             {...register("certifications", {
-              required: "Please provide relevant certifications or write 'None'.",
+              required:
+                "Please provide relevant certifications or write 'None'.",
             })}
           />
           {errors.certifications && (
