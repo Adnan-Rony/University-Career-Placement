@@ -4,6 +4,7 @@ import FaqSection from "../Components/Home/FAQ.jsx";
 import FeatureCompany from "../Components/Home/FeatureCompany.jsx";
 import FeaturedJob from "../Components/Home/FeaturedJob.jsx";
 import FeatureSection from "../Components/Home/FeatureSection.jsx";
+import Hero from "../Components/Home/Hero.jsx";
 import HeroSection from "../Components/Home/HeroSection";
 import PopulerJob from "../Components/Home/PopulerJob.jsx";
 import SponserCompany from "../Components/Home/SponserCompany.jsx";
@@ -27,8 +28,8 @@ export const Home = () => {
          employment, hiring, job listings, apply online, career growth"
       />
 
-      <HeroSection />
-
+      {/* <HeroSection /> */}
+<Hero/>
 
 
 

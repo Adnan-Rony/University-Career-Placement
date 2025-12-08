@@ -13,7 +13,7 @@ export const UserDropdown = ({ user }) => {
   const { mutate: logout, isPending } = UseLogout();
    const { googlelogout } = useContext(Authcontext);
   const navigate = useNavigate();
-
+console.log("user info dubug1",user);
   const avatar =
     "https://thumbs.dreamstime.com/b/minimalist-male-avatar-brown-hair-teal-shirt-flat-style-perfect-user-profile-social-media-illustration-colors-384307770.jpg";
 

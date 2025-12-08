@@ -64,30 +64,7 @@ export const ManagePortfolio = () => {
               {data.basicInfo.bio}
             </p>
 
-            {/* Stats Row */}
-            {/* <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-gray-200">
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <Eye className="w-4 h-4 text-purple-600" />
-                  <p className="text-2xl font-bold text-gray-800">{data.views}</p>
-                </div>
-                <p className="text-sm text-gray-600">Profile Views</p>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <Calendar className="w-4 h-4 text-purple-600" />
-                  <p className="text-2xl font-bold text-gray-800">{new Date(data.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</p>
-                </div>
-                <p className="text-sm text-gray-600">Created</p>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <Award className="w-4 h-4 text-purple-600" />
-                  <p className="text-2xl font-bold text-gray-800">{data.completionScore}%</p>
-                </div>
-                <p className="text-sm text-gray-600">Complete</p>
-              </div>
-            </div> */}
+          
 
             {/* Last Updated */}
             <div className="mb-6">
@@ -131,18 +108,7 @@ export const ManagePortfolio = () => {
             </div>
           </div>
 
-          {/* Completion Progress Bar */}
-          {/* <div className="px-6 pb-6">
-            <div className="bg-gray-200 rounded-full h-2 overflow-hidden">
-              <div 
-                className="bg-gradient-to-r from-purple-600 to-purple-500 h-full transition-all duration-500"
-                style={{ width: `${data.completionScore}%` }}
-              ></div>
-            </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">
-              Portfolio Completion Score
-            </p>
-          </div> */}
+     
         </div>
 
         {/* Help Card */}

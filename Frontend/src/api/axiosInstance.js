@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3002/api/v1',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   //  baseURL: 'https://smartjob-backendserver.vercel.app/api/v1',     //Production
   withCredentials: true,
 });
