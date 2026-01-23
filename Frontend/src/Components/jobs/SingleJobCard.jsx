@@ -2,11 +2,23 @@ import { CiBookmark, CiCalendar } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { RxTimer } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ApplyJob from "../DetailsJob/ApplyJob.jsx";
+import { useCurrentUser } from "../../hooks/useAuth.js";
+import toast from "react-hot-toast";
 
 const SingleJobCard = ({ job, setActiveJobId, activeJobId, handleApply }) => {
+  const { data: user, isPending: userloading } = useCurrentUser();
+  const handleApplyNow = (jobId) => {
+    if (!user) {
+      toast.error("Please login to apply for this job.");
+
+      return;
+    }
+
+    setActiveJobId(jobId);
+  };
   return (
     <div>
       <div
@@ -17,7 +29,10 @@ const SingleJobCard = ({ job, setActiveJobId, activeJobId, handleApply }) => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
             <img
-              src={job?.company?.logo || 'https://img.icons8.com/?size=100&id=V1IkfkcRwvRl&format=png&color=000000'}
+              src={
+                job?.company?.logo ||
+                "https://img.icons8.com/?size=100&id=V1IkfkcRwvRl&format=png&color=000000"
+              }
               alt="company logo"
               className="w-14 h-14 rounded-md object-cover"
             />
@@ -43,10 +58,8 @@ const SingleJobCard = ({ job, setActiveJobId, activeJobId, handleApply }) => {
 
           <span className="flex items-center gap-1">
             <MdOutlineLocationOn className="text-lg text-gray-500 capitalize" />
-           <span className="capitalize">
-            
-            {job?.city}
-            </span> , {job?.location}, {job?.country}
+            <span className="capitalize">{job?.city}</span> , {job?.location},{" "}
+            {job?.country}
           </span>
 
           <span className="flex items-center gap-1">
@@ -88,8 +101,9 @@ const SingleJobCard = ({ job, setActiveJobId, activeJobId, handleApply }) => {
           </Link>
 
           <button
-            onClick={() => setActiveJobId(job._id)}
-            className="w-full sm:w-auto text-sm font-medium bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-all duration-200"
+            onClick={() => handleApplyNow(job._id)}
+            className="w-full sm:w-auto text-sm font-medium btn bg-purple-600
+             text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-all duration-200"
           >
             Apply Now
           </button>

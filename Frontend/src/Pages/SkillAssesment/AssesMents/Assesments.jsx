@@ -11,7 +11,7 @@ export const Assesments = () => {
     isError,
     error,
   } = useAssessmentBySkillId(id);
-
+console.log(assessments);
   if (isPending) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -29,7 +29,7 @@ export const Assesments = () => {
     );
   }
 
- if (!assessments || assessments.length === 0) {
+ if (assessments.length === 0) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <div className="alert alert-info">

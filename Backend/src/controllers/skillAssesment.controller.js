@@ -40,7 +40,8 @@ const createassesment = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "error.message",
+      description: error.message,
+      message:"Failed to add assesment questions"
     });
   }
 };

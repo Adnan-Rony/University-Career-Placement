@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { MdOutlineLocationOn } from 'react-icons/md';
 
 const CompanyCard = ({ companies }) => {
+  console.log(companies);
   return (
     <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-3 sm:grid-cols-1 max-w-screen-xl mx-auto">
       {companies?.map((company) => (

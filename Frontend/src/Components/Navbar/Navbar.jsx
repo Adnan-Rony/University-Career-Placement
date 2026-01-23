@@ -4,9 +4,11 @@ import { UserDropdown } from "./UserDropdown";
 import { useState } from "react";
 import { FaUserTie, FaUserGraduate, FaGraduationCap } from "react-icons/fa";
 import { AlignJustify, X, Sparkles } from "lucide-react";
+import { JobSeekerSignIn } from "./JobSeekerSignIn";
+import { EmployerSignin } from "./EmployerSignin";
 
 export const Navbar = () => {
-  const { data } = useCurrentUser();
+  const { data,isPending } = useCurrentUser();
   const user = data?.user;
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -207,7 +209,7 @@ export const Navbar = () => {
   );
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
+    <nav className="bg-white shadow-sm sticky top-0 z-50 font-roboto">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Left - Logo */}
@@ -232,7 +234,7 @@ export const Navbar = () => {
           <div className="flex items-center gap-2">
             {/* User Dropdown or Sign In */}
             <div className="relative">
-              {user ? (
+              {isPending ? (<UserSkeleton/>): user ? (
                 <UserDropdown user={user} />
               ) : (
                 <div className="relative">
@@ -255,70 +257,20 @@ export const Navbar = () => {
                       />
 
                       {/* Dropdown */}
-                      <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-[80vh] overflow-y-auto">
+                      <div
+                        className="absolute right-0
+                    
+                       mt-2  w-[calc(100vw-1rem)]  sm:w-80
+                        bg-white border border-gray-200 rounded-lg shadow-lg z-50
+                       max-h-[80vh] overflow-y-auto"
+                      >
                         {/* Job Seeker */}
-                        <div className="p-4 border-b flex items-start gap-3 sm:gap-4">
-                          <div className="bg-gray-100 p-2 rounded-full flex-shrink-0">
-                            <FaUserGraduate className="text-lg sm:text-xl text-purple-700" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 className="text-base sm:text-lg font-semibold">
-                              Job Seeker
-                            </h3>
-                            <p className="text-gray-500 text-xs sm:text-sm mt-1">
-                              Sign in or create an account to manage your job
-                              profile.
-                            </p>
-                            <div className="flex gap-2 mt-3">
-                              <Link
-                                to="/SignIn"
-                                onClick={() => setDropdownOpen(false)}
-                                className="text-xs sm:text-sm text-white bg-purple-700 px-3 py-1.5 rounded hover:bg-purple-800 transition-colors"
-                              >
-                                Sign In
-                              </Link>
-                              <Link
-                                to="/SignUp"
-                                onClick={() => setDropdownOpen(false)}
-                                className="text-xs sm:text-sm text-purple-700 border border-purple-600 px-3 py-1.5 rounded hover:bg-purple-50 transition-colors"
-                              >
-                                Create Account
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
+
+                        <JobSeekerSignIn setDropdownOpen={setDropdownOpen} />
 
                         {/* Employer */}
-                        <div className="p-4 flex items-start gap-3 sm:gap-4">
-                          <div className="bg-gray-100 p-2 rounded-full flex-shrink-0">
-                            <FaUserTie className="text-lg sm:text-xl text-green-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 className="text-base sm:text-lg font-semibold">
-                              Employer
-                            </h3>
-                            <p className="text-gray-500 text-xs sm:text-sm mt-1">
-                              Post jobs, view applications and manage your
-                              company profile.
-                            </p>
-                            <div className="flex gap-2 mt-3">
-                              <Link
-                                to="/employer-signIn"
-                                onClick={() => setDropdownOpen(false)}
-                                className="text-xs sm:text-sm text-white bg-green-600 px-3 py-1.5 rounded hover:bg-green-700 transition-colors"
-                              >
-                                Sign In
-                              </Link>
-                              <Link
-                                to="/employer-create-company"
-                                onClick={() => setDropdownOpen(false)}
-                                className="text-xs sm:text-sm text-green-600 border border-green-600 px-3 py-1.5 rounded hover:bg-green-50 transition-colors"
-                              >
-                                Create Account
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
+
+                        <EmployerSignin setDropdownOpen={setDropdownOpen} />
                       </div>
                     </>
                   )}
@@ -348,7 +300,7 @@ export const Navbar = () => {
 
             {/* Mobile Sign In Options (if not logged in) */}
             {!user && (
-              <div className="mt-4 pt-4 border-t space-y-4">
+              <div className="mt-4 pt-4 border-t-2 border-purple-200  space-y-4">
                 <div className="space-y-2">
                   <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide px-4">
                     Job Seeker
@@ -398,5 +350,13 @@ export const Navbar = () => {
         )}
       </div>
     </nav>
+  );
+};
+const UserSkeleton = () => {
+  return (
+    <div className="flex items-center gap-2 animate-pulse">
+      <div className="w-8 h-8 rounded-full bg-gray-200" />
+      <div className="hidden sm:block w-20 h-4 bg-gray-200 rounded" />
+    </div>
   );
 };

@@ -1,64 +1,20 @@
 import { Link } from "react-router";
+import { articles } from "./articles";
+import { Heading } from "../Shared/Heading";
 
 const Article = () => {
-  const articles = [
-    {
-      id: 1,
-      image:
-        "https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Fblog%2F1.jpg&w=2048&q=75",
-      date: "August 31, 2021",
-      comments: "12 Comment",
-      title: "Attract Sales And Profits",
-      excerpt:
-        "A job ravenously while Far much that one rank beheld after outside....",
-      link: "#",
-    },
-    {
-      id: 2,
-      image:
-        "https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Fblog%2F2.jpg&w=2048&q=75",
-      date: "August 31, 2021",
-      comments: "12 Comment",
-      title: "5 Tips For Your Job Interviews",
-      excerpt:
-        "A job ravenously while Far much that one rank beheld after outside....",
-      link: "#",
-    },
-    {
-      id: 3,
-      image:
-        "https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Fblog%2F3.jpg&w=2048&q=75",
-      date: "August 31, 2021",
-      comments: "12 Comment",
-      title: "Overworked Newspaper Editor",
-      excerpt:
-        "A job ravenously while Far much that one rank beheld after outside....",
-      link: "#",
-    },
-    {
-      id: 1,
-      image:
-        "https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Fblog%2F1.jpg&w=2048&q=75",
-      date: "August 31, 2021",
-      comments: "12 Comment",
-      title: "Attract Sales And Profits",
-      excerpt:
-        "A job ravenously while Far much that one rank beheld after outside....",
-      link: "#",
-    },
-  ];
+
   return (
     <section className=" py-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-semibold mb-2">Recent News Articles</h2>
-          <p className="text-gray-500">
-            Fresh job related news content posted each day.
-          </p>
-        </div>
+  <Heading
+  title="Recent News Articles"
+  subtitle="Fresh job related news content posted each day."
+/>
+
 
         <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {articles.map((article) => (
+          {articles?.map((article) => (
             <div
               key={article.id}
               className="bg-base-100 rounded-xl overflow-hidden shadow hover:shadow-md transition"
@@ -77,11 +33,11 @@ const Article = () => {
                 <h3 className="text-lg font-semibold mb-2">{article.title}</h3>
                 <p className="text-gray-600 text-sm mb-4">{article.excerpt}</p>
 
-                <Link>
-                  <button className="btn bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white btn-outline border-none">
-                    Read More
-                  </button>
-                </Link>
+             <Link to={`/article/${article.id}`}>
+  <button className="btn bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white btn-outline border-none">
+    Read More
+  </button>
+</Link>
               </div>
             </div>
           ))}

@@ -21,18 +21,18 @@ export const ResumeHeroSection = () => {
   ];
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="font-roboto flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           
           {/* Left Content */}
           <div className="flex-1 text-center lg:text-left">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <div className="font-roboto inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Sparkles size={16} />
               <span>Free Resume Builder</span>
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="font-poppins text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
               Build Your
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
                 Professional Resume
@@ -40,7 +40,7 @@ export const ResumeHeroSection = () => {
             </h1>
 
             {/* Subheading */}
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
+            <p className=" text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
               Create a standout resume in minutes with our easy-to-use builder. 
               Choose from professional templates and land your dream job.
             </p>

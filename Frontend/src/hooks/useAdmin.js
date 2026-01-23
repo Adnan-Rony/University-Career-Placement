@@ -9,6 +9,8 @@ export const UseAdminAllUser = () => {
   return useQuery({
     queryKey: ['admin-user'],
     queryFn: fetchAdminAllUsers,
+    staleTime: 1000 * 60 * 5, 
+  refetchOnWindowFocus: false,
   });
 };
 
@@ -19,7 +21,7 @@ export const UseAdminDeleteUser = () => {
   return useMutation({
     mutationFn: deleteUserByAdmin,
     onSuccess: () => {
-      queryClient.invalidateQueries(['admin-user']); // refetch job list
+      queryClient.invalidateQueries(['admin-user']);
     },
   });
 };

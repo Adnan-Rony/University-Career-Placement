@@ -1,4 +1,5 @@
 
+import { Job } from '../models/job.model.js';
 import { Company } from './../models/company.model.js';
 
 
@@ -90,16 +91,52 @@ export const createCompany = async (req, res) => {
 
 
 // Get all companies (public)
+// export const getAllCompanies = async (req, res) => {
+//   try {
+//     const companies = await Company.find().populate('createdBy', 'name email');
+//     res.status(200).json({ success: true, companies });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ success: false, message: 'Server error.' });
+//   }
+// }
+
 export const getAllCompanies = async (req, res) => {
   try {
-    const companies = await Company.find().populate('createdBy', 'name email');
-    res.status(200).json({ success: true, companies });
+   
+    const jobCounts = await Job.aggregate([
+      {
+        $group: {
+          _id: "$company",  
+          openings: { $sum: 1 }
+        }
+      }
+    ]);
+
+    
+    const jobCountMap = {};
+    jobCounts.forEach(j => {
+      jobCountMap[j._id.toString()] = j.openings;
+    });
+
+    
+    const companies = await Company.find()
+    .sort({ createdAt: -1 })
+    .populate("createdBy", "name email");
+
+  
+    const results = companies.map(company => ({
+      ...company._doc,
+      openings: jobCountMap[company._id.toString()] || 0
+    }));
+
+    res.status(200).json({ success: true, companies: results });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: 'Server error.' });
+    res.status(500).json({ success: false, message: "Server error." });
   }
-}
-
+};
 
 // Get a single company by ID (public)
 export const getCompanyById = async (req, res) => {

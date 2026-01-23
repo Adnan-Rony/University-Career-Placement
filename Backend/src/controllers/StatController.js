@@ -136,8 +136,30 @@ const appStats = await Application.aggregate([
 }
 
 
+const AdminStatistics = async (req, res) =>{
+  try {
+    const totalUsers = await User.countDocuments();
+    const totalJobSeekers = await User.countDocuments({ role: "job-seeker" });
+    const totalEmployers = await User.countDocuments({ role: "employer" });
+    const totalJobs = await Job.countDocuments();
+
+    return res.status(200).json({
+      success:true,
+      totalUsers,
+      totalJobSeekers,
+      totalEmployers,
+      totalJobs
+    })
+
+  } catch (error) {
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+}
+
+
+
 
 export const Statistics={
    UserStatistics,
-   EmployerStatistics
+   EmployerStatistics,AdminStatistics
 }

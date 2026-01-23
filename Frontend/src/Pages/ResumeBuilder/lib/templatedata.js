@@ -66,7 +66,7 @@ export const templatesData = [
   },
   {
     id: "temp05",
-    title: "Student Template",  //Orange template
+    title: "Student Template",  //Orange template ✅
     image: student2,
     component: StudentTemp2,
     pdfComponent: PdfStudentTemp2,

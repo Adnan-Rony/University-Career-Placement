@@ -42,7 +42,7 @@ export const ResumeBuilder = () => {
           ].map((feature, index) => (
             <div 
               key={index}
-              className="group bg-white rounded-xl p-6 shadow-md hover:shadow-xl border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+              className="font-roboto hover:bg-purple-100 group bg-white rounded-xl p-6 shadow-md hover:shadow-xl border border-gray-100 transition-all duration-300 hover:-translate-y-1"
             >
               <div className={`w-14 h-14 bg-gradient-to-br from-${feature.color}-100 to-${feature.color}-200 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                 <feature.icon className={`text-${feature.color}-600`} size={28} />
