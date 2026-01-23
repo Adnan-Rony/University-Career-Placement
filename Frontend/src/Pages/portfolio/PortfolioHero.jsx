@@ -10,7 +10,7 @@ export default function PortfolioHero() {
   }, []);
 
   return (
-    <div className=" relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="font-roboto relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 " />
 
       <div className=" relative z-10 max-w-6xl mx-auto
@@ -30,7 +30,7 @@ export default function PortfolioHero() {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+            <h1 className="font-poppins text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
               <span className="bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 bg-clip-text text-transparent">
                 Build Your Career Story
               </span>
@@ -50,11 +50,11 @@ export default function PortfolioHero() {
                 </Button>
               </Link>
 
-              <Link to="/" className="w-full sm:w-auto">
+              {/* <Link to="/" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="py-6">
                   Use Existing Data
                 </Button>
-              </Link>
+              </Link> */}
             </div>
 
             {/* Stats */}

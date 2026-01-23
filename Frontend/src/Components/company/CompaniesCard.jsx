@@ -5,7 +5,9 @@ const CompaniesCards = ({ company }) => {
   return (
    <div>
     <Link to={`/companydetails/${company._id}`}>
-     <div className="bg-base-100 p-5 rounded-lg shadow hover:shadow-md transition space-y-3 border border-gray-100">
+     <div className=" bg-base-100 p-5 rounded-lg 
+     shadow hover:shadow-md transition space-y-3
+      border border-gray-100">
       {/* Logo & Name */}
       <div className="flex items-center gap-4">
         <img

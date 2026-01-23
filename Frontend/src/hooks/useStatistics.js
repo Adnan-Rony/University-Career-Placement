@@ -1,7 +1,7 @@
 
 
 import { useQuery } from "@tanstack/react-query"
-import { fetchEmployerStatistics, fetchUserStatistics } from "../api/Statistics"
+import { fetchAdminStatistics, fetchEmployerStatistics, fetchUserStatistics } from "../api/Statistics"
 
 
 export const useUserStatistics=()=>{
@@ -18,3 +18,12 @@ export const useEmployerStatistics=()=>{
         queryFn:fetchEmployerStatistics
     })
 }
+
+
+export const useAdminStatistics = () => {
+  return useQuery({
+    queryKey: ["adminStatistics"],
+    queryFn: fetchAdminStatistics,
+    
+  });
+};

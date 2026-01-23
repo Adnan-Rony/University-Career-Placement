@@ -34,7 +34,7 @@ export const AboutForm = () => {
       yearsExperience: userinfos.yearsExperience || "",
     },
   });
-  console.log(userinfos.primaryRole);
+
 
   //  Image Upload
 

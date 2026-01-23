@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 /* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
 @plugin "daisyui";
- /* @plugin "daisyui" {
-   themes: light --default, dark --prefersdark;
- } */
+
 
 
 
@@ -13,6 +14,8 @@
     --color-r-accent: #9B00FF;
     --color-r-background: #F1E7FB;
     --color-text: #333333;
+    --font-poppins: "Poppins", sans-serif;
+    --font-roboto: "Roboto", sans-serif;
 }
 /* Custom animations for hero section */
 @layer utilities {

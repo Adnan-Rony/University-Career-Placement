@@ -1,6 +1,8 @@
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { UseAdminAllUser, UseAdminDeleteUser } from '../../../../../hooks/useAdmin'
 import Swal from "sweetalert2";
+import { Spinner } from "../../../../loading/loader/Spinner";
+import DashboardManageCompanySkeleton from "../../../../loading/DashboardManageCompanySkeleton";
 
 export const ManageUsers = () => {
   const { data: allUsers, isPending } = UseAdminAllUser();
@@ -33,7 +35,7 @@ export const ManageUsers = () => {
 
 
   if (isPending) {
-    return <p>Loading users...</p>;
+    return <DashboardManageCompanySkeleton />;
   }
 
   return (
@@ -60,7 +62,7 @@ export const ManageUsers = () => {
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <img
-                          src={`https://api.dicebear.com/9.x/big-smile/svg?seed=${user.name}`}
+                          src={`https://api.dicebear.com/9.x/personas/svg?seed=${user.name}`}
                           alt="Avatar"
                         />
                       </div>
@@ -74,7 +76,7 @@ export const ManageUsers = () => {
                 <td>{user.role}</td>
                 <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                 <td>
-                  <button className="btn btn-sm  mr-2">Edit</button>
+                  {/* <button className="btn btn-sm  mr-2">Edit</button> */}
 
                   {/* Delete Button */}
                   <button

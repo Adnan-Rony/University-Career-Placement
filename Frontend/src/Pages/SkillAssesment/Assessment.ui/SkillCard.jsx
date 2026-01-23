@@ -1,14 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router'
-import Button from '../../../Components/Ui/Button'
+import React from "react";
+import { Link } from "react-router";
+import Button from "../../../Components/Ui/Button";
 
-export const SkillCard = ({skill}) => {
+export const SkillCard = ({ skill }) => {
+  console.log(skill);
   return (
-    <div className="card w-full  bg-base-100
-     shadow-sm hover:shadow-md transition">
+    <div
+      className="card w-full  bg-base-100
+     shadow-sm hover:shadow-md transition"
+    >
       <figure className="px-6 pt-6  ">
         <img
-          src={skill?.icon_url || 'https://img.icons8.com/?size=80&id=1EUAqjY63hPZ&format=png'}
+          src={
+            skill?.icon_url ||
+            "https://img.icons8.com/?size=80&id=1EUAqjY63hPZ&format=png"
+          }
           alt={skill.name}
           className="rounded-xl h-32 w-32  object-cover"
         />
@@ -23,12 +29,17 @@ export const SkillCard = ({skill}) => {
         </div>
 
         <div className="card-actions justify-end mt-4">
-                 <Button variant='gradient' className='w-full'>
- <Link to={`/skills/${skill._id}`} >Learn More</Link>
-        </Button>
+        
+          <Link
+            className="btn w-full text-white border-0 rounded-2xl
+                   bg-gradient-to-r from-purple-600 to-indigo-600 
+                   hover:from-purple-700 hover:to-indigo-700"
+            to={`/skills/${skill._id}`}
+          >
+            Learn More
+          </Link>
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};

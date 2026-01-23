@@ -46,40 +46,57 @@ export const AssesmentCard = ({ assessment }) => {
   }
 
   return (
-    <div key={assessment._id} className="card bg-base-100 shadow-xl">
-      <div className="card-body">
-        <h2 className="card-title">{assessment.title}</h2>
-        <p className="text-base-content/70">{assessment.description}</p>
+ <div
+  key={assessment._id}
+  className="card bg-base-100 shadow-lg rounded-2xl
+             transform transition-transform duration-300 ease-in-out
+             hover:scale-[1.02]"
+>
+  <div className="card-body">
+    <h2 className="card-title text-2xl font-bold text-purple-600">
+      {assessment.title}
+    </h2>
+    <p className="text-base-content/70 font-semibold">
+      {assessment.description}
+    </p>
 
-        <div className="flex items-center gap-2 mt-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <span className="text-sm">
-            Duration: {formatDuration(assessment.duration_seconds)}
-          </span>
-        </div>
-
-        <div className="card-actions justify-end mt-4">
-          <button
-            className="btn btn-primary"
-            onClick={() => handleStartQuiz(assessment._id)}
-          >
-            Start Quiz
-          </button>
-        </div>
-      </div>
+    <div
+      className="flex items-center gap-2 mt-4 border border-purple-100
+                 bg-purple-200 rounded-2xl p-4"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5 text-purple-600"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <span className="text-sm text-purple-800">
+        Duration: {formatDuration(assessment.duration_seconds)}
+      </span>
     </div>
+
+    <div className="card-actions justify-end mt-4">
+      <button
+        className="btn text-white border-0 rounded-2xl w-full
+                   transform transition-transform duration-300 ease-in-out
+                   hover:scale-105
+                   bg-gradient-to-r from-purple-600 to-indigo-600 
+                   hover:from-purple-700 hover:to-indigo-700"
+        onClick={() => handleStartQuiz(assessment._id)}
+      >
+        Start Quiz
+      </button>
+    </div>
+  </div>
+</div>
+
   );
 };

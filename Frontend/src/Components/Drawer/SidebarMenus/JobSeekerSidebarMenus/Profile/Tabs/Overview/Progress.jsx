@@ -5,7 +5,7 @@ import Loading from "../../../../../../loading/Loading";
 export const Progress = () => {
   const { data, isPending } = useCurrentUser();
   const profileInfo = data?.user;
-
+console.log(data);
   if (isPending) return <Loading />;
 
   //Checking profile complete or not
@@ -13,8 +13,8 @@ export const Progress = () => {
     const profileFields = [
       { key: "skills", type: "array" },
       { key: "languages", type: "array" },
-      { key: "certifications", type: "array" },
-      { key: "projects", type: "array" },
+      // { key: "certifications", type: "array" },
+      // { key: "projects", type: "array" },
       { key: "education", type: "array" },
       { key: "workExperience", type: "array" },
       { key: "bio", type: "string" },
@@ -43,6 +43,11 @@ export const Progress = () => {
         <p className="text-gray-600 mb-4 text-lg font-semibold ">
           Your profile is {checkPercentage}% complete. Completing your profile
           will help employers find you more easily.
+        </p>
+      )}
+      {checkPercentage === 100 && (
+        <p className="text-gray-600 mb-4 text-lg font-semibold ">
+         Your profile is 100% complete. Great job!
         </p>
       )}
       <ProgressBar percentage={checkPercentage} />

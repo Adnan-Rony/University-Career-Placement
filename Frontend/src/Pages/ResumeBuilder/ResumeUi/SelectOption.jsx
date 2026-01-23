@@ -9,7 +9,7 @@ export const SelectOption = () => {
   const [selectedProfession, setSelectedProfession] = useState("");
   return (
     <>
-      <div className="container mx-auto py-16">
+      <div className="container mx-auto py-16 px-4">
         <ProfessionSelect
           selectedProfession={selectedProfession}
           setSelectedProfession={setSelectedProfession}

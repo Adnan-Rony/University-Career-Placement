@@ -13,6 +13,7 @@ import BasicInfo from "./Forms/BasicInfo";
 import { PortfolioNavigation } from "./Forms/PortfolioNavigation";
 import { usePortfolio } from "../../Context/PortfolioProvider";
 import { Spinner } from "../../Components/loading/loader/Spinner";
+import { useNavigate } from "react-router";
 
 const steps = [
   "Basic Info",
@@ -27,6 +28,7 @@ const steps = [
 
 const BuildPortfolio = () => {
   const [step, setStep] = useState(0);
+  const navigate=useNavigate()
 const { updatePortfolioData,portfolioData } = usePortfolio();
 const   defaultValues={
       basicInfo: {
@@ -70,7 +72,7 @@ const   defaultValues={
   defaultValues
   });
 
-  const { mutate,isPending } = UseCreatePortfolio();
+  const { mutateAsync,isPending } = UseCreatePortfolio();
 
   const skillsArray = useFieldArray({ control, name: "skills" });
   const projectsArray = useFieldArray({ control, name: "projects" });
@@ -91,11 +93,19 @@ useEffect(() => {
 
   const formData = watch();
 
-  const onSubmit = (data) => {
+  // const onSubmit =(data) => {
    
-    mutate(data);
-  };
-
+  //   mutate(data);
+  // };
+const onSubmit = async (data) => {
+  try {
+    await mutateAsync(data);
+    toast.success("Portfolio Created Successfully");
+    navigate("/select-portfolio-template");
+  } catch {
+    toast.error("Something went wrong");
+  }
+};
 
 
   const nextStep = () =>

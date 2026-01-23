@@ -25,7 +25,7 @@ export const fetchPublicPortfolio = async (slug) => {
   }
 };
 
-
+// create+update
 export const createportfolio = async (portfoliodata) => {
   try {
     const res = await axiosInstance.post("/portfolio/create", portfoliodata);

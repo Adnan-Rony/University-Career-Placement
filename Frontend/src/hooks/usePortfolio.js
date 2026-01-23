@@ -27,7 +27,7 @@ const navigate=useNavigate()
     mutationFn: createportfolio,
     onSuccess: () => {
       toast.success("Portfolio Created Successfully");
-      navigate("/select-portfolio-template")
+      // navigate("/select-portfolio-template")
       queryClient.invalidateQueries(["portfolio"]);
     },
   });

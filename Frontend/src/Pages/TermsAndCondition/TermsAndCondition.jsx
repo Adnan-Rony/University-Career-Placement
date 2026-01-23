@@ -10,6 +10,9 @@ export const TermsAndCondition = () => {
   if (isPending) {
     return <Spinner />;
   }
+  if (!user) {
+    return <NotLoggedInTerms />; 
+  }
 
   return (
     <div className="py-12 container mx-auto px-4 lg:px-0">
@@ -19,10 +22,25 @@ export const TermsAndCondition = () => {
       {/* ROLE BASED TERMS */}
       {role === "job-seeker" && <JobSeekerTerms />}
       {role === "employer" && <EmployerTerms />}
+      
     </div>
   );
 };
 
+// ----------------------------------
+// NOT LOGGED IN VIEW
+// ----------------------------------
+const NotLoggedInTerms = () => {
+  return (
+    <div className="py-12 container mx-auto px-4 lg:px-0 text-center space-y-6">
+      <h2 className="text-2xl font-semibold">Terms & Conditions</h2>
+      <p className="text-gray-700">
+        You are not logged in. To view full terms and conditions specific to your role,
+       
+      </p>
+    </div>
+  );
+};
 
 // --------------------------------------------------
 // JOB SEEKER TERMS

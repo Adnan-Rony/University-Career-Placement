@@ -20,3 +20,18 @@ export const fetchEmployerStatistics = async () => {
     throw error;
   }
 };
+
+
+
+//admin
+
+
+export const fetchAdminStatistics = async () => {
+  try {
+    const res = await axiosInstance.get("/statistics/adminStat");
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch admin statistics:", error);
+    throw error;
+  }
+};
