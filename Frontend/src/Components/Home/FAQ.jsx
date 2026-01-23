@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router";
+import { Heading } from "../Shared/Heading";
 
 const faqData = [
   {
@@ -67,14 +68,11 @@ const FaqSection = ({ showall = false }) => {
 
   return (
     <section className="container mx-auto px-4 py-16 ">
-      <h2
-        className="
-      text-3xl font-bold text-center mb-10
-  
-   bg-base-100   text-base-content "
-      >
-        Common Job Interview Questions
-      </h2>
+  <Heading
+  title="Common Job Interview Questions"
+  subtitle="Prepare yourself with the most frequently asked questions"
+/>
+
 
       <div className="bg-base-100 ">
         {visibleFaqs.map((item, index) => (
@@ -96,7 +94,7 @@ const FaqSection = ({ showall = false }) => {
               </span>
             </button>
             {openIndex === index && (
-              <div className="px-6 pb-4 font-semibold text-gray-700">
+              <div className="px-6 pb-4  text-gray-700">
                 {item.answer}
               </div>
             )}

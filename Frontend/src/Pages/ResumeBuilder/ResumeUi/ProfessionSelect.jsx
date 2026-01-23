@@ -21,7 +21,7 @@ const ProfessionSelect = ({ selectedProfession, setSelectedProfession }) => {
       <p className="text-base font-semibold md:text-lg text-gray-600  my-4">
         Choose your profession to start building your resume.
       </p>
-      <div className="flex gap-4 mt-6">
+      <div className="flex flex-col sm:flex-row gap-4 mt-6">
         {professions.map((prof,index) => (
           <button
             key={prof}

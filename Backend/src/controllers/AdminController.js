@@ -7,7 +7,7 @@ import { User } from "../models/user.model.js";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select('-password'); // Never expose passwords
+    const users = await User.find().select('name email role isProfileComplete createdAt').sort({createdAt:-1}); // Never expose passwords
 
     res.status(200).json({
       success: true,

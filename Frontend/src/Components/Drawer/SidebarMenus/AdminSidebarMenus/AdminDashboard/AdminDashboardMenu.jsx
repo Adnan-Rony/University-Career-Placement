@@ -2,46 +2,48 @@ import { FaRegFileAlt } from "react-icons/fa";
 import { PiUsersBold } from "react-icons/pi";
 import { SlBadge } from "react-icons/sl";
 import { GoGraph } from "react-icons/go";
+import { useAdminStatistics } from "../../../../../hooks/useStatistics";
 import { ApplicationVsPlacementChart } from "./ApplicationVsPlacementChart";
+import { Spinner } from "../../../../loading/loader/Spinner";
 
 export const AdminDashboardMenu = () => {
+const {data:stats,isPending}=useAdminStatistics()
+console.log(stats);
   const cardData = [
     {
+      title: "Total Users",
+      value: stats?.totalUsers,
+      subtitle: "All registered users",
+      icon: <PiUsersBold />,
+    },
+    {
       title: "Total Job Seekers",
-      value: 1250,
-      subtitle: "Registered users",
-      icon:<PiUsersBold />
-    
+      value: stats?.totalJobSeekers,
+      subtitle: "Registered job seekers",
+      icon: <SlBadge />,
     },
     {
-      title: "Placed Candidates",
-      value: 890,
-      subtitle: "71% placement rate",
-       icon:<SlBadge/>
-     
-    },
-    {
-      title: "Pending Applications",
-      value: 156,
-      subtitle: "Awaiting review",
-      icon:<FaRegFileAlt />
-     
+      title: "Total Employers",
+      value: stats?.totalEmployers,
+      subtitle: "Registered employers",
+      icon: <FaRegFileAlt />,
     },
     {
       title: "Active Jobs",
-      value: 450,
-      subtitle: "Open positions",
-       icon:<GoGraph/>
-     
+      value: stats?.totalJobs,
+      subtitle: "Total job posts",
+      icon: <GoGraph />,
     },
   ];
-
+if(isPending){
+  return <Spinner/>
+}
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4">
    <div>
        <div>
         <h1 className="text-4xl font-bold text-[var(--color-r-primary)]">Admin Dashboard</h1>
-        <p className="text-lg font-medium opacity-80 mt-3 text-[var(--color-text)]">
+        <p className="mb-4 text-lg font-medium opacity-80 mt-3 text-[var(--color-text)]">
           Track job seekers, manage jobs, and monitor application progress
         </p>
       </div>
@@ -67,7 +69,7 @@ export const AdminDashboardMenu = () => {
 {/* Chart */}
    <div>
 
-<ApplicationVsPlacementChart/>
+{/* <ApplicationVsPlacementChart/> */}
 
    </div>
     </div>

@@ -6,9 +6,22 @@ import { FaDollarSign } from "react-icons/fa6";
 import moment from "moment";
 import { useState } from "react";
 import ApplyJob from "./ApplyJob.jsx";
+import { useCurrentUser } from "../../hooks/useAuth.js";
+import toast from "react-hot-toast";
 
 const HeaderJobCard = ({ job }) => {
   const [showModal, setShowModal] = useState(false);
+  const { data: user, isPending: userloading } = useCurrentUser();
+  console.log(user);
+
+  const handleApplyClick = () => {
+    if (!user) {
+      toast.error("Please login to apply.");
+
+      return;
+    }
+    setShowModal(true);
+  };
 
   const handleApply = (applicationData) => {
     console.log("Application submitted", applicationData);
@@ -71,7 +84,7 @@ const HeaderJobCard = ({ job }) => {
         {/* Action Button */}
         <div>
           <button
-            onClick={() => setShowModal(true)}
+            onClick={handleApplyClick}
             className="w-full md:w-auto bg-gradient-to-r from-[#7405de] to-[#a626ec] text-white font-medium px-6 py-3 rounded-lg transition"
           >
             Apply for this Job

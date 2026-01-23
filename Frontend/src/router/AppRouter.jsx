@@ -59,6 +59,7 @@ import { ManagePortfolio } from "../Components/Drawer/SidebarMenus/JobSeekerSide
 import { PublicPortfolio } from "../Pages/portfolio/Categories/PublicPortfolio.jsx";
 import { TermsAndCondition } from "../Pages/TermsAndCondition/TermsAndCondition.jsx";
 import { ManageResume } from "../Components/Drawer/SidebarMenus/JobSeekerSidebarMenus/ManageResume/ManageResume.jsx";
+import ArticleDetails from "../Components/Home/ArticleDetails.jsx";
 
 
 export const AppRouter = createBrowserRouter([
@@ -91,6 +92,12 @@ export const AppRouter = createBrowserRouter([
         path: "/job/details/:id",
         element: <JobDetails />,
       },
+      {
+
+         path: "/article/:id",
+  element: <ArticleDetails />
+      },
+
 
       {
         path: "/alljobs",
@@ -128,9 +135,16 @@ export const AppRouter = createBrowserRouter([
       // --> Portfolio Builder
       {
         path: "/portfolio-builder",
-        element: <PortfolionBuilderHome/>,
+        element: <PortfolionBuilderHome />,
       },
-       { path: "/portfolio-builder/create", element:<BuildPortfolio/> },
+      {
+        path: "/portfolio-builder/create",
+        element: (
+          <Privateroute>
+            <BuildPortfolio />
+          </Privateroute>
+        ),
+      },
 
       {
         path: "/myportfolio",
@@ -138,15 +152,12 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: "/select-portfolio-template",
-        element: <SelectPortfolioTemp/>,
+        element: <SelectPortfolioTemp />,
       },
       {
         path: "/selected-template/:id",
-        element: <SelectedTemplate/>,
+        element: <SelectedTemplate />,
       },
-
-
-
 
       //payment,
 
@@ -169,13 +180,19 @@ export const AppRouter = createBrowserRouter([
       //Skill Assesmnet
       {
         path: "/skill-assessment",
-        element:<SkillAssesmentHome/>,
-      },{
-        path:`/skills/:id`,
-        element:<Assesments/>
-      },{
-        path:'/quiz-started/questions',
-        element:<AllQuestions/>
+        element: <SkillAssesmentHome />,
+      },
+      {
+        path: `/skills/:id`,
+        element: (
+          <Privateroute>
+            <Assesments />
+          </Privateroute>
+        ),
+      },
+      {
+        path: "/quiz-started/questions",
+        element: <AllQuestions />,
       },
 
       //..........
@@ -188,85 +205,172 @@ export const AppRouter = createBrowserRouter([
       {
         path: "/resumebuilder/build-your-resume/:id",
         element: (
-          <ResumeProvider>
-            <BuildYourResume />
-          </ResumeProvider>
+          <Privateroute>
+            <ResumeProvider>
+              <BuildYourResume />
+            </ResumeProvider>
+          </Privateroute>
         ),
       },
-// For footer
+      // For footer
       {
-path:"/termsAndcondion",
-element:<TermsAndCondition/>
-      }
+        path: "/termsAndcondion",
+        element: <TermsAndCondition />,
+      },
     ],
   },
   {
     path: "/dashboard",
     element: <DashBoardLayout></DashBoardLayout>,
     children: [
-      { path: "jobseekerDashboard",
-         element: <JobSeekerDashboardMenu /> },
+      {
+        path: "jobseekerDashboard",
+        element: (
+          <Privateroute>
+            <JobSeekerDashboardMenu />
+          </Privateroute>
+        ),
+      },
       {
         path: "jobseekerProfile",
-        element: <JobseekerProfile />,
+        element: (
+          <Privateroute>
+            <JobseekerProfile />
+          </Privateroute>
+        ),
       },
       {
         path: "jobseekerAppliedJob",
-        element: <JobSeekerAppliedJobs />,
+        element: (
+          <Privateroute>
+            <JobSeekerAppliedJobs />
+          </Privateroute>
+        ),
       },
-      // {
-      //   path: "jobseekercreateportfolio",
-      //   element: <PortfolioBuilder />,
-      // },
+
       {
         path: "jobseekerMyPortfolio",
-        element: <ManagePortfolio/>,
+        element: (
+          <Privateroute>
+            <ManagePortfolio />
+          </Privateroute>
+        ),
       },
       {
-        path:"jobseekerManageResume",
-        element:<ManageResume/>
+        path: "jobseekerManageResume",
+        element: (
+          <Privateroute>
+            <ManageResume />
+          </Privateroute>
+        ),
       },
 
       // For Employer
-      { path: "employerDashboard", element: <EmployerDashboardMenu /> },
+      {
+        path: "employerDashboard",
+        element: (
+          <Privateroute>
+            <EmployerDashboardMenu />
+          </Privateroute>
+        ),
+      },
 
-      { path: "employer/create-job", element: <CreateJob /> },
-      { path: "employer/postedJobs", element: <PostedJobs /> },
-      { path: "employer/managecompany", element: <EmployerCompany /> },
-      { path: "employer/applications", element: <EmployerApplication /> },
-      { path: "employer/alljobs", element: <JobsShowAll /> },
-      { path: "employer/interview", element: <EmployerShowAllApplication /> },
+      {
+        path: "employer/create-job",
+        element: (
+          <Privateroute>
+            <CreateJob />
+          </Privateroute>
+        ),
+      },
+      {
+        path: "employer/postedJobs",
+        element: (
+          <Privateroute>
+            <PostedJobs />
+          </Privateroute>
+        ),
+      },
+      {
+        path: "employer/managecompany",
+        element: (
+          <Privateroute>
+            {" "}
+            <EmployerCompany />
+          </Privateroute>
+        ),
+      },
+      {
+        path: "employer/applications",
+        element: (
+          <Privateroute>
+            <EmployerApplication />{" "}
+          </Privateroute>
+        ),
+      },
+      {
+        path: "employer/alljobs",
+        element: (
+          <Privateroute>
+            <JobsShowAll />
+          </Privateroute>
+        ),
+      },
+      {
+        path: "employer/interview",
+        element: (
+          <Privateroute>
+            <EmployerShowAllApplication />
+          </Privateroute>
+        ),
+      },
 
       //for admin
       {
         path: "adminDashboard",
-        element: <AdminDashboardMenu />,
+        element: (
+          <Privateroute>
+            <AdminDashboardMenu />
+          </Privateroute>
+        ),
       },
       {
         path: "manageCompany",
-        element: <ManageCompany />,
+        element: (
+          <Privateroute>
+            <ManageCompany />
+          </Privateroute>
+        ),
       },
       {
         path: "manageUsers",
-        element: <ManageUsers />,
+        element: (
+          <Privateroute>
+            <ManageUsers />
+          </Privateroute>
+        ),
       },
       {
         path: "manageJobs",
-        element: <ManageJobs />,
-      },{
-         path: "manage-skill-assessment",
-        element: <ManageSkillAssessment/>,
-      }
+        element: (
+          <Privateroute>
+            <ManageJobs />
+          </Privateroute>
+        ),
+      },
+      {
+        path: "manage-skill-assessment",
+        element: (
+          <Privateroute>
+            <ManageSkillAssessment />
+          </Privateroute>
+        ),
+      },
     ],
   },
 
   {
     path: "/portfolio/:slug",
-    element: <PublicPortfolio/>,
-    // children: [
-    //   { path: "create", element:<BuildPortfolio/> },
-    //   // { path: "create", element: <PortfolioBuilder /> },
-    //   { path: "my", element: <ViewMyPortfolio /> },
-    // ],
+    element: <PublicPortfolio />,
   },
 ]);

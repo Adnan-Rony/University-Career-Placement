@@ -49,7 +49,7 @@ const assessmentSchema = new mongoose.Schema(
     difficulty_level: {
       type: String,
       enum: ["Beginner", "Intermediate", "Advanced"],
-      default: "Beginnar",
+      default: "Beginner",
     },
     total_questions: { type: Number, default: 15 },
     is_active: { type: Boolean, default: true },

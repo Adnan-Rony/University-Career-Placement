@@ -50,11 +50,12 @@ if(isPending){
   return <Spinner/>
 }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-white to-purple-100 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-white to-purple-100
+     px-4 sm:px-6 lg:px-8 ">
       <title>Job Portal | SignIn</title>
 
       <div className="w-full max-w-md bg-white p-8 sm:p-10 rounded-2xl shadow-lg ring-1 ring-gray-200 shadow-purple-600 ">
-        <h2 className="text-3xl font-semibold text-gray-800 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 text-center">
           Login to your Account
         </h2>
         <p className="text-gray-500 text-center mt-2 mb-6">

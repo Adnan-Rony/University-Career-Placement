@@ -6,9 +6,10 @@ import { Link } from "react-router";
 import CompanyCardSkeleton from "../loading/SponserCompanyCardSkeleton.jsx";
 import CompanyDetails from "../../Pages/company/CompanyDetails.jsx";
 import { useMediaQuery } from "react-responsive";
+import { Heading } from "../Shared/Heading.js";
 const SponserCompany = () => {
   const { data, isLoading, isError } = useFetchCompanies();
-  const isMobile = useMediaQuery({ maxWidth: 640 }); // Tailwind 'sm' breakpoint
+  const isMobile = useMediaQuery({ maxWidth: 640 });
 
   const companies = Array.isArray(data?.companies) ? data.companies : [];
 
@@ -30,9 +31,11 @@ const SponserCompany = () => {
 
   return (
     <section className="container mx-auto px-4 my-12">
-      <h2 className="lg:text-3xl text-2xl font-semibold text-center mb-6">
-        Sponsored Companies
-      </h2>
+  <Heading
+  title="Sponsored Companies"
+  subtitle="Top companies actively hiring through our platform"
+/>
+
 
       {/* Error Message */}
       {isError && (

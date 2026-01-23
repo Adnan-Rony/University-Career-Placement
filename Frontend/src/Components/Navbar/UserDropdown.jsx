@@ -13,7 +13,7 @@ export const UserDropdown = ({ user }) => {
   const { mutate: logout, isPending } = UseLogout();
    const { googlelogout } = useContext(Authcontext);
   const navigate = useNavigate();
-console.log("user info dubug1",user);
+
   const avatar =
     "https://thumbs.dreamstime.com/b/minimalist-male-avatar-brown-hair-teal-shirt-flat-style-perfect-user-profile-social-media-illustration-colors-384307770.jpg";
 
@@ -43,7 +43,7 @@ const handleLogout = async () => {
     <div className="dropdown dropdown-end z-50">
       <div
         tabIndex={0}
-        className="btn btn-ghost px-3 py-1.5 flex items-center gap-2 border rounded-full hover:bg-gray-100 transition"
+        className="btn btn-ghost px-3 py-1.5 flex items-center gap-2  rounded-full hover:bg-gray-100 transition"
       >
         <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-purple-200">
           <img

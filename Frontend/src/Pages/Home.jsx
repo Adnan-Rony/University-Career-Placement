@@ -43,7 +43,7 @@ export const Home = () => {
       <FaqSection showall={false}/>
      
       {/* <Testimonails /> */}
-       <Newsletter></Newsletter>
+       {/* <Newsletter></Newsletter> */}
     </div>
   );
 };

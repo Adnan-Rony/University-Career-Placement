@@ -1,6 +1,7 @@
 
 import { UseJobs } from "../../hooks/useJobs.js";
 import AllJobsSkeleton from "../loading/AllJobsSkeleton.jsx";
+import { Heading } from "../Shared/Heading.js";
 
 
 import JobsCards from "./components/JobsCards.jsx";
@@ -16,14 +17,17 @@ const PopulerJob = () => {
   return (
     <div className="container mx-auto my-12">
       <div className="w-full h-full p-4 text-center">
-        <h2 className=" text-base-content text-3xl font-bold text-center mb-6">Popular Jobs</h2>
+        <h2 className=" text-base-content text-3xl font-bold text-center mb-6"></h2>
         <p className="text-gray-600 mb-6">
-          Explore the most sought-after job listings in various industries.
+        
         </p>
+        <Heading 
+        title={"Popular Jobs"}
+        subtitle={"Explore the most sought-after job listings in various industries."}/>
 
         <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-6">
           {jobs.slice(0,6).map((job,index) => (
-           <JobsCards key={index} job={job}></JobsCards>
+           <JobsCards key={index} job={job}/>
           ))}
         </div>
 

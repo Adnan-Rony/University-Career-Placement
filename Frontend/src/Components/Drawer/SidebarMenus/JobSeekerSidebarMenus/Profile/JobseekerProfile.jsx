@@ -7,7 +7,7 @@ import { OverViewTab } from "./Tabs/Overview/OverViewTab";
 export const JobseekerProfile = () => {
   const [activeTab, setActiveTab] = useState("Overview");
 
-  const tabs = ["Overview", "Profile", "Resume / CV", "Preferences"];
+  const tabs = ["Overview", "Profile"];
 
 
   const renederTabsByClick = () => {
@@ -18,12 +18,12 @@ export const JobseekerProfile = () => {
       case "Profile":
         return <ProfileTab />;
 
-      case "Resume / CV":
-        return <ResumeCvTab />;
+      // case "Resume / CV":
+      //   return <ResumeCvTab />;
 
 
-      case "Preferences":
-        return <PreferencesTab />;
+      // case "Preferences":
+      //   return <PreferencesTab />;
       default:
         return <OverViewTab />;
     }

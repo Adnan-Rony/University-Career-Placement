@@ -28,7 +28,7 @@ export default function ResumePreview() {
   const { about, education, experience, skills, projects } = resumeData;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100  py-12  sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-8">
@@ -39,19 +39,17 @@ export default function ResumePreview() {
           <p className="text-center text-lg text-gray-600">Review your resume before downloading or saving</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 lg:p-8">
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden ">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-1 sm:p-6 lg:p-8 ">
             {/* Left Sidebar - Actions */}
             <div className="lg:col-span-1">
               <div className="sticky top-8 space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex flex-row md:flex-col ">Actions</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Actions</h3>
                 
                 {/* Download Button */}
                 <PDFDownloadLink
                   key={refreshKey}
-                  className="w-full inline-flex items-center justify-center gap-3 
-                   px-6 py-3 text-base font-semibold rounded-lg
-                    text-white bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 shadow-md hover:shadow-lg transition-all duration-200"
+                  className="w-full inline-flex items-center justify-center gap-3 px-6 py-3 text-base font-semibold rounded-lg text-white bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 shadow-md hover:shadow-lg transition-all duration-200"
                   document={
                     <PdfTemplate key={refreshKey} resumeData={resumeData} />
                   }
@@ -83,8 +81,8 @@ export default function ResumePreview() {
             {/* Right Side - Preview */}
             <div className="lg:col-span-2">
               <div className="border border-gray-200 rounded-lg overflow-hidden bg-gray-50 p-4">
-                <div className="bg-white rounded">
-                  <PreviewTemplate resumeData={resumeData} />
+            <div className="bg-white rounded">
+                 <PreviewTemplate resumeData={resumeData} />
                 </div>
               </div>
             </div>

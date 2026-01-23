@@ -4,13 +4,16 @@ import { UseJobs } from "../../hooks/useJobs.js";
 import SingleJobCard from "../../Components/jobs/SingleJobCard.jsx";
 import AllJobsSkeleton from "../../Components/loading/AllJobsSkeleton.jsx";
 import NotFound from "../../Components/jobs/NotFound.jsx";
+import { useCurrentUser } from "../../hooks/useAuth.js";
+import toast from "react-hot-toast";
 
 const JOBS_PER_PAGE = 4;
 
 const JobsShowAll = () => {
   const { data, isPending, error } = UseJobs();
   const jobs = data?.jobs || [];
-
+  const {data:user}=useCurrentUser()
+  console.log("cyrrent",user);
   //  Filter state
   const [filters, setFilters] = useState({
     keyword: "",
@@ -83,6 +86,10 @@ const JobsShowAll = () => {
   const currentJobs = filteredJobs.slice(startIndex, startIndex + JOBS_PER_PAGE);
 
   const handleApply = (applicationData) => {
+  //    if (!user) {
+  //   toast.error("You must be logged in to apply for this job.");
+  //   return;
+  // }
     console.log("Application submitted", applicationData);
     setActiveJobId(null);
   };

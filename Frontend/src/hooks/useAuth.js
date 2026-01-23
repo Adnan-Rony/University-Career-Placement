@@ -50,6 +50,8 @@ export const useCurrentUser = () => {
   return useQuery({
     queryKey: ["user"],
     queryFn: CurrentUser,
+    retry: false,
+    placeholderData: null,
   });
 };
 

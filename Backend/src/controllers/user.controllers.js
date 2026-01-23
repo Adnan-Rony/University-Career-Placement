@@ -245,7 +245,10 @@ export const getCurrentUser = async (req, res) => {
 export const getuserData = async (req, res) => {
     try {
         // Fetch all users from the database
-        const users = await User.find().select("-password"); // Exclude passwords for security
+        const users = await User.find()
+        .select("-password")
+    
+        ; // Exclude passwords for security
 
         return res.status(200).json({
             message: "Users data fetched successfully.",

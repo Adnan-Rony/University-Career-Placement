@@ -34,7 +34,7 @@ const Hero = () => {
              border-purple-600 text-purple-600 text-xs rounded-full px-4 pr-1.5 py-1.5 hover:bg-purple-50 transition"
             type="button"
           >
-         <span>Find your dream job today</span>
+         <span className="font-roboto">Find your dream job today</span>
             <span className="flex items-center justify-center size-6 p-1 rounded-full bg-purple-600">
               <svg
                 width="14"
@@ -54,39 +54,24 @@ const Hero = () => {
             </span>
           </button>
 
-          <h1 className="text-gray-900 font-semibold md:font-bold text-4xl sm:text-5xl capitalize lg:text-6xl leading-tight
+          <h1 className="
+          font-poppins
+          text-gray-900 font-semibold md:font-bold text-4xl sm:text-5xl capitalize lg:text-6xl leading-tight
           ">
              Your next career move 
             <span className="
  bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"> starts  here</span>
           </h1>
 
-          <p className="mt-5 text-gray-600 text-base leading-relaxed max-w-md">
+          <p className="font-roboto mt-5 text-gray-600 text-base leading-relaxed max-w-md">
            Browse thousands of jobs, internships, and freelance opportunities in top companies worldwide.
           </p>
-
-          {/* Search Bar */}
-          {/* <div className="mt-8 w-full max-w-md">
-            <form className="flex items-center gap-2 bg-white rounded-full shadow-md overflow-hidden">
-              <input
-                type="text"
-                placeholder="Search jobs, companies, or keywords"
-                className="flex-1 px-4 py-2 text-sm text-gray-700 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-purple-700 transition"
-              >
-                Search
-              </button>
-            </form>
-          </div> */}
           <div className="flex flex-col md:flex-row items-center mt-10 gap-4">
-            <button
+            <Link to='/alljobs'
               className="bg-purple-600 text-white px-6 pr-2.5 py-2.5 rounded-full text-sm font-medium flex items-center space-x-2 hover:bg-purple-700 transition"
               type="button"
             >
-              <span>  Post a Job</span>
+              <span className="font-roboto">  Browse Jobs </span>
               <svg
                 width="20"
                 height="20"
@@ -102,14 +87,14 @@ const Hero = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-            </button>
+            </Link>
 
-            <a
-              className="text-purple-600 border bg-purple-100 px-6 py-2 rounded-full text-sm font-medium hover:bg-purple-200 transition"
-              href="#"
+            <Link to={'/portfolio-builder'}
+              className="font-roboto text-purple-600 border bg-purple-100 px-6 py-2 rounded-full text-sm font-medium hover:bg-purple-200 transition"
+             
             >
-              Browse Jobs
-            </a>
+             Explore Resume Builder
+            </Link>
           </div>
         </div>
 
